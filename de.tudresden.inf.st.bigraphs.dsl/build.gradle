@@ -1,0 +1,45 @@
+dependencies {
+	//providedCompile group: 'org.eclipselabs', name: 'cdo', version: '4.6.2' //, ext: 'pom'
+	compile project(":BigraphBaseModel")
+	compile "org.eclipse.xtext:org.eclipse.xtext:${xtextVersion}"
+	compile "org.eclipse.xtext:org.eclipse.xtext.xbase:${xtextVersion}"
+	//compile 'de.tudresden.inf.st.bigraphs.model:bigraph-ecore-model:1.1.0'
+}
+
+configurations {
+	mwe2 {
+		extendsFrom compile
+	}
+}
+
+dependencies {
+	mwe2 'org.eclipse.emf:org.eclipse.emf.mwe2.launch'
+	mwe2 "org.eclipse.xtext:org.eclipse.xtext.common.types:${xtextVersion}"
+	mwe2 "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:${xtextVersion}"
+	mwe2 'org.eclipse.xtext:xtext-antlr-generator'
+}
+
+task generateXtextLanguage(type: JavaExec) {
+	main = 'org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher'
+	classpath = configurations.mwe2
+	inputs.file "src/de/tudresden/inf/st/bigraphs/dsl/GenerateBDSL.mwe2"
+	inputs.file "src/de/tudresden/inf/st/bigraphs/dsl/BDSL.xtext"
+	outputs.dir "src-gen"
+	args += "src/de/tudresden/inf/st/bigraphs/dsl/GenerateBDSL.mwe2"
+	args += "-p"
+	args += "rootPath=/${projectDir}/.."
+}
+
+generateXtext.dependsOn(generateXtextLanguage)
+clean.dependsOn(cleanGenerateXtextLanguage)
+eclipse.classpath.plusConfigurations += [configurations.mwe2]
+
+/*
+project(':BigraphBaseModel') {
+	compileJava {
+		onlyIf {
+            project.hasProperty("generateBigraphBaseModel")
+        }
+	}
+}
+*/

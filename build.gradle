@@ -1,0 +1,44 @@
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath 'org.xtext:xtext-gradle-plugin:2.0.8'
+	}
+}
+
+subprojects {
+	ext.xtextVersion = '2.21.0'
+	repositories {
+		mavenCentral()
+		maven {
+			url 'http://www.jabylon.org/maven/'
+		}
+        maven {
+            url 'https://dl.bintray.com/st-tu-dresden/maven-repository'
+        }
+	}
+	
+	apply plugin: 'java'
+	dependencies {
+		compile platform("org.eclipse.xtext:xtext-dev-bom:${xtextVersion}")
+		compile group: 'org.eclipse.emf', name: 'cdo', version: '4.2.1'
+		//compile group: 'org.eclipse.emf', name: 'org.eclipse.emf.ecore', version: '2.18.0'
+		//compile group: 'org.eclipse.maven', name: 'org.eclipse.emf.cdo', version: '3.7.0'
+		//compile group: 'org.eclipselabs', name: 'cdo', version: '4.7.0', ext: 'pom'
+	}
+
+	apply plugin: 'org.xtext.xtend'
+	apply from: "${rootDir}/gradle/source-layout.gradle"
+	apply plugin: 'eclipse'
+	
+	group = 'de.tudresden.inf.st.bigraphs.dsl'
+	version = '1.0.0-SNAPSHOT'
+	
+	sourceCompatibility = '1.8'
+	targetCompatibility = '1.8'
+	
+	configurations.all {
+		exclude group: 'asm'
+	}
+}

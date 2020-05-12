@@ -1,0 +1,6 @@
+include 'de.tudresden.inf.st.bigraphs.dsl'
+include 'de.tudresden.inf.st.bigraphs.dsl.ide'
+include 'de.tudresden.inf.st.bigraphs.dsl.web'
+include 'de.tudresden.inf.st.bigraphs.dsl.tests'
+include ':BigraphBaseModel'
+project(':BigraphBaseModel').projectDir = file('./BigraphBaseModel/')
