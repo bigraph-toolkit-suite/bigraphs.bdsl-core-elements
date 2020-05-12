@@ -1,6 +1,3 @@
-[submodule "ecore-bigraph-meta-model"]
-	path = ecore-bigraph-meta-model
-	url = git@git-st.inf.tu-dresden.de:bigraphs/ecore-bigraph-meta-model.git
 [submodule "BigraphBaseModel"]
 	path = BigraphBaseModel
 	url = git@git-st.inf.tu-dresden.de:bigraphs/ecore-bigraph-meta-model.git
