@@ -21,8 +21,6 @@ import de.tudresden.inf.st.bigraphs.dsl.bDSL.PrintLn;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.Signature;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.SiteVars;
 import de.tudresden.inf.st.bigraphs.dsl.services.BDSLGrammarAccess;
-import de.tudresden.inf.st.bigraphs.models.bigraphBaseModel.BNode;
-import de.tudresden.inf.st.bigraphs.models.bigraphBaseModel.BigraphBaseModelPackage;
 import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -107,12 +105,6 @@ public class BDSLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				return; 
 			case BDSLPackage.SITE_VARS:
 				sequence_SiteVars(context, (SiteVars) semanticObject); 
-				return; 
-			}
-		else if (epackage == BigraphBaseModelPackage.eINSTANCE)
-			switch (semanticObject.eClass().getClassifierID()) {
-			case BigraphBaseModelPackage.BNODE:
-				sequence_ControlVariable(context, (BNode) semanticObject); 
 				return; 
 			}
 		if (errorAcceptor != null)
@@ -232,24 +224,6 @@ public class BDSLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 */
 	protected void sequence_ControlDef(ISerializationContext context, ControlVariable semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     ControlVariable returns BNode
-	 *
-	 * Constraint:
-	 *     name=ID
-	 */
-	protected void sequence_ControlVariable(ISerializationContext context, BNode semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient((EObject) semanticObject, BigraphBaseModelPackage.Literals.NAMEABLE_TYPE__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing((EObject) semanticObject, BigraphBaseModelPackage.Literals.NAMEABLE_TYPE__NAME));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, (EObject) semanticObject);
-		feeder.accept(grammarAccess.getControlVariableAccess().getNameIDTerminalRuleCall_0(), semanticObject.getName());
-		feeder.finish();
 	}
 	
 	

@@ -50,7 +50,7 @@ public interface Signature extends EObject
 
   /**
    * Returns the value of the '<em><b>Controls</b></em>' containment reference list.
-   * The list contents are of type {@link de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlDef}.
+   * The list contents are of type {@link de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Controls</em>' containment reference list.
@@ -58,6 +58,6 @@ public interface Signature extends EObject
    * @model containment="true"
    * @generated
    */
-  EList<ControlDef> getControls();
+  EList<ControlVariable> getControls();
 
 } // Signature

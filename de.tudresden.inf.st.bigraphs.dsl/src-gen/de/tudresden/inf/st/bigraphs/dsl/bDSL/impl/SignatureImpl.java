@@ -4,7 +4,7 @@
 package de.tudresden.inf.st.bigraphs.dsl.bDSL.impl;
 
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLPackage;
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlDef;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.Signature;
 
 import java.util.Collection;
@@ -67,7 +67,7 @@ public class SignatureImpl extends MinimalEObjectImpl.Container implements Signa
    * @generated
    * @ordered
    */
-  protected EList<ControlDef> controls;
+  protected EList<ControlVariable> controls;
 
   /**
    * <!-- begin-user-doc -->
@@ -121,11 +121,11 @@ public class SignatureImpl extends MinimalEObjectImpl.Container implements Signa
    * @generated
    */
   @Override
-  public EList<ControlDef> getControls()
+  public EList<ControlVariable> getControls()
   {
     if (controls == null)
     {
-      controls = new EObjectContainmentEList<ControlDef>(ControlDef.class, this, BDSLPackage.SIGNATURE__CONTROLS);
+      controls = new EObjectContainmentEList<ControlVariable>(ControlVariable.class, this, BDSLPackage.SIGNATURE__CONTROLS);
     }
     return controls;
   }
@@ -180,7 +180,7 @@ public class SignatureImpl extends MinimalEObjectImpl.Container implements Signa
         return;
       case BDSLPackage.SIGNATURE__CONTROLS:
         getControls().clear();
-        getControls().addAll((Collection<? extends ControlDef>)newValue);
+        getControls().addAll((Collection<? extends ControlVariable>)newValue);
         return;
     }
     super.eSet(featureID, newValue);

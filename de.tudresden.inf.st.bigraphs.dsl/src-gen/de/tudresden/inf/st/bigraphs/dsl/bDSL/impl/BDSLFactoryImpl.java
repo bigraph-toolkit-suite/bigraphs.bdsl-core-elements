@@ -71,7 +71,7 @@ public class BDSLFactoryImpl extends EFactoryImpl implements BDSLFactory
       case BDSLPackage.ABSTRACT_ELEMENT: return createAbstractElement();
       case BDSLPackage.MAIN_ELEMENT: return createMainElement();
       case BDSLPackage.SIGNATURE: return createSignature();
-      case BDSLPackage.CONTROL_DEF: return createControlDef();
+      case BDSLPackage.CONTROL_VARIABLE: return createControlVariable();
       case BDSLPackage.EINT: return createEInt();
       case BDSLPackage.NAME_CONSTANT: return createNameConstant();
       case BDSLPackage.LINK_NAMES: return createLinkNames();
@@ -87,7 +87,6 @@ public class BDSLFactoryImpl extends EFactoryImpl implements BDSLFactory
       case BDSLPackage.PRINT_LN: return createPrintLn();
       case BDSLPackage.PRINTABLE_EXPRESSION: return createPrintableExpression();
       case BDSLPackage.MAIN_LITERAL: return createMainLiteral();
-      case BDSLPackage.CONTROL_VARIABLE: return createControlVariable();
       case BDSLPackage.PLUS: return createPlus();
       case BDSLPackage.MULTI: return createMulti();
       default:
@@ -203,10 +202,10 @@ public class BDSLFactoryImpl extends EFactoryImpl implements BDSLFactory
    * @generated
    */
   @Override
-  public ControlDef createControlDef()
+  public ControlVariable createControlVariable()
   {
-    ControlDefImpl controlDef = new ControlDefImpl();
-    return controlDef;
+    ControlVariableImpl controlVariable = new ControlVariableImpl();
+    return controlVariable;
   }
 
   /**
@@ -387,18 +386,6 @@ public class BDSLFactoryImpl extends EFactoryImpl implements BDSLFactory
   {
     MainLiteralImpl mainLiteral = new MainLiteralImpl();
     return mainLiteral;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public ControlVariable createControlVariable()
-  {
-    ControlVariableImpl controlVariable = new ControlVariableImpl();
-    return controlVariable;
   }
 
   /**

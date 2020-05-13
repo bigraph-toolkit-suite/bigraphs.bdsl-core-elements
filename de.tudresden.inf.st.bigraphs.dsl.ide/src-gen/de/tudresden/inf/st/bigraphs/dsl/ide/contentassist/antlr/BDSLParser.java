@@ -82,7 +82,6 @@ public class BDSLParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getControlDefAccess().getNameAssignment_3(), "rule__ControlDef__NameAssignment_3");
 			builder.put(grammarAccess.getControlDefAccess().getArityAssignment_5(), "rule__ControlDef__ArityAssignment_5");
 			builder.put(grammarAccess.getArityValueAccess().getValueAssignment(), "rule__ArityValue__ValueAssignment");
-			builder.put(grammarAccess.getControlVariableAccess().getNameAssignment(), "rule__ControlVariable__NameAssignment");
 			builder.put(grammarAccess.getNameConstantAccess().getValueAssignment(), "rule__NameConstant__ValueAssignment");
 			builder.put(grammarAccess.getSiteVarsAccess().getNameAssignment(), "rule__SiteVars__NameAssignment");
 			builder.put(grammarAccess.getLVD2Access().getNameAssignment_2(), "rule__LVD2__NameAssignment_2");

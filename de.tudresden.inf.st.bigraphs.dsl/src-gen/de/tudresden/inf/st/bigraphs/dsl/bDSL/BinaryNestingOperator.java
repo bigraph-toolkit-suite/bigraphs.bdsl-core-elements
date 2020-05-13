@@ -31,24 +31,24 @@ public enum BinaryNestingOperator implements Enumerator
   UNSET2(0, "UNSET2", "UNSET2"),
 
   /**
-   * The '<em><b>DOT</b></em>' literal object.
+   * The '<em><b>NESTING</b></em>' literal object.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #DOT_VALUE
+   * @see #NESTING_VALUE
    * @generated
    * @ordered
    */
-  DOT(1, "DOT", "-"),
+  NESTING(1, "NESTING", "-"),
 
   /**
-   * The '<em><b>MUL</b></em>' literal object.
+   * The '<em><b>COMPOSITION</b></em>' literal object.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #MUL_VALUE
+   * @see #COMPOSITION_VALUE
    * @generated
    * @ordered
    */
-  MUL(2, "MUL", "*");
+  COMPOSITION(2, "COMPOSITION", "*");
 
   /**
    * The '<em><b>UNSET2</b></em>' literal value.
@@ -62,26 +62,26 @@ public enum BinaryNestingOperator implements Enumerator
   public static final int UNSET2_VALUE = 0;
 
   /**
-   * The '<em><b>DOT</b></em>' literal value.
+   * The '<em><b>NESTING</b></em>' literal value.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #DOT
+   * @see #NESTING
    * @model literal="-"
    * @generated
    * @ordered
    */
-  public static final int DOT_VALUE = 1;
+  public static final int NESTING_VALUE = 1;
 
   /**
-   * The '<em><b>MUL</b></em>' literal value.
+   * The '<em><b>COMPOSITION</b></em>' literal value.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #MUL
+   * @see #COMPOSITION
    * @model literal="*"
    * @generated
    * @ordered
    */
-  public static final int MUL_VALUE = 2;
+  public static final int COMPOSITION_VALUE = 2;
 
   /**
    * An array of all the '<em><b>Binary Nesting Operator</b></em>' enumerators.
@@ -93,8 +93,8 @@ public enum BinaryNestingOperator implements Enumerator
     new BinaryNestingOperator[]
     {
       UNSET2,
-      DOT,
-      MUL,
+      NESTING,
+      COMPOSITION,
     };
 
   /**
@@ -160,8 +160,8 @@ public enum BinaryNestingOperator implements Enumerator
     switch (value)
     {
       case UNSET2_VALUE: return UNSET2;
-      case DOT_VALUE: return DOT;
-      case MUL_VALUE: return MUL;
+      case NESTING_VALUE: return NESTING;
+      case COMPOSITION_VALUE: return COMPOSITION;
     }
     return null;
   }

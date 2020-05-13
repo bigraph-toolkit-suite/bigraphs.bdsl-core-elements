@@ -44,7 +44,6 @@ import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLPackage;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BRSModel;
 //import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphLiteral;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphVarReference;
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlDef;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable;
 //import de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlDef;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalVarDecl;
@@ -165,7 +164,7 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 //				}
 //				IScope existingScope = Scopes.scopeFor(correctSignature.getControls());
 				List<IEObjectDescription> scopesy = new ArrayList<IEObjectDescription>();
-				for (ControlDef x : correctSignature.getControls()) {
+				for (ControlVariable x : correctSignature.getControls()) {
 					if (x instanceof ControlVariable) {
 						String fqn1 = ((ControlVariable) x).getName();
 						// der alias name erlaubt, das als stellvertreter einzugeben und zeigt dabei

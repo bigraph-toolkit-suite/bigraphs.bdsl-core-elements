@@ -46,15 +46,15 @@ Signature:
 	name=ID
 	('{' (controls+=ControlDef)+ '}')?;
 
-ControlDef:
+ControlDef returns ControlVariable:
 //	{ControlDef}
 	{ControlVariable} type=ControlType? 'ctrl' name=ID 'arity' arity=ArityValue ';';
 
 ArityValue returns EInt:
 	value=EInt;
 
-ControlVariable returns bigraph::BNode:
-	name=ID;
+//ControlVariable returns bigraph::BNode:
+//	name=ID;
 
 NameConstant:
 	value=EString;
@@ -95,7 +95,7 @@ AbstractBigraphDeclaration:
 //	NodeExpression //| BigraphVarReference
 	BigraphVarReference | NodeExpressionCall | LVD2;
 
-NodeExpressionCall:
+NodeExpressionCall :
 	value=[ControlVariable|FQN] ('[' links+=LinkNames* ']')?;
 
 	//Call:
@@ -142,10 +142,10 @@ PrintableExpression:
 ;
 
 enum BinaryParallelOperator:
-	UNSET | PLUS='+' | BARS='||'
+	UNSET | MERGE='|' | PARALLEL='||'
 ;
 enum BinaryNestingOperator:
-	UNSET2 | DOT='-' | MUL='*' //we cannot use a simple '.' right now
+	UNSET2 | NESTING='-' | COMPOSITION='*' //we cannot use a simple '.' right now
 ;
 enum ControlType:
 	ATOMIC='atomic' | ACTIVE='active' | PASSIVE='passive';

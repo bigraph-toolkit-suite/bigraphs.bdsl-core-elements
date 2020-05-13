@@ -208,23 +208,50 @@ public interface BDSLPackage extends EPackage
   int SIGNATURE_FEATURE_COUNT = 2;
 
   /**
-   * The meta object id for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.ControlDefImpl <em>Control Def</em>}' class.
+   * The meta object id for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.ControlVariableImpl <em>Control Variable</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.ControlDefImpl
-   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getControlDef()
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.ControlVariableImpl
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getControlVariable()
    * @generated
    */
-  int CONTROL_DEF = 5;
+  int CONTROL_VARIABLE = 5;
 
   /**
-   * The number of structural features of the '<em>Control Def</em>' class.
+   * The feature id for the '<em><b>Type</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int CONTROL_DEF_FEATURE_COUNT = 0;
+  int CONTROL_VARIABLE__TYPE = 0;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONTROL_VARIABLE__NAME = 1;
+
+  /**
+   * The feature id for the '<em><b>Arity</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONTROL_VARIABLE__ARITY = 2;
+
+  /**
+   * The number of structural features of the '<em>Control Variable</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONTROL_VARIABLE_FEATURE_COUNT = 3;
 
   /**
    * The meta object id for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.EIntImpl <em>EInt</em>}' class.
@@ -638,52 +665,6 @@ public interface BDSLPackage extends EPackage
   int MAIN_LITERAL_FEATURE_COUNT = MAIN_ELEMENT_FEATURE_COUNT + 1;
 
   /**
-   * The meta object id for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.ControlVariableImpl <em>Control Variable</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.ControlVariableImpl
-   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getControlVariable()
-   * @generated
-   */
-  int CONTROL_VARIABLE = 21;
-
-  /**
-   * The feature id for the '<em><b>Type</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CONTROL_VARIABLE__TYPE = CONTROL_DEF_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CONTROL_VARIABLE__NAME = CONTROL_DEF_FEATURE_COUNT + 1;
-
-  /**
-   * The feature id for the '<em><b>Arity</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CONTROL_VARIABLE__ARITY = CONTROL_DEF_FEATURE_COUNT + 2;
-
-  /**
-   * The number of structural features of the '<em>Control Variable</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CONTROL_VARIABLE_FEATURE_COUNT = CONTROL_DEF_FEATURE_COUNT + 3;
-
-  /**
    * The meta object id for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.PlusImpl <em>Plus</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -691,7 +672,7 @@ public interface BDSLPackage extends EPackage
    * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getPlus()
    * @generated
    */
-  int PLUS = 22;
+  int PLUS = 21;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -737,7 +718,7 @@ public interface BDSLPackage extends EPackage
    * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getMulti()
    * @generated
    */
-  int MULTI = 23;
+  int MULTI = 22;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -783,7 +764,7 @@ public interface BDSLPackage extends EPackage
    * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getBinaryParallelOperator()
    * @generated
    */
-  int BINARY_PARALLEL_OPERATOR = 24;
+  int BINARY_PARALLEL_OPERATOR = 23;
 
   /**
    * The meta object id for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.BinaryNestingOperator <em>Binary Nesting Operator</em>}' enum.
@@ -793,7 +774,7 @@ public interface BDSLPackage extends EPackage
    * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getBinaryNestingOperator()
    * @generated
    */
-  int BINARY_NESTING_OPERATOR = 25;
+  int BINARY_NESTING_OPERATOR = 24;
 
   /**
    * The meta object id for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlType <em>Control Type</em>}' enum.
@@ -803,7 +784,7 @@ public interface BDSLPackage extends EPackage
    * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getControlType()
    * @generated
    */
-  int CONTROL_TYPE = 26;
+  int CONTROL_TYPE = 25;
 
 
   /**
@@ -923,14 +904,47 @@ public interface BDSLPackage extends EPackage
   EReference getSignature_Controls();
 
   /**
-   * Returns the meta object for class '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlDef <em>Control Def</em>}'.
+   * Returns the meta object for class '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable <em>Control Variable</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Control Def</em>'.
-   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlDef
+   * @return the meta object for class '<em>Control Variable</em>'.
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable
    * @generated
    */
-  EClass getControlDef();
+  EClass getControlVariable();
+
+  /**
+   * Returns the meta object for the attribute '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Type</em>'.
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable#getType()
+   * @see #getControlVariable()
+   * @generated
+   */
+  EAttribute getControlVariable_Type();
+
+  /**
+   * Returns the meta object for the attribute '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable#getName()
+   * @see #getControlVariable()
+   * @generated
+   */
+  EAttribute getControlVariable_Name();
+
+  /**
+   * Returns the meta object for the containment reference '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable#getArity <em>Arity</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Arity</em>'.
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable#getArity()
+   * @see #getControlVariable()
+   * @generated
+   */
+  EReference getControlVariable_Arity();
 
   /**
    * Returns the meta object for class '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.EInt <em>EInt</em>}'.
@@ -1237,49 +1251,6 @@ public interface BDSLPackage extends EPackage
   EReference getMainLiteral_Value();
 
   /**
-   * Returns the meta object for class '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable <em>Control Variable</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Control Variable</em>'.
-   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable
-   * @generated
-   */
-  EClass getControlVariable();
-
-  /**
-   * Returns the meta object for the attribute '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable#getType <em>Type</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Type</em>'.
-   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable#getType()
-   * @see #getControlVariable()
-   * @generated
-   */
-  EAttribute getControlVariable_Type();
-
-  /**
-   * Returns the meta object for the attribute '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable#getName()
-   * @see #getControlVariable()
-   * @generated
-   */
-  EAttribute getControlVariable_Name();
-
-  /**
-   * Returns the meta object for the containment reference '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable#getArity <em>Arity</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Arity</em>'.
-   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable#getArity()
-   * @see #getControlVariable()
-   * @generated
-   */
-  EReference getControlVariable_Arity();
-
-  /**
    * Returns the meta object for class '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.Plus <em>Plus</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1517,14 +1488,38 @@ public interface BDSLPackage extends EPackage
     EReference SIGNATURE__CONTROLS = eINSTANCE.getSignature_Controls();
 
     /**
-     * The meta object literal for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.ControlDefImpl <em>Control Def</em>}' class.
+     * The meta object literal for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.ControlVariableImpl <em>Control Variable</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.ControlDefImpl
-     * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getControlDef()
+     * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.ControlVariableImpl
+     * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getControlVariable()
      * @generated
      */
-    EClass CONTROL_DEF = eINSTANCE.getControlDef();
+    EClass CONTROL_VARIABLE = eINSTANCE.getControlVariable();
+
+    /**
+     * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute CONTROL_VARIABLE__TYPE = eINSTANCE.getControlVariable_Type();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute CONTROL_VARIABLE__NAME = eINSTANCE.getControlVariable_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Arity</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference CONTROL_VARIABLE__ARITY = eINSTANCE.getControlVariable_Arity();
 
     /**
      * The meta object literal for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.EIntImpl <em>EInt</em>}' class.
@@ -1787,40 +1782,6 @@ public interface BDSLPackage extends EPackage
      * @generated
      */
     EReference MAIN_LITERAL__VALUE = eINSTANCE.getMainLiteral_Value();
-
-    /**
-     * The meta object literal for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.ControlVariableImpl <em>Control Variable</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.ControlVariableImpl
-     * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getControlVariable()
-     * @generated
-     */
-    EClass CONTROL_VARIABLE = eINSTANCE.getControlVariable();
-
-    /**
-     * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute CONTROL_VARIABLE__TYPE = eINSTANCE.getControlVariable_Type();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute CONTROL_VARIABLE__NAME = eINSTANCE.getControlVariable_Name();
-
-    /**
-     * The meta object literal for the '<em><b>Arity</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference CONTROL_VARIABLE__ARITY = eINSTANCE.getControlVariable_Arity();
 
     /**
      * The meta object literal for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.PlusImpl <em>Plus</em>}' class.

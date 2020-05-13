@@ -315,7 +315,7 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cArityArityValueParserRuleCall_5_0 = (RuleCall)cArityAssignment_5.eContents().get(0);
 		private final Keyword cSemicolonKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
-		//ControlDef:
+		//ControlDef ControlVariable:
 		//	{ControlVariable} type=ControlType? 'ctrl' name=ID 'arity' arity=ArityValue ';';
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -367,26 +367,13 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 		//EInt
 		public RuleCall getValueEIntParserRuleCall_0() { return cValueEIntParserRuleCall_0; }
 	}
-	public class ControlVariableElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.tudresden.inf.st.bigraphs.dsl.BDSL.ControlVariable");
-		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
-		
-		//ControlVariable bigraph::BNode:
-		//	name=ID;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//name=ID
-		public Assignment getNameAssignment() { return cNameAssignment; }
-		
-		//ID
-		public RuleCall getNameIDTerminalRuleCall_0() { return cNameIDTerminalRuleCall_0; }
-	}
 	public class NameConstantElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.tudresden.inf.st.bigraphs.dsl.BDSL.NameConstant");
 		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cValueEStringParserRuleCall_0 = (RuleCall)cValueAssignment.eContents().get(0);
 		
+		////ControlVariable returns bigraph::BNode:
+		////	name=ID;
 		//NameConstant:
 		//	value=EString;
 		@Override public ParserRule getRule() { return rule; }
@@ -987,16 +974,16 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final EnumLiteralDeclaration cUNSETEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
 		private final Keyword cUNSETUNSETKeyword_0_0 = (Keyword)cUNSETEnumLiteralDeclaration_0.eContents().get(0);
-		private final EnumLiteralDeclaration cPLUSEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
-		private final Keyword cPLUSPlusSignKeyword_1_0 = (Keyword)cPLUSEnumLiteralDeclaration_1.eContents().get(0);
-		private final EnumLiteralDeclaration cBARSEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
-		private final Keyword cBARSVerticalLineVerticalLineKeyword_2_0 = (Keyword)cBARSEnumLiteralDeclaration_2.eContents().get(0);
+		private final EnumLiteralDeclaration cMERGEEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
+		private final Keyword cMERGEVerticalLineKeyword_1_0 = (Keyword)cMERGEEnumLiteralDeclaration_1.eContents().get(0);
+		private final EnumLiteralDeclaration cPARALLELEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
+		private final Keyword cPARALLELVerticalLineVerticalLineKeyword_2_0 = (Keyword)cPARALLELEnumLiteralDeclaration_2.eContents().get(0);
 		
 		//enum BinaryParallelOperator:
-		//	UNSET | PLUS='+' | BARS='||';
+		//	UNSET | MERGE='|' | PARALLEL='||';
 		public EnumRule getRule() { return rule; }
 		
-		//UNSET | PLUS='+' | BARS='||'
+		//UNSET | MERGE='|' | PARALLEL='||'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//UNSET
@@ -1005,34 +992,34 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 		//"UNSET"
 		public Keyword getUNSETUNSETKeyword_0_0() { return cUNSETUNSETKeyword_0_0; }
 		
-		//PLUS='+'
-		public EnumLiteralDeclaration getPLUSEnumLiteralDeclaration_1() { return cPLUSEnumLiteralDeclaration_1; }
+		//MERGE='|'
+		public EnumLiteralDeclaration getMERGEEnumLiteralDeclaration_1() { return cMERGEEnumLiteralDeclaration_1; }
 		
-		//'+'
-		public Keyword getPLUSPlusSignKeyword_1_0() { return cPLUSPlusSignKeyword_1_0; }
+		//'|'
+		public Keyword getMERGEVerticalLineKeyword_1_0() { return cMERGEVerticalLineKeyword_1_0; }
 		
-		//BARS='||'
-		public EnumLiteralDeclaration getBARSEnumLiteralDeclaration_2() { return cBARSEnumLiteralDeclaration_2; }
+		//PARALLEL='||'
+		public EnumLiteralDeclaration getPARALLELEnumLiteralDeclaration_2() { return cPARALLELEnumLiteralDeclaration_2; }
 		
 		//'||'
-		public Keyword getBARSVerticalLineVerticalLineKeyword_2_0() { return cBARSVerticalLineVerticalLineKeyword_2_0; }
+		public Keyword getPARALLELVerticalLineVerticalLineKeyword_2_0() { return cPARALLELVerticalLineVerticalLineKeyword_2_0; }
 	}
 	public class BinaryNestingOperatorElements extends AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "de.tudresden.inf.st.bigraphs.dsl.BDSL.BinaryNestingOperator");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final EnumLiteralDeclaration cUNSET2EnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
 		private final Keyword cUNSET2UNSET2Keyword_0_0 = (Keyword)cUNSET2EnumLiteralDeclaration_0.eContents().get(0);
-		private final EnumLiteralDeclaration cDOTEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
-		private final Keyword cDOTHyphenMinusKeyword_1_0 = (Keyword)cDOTEnumLiteralDeclaration_1.eContents().get(0);
-		private final EnumLiteralDeclaration cMULEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
-		private final Keyword cMULAsteriskKeyword_2_0 = (Keyword)cMULEnumLiteralDeclaration_2.eContents().get(0);
+		private final EnumLiteralDeclaration cNESTINGEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
+		private final Keyword cNESTINGHyphenMinusKeyword_1_0 = (Keyword)cNESTINGEnumLiteralDeclaration_1.eContents().get(0);
+		private final EnumLiteralDeclaration cCOMPOSITIONEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
+		private final Keyword cCOMPOSITIONAsteriskKeyword_2_0 = (Keyword)cCOMPOSITIONEnumLiteralDeclaration_2.eContents().get(0);
 		
 		//enum BinaryNestingOperator:
-		//	UNSET2 | DOT='-' | MUL='*' //we cannot use a simple '.' right now
+		//	UNSET2 | NESTING='-' | COMPOSITION='*' //we cannot use a simple '.' right now
 		//;
 		public EnumRule getRule() { return rule; }
 		
-		//UNSET2 | DOT='-' | MUL='*'
+		//UNSET2 | NESTING='-' | COMPOSITION='*'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//UNSET2
@@ -1041,17 +1028,17 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 		//"UNSET2"
 		public Keyword getUNSET2UNSET2Keyword_0_0() { return cUNSET2UNSET2Keyword_0_0; }
 		
-		//DOT='-'
-		public EnumLiteralDeclaration getDOTEnumLiteralDeclaration_1() { return cDOTEnumLiteralDeclaration_1; }
+		//NESTING='-'
+		public EnumLiteralDeclaration getNESTINGEnumLiteralDeclaration_1() { return cNESTINGEnumLiteralDeclaration_1; }
 		
 		//'-'
-		public Keyword getDOTHyphenMinusKeyword_1_0() { return cDOTHyphenMinusKeyword_1_0; }
+		public Keyword getNESTINGHyphenMinusKeyword_1_0() { return cNESTINGHyphenMinusKeyword_1_0; }
 		
-		//MUL='*'
-		public EnumLiteralDeclaration getMULEnumLiteralDeclaration_2() { return cMULEnumLiteralDeclaration_2; }
+		//COMPOSITION='*'
+		public EnumLiteralDeclaration getCOMPOSITIONEnumLiteralDeclaration_2() { return cCOMPOSITIONEnumLiteralDeclaration_2; }
 		
 		//'*'
-		public Keyword getMULAsteriskKeyword_2_0() { return cMULAsteriskKeyword_2_0; }
+		public Keyword getCOMPOSITIONAsteriskKeyword_2_0() { return cCOMPOSITIONAsteriskKeyword_2_0; }
 	}
 	public class ControlTypeElements extends AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "de.tudresden.inf.st.bigraphs.dsl.BDSL.ControlType");
@@ -1101,7 +1088,6 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 	private final SignatureElements pSignature;
 	private final ControlDefElements pControlDef;
 	private final ArityValueElements pArityValue;
-	private final ControlVariableElements pControlVariable;
 	private final NameConstantElements pNameConstant;
 	private final LinkNamesElements pLinkNames;
 	private final SiteVarsElements pSiteVars;
@@ -1143,7 +1129,6 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 		this.pSignature = new SignatureElements();
 		this.pControlDef = new ControlDefElements();
 		this.pArityValue = new ArityValueElements();
-		this.pControlVariable = new ControlVariableElements();
 		this.pNameConstant = new NameConstantElements();
 		this.pLinkNames = new LinkNamesElements();
 		this.pSiteVars = new SiteVarsElements();
@@ -1299,7 +1284,7 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 		return getSignatureAccess().getRule();
 	}
 	
-	//ControlDef:
+	//ControlDef ControlVariable:
 	//	{ControlVariable} type=ControlType? 'ctrl' name=ID 'arity' arity=ArityValue ';';
 	public ControlDefElements getControlDefAccess() {
 		return pControlDef;
@@ -1319,16 +1304,8 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 		return getArityValueAccess().getRule();
 	}
 	
-	//ControlVariable bigraph::BNode:
-	//	name=ID;
-	public ControlVariableElements getControlVariableAccess() {
-		return pControlVariable;
-	}
-	
-	public ParserRule getControlVariableRule() {
-		return getControlVariableAccess().getRule();
-	}
-	
+	////ControlVariable returns bigraph::BNode:
+	////	name=ID;
 	//NameConstant:
 	//	value=EString;
 	public NameConstantElements getNameConstantAccess() {
@@ -1514,7 +1491,7 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//enum BinaryParallelOperator:
-	//	UNSET | PLUS='+' | BARS='||';
+	//	UNSET | MERGE='|' | PARALLEL='||';
 	public BinaryParallelOperatorElements getBinaryParallelOperatorAccess() {
 		return eBinaryParallelOperator;
 	}
@@ -1524,7 +1501,7 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//enum BinaryNestingOperator:
-	//	UNSET2 | DOT='-' | MUL='*' //we cannot use a simple '.' right now
+	//	UNSET2 | NESTING='-' | COMPOSITION='*' //we cannot use a simple '.' right now
 	//;
 	public BinaryNestingOperatorElements getBinaryNestingOperatorAccess() {
 		return eBinaryNestingOperator;

@@ -23,7 +23,7 @@ import java.util.HashMap;
 @SuppressWarnings("all")
 public class InternalBDSLParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_ID", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'UNSET'", "'+'", "'||'", "'UNSET2'", "'-'", "'*'", "'atomic'", "'active'", "'passive'", "'.'", "'.*'", "'$'", "'main'", "'='", "'{'", "'}'", "';'", "'signature'", "'ctrl'", "'arity'", "','", "'val'", "':'", "'('", "')'", "'['", "']'", "'println'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_ID", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'UNSET'", "'|'", "'||'", "'UNSET2'", "'-'", "'*'", "'atomic'", "'active'", "'passive'", "'.'", "'.*'", "'$'", "'main'", "'='", "'{'", "'}'", "';'", "'signature'", "'ctrl'", "'arity'", "','", "'val'", "':'", "'('", "')'", "'['", "']'", "'println'"
     };
     public static final int RULE_STRING=4;
     public static final int RULE_SL_COMMENT=8;
@@ -3130,13 +3130,13 @@ public class InternalBDSLParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__BinaryParallelOperator__Alternatives"
-    // InternalBDSL.g:915:1: rule__BinaryParallelOperator__Alternatives : ( ( ( 'UNSET' ) ) | ( ( '+' ) ) | ( ( '||' ) ) );
+    // InternalBDSL.g:915:1: rule__BinaryParallelOperator__Alternatives : ( ( ( 'UNSET' ) ) | ( ( '|' ) ) | ( ( '||' ) ) );
     public final void rule__BinaryParallelOperator__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBDSL.g:919:1: ( ( ( 'UNSET' ) ) | ( ( '+' ) ) | ( ( '||' ) ) )
+            // InternalBDSL.g:919:1: ( ( ( 'UNSET' ) ) | ( ( '|' ) ) | ( ( '||' ) ) )
             int alt7=3;
             switch ( input.LA(1) ) {
             case 11:
@@ -3189,23 +3189,23 @@ public class InternalBDSLParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // InternalBDSL.g:926:2: ( ( '+' ) )
+                    // InternalBDSL.g:926:2: ( ( '|' ) )
                     {
-                    // InternalBDSL.g:926:2: ( ( '+' ) )
-                    // InternalBDSL.g:927:3: ( '+' )
+                    // InternalBDSL.g:926:2: ( ( '|' ) )
+                    // InternalBDSL.g:927:3: ( '|' )
                     {
                     if ( state.backtracking==0 ) {
-                       before(grammarAccess.getBinaryParallelOperatorAccess().getPLUSEnumLiteralDeclaration_1()); 
+                       before(grammarAccess.getBinaryParallelOperatorAccess().getMERGEEnumLiteralDeclaration_1()); 
                     }
-                    // InternalBDSL.g:928:3: ( '+' )
-                    // InternalBDSL.g:928:4: '+'
+                    // InternalBDSL.g:928:3: ( '|' )
+                    // InternalBDSL.g:928:4: '|'
                     {
                     match(input,12,FOLLOW_2); if (state.failed) return ;
 
                     }
 
                     if ( state.backtracking==0 ) {
-                       after(grammarAccess.getBinaryParallelOperatorAccess().getPLUSEnumLiteralDeclaration_1()); 
+                       after(grammarAccess.getBinaryParallelOperatorAccess().getMERGEEnumLiteralDeclaration_1()); 
                     }
 
                     }
@@ -3220,7 +3220,7 @@ public class InternalBDSLParser extends AbstractInternalContentAssistParser {
                     // InternalBDSL.g:933:3: ( '||' )
                     {
                     if ( state.backtracking==0 ) {
-                       before(grammarAccess.getBinaryParallelOperatorAccess().getBARSEnumLiteralDeclaration_2()); 
+                       before(grammarAccess.getBinaryParallelOperatorAccess().getPARALLELEnumLiteralDeclaration_2()); 
                     }
                     // InternalBDSL.g:934:3: ( '||' )
                     // InternalBDSL.g:934:4: '||'
@@ -3230,7 +3230,7 @@ public class InternalBDSLParser extends AbstractInternalContentAssistParser {
                     }
 
                     if ( state.backtracking==0 ) {
-                       after(grammarAccess.getBinaryParallelOperatorAccess().getBARSEnumLiteralDeclaration_2()); 
+                       after(grammarAccess.getBinaryParallelOperatorAccess().getPARALLELEnumLiteralDeclaration_2()); 
                     }
 
                     }
@@ -3321,7 +3321,7 @@ public class InternalBDSLParser extends AbstractInternalContentAssistParser {
                     // InternalBDSL.g:954:3: ( '-' )
                     {
                     if ( state.backtracking==0 ) {
-                       before(grammarAccess.getBinaryNestingOperatorAccess().getDOTEnumLiteralDeclaration_1()); 
+                       before(grammarAccess.getBinaryNestingOperatorAccess().getNESTINGEnumLiteralDeclaration_1()); 
                     }
                     // InternalBDSL.g:955:3: ( '-' )
                     // InternalBDSL.g:955:4: '-'
@@ -3331,7 +3331,7 @@ public class InternalBDSLParser extends AbstractInternalContentAssistParser {
                     }
 
                     if ( state.backtracking==0 ) {
-                       after(grammarAccess.getBinaryNestingOperatorAccess().getDOTEnumLiteralDeclaration_1()); 
+                       after(grammarAccess.getBinaryNestingOperatorAccess().getNESTINGEnumLiteralDeclaration_1()); 
                     }
 
                     }
@@ -3346,7 +3346,7 @@ public class InternalBDSLParser extends AbstractInternalContentAssistParser {
                     // InternalBDSL.g:960:3: ( '*' )
                     {
                     if ( state.backtracking==0 ) {
-                       before(grammarAccess.getBinaryNestingOperatorAccess().getMULEnumLiteralDeclaration_2()); 
+                       before(grammarAccess.getBinaryNestingOperatorAccess().getCOMPOSITIONEnumLiteralDeclaration_2()); 
                     }
                     // InternalBDSL.g:961:3: ( '*' )
                     // InternalBDSL.g:961:4: '*'
@@ -3356,7 +3356,7 @@ public class InternalBDSLParser extends AbstractInternalContentAssistParser {
                     }
 
                     if ( state.backtracking==0 ) {
-                       after(grammarAccess.getBinaryNestingOperatorAccess().getMULEnumLiteralDeclaration_2()); 
+                       after(grammarAccess.getBinaryNestingOperatorAccess().getCOMPOSITIONEnumLiteralDeclaration_2()); 
                     }
 
                     }

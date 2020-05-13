@@ -8,13 +8,13 @@
       fileExtensions="bdsl" ecorePackage="BDSL.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="BDSL.ecore#//BinaryParallelOperator">
       <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//BinaryParallelOperator/UNSET"/>
-      <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//BinaryParallelOperator/PLUS"/>
-      <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//BinaryParallelOperator/BARS"/>
+      <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//BinaryParallelOperator/MERGE"/>
+      <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//BinaryParallelOperator/PARALLEL"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="BDSL.ecore#//BinaryNestingOperator">
       <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//BinaryNestingOperator/UNSET2"/>
-      <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//BinaryNestingOperator/DOT"/>
-      <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//BinaryNestingOperator/MUL"/>
+      <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//BinaryNestingOperator/NESTING"/>
+      <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//BinaryNestingOperator/COMPOSITION"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="BDSL.ecore#//ControlType">
       <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//ControlType/ATOMIC"/>
@@ -35,7 +35,11 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//Signature/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//Signature/controls"/>
     </genClasses>
-    <genClasses ecoreClass="BDSL.ecore#//ControlDef"/>
+    <genClasses ecoreClass="BDSL.ecore#//ControlVariable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//ControlVariable/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//ControlVariable/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//ControlVariable/arity"/>
+    </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//EInt">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//EInt/value"/>
     </genClasses>
@@ -73,11 +77,6 @@
     <genClasses ecoreClass="BDSL.ecore#//PrintableExpression"/>
     <genClasses ecoreClass="BDSL.ecore#//MainLiteral">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//MainLiteral/value"/>
-    </genClasses>
-    <genClasses ecoreClass="BDSL.ecore#//ControlVariable">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//ControlVariable/type"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//ControlVariable/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//ControlVariable/arity"/>
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//Plus">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//Plus/left"/>

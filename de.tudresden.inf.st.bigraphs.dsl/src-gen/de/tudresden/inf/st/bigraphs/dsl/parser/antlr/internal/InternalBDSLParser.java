@@ -22,7 +22,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalBDSLParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'.'", "'.*'", "'$'", "'-'", "'main'", "'='", "'{'", "'}'", "';'", "'signature'", "'ctrl'", "'arity'", "','", "'val'", "':'", "'('", "')'", "'['", "']'", "'println'", "'UNSET'", "'+'", "'||'", "'UNSET2'", "'*'", "'atomic'", "'active'", "'passive'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'.'", "'.*'", "'$'", "'-'", "'main'", "'='", "'{'", "'}'", "';'", "'signature'", "'ctrl'", "'arity'", "','", "'val'", "':'", "'('", "')'", "'['", "']'", "'println'", "'UNSET'", "'|'", "'||'", "'UNSET2'", "'*'", "'atomic'", "'active'", "'passive'"
     };
     public static final int RULE_STRING=6;
     public static final int RULE_SL_COMMENT=8;
@@ -4287,7 +4287,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleBinaryParallelOperator"
-    // InternalBDSL.g:1583:1: ruleBinaryParallelOperator returns [Enumerator current=null] : ( (enumLiteral_0= 'UNSET' ) | (enumLiteral_1= '+' ) | (enumLiteral_2= '||' ) ) ;
+    // InternalBDSL.g:1583:1: ruleBinaryParallelOperator returns [Enumerator current=null] : ( (enumLiteral_0= 'UNSET' ) | (enumLiteral_1= '|' ) | (enumLiteral_2= '||' ) ) ;
     public final Enumerator ruleBinaryParallelOperator() throws RecognitionException {
         Enumerator current = null;
 
@@ -4299,10 +4299,10 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBDSL.g:1589:2: ( ( (enumLiteral_0= 'UNSET' ) | (enumLiteral_1= '+' ) | (enumLiteral_2= '||' ) ) )
-            // InternalBDSL.g:1590:2: ( (enumLiteral_0= 'UNSET' ) | (enumLiteral_1= '+' ) | (enumLiteral_2= '||' ) )
+            // InternalBDSL.g:1589:2: ( ( (enumLiteral_0= 'UNSET' ) | (enumLiteral_1= '|' ) | (enumLiteral_2= '||' ) ) )
+            // InternalBDSL.g:1590:2: ( (enumLiteral_0= 'UNSET' ) | (enumLiteral_1= '|' ) | (enumLiteral_2= '||' ) )
             {
-            // InternalBDSL.g:1590:2: ( (enumLiteral_0= 'UNSET' ) | (enumLiteral_1= '+' ) | (enumLiteral_2= '||' ) )
+            // InternalBDSL.g:1590:2: ( (enumLiteral_0= 'UNSET' ) | (enumLiteral_1= '|' ) | (enumLiteral_2= '||' ) )
             int alt27=3;
             switch ( input.LA(1) ) {
             case 31:
@@ -4346,15 +4346,15 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalBDSL.g:1599:3: (enumLiteral_1= '+' )
+                    // InternalBDSL.g:1599:3: (enumLiteral_1= '|' )
                     {
-                    // InternalBDSL.g:1599:3: (enumLiteral_1= '+' )
-                    // InternalBDSL.g:1600:4: enumLiteral_1= '+'
+                    // InternalBDSL.g:1599:3: (enumLiteral_1= '|' )
+                    // InternalBDSL.g:1600:4: enumLiteral_1= '|'
                     {
                     enumLiteral_1=(Token)match(input,32,FOLLOW_2); 
 
-                    				current = grammarAccess.getBinaryParallelOperatorAccess().getPLUSEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
-                    				newLeafNode(enumLiteral_1, grammarAccess.getBinaryParallelOperatorAccess().getPLUSEnumLiteralDeclaration_1());
+                    				current = grammarAccess.getBinaryParallelOperatorAccess().getMERGEEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
+                    				newLeafNode(enumLiteral_1, grammarAccess.getBinaryParallelOperatorAccess().getMERGEEnumLiteralDeclaration_1());
                     			
 
                     }
@@ -4370,8 +4370,8 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
                     {
                     enumLiteral_2=(Token)match(input,33,FOLLOW_2); 
 
-                    				current = grammarAccess.getBinaryParallelOperatorAccess().getBARSEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
-                    				newLeafNode(enumLiteral_2, grammarAccess.getBinaryParallelOperatorAccess().getBARSEnumLiteralDeclaration_2());
+                    				current = grammarAccess.getBinaryParallelOperatorAccess().getPARALLELEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
+                    				newLeafNode(enumLiteral_2, grammarAccess.getBinaryParallelOperatorAccess().getPARALLELEnumLiteralDeclaration_2());
                     			
 
                     }
@@ -4468,8 +4468,8 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
                     {
                     enumLiteral_1=(Token)match(input,14,FOLLOW_2); 
 
-                    				current = grammarAccess.getBinaryNestingOperatorAccess().getDOTEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
-                    				newLeafNode(enumLiteral_1, grammarAccess.getBinaryNestingOperatorAccess().getDOTEnumLiteralDeclaration_1());
+                    				current = grammarAccess.getBinaryNestingOperatorAccess().getNESTINGEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
+                    				newLeafNode(enumLiteral_1, grammarAccess.getBinaryNestingOperatorAccess().getNESTINGEnumLiteralDeclaration_1());
                     			
 
                     }
@@ -4485,8 +4485,8 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
                     {
                     enumLiteral_2=(Token)match(input,35,FOLLOW_2); 
 
-                    				current = grammarAccess.getBinaryNestingOperatorAccess().getMULEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
-                    				newLeafNode(enumLiteral_2, grammarAccess.getBinaryNestingOperatorAccess().getMULEnumLiteralDeclaration_2());
+                    				current = grammarAccess.getBinaryNestingOperatorAccess().getCOMPOSITIONEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
+                    				newLeafNode(enumLiteral_2, grammarAccess.getBinaryNestingOperatorAccess().getCOMPOSITIONEnumLiteralDeclaration_2());
                     			
 
                     }

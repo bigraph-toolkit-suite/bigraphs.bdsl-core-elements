@@ -69,13 +69,13 @@ public interface BDSLFactory extends EFactory
   Signature createSignature();
 
   /**
-   * Returns a new object of class '<em>Control Def</em>'.
+   * Returns a new object of class '<em>Control Variable</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Control Def</em>'.
+   * @return a new object of class '<em>Control Variable</em>'.
    * @generated
    */
-  ControlDef createControlDef();
+  ControlVariable createControlVariable();
 
   /**
    * Returns a new object of class '<em>EInt</em>'.
@@ -211,15 +211,6 @@ public interface BDSLFactory extends EFactory
    * @generated
    */
   MainLiteral createMainLiteral();
-
-  /**
-   * Returns a new object of class '<em>Control Variable</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Control Variable</em>'.
-   * @generated
-   */
-  ControlVariable createControlVariable();
 
   /**
    * Returns a new object of class '<em>Plus</em>'.

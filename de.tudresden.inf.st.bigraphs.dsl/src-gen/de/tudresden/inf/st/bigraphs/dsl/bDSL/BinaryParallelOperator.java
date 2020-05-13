@@ -31,24 +31,24 @@ public enum BinaryParallelOperator implements Enumerator
   UNSET(0, "UNSET", "UNSET"),
 
   /**
-   * The '<em><b>PLUS</b></em>' literal object.
+   * The '<em><b>MERGE</b></em>' literal object.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #PLUS_VALUE
+   * @see #MERGE_VALUE
    * @generated
    * @ordered
    */
-  PLUS(1, "PLUS", "+"),
+  MERGE(1, "MERGE", "|"),
 
   /**
-   * The '<em><b>BARS</b></em>' literal object.
+   * The '<em><b>PARALLEL</b></em>' literal object.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #BARS_VALUE
+   * @see #PARALLEL_VALUE
    * @generated
    * @ordered
    */
-  BARS(2, "BARS", "||");
+  PARALLEL(2, "PARALLEL", "||");
 
   /**
    * The '<em><b>UNSET</b></em>' literal value.
@@ -62,26 +62,26 @@ public enum BinaryParallelOperator implements Enumerator
   public static final int UNSET_VALUE = 0;
 
   /**
-   * The '<em><b>PLUS</b></em>' literal value.
+   * The '<em><b>MERGE</b></em>' literal value.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #PLUS
-   * @model literal="+"
+   * @see #MERGE
+   * @model literal="|"
    * @generated
    * @ordered
    */
-  public static final int PLUS_VALUE = 1;
+  public static final int MERGE_VALUE = 1;
 
   /**
-   * The '<em><b>BARS</b></em>' literal value.
+   * The '<em><b>PARALLEL</b></em>' literal value.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #BARS
+   * @see #PARALLEL
    * @model literal="||"
    * @generated
    * @ordered
    */
-  public static final int BARS_VALUE = 2;
+  public static final int PARALLEL_VALUE = 2;
 
   /**
    * An array of all the '<em><b>Binary Parallel Operator</b></em>' enumerators.
@@ -93,8 +93,8 @@ public enum BinaryParallelOperator implements Enumerator
     new BinaryParallelOperator[]
     {
       UNSET,
-      PLUS,
-      BARS,
+      MERGE,
+      PARALLEL,
     };
 
   /**
@@ -160,8 +160,8 @@ public enum BinaryParallelOperator implements Enumerator
     switch (value)
     {
       case UNSET_VALUE: return UNSET;
-      case PLUS_VALUE: return PLUS;
-      case BARS_VALUE: return BARS;
+      case MERGE_VALUE: return MERGE;
+      case PARALLEL_VALUE: return PARALLEL;
     }
     return null;
   }

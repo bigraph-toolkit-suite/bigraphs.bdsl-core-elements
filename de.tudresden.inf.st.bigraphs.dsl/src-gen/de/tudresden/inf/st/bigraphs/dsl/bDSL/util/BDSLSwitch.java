@@ -108,10 +108,10 @@ public class BDSLSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case BDSLPackage.CONTROL_DEF:
+      case BDSLPackage.CONTROL_VARIABLE:
       {
-        ControlDef controlDef = (ControlDef)theEObject;
-        T result = caseControlDef(controlDef);
+        ControlVariable controlVariable = (ControlVariable)theEObject;
+        T result = caseControlVariable(controlVariable);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -236,14 +236,6 @@ public class BDSLSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case BDSLPackage.CONTROL_VARIABLE:
-      {
-        ControlVariable controlVariable = (ControlVariable)theEObject;
-        T result = caseControlVariable(controlVariable);
-        if (result == null) result = caseControlDef(controlVariable);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case BDSLPackage.PLUS:
       {
         Plus plus = (Plus)theEObject;
@@ -345,17 +337,17 @@ public class BDSLSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Control Def</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Control Variable</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Control Def</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Control Variable</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseControlDef(ControlDef object)
+  public T caseControlVariable(ControlVariable object)
   {
     return null;
   }
@@ -596,22 +588,6 @@ public class BDSLSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseMainLiteral(MainLiteral object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Control Variable</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Control Variable</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseControlVariable(ControlVariable object)
   {
     return null;
   }

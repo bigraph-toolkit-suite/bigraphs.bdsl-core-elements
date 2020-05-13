@@ -101,9 +101,9 @@ public class BDSLAdapterFactory extends AdapterFactoryImpl
         return createSignatureAdapter();
       }
       @Override
-      public Adapter caseControlDef(ControlDef object)
+      public Adapter caseControlVariable(ControlVariable object)
       {
-        return createControlDefAdapter();
+        return createControlVariableAdapter();
       }
       @Override
       public Adapter caseEInt(EInt object)
@@ -179,11 +179,6 @@ public class BDSLAdapterFactory extends AdapterFactoryImpl
       public Adapter caseMainLiteral(MainLiteral object)
       {
         return createMainLiteralAdapter();
-      }
-      @Override
-      public Adapter caseControlVariable(ControlVariable object)
-      {
-        return createControlVariableAdapter();
       }
       @Override
       public Adapter casePlus(Plus object)
@@ -293,16 +288,16 @@ public class BDSLAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlDef <em>Control Def</em>}'.
+   * Creates a new adapter for an object of class '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable <em>Control Variable</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlDef
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable
    * @generated
    */
-  public Adapter createControlDefAdapter()
+  public Adapter createControlVariableAdapter()
   {
     return null;
   }
@@ -528,21 +523,6 @@ public class BDSLAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createMainLiteralAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable <em>Control Variable</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable
-   * @generated
-   */
-  public Adapter createControlVariableAdapter()
   {
     return null;
   }

@@ -1597,18 +1597,18 @@ ruleBinaryParallelOperator returns [Enumerator current=null]
 		)
 		    |
 		(
-			enumLiteral_1='+'
+			enumLiteral_1='|'
 			{
-				$current = grammarAccess.getBinaryParallelOperatorAccess().getPLUSEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
-				newLeafNode(enumLiteral_1, grammarAccess.getBinaryParallelOperatorAccess().getPLUSEnumLiteralDeclaration_1());
+				$current = grammarAccess.getBinaryParallelOperatorAccess().getMERGEEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_1, grammarAccess.getBinaryParallelOperatorAccess().getMERGEEnumLiteralDeclaration_1());
 			}
 		)
 		    |
 		(
 			enumLiteral_2='||'
 			{
-				$current = grammarAccess.getBinaryParallelOperatorAccess().getBARSEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
-				newLeafNode(enumLiteral_2, grammarAccess.getBinaryParallelOperatorAccess().getBARSEnumLiteralDeclaration_2());
+				$current = grammarAccess.getBinaryParallelOperatorAccess().getPARALLELEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_2, grammarAccess.getBinaryParallelOperatorAccess().getPARALLELEnumLiteralDeclaration_2());
 			}
 		)
 	)
@@ -1634,16 +1634,16 @@ ruleBinaryNestingOperator returns [Enumerator current=null]
 		(
 			enumLiteral_1='-'
 			{
-				$current = grammarAccess.getBinaryNestingOperatorAccess().getDOTEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
-				newLeafNode(enumLiteral_1, grammarAccess.getBinaryNestingOperatorAccess().getDOTEnumLiteralDeclaration_1());
+				$current = grammarAccess.getBinaryNestingOperatorAccess().getNESTINGEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_1, grammarAccess.getBinaryNestingOperatorAccess().getNESTINGEnumLiteralDeclaration_1());
 			}
 		)
 		    |
 		(
 			enumLiteral_2='*'
 			{
-				$current = grammarAccess.getBinaryNestingOperatorAccess().getMULEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
-				newLeafNode(enumLiteral_2, grammarAccess.getBinaryNestingOperatorAccess().getMULEnumLiteralDeclaration_2());
+				$current = grammarAccess.getBinaryNestingOperatorAccess().getCOMPOSITIONEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_2, grammarAccess.getBinaryNestingOperatorAccess().getCOMPOSITIONEnumLiteralDeclaration_2());
 			}
 		)
 	)

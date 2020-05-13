@@ -14,7 +14,6 @@ import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphExpression;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphVarReference;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BinaryNestingOperator;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BinaryParallelOperator;
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlDef;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlType;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.EInt;
@@ -88,7 +87,7 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass controlDefEClass = null;
+  private EClass controlVariableEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -194,13 +193,6 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
    * @generated
    */
   private EClass mainLiteralEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass controlVariableEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -427,9 +419,42 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
    * @generated
    */
   @Override
-  public EClass getControlDef()
+  public EClass getControlVariable()
   {
-    return controlDefEClass;
+    return controlVariableEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getControlVariable_Type()
+  {
+    return (EAttribute)controlVariableEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getControlVariable_Name()
+  {
+    return (EAttribute)controlVariableEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getControlVariable_Arity()
+  {
+    return (EReference)controlVariableEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -757,50 +782,6 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
    * @generated
    */
   @Override
-  public EClass getControlVariable()
-  {
-    return controlVariableEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getControlVariable_Type()
-  {
-    return (EAttribute)controlVariableEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getControlVariable_Name()
-  {
-    return (EAttribute)controlVariableEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getControlVariable_Arity()
-  {
-    return (EReference)controlVariableEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EClass getPlus()
   {
     return plusEClass;
@@ -963,7 +944,10 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
     createEAttribute(signatureEClass, SIGNATURE__NAME);
     createEReference(signatureEClass, SIGNATURE__CONTROLS);
 
-    controlDefEClass = createEClass(CONTROL_DEF);
+    controlVariableEClass = createEClass(CONTROL_VARIABLE);
+    createEAttribute(controlVariableEClass, CONTROL_VARIABLE__TYPE);
+    createEAttribute(controlVariableEClass, CONTROL_VARIABLE__NAME);
+    createEReference(controlVariableEClass, CONTROL_VARIABLE__ARITY);
 
     eIntEClass = createEClass(EINT);
     createEAttribute(eIntEClass, EINT__VALUE);
@@ -1008,11 +992,6 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
 
     mainLiteralEClass = createEClass(MAIN_LITERAL);
     createEReference(mainLiteralEClass, MAIN_LITERAL__VALUE);
-
-    controlVariableEClass = createEClass(CONTROL_VARIABLE);
-    createEAttribute(controlVariableEClass, CONTROL_VARIABLE__TYPE);
-    createEAttribute(controlVariableEClass, CONTROL_VARIABLE__NAME);
-    createEReference(controlVariableEClass, CONTROL_VARIABLE__ARITY);
 
     plusEClass = createEClass(PLUS);
     createEReference(plusEClass, PLUS__LEFT);
@@ -1070,7 +1049,6 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
     nodeExpressionCallEClass.getESuperTypes().add(this.getAbstractBigraphDeclaration());
     printLnEClass.getESuperTypes().add(this.getAbstractMainStatements());
     mainLiteralEClass.getESuperTypes().add(this.getMainElement());
-    controlVariableEClass.getESuperTypes().add(this.getControlDef());
     plusEClass.getESuperTypes().add(this.getBigraphExpression());
     multiEClass.getESuperTypes().add(this.getBigraphExpression());
 
@@ -1089,9 +1067,12 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
 
     initEClass(signatureEClass, Signature.class, "Signature", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getSignature_Name(), ecorePackage.getEString(), "name", null, 0, 1, Signature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getSignature_Controls(), this.getControlDef(), null, "controls", null, 0, -1, Signature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSignature_Controls(), this.getControlVariable(), null, "controls", null, 0, -1, Signature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(controlDefEClass, ControlDef.class, "ControlDef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEClass(controlVariableEClass, ControlVariable.class, "ControlVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getControlVariable_Type(), this.getControlType(), "type", null, 0, 1, ControlVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getControlVariable_Name(), ecorePackage.getEString(), "name", null, 0, 1, ControlVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getControlVariable_Arity(), this.getEInt(), null, "arity", null, 0, 1, ControlVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eIntEClass, EInt.class, "EInt", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEInt_Value(), ecorePackage.getEInt(), "value", null, 0, 1, EInt.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1137,11 +1118,6 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
     initEClass(mainLiteralEClass, MainLiteral.class, "MainLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getMainLiteral_Value(), this.getMainDeclaration(), null, "value", null, 0, -1, MainLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(controlVariableEClass, ControlVariable.class, "ControlVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getControlVariable_Type(), this.getControlType(), "type", null, 0, 1, ControlVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getControlVariable_Name(), ecorePackage.getEString(), "name", null, 0, 1, ControlVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getControlVariable_Arity(), this.getEInt(), null, "arity", null, 0, 1, ControlVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
     initEClass(plusEClass, Plus.class, "Plus", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getPlus_Left(), this.getBigraphExpression(), null, "left", null, 0, 1, Plus.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getPlus_Operator(), this.getBinaryParallelOperator(), "operator", null, 0, 1, Plus.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1155,13 +1131,13 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
     // Initialize enums and add enum literals
     initEEnum(binaryParallelOperatorEEnum, BinaryParallelOperator.class, "BinaryParallelOperator");
     addEEnumLiteral(binaryParallelOperatorEEnum, BinaryParallelOperator.UNSET);
-    addEEnumLiteral(binaryParallelOperatorEEnum, BinaryParallelOperator.PLUS);
-    addEEnumLiteral(binaryParallelOperatorEEnum, BinaryParallelOperator.BARS);
+    addEEnumLiteral(binaryParallelOperatorEEnum, BinaryParallelOperator.MERGE);
+    addEEnumLiteral(binaryParallelOperatorEEnum, BinaryParallelOperator.PARALLEL);
 
     initEEnum(binaryNestingOperatorEEnum, BinaryNestingOperator.class, "BinaryNestingOperator");
     addEEnumLiteral(binaryNestingOperatorEEnum, BinaryNestingOperator.UNSET2);
-    addEEnumLiteral(binaryNestingOperatorEEnum, BinaryNestingOperator.DOT);
-    addEEnumLiteral(binaryNestingOperatorEEnum, BinaryNestingOperator.MUL);
+    addEEnumLiteral(binaryNestingOperatorEEnum, BinaryNestingOperator.NESTING);
+    addEEnumLiteral(binaryNestingOperatorEEnum, BinaryNestingOperator.COMPOSITION);
 
     initEEnum(controlTypeEEnum, ControlType.class, "ControlType");
     addEEnumLiteral(controlTypeEEnum, ControlType.ATOMIC);

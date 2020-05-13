@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,7 +32,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class ControlVariableImpl extends ControlDefImpl implements ControlVariable
+public class ControlVariableImpl extends MinimalEObjectImpl.Container implements ControlVariable
 {
   /**
    * The default value of the '{@link #getType() <em>Type</em>}' attribute.

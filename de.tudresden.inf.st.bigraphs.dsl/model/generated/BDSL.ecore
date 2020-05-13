@@ -18,9 +18,14 @@
   <eClassifiers xsi:type="ecore:EClass" name="Signature">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="controls" upperBound="-1"
-        eType="#//ControlDef" containment="true"/>
+        eType="#//ControlVariable" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ControlDef"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ControlVariable">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//ControlType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arity" eType="#//EInt"
+        containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EInt">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
@@ -63,13 +68,13 @@
   <eClassifiers xsi:type="ecore:EClass" name="PrintableExpression"/>
   <eClassifiers xsi:type="ecore:EEnum" name="BinaryParallelOperator">
     <eLiterals name="UNSET" literal="UNSET"/>
-    <eLiterals name="PLUS" value="1" literal="+"/>
-    <eLiterals name="BARS" value="2" literal="||"/>
+    <eLiterals name="MERGE" value="1" literal="|"/>
+    <eLiterals name="PARALLEL" value="2" literal="||"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="BinaryNestingOperator">
     <eLiterals name="UNSET2" literal="UNSET2"/>
-    <eLiterals name="DOT" value="1" literal="-"/>
-    <eLiterals name="MUL" value="2" literal="*"/>
+    <eLiterals name="NESTING" value="1" literal="-"/>
+    <eLiterals name="COMPOSITION" value="2" literal="*"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ControlType">
     <eLiterals name="ATOMIC" literal="atomic"/>
@@ -79,12 +84,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="MainLiteral" eSuperTypes="#//MainElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" upperBound="-1"
         eType="#//MainDeclaration" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ControlVariable" eSuperTypes="#//ControlDef">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//ControlType"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="arity" eType="#//EInt"
-        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Plus" eSuperTypes="#//BigraphExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//BigraphExpression"

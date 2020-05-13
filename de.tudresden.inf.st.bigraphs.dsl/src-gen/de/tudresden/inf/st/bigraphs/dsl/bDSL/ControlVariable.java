@@ -3,6 +3,7 @@
  */
 package de.tudresden.inf.st.bigraphs.dsl.bDSL;
 
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -22,7 +23,7 @@ package de.tudresden.inf.st.bigraphs.dsl.bDSL;
  * @model
  * @generated
  */
-public interface ControlVariable extends ControlDef
+public interface ControlVariable extends EObject
 {
   /**
    * Returns the value of the '<em><b>Type</b></em>' attribute.

@@ -924,15 +924,15 @@ rule__BinaryParallelOperator__Alternatives
 	)
 	|
 	(
-		{ before(grammarAccess.getBinaryParallelOperatorAccess().getPLUSEnumLiteralDeclaration_1()); }
-		('+')
-		{ after(grammarAccess.getBinaryParallelOperatorAccess().getPLUSEnumLiteralDeclaration_1()); }
+		{ before(grammarAccess.getBinaryParallelOperatorAccess().getMERGEEnumLiteralDeclaration_1()); }
+		('|')
+		{ after(grammarAccess.getBinaryParallelOperatorAccess().getMERGEEnumLiteralDeclaration_1()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getBinaryParallelOperatorAccess().getBARSEnumLiteralDeclaration_2()); }
+		{ before(grammarAccess.getBinaryParallelOperatorAccess().getPARALLELEnumLiteralDeclaration_2()); }
 		('||')
-		{ after(grammarAccess.getBinaryParallelOperatorAccess().getBARSEnumLiteralDeclaration_2()); }
+		{ after(grammarAccess.getBinaryParallelOperatorAccess().getPARALLELEnumLiteralDeclaration_2()); }
 	)
 ;
 finally {
@@ -951,15 +951,15 @@ rule__BinaryNestingOperator__Alternatives
 	)
 	|
 	(
-		{ before(grammarAccess.getBinaryNestingOperatorAccess().getDOTEnumLiteralDeclaration_1()); }
+		{ before(grammarAccess.getBinaryNestingOperatorAccess().getNESTINGEnumLiteralDeclaration_1()); }
 		('-')
-		{ after(grammarAccess.getBinaryNestingOperatorAccess().getDOTEnumLiteralDeclaration_1()); }
+		{ after(grammarAccess.getBinaryNestingOperatorAccess().getNESTINGEnumLiteralDeclaration_1()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getBinaryNestingOperatorAccess().getMULEnumLiteralDeclaration_2()); }
+		{ before(grammarAccess.getBinaryNestingOperatorAccess().getCOMPOSITIONEnumLiteralDeclaration_2()); }
 		('*')
-		{ after(grammarAccess.getBinaryNestingOperatorAccess().getMULEnumLiteralDeclaration_2()); }
+		{ after(grammarAccess.getBinaryNestingOperatorAccess().getCOMPOSITIONEnumLiteralDeclaration_2()); }
 	)
 ;
 finally {

@@ -17,7 +17,6 @@ public abstract class AbstractBDSLValidator extends AbstractDeclarativeValidator
 	protected List<EPackage> getEPackages() {
 		List<EPackage> result = new ArrayList<EPackage>();
 		result.add(de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLPackage.eINSTANCE);
-		result.add(EPackage.Registry.INSTANCE.getEPackage("http://de.tudresden.inf.st.bigraphs.models"));
 		return result;
 	}
 }
