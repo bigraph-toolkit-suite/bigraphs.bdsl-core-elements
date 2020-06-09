@@ -6,12 +6,9 @@ package de.tudresden.inf.st.bigraphs.dsl.tests;
 import com.google.inject.Inject;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BRSModel;
 import de.tudresden.inf.st.bigraphs.dsl.tests.BDSLInjectorProvider;
-import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.extensions.InjectionExtension;
 import org.eclipse.xtext.testing.util.ParseHelper;
-import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -24,40 +21,5 @@ public class BDSLParsingTest {
   
   @Test
   public void loadModel() {
-    try {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("signature sig1 {");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("ctrl a1 arity 1;");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("ctrl a2 arity 1;");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      _builder.newLine();
-      _builder.append("signature sig2 {");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("ctrl a arity 1;");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("ctrl big0 arity 2;");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      _builder.newLine();
-      _builder.append("var big0(sig1) = a1;");
-      _builder.newLine();
-      _builder.append("var big1(sig1) = a1 + a1 + a2 + $big0;");
-      _builder.newLine();
-      _builder.append("var big2(sig2) = a + big0[\"c\", \"a\"];");
-      _builder.newLine();
-      final BRSModel result = this.parseHelper.parse(_builder);
-      Assertions.assertNotNull(result);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
   }
 }

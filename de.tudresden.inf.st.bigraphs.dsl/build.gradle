@@ -1,3 +1,10 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+archivesBaseName = 'de.tudresden.inf.st.bigraphs.dsl'
+//version = '1.0-SNAPSHOT'
+//group = 'example'
+
 dependencies {
 	//providedCompile group: 'org.eclipselabs', name: 'cdo', version: '4.6.2' //, ext: 'pom'
 	compile project(":BigraphBaseModel")

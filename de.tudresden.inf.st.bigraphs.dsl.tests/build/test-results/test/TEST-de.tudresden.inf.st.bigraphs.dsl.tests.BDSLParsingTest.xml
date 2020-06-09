@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="de.tudresden.inf.st.bigraphs.dsl.tests.BDSLParsingTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-06-09T11:25:15" hostname="iosensedg" time="0.987">
+  <properties/>
+  <testcase name="loadModel()" classname="de.tudresden.inf.st.bigraphs.dsl.tests.BDSLParsingTest" time="0.987"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

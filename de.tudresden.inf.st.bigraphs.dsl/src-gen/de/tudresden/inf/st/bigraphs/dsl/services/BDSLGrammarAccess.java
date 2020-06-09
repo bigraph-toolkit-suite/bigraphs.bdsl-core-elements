@@ -769,8 +769,6 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.tudresden.inf.st.bigraphs.dsl.BDSL.BigraphExpression");
 		private final RuleCall cAdditionParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		////Call:
-		////	var=[Signature] "." op=[ControlDef];
 		//BigraphExpression:
 		//	Addition;
 		@Override public ParserRule getRule() { return rule; }
@@ -1460,8 +1458,6 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 		return getNodeExpressionCallAccess().getRule();
 	}
 	
-	////Call:
-	////	var=[Signature] "." op=[ControlDef];
 	//BigraphExpression:
 	//	Addition;
 	public BigraphExpressionElements getBigraphExpressionAccess() {
