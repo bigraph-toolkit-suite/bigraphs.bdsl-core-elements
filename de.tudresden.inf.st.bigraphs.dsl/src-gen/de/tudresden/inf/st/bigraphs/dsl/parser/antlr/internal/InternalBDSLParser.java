@@ -22,7 +22,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalBDSLParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'.'", "'.*'", "'$'", "'-'", "'main'", "'='", "'{'", "'}'", "';'", "'signature'", "'ctrl'", "'arity'", "','", "'val'", "':'", "'('", "')'", "'['", "']'", "'println'", "'UNSET'", "'|'", "'||'", "'UNSET2'", "'*'", "'atomic'", "'active'", "'passive'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'.'", "'.*'", "'$'", "'-'", "'main'", "'='", "'{'", "'}'", "';'", "'signature'", "'ctrl'", "'arity'", "','", "'id'", "'('", "')'", "'val'", "':'", "'['", "']'", "'println'", "'UNSET'", "'|'", "'||'", "'UNSET2'", "'*'", "'atomic'", "'active'", "'passive'"
     };
     public static final int RULE_STRING=6;
     public static final int RULE_SL_COMMENT=8;
@@ -32,6 +32,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
     public static final int T__16=16;
     public static final int T__38=38;
     public static final int T__17=17;
+    public static final int T__39=39;
     public static final int T__18=18;
     public static final int T__11=11;
     public static final int T__33=33;
@@ -226,7 +227,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
                 int alt3=3;
                 int LA3_0 = input.LA(1);
 
-                if ( LA3_0 == 24 && getUnorderedGroupHelper().canSelect(grammarAccess.getBRSModelAccess().getUnorderedGroup_1(), 0) ) {
+                if ( LA3_0 == 27 && getUnorderedGroupHelper().canSelect(grammarAccess.getBRSModelAccess().getUnorderedGroup_1(), 0) ) {
                     alt3=1;
                 }
                 else if ( LA3_0 == 15 && getUnorderedGroupHelper().canSelect(grammarAccess.getBRSModelAccess().getUnorderedGroup_1(), 1) ) {
@@ -257,7 +258,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
             	        int alt2=2;
             	        int LA2_0 = input.LA(1);
 
-            	        if ( (LA2_0==24) ) {
+            	        if ( (LA2_0==27) ) {
             	            int LA2_2 = input.LA(2);
 
             	            if ( ((true)) ) {
@@ -1163,7 +1164,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
             {
 
             				current = forceCreateModelElement(
-            					grammarAccess.getMainElementAccess().getMainLiteralAction_3(),
+            					grammarAccess.getMainElementAccess().getMainElementAction_3(),
             					current);
             			
 
@@ -1175,7 +1176,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
                 int alt8=2;
                 int LA8_0 = input.LA(1);
 
-                if ( (LA8_0==13||LA8_0==30) ) {
+                if ( (LA8_0==13||LA8_0==31) ) {
                     alt8=1;
                 }
 
@@ -1369,7 +1370,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
                         int alt9=2;
                         int LA9_0 = input.LA(1);
 
-                        if ( (LA9_0==21||(LA9_0>=36 && LA9_0<=38)) ) {
+                        if ( (LA9_0==21||(LA9_0>=37 && LA9_0<=39)) ) {
                             alt9=1;
                         }
 
@@ -1523,7 +1524,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
             int alt11=2;
             int LA11_0 = input.LA(1);
 
-            if ( ((LA11_0>=36 && LA11_0<=38)) ) {
+            if ( ((LA11_0>=37 && LA11_0<=39)) ) {
                 alt11=1;
             }
             switch (alt11) {
@@ -1918,7 +1919,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
                 if ( (LA12_1==23) ) {
                     alt12=2;
                 }
-                else if ( (LA12_1==EOF||LA12_1==RULE_ID||LA12_1==RULE_STRING||LA12_1==29) ) {
+                else if ( (LA12_1==EOF||LA12_1==RULE_ID||LA12_1==RULE_STRING||LA12_1==30) ) {
                     alt12=1;
                 }
                 else {
@@ -1931,11 +1932,11 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
             else if ( (LA12_0==RULE_ID) ) {
                 int LA12_2 = input.LA(2);
 
-                if ( (LA12_2==EOF||LA12_2==RULE_ID||LA12_2==RULE_STRING||LA12_2==29) ) {
-                    alt12=1;
-                }
-                else if ( (LA12_2==23) ) {
+                if ( (LA12_2==23) ) {
                     alt12=2;
+                }
+                else if ( (LA12_2==EOF||LA12_2==RULE_ID||LA12_2==RULE_STRING||LA12_2==30) ) {
+                    alt12=1;
                 }
                 else {
                     NoViableAltException nvae =
@@ -2114,8 +2115,124 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleSiteVars"
 
 
+    // $ANTLR start "entryRuleSite"
+    // InternalBDSL.g:770:1: entryRuleSite returns [EObject current=null] : iv_ruleSite= ruleSite EOF ;
+    public final EObject entryRuleSite() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleSite = null;
+
+
+        try {
+            // InternalBDSL.g:770:45: (iv_ruleSite= ruleSite EOF )
+            // InternalBDSL.g:771:2: iv_ruleSite= ruleSite EOF
+            {
+             newCompositeNode(grammarAccess.getSiteRule()); 
+            pushFollow(FOLLOW_1);
+            iv_ruleSite=ruleSite();
+
+            state._fsp--;
+
+             current =iv_ruleSite; 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleSite"
+
+
+    // $ANTLR start "ruleSite"
+    // InternalBDSL.g:777:1: ruleSite returns [EObject current=null] : (otherlv_0= 'id' otherlv_1= '(' ( (lv_index_2_0= RULE_INT ) ) otherlv_3= ')' ) ;
+    public final EObject ruleSite() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_0=null;
+        Token otherlv_1=null;
+        Token lv_index_2_0=null;
+        Token otherlv_3=null;
+
+
+        	enterRule();
+
+        try {
+            // InternalBDSL.g:783:2: ( (otherlv_0= 'id' otherlv_1= '(' ( (lv_index_2_0= RULE_INT ) ) otherlv_3= ')' ) )
+            // InternalBDSL.g:784:2: (otherlv_0= 'id' otherlv_1= '(' ( (lv_index_2_0= RULE_INT ) ) otherlv_3= ')' )
+            {
+            // InternalBDSL.g:784:2: (otherlv_0= 'id' otherlv_1= '(' ( (lv_index_2_0= RULE_INT ) ) otherlv_3= ')' )
+            // InternalBDSL.g:785:3: otherlv_0= 'id' otherlv_1= '(' ( (lv_index_2_0= RULE_INT ) ) otherlv_3= ')'
+            {
+            otherlv_0=(Token)match(input,24,FOLLOW_20); 
+
+            			newLeafNode(otherlv_0, grammarAccess.getSiteAccess().getIdKeyword_0());
+            		
+            otherlv_1=(Token)match(input,25,FOLLOW_8); 
+
+            			newLeafNode(otherlv_1, grammarAccess.getSiteAccess().getLeftParenthesisKeyword_1());
+            		
+            // InternalBDSL.g:793:3: ( (lv_index_2_0= RULE_INT ) )
+            // InternalBDSL.g:794:4: (lv_index_2_0= RULE_INT )
+            {
+            // InternalBDSL.g:794:4: (lv_index_2_0= RULE_INT )
+            // InternalBDSL.g:795:5: lv_index_2_0= RULE_INT
+            {
+            lv_index_2_0=(Token)match(input,RULE_INT,FOLLOW_21); 
+
+            					newLeafNode(lv_index_2_0, grammarAccess.getSiteAccess().getIndexINTTerminalRuleCall_2_0());
+            				
+
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getSiteRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"index",
+            						lv_index_2_0,
+            						"org.eclipse.xtext.common.Terminals.INT");
+            				
+
+            }
+
+
+            }
+
+            otherlv_3=(Token)match(input,26,FOLLOW_2); 
+
+            			newLeafNode(otherlv_3, grammarAccess.getSiteAccess().getRightParenthesisKeyword_3());
+            		
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleSite"
+
+
     // $ANTLR start "entryRuleLVD2"
-    // InternalBDSL.g:770:1: entryRuleLVD2 returns [EObject current=null] : iv_ruleLVD2= ruleLVD2 EOF ;
+    // InternalBDSL.g:819:1: entryRuleLVD2 returns [EObject current=null] : iv_ruleLVD2= ruleLVD2 EOF ;
     public final EObject entryRuleLVD2() throws RecognitionException {
         EObject current = null;
 
@@ -2123,8 +2240,8 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalBDSL.g:770:45: (iv_ruleLVD2= ruleLVD2 EOF )
-            // InternalBDSL.g:771:2: iv_ruleLVD2= ruleLVD2 EOF
+            // InternalBDSL.g:819:45: (iv_ruleLVD2= ruleLVD2 EOF )
+            // InternalBDSL.g:820:2: iv_ruleLVD2= ruleLVD2 EOF
             {
              newCompositeNode(grammarAccess.getLVD2Rule()); 
             pushFollow(FOLLOW_1);
@@ -2151,7 +2268,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleLVD2"
-    // InternalBDSL.g:777:1: ruleLVD2 returns [EObject current=null] : ( () otherlv_1= 'val' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= ':' ( ( ruleFQN ) ) otherlv_5= '=' otherlv_6= '{' ( (lv_definition_7_0= ruleBigraphExpression ) )* otherlv_8= '}' ) ;
+    // InternalBDSL.g:826:1: ruleLVD2 returns [EObject current=null] : ( () otherlv_1= 'val' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= ':' ( ( ruleFQN ) ) otherlv_5= '=' otherlv_6= '{' ( (lv_definition_7_0= ruleBigraphExpression ) )* otherlv_8= '}' ) ;
     public final EObject ruleLVD2() throws RecognitionException {
         EObject current = null;
 
@@ -2168,14 +2285,14 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBDSL.g:783:2: ( ( () otherlv_1= 'val' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= ':' ( ( ruleFQN ) ) otherlv_5= '=' otherlv_6= '{' ( (lv_definition_7_0= ruleBigraphExpression ) )* otherlv_8= '}' ) )
-            // InternalBDSL.g:784:2: ( () otherlv_1= 'val' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= ':' ( ( ruleFQN ) ) otherlv_5= '=' otherlv_6= '{' ( (lv_definition_7_0= ruleBigraphExpression ) )* otherlv_8= '}' )
+            // InternalBDSL.g:832:2: ( ( () otherlv_1= 'val' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= ':' ( ( ruleFQN ) ) otherlv_5= '=' otherlv_6= '{' ( (lv_definition_7_0= ruleBigraphExpression ) )* otherlv_8= '}' ) )
+            // InternalBDSL.g:833:2: ( () otherlv_1= 'val' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= ':' ( ( ruleFQN ) ) otherlv_5= '=' otherlv_6= '{' ( (lv_definition_7_0= ruleBigraphExpression ) )* otherlv_8= '}' )
             {
-            // InternalBDSL.g:784:2: ( () otherlv_1= 'val' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= ':' ( ( ruleFQN ) ) otherlv_5= '=' otherlv_6= '{' ( (lv_definition_7_0= ruleBigraphExpression ) )* otherlv_8= '}' )
-            // InternalBDSL.g:785:3: () otherlv_1= 'val' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= ':' ( ( ruleFQN ) ) otherlv_5= '=' otherlv_6= '{' ( (lv_definition_7_0= ruleBigraphExpression ) )* otherlv_8= '}'
+            // InternalBDSL.g:833:2: ( () otherlv_1= 'val' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= ':' ( ( ruleFQN ) ) otherlv_5= '=' otherlv_6= '{' ( (lv_definition_7_0= ruleBigraphExpression ) )* otherlv_8= '}' )
+            // InternalBDSL.g:834:3: () otherlv_1= 'val' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= ':' ( ( ruleFQN ) ) otherlv_5= '=' otherlv_6= '{' ( (lv_definition_7_0= ruleBigraphExpression ) )* otherlv_8= '}'
             {
-            // InternalBDSL.g:785:3: ()
-            // InternalBDSL.g:786:4: 
+            // InternalBDSL.g:834:3: ()
+            // InternalBDSL.g:835:4: 
             {
 
             				current = forceCreateModelElement(
@@ -2185,17 +2302,17 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,24,FOLLOW_6); 
+            otherlv_1=(Token)match(input,27,FOLLOW_6); 
 
             			newLeafNode(otherlv_1, grammarAccess.getLVD2Access().getValKeyword_1());
             		
-            // InternalBDSL.g:796:3: ( (lv_name_2_0= RULE_ID ) )
-            // InternalBDSL.g:797:4: (lv_name_2_0= RULE_ID )
+            // InternalBDSL.g:845:3: ( (lv_name_2_0= RULE_ID ) )
+            // InternalBDSL.g:846:4: (lv_name_2_0= RULE_ID )
             {
-            // InternalBDSL.g:797:4: (lv_name_2_0= RULE_ID )
-            // InternalBDSL.g:798:5: lv_name_2_0= RULE_ID
+            // InternalBDSL.g:846:4: (lv_name_2_0= RULE_ID )
+            // InternalBDSL.g:847:5: lv_name_2_0= RULE_ID
             {
-            lv_name_2_0=(Token)match(input,RULE_ID,FOLLOW_20); 
+            lv_name_2_0=(Token)match(input,RULE_ID,FOLLOW_22); 
 
             					newLeafNode(lv_name_2_0, grammarAccess.getLVD2Access().getNameIDTerminalRuleCall_2_0());
             				
@@ -2215,15 +2332,15 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_3=(Token)match(input,25,FOLLOW_6); 
+            otherlv_3=(Token)match(input,28,FOLLOW_6); 
 
             			newLeafNode(otherlv_3, grammarAccess.getLVD2Access().getColonKeyword_3());
             		
-            // InternalBDSL.g:818:3: ( ( ruleFQN ) )
-            // InternalBDSL.g:819:4: ( ruleFQN )
+            // InternalBDSL.g:867:3: ( ( ruleFQN ) )
+            // InternalBDSL.g:868:4: ( ruleFQN )
             {
-            // InternalBDSL.g:819:4: ( ruleFQN )
-            // InternalBDSL.g:820:5: ruleFQN
+            // InternalBDSL.g:868:4: ( ruleFQN )
+            // InternalBDSL.g:869:5: ruleFQN
             {
 
             					if (current==null) {
@@ -2251,32 +2368,32 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_5, grammarAccess.getLVD2Access().getEqualsSignKeyword_5());
             		
-            otherlv_6=(Token)match(input,17,FOLLOW_21); 
+            otherlv_6=(Token)match(input,17,FOLLOW_23); 
 
             			newLeafNode(otherlv_6, grammarAccess.getLVD2Access().getLeftCurlyBracketKeyword_6());
             		
-            // InternalBDSL.g:842:3: ( (lv_definition_7_0= ruleBigraphExpression ) )*
+            // InternalBDSL.g:891:3: ( (lv_definition_7_0= ruleBigraphExpression ) )*
             loop13:
             do {
                 int alt13=2;
                 int LA13_0 = input.LA(1);
 
-                if ( (LA13_0==RULE_ID||LA13_0==13||LA13_0==24||LA13_0==26) ) {
+                if ( (LA13_0==RULE_ID||LA13_0==13||(LA13_0>=24 && LA13_0<=25)||LA13_0==27) ) {
                     alt13=1;
                 }
 
 
                 switch (alt13) {
             	case 1 :
-            	    // InternalBDSL.g:843:4: (lv_definition_7_0= ruleBigraphExpression )
+            	    // InternalBDSL.g:892:4: (lv_definition_7_0= ruleBigraphExpression )
             	    {
-            	    // InternalBDSL.g:843:4: (lv_definition_7_0= ruleBigraphExpression )
-            	    // InternalBDSL.g:844:5: lv_definition_7_0= ruleBigraphExpression
+            	    // InternalBDSL.g:892:4: (lv_definition_7_0= ruleBigraphExpression )
+            	    // InternalBDSL.g:893:5: lv_definition_7_0= ruleBigraphExpression
             	    {
 
             	    					newCompositeNode(grammarAccess.getLVD2Access().getDefinitionBigraphExpressionParserRuleCall_7_0());
             	    				
-            	    pushFollow(FOLLOW_21);
+            	    pushFollow(FOLLOW_23);
             	    lv_definition_7_0=ruleBigraphExpression();
 
             	    state._fsp--;
@@ -2331,7 +2448,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleLocalVarDecl"
-    // InternalBDSL.g:869:1: entryRuleLocalVarDecl returns [EObject current=null] : iv_ruleLocalVarDecl= ruleLocalVarDecl EOF ;
+    // InternalBDSL.g:918:1: entryRuleLocalVarDecl returns [EObject current=null] : iv_ruleLocalVarDecl= ruleLocalVarDecl EOF ;
     public final EObject entryRuleLocalVarDecl() throws RecognitionException {
         EObject current = null;
 
@@ -2339,8 +2456,8 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalBDSL.g:869:53: (iv_ruleLocalVarDecl= ruleLocalVarDecl EOF )
-            // InternalBDSL.g:870:2: iv_ruleLocalVarDecl= ruleLocalVarDecl EOF
+            // InternalBDSL.g:918:53: (iv_ruleLocalVarDecl= ruleLocalVarDecl EOF )
+            // InternalBDSL.g:919:2: iv_ruleLocalVarDecl= ruleLocalVarDecl EOF
             {
              newCompositeNode(grammarAccess.getLocalVarDeclRule()); 
             pushFollow(FOLLOW_1);
@@ -2367,7 +2484,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleLocalVarDecl"
-    // InternalBDSL.g:876:1: ruleLocalVarDecl returns [EObject current=null] : (otherlv_0= 'val' () ( ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= '(' ( (otherlv_4= RULE_ID ) ) otherlv_5= ')' )? ( (otherlv_6= '[' ( (lv_siteArgs_7_0= ruleSiteVars ) ) (otherlv_8= ',' ( (lv_siteArgs_9_0= ruleSiteVars ) ) )* otherlv_10= ']' )? otherlv_11= ':' ( ( ruleFQN ) ) )? (otherlv_13= '=' otherlv_14= '{' ( (lv_definition_15_0= ruleBigraphExpression ) )* otherlv_16= '}' ) ) ) ;
+    // InternalBDSL.g:925:1: ruleLocalVarDecl returns [EObject current=null] : (otherlv_0= 'val' () ( ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= '(' ( (otherlv_4= RULE_ID ) ) otherlv_5= ')' )? ( (otherlv_6= '[' ( (lv_siteArgs_7_0= ruleSiteVars ) ) (otherlv_8= ',' ( (lv_siteArgs_9_0= ruleSiteVars ) ) )* otherlv_10= ']' )? otherlv_11= ':' ( ( ruleFQN ) ) )? (otherlv_13= '=' otherlv_14= '{' ( (lv_definition_15_0= ruleBigraphExpression ) )* otherlv_16= '}' ) ) ) ;
     public final EObject ruleLocalVarDecl() throws RecognitionException {
         EObject current = null;
 
@@ -2394,18 +2511,18 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBDSL.g:882:2: ( (otherlv_0= 'val' () ( ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= '(' ( (otherlv_4= RULE_ID ) ) otherlv_5= ')' )? ( (otherlv_6= '[' ( (lv_siteArgs_7_0= ruleSiteVars ) ) (otherlv_8= ',' ( (lv_siteArgs_9_0= ruleSiteVars ) ) )* otherlv_10= ']' )? otherlv_11= ':' ( ( ruleFQN ) ) )? (otherlv_13= '=' otherlv_14= '{' ( (lv_definition_15_0= ruleBigraphExpression ) )* otherlv_16= '}' ) ) ) )
-            // InternalBDSL.g:883:2: (otherlv_0= 'val' () ( ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= '(' ( (otherlv_4= RULE_ID ) ) otherlv_5= ')' )? ( (otherlv_6= '[' ( (lv_siteArgs_7_0= ruleSiteVars ) ) (otherlv_8= ',' ( (lv_siteArgs_9_0= ruleSiteVars ) ) )* otherlv_10= ']' )? otherlv_11= ':' ( ( ruleFQN ) ) )? (otherlv_13= '=' otherlv_14= '{' ( (lv_definition_15_0= ruleBigraphExpression ) )* otherlv_16= '}' ) ) )
+            // InternalBDSL.g:931:2: ( (otherlv_0= 'val' () ( ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= '(' ( (otherlv_4= RULE_ID ) ) otherlv_5= ')' )? ( (otherlv_6= '[' ( (lv_siteArgs_7_0= ruleSiteVars ) ) (otherlv_8= ',' ( (lv_siteArgs_9_0= ruleSiteVars ) ) )* otherlv_10= ']' )? otherlv_11= ':' ( ( ruleFQN ) ) )? (otherlv_13= '=' otherlv_14= '{' ( (lv_definition_15_0= ruleBigraphExpression ) )* otherlv_16= '}' ) ) ) )
+            // InternalBDSL.g:932:2: (otherlv_0= 'val' () ( ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= '(' ( (otherlv_4= RULE_ID ) ) otherlv_5= ')' )? ( (otherlv_6= '[' ( (lv_siteArgs_7_0= ruleSiteVars ) ) (otherlv_8= ',' ( (lv_siteArgs_9_0= ruleSiteVars ) ) )* otherlv_10= ']' )? otherlv_11= ':' ( ( ruleFQN ) ) )? (otherlv_13= '=' otherlv_14= '{' ( (lv_definition_15_0= ruleBigraphExpression ) )* otherlv_16= '}' ) ) )
             {
-            // InternalBDSL.g:883:2: (otherlv_0= 'val' () ( ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= '(' ( (otherlv_4= RULE_ID ) ) otherlv_5= ')' )? ( (otherlv_6= '[' ( (lv_siteArgs_7_0= ruleSiteVars ) ) (otherlv_8= ',' ( (lv_siteArgs_9_0= ruleSiteVars ) ) )* otherlv_10= ']' )? otherlv_11= ':' ( ( ruleFQN ) ) )? (otherlv_13= '=' otherlv_14= '{' ( (lv_definition_15_0= ruleBigraphExpression ) )* otherlv_16= '}' ) ) )
-            // InternalBDSL.g:884:3: otherlv_0= 'val' () ( ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= '(' ( (otherlv_4= RULE_ID ) ) otherlv_5= ')' )? ( (otherlv_6= '[' ( (lv_siteArgs_7_0= ruleSiteVars ) ) (otherlv_8= ',' ( (lv_siteArgs_9_0= ruleSiteVars ) ) )* otherlv_10= ']' )? otherlv_11= ':' ( ( ruleFQN ) ) )? (otherlv_13= '=' otherlv_14= '{' ( (lv_definition_15_0= ruleBigraphExpression ) )* otherlv_16= '}' ) )
+            // InternalBDSL.g:932:2: (otherlv_0= 'val' () ( ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= '(' ( (otherlv_4= RULE_ID ) ) otherlv_5= ')' )? ( (otherlv_6= '[' ( (lv_siteArgs_7_0= ruleSiteVars ) ) (otherlv_8= ',' ( (lv_siteArgs_9_0= ruleSiteVars ) ) )* otherlv_10= ']' )? otherlv_11= ':' ( ( ruleFQN ) ) )? (otherlv_13= '=' otherlv_14= '{' ( (lv_definition_15_0= ruleBigraphExpression ) )* otherlv_16= '}' ) ) )
+            // InternalBDSL.g:933:3: otherlv_0= 'val' () ( ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= '(' ( (otherlv_4= RULE_ID ) ) otherlv_5= ')' )? ( (otherlv_6= '[' ( (lv_siteArgs_7_0= ruleSiteVars ) ) (otherlv_8= ',' ( (lv_siteArgs_9_0= ruleSiteVars ) ) )* otherlv_10= ']' )? otherlv_11= ':' ( ( ruleFQN ) ) )? (otherlv_13= '=' otherlv_14= '{' ( (lv_definition_15_0= ruleBigraphExpression ) )* otherlv_16= '}' ) )
             {
-            otherlv_0=(Token)match(input,24,FOLLOW_6); 
+            otherlv_0=(Token)match(input,27,FOLLOW_6); 
 
             			newLeafNode(otherlv_0, grammarAccess.getLocalVarDeclAccess().getValKeyword_0());
             		
-            // InternalBDSL.g:888:3: ()
-            // InternalBDSL.g:889:4: 
+            // InternalBDSL.g:937:3: ()
+            // InternalBDSL.g:938:4: 
             {
 
             				current = forceCreateModelElement(
@@ -2415,16 +2532,16 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalBDSL.g:895:3: ( ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= '(' ( (otherlv_4= RULE_ID ) ) otherlv_5= ')' )? ( (otherlv_6= '[' ( (lv_siteArgs_7_0= ruleSiteVars ) ) (otherlv_8= ',' ( (lv_siteArgs_9_0= ruleSiteVars ) ) )* otherlv_10= ']' )? otherlv_11= ':' ( ( ruleFQN ) ) )? (otherlv_13= '=' otherlv_14= '{' ( (lv_definition_15_0= ruleBigraphExpression ) )* otherlv_16= '}' ) )
-            // InternalBDSL.g:896:4: ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= '(' ( (otherlv_4= RULE_ID ) ) otherlv_5= ')' )? ( (otherlv_6= '[' ( (lv_siteArgs_7_0= ruleSiteVars ) ) (otherlv_8= ',' ( (lv_siteArgs_9_0= ruleSiteVars ) ) )* otherlv_10= ']' )? otherlv_11= ':' ( ( ruleFQN ) ) )? (otherlv_13= '=' otherlv_14= '{' ( (lv_definition_15_0= ruleBigraphExpression ) )* otherlv_16= '}' )
+            // InternalBDSL.g:944:3: ( ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= '(' ( (otherlv_4= RULE_ID ) ) otherlv_5= ')' )? ( (otherlv_6= '[' ( (lv_siteArgs_7_0= ruleSiteVars ) ) (otherlv_8= ',' ( (lv_siteArgs_9_0= ruleSiteVars ) ) )* otherlv_10= ']' )? otherlv_11= ':' ( ( ruleFQN ) ) )? (otherlv_13= '=' otherlv_14= '{' ( (lv_definition_15_0= ruleBigraphExpression ) )* otherlv_16= '}' ) )
+            // InternalBDSL.g:945:4: ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= '(' ( (otherlv_4= RULE_ID ) ) otherlv_5= ')' )? ( (otherlv_6= '[' ( (lv_siteArgs_7_0= ruleSiteVars ) ) (otherlv_8= ',' ( (lv_siteArgs_9_0= ruleSiteVars ) ) )* otherlv_10= ']' )? otherlv_11= ':' ( ( ruleFQN ) ) )? (otherlv_13= '=' otherlv_14= '{' ( (lv_definition_15_0= ruleBigraphExpression ) )* otherlv_16= '}' )
             {
-            // InternalBDSL.g:896:4: ( (lv_name_2_0= RULE_ID ) )
-            // InternalBDSL.g:897:5: (lv_name_2_0= RULE_ID )
+            // InternalBDSL.g:945:4: ( (lv_name_2_0= RULE_ID ) )
+            // InternalBDSL.g:946:5: (lv_name_2_0= RULE_ID )
             {
-            // InternalBDSL.g:897:5: (lv_name_2_0= RULE_ID )
-            // InternalBDSL.g:898:6: lv_name_2_0= RULE_ID
+            // InternalBDSL.g:946:5: (lv_name_2_0= RULE_ID )
+            // InternalBDSL.g:947:6: lv_name_2_0= RULE_ID
             {
-            lv_name_2_0=(Token)match(input,RULE_ID,FOLLOW_22); 
+            lv_name_2_0=(Token)match(input,RULE_ID,FOLLOW_24); 
 
             						newLeafNode(lv_name_2_0, grammarAccess.getLocalVarDeclAccess().getNameIDTerminalRuleCall_2_0_0());
             					
@@ -2444,33 +2561,33 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalBDSL.g:914:4: (otherlv_3= '(' ( (otherlv_4= RULE_ID ) ) otherlv_5= ')' )?
+            // InternalBDSL.g:963:4: (otherlv_3= '(' ( (otherlv_4= RULE_ID ) ) otherlv_5= ')' )?
             int alt14=2;
             int LA14_0 = input.LA(1);
 
-            if ( (LA14_0==26) ) {
+            if ( (LA14_0==25) ) {
                 alt14=1;
             }
             switch (alt14) {
                 case 1 :
-                    // InternalBDSL.g:915:5: otherlv_3= '(' ( (otherlv_4= RULE_ID ) ) otherlv_5= ')'
+                    // InternalBDSL.g:964:5: otherlv_3= '(' ( (otherlv_4= RULE_ID ) ) otherlv_5= ')'
                     {
-                    otherlv_3=(Token)match(input,26,FOLLOW_6); 
+                    otherlv_3=(Token)match(input,25,FOLLOW_6); 
 
                     					newLeafNode(otherlv_3, grammarAccess.getLocalVarDeclAccess().getLeftParenthesisKeyword_2_1_0());
                     				
-                    // InternalBDSL.g:919:5: ( (otherlv_4= RULE_ID ) )
-                    // InternalBDSL.g:920:6: (otherlv_4= RULE_ID )
+                    // InternalBDSL.g:968:5: ( (otherlv_4= RULE_ID ) )
+                    // InternalBDSL.g:969:6: (otherlv_4= RULE_ID )
                     {
-                    // InternalBDSL.g:920:6: (otherlv_4= RULE_ID )
-                    // InternalBDSL.g:921:7: otherlv_4= RULE_ID
+                    // InternalBDSL.g:969:6: (otherlv_4= RULE_ID )
+                    // InternalBDSL.g:970:7: otherlv_4= RULE_ID
                     {
 
                     							if (current==null) {
                     								current = createModelElement(grammarAccess.getLocalVarDeclRule());
                     							}
                     						
-                    otherlv_4=(Token)match(input,RULE_ID,FOLLOW_23); 
+                    otherlv_4=(Token)match(input,RULE_ID,FOLLOW_21); 
 
                     							newLeafNode(otherlv_4, grammarAccess.getLocalVarDeclAccess().getSigSignatureCrossReference_2_1_1_0());
                     						
@@ -2480,7 +2597,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_5=(Token)match(input,27,FOLLOW_24); 
+                    otherlv_5=(Token)match(input,26,FOLLOW_25); 
 
                     					newLeafNode(otherlv_5, grammarAccess.getLocalVarDeclAccess().getRightParenthesisKeyword_2_1_2());
                     				
@@ -2490,42 +2607,42 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalBDSL.g:937:4: ( (otherlv_6= '[' ( (lv_siteArgs_7_0= ruleSiteVars ) ) (otherlv_8= ',' ( (lv_siteArgs_9_0= ruleSiteVars ) ) )* otherlv_10= ']' )? otherlv_11= ':' ( ( ruleFQN ) ) )?
+            // InternalBDSL.g:986:4: ( (otherlv_6= '[' ( (lv_siteArgs_7_0= ruleSiteVars ) ) (otherlv_8= ',' ( (lv_siteArgs_9_0= ruleSiteVars ) ) )* otherlv_10= ']' )? otherlv_11= ':' ( ( ruleFQN ) ) )?
             int alt17=2;
             int LA17_0 = input.LA(1);
 
-            if ( (LA17_0==25||LA17_0==28) ) {
+            if ( ((LA17_0>=28 && LA17_0<=29)) ) {
                 alt17=1;
             }
             switch (alt17) {
                 case 1 :
-                    // InternalBDSL.g:938:5: (otherlv_6= '[' ( (lv_siteArgs_7_0= ruleSiteVars ) ) (otherlv_8= ',' ( (lv_siteArgs_9_0= ruleSiteVars ) ) )* otherlv_10= ']' )? otherlv_11= ':' ( ( ruleFQN ) )
+                    // InternalBDSL.g:987:5: (otherlv_6= '[' ( (lv_siteArgs_7_0= ruleSiteVars ) ) (otherlv_8= ',' ( (lv_siteArgs_9_0= ruleSiteVars ) ) )* otherlv_10= ']' )? otherlv_11= ':' ( ( ruleFQN ) )
                     {
-                    // InternalBDSL.g:938:5: (otherlv_6= '[' ( (lv_siteArgs_7_0= ruleSiteVars ) ) (otherlv_8= ',' ( (lv_siteArgs_9_0= ruleSiteVars ) ) )* otherlv_10= ']' )?
+                    // InternalBDSL.g:987:5: (otherlv_6= '[' ( (lv_siteArgs_7_0= ruleSiteVars ) ) (otherlv_8= ',' ( (lv_siteArgs_9_0= ruleSiteVars ) ) )* otherlv_10= ']' )?
                     int alt16=2;
                     int LA16_0 = input.LA(1);
 
-                    if ( (LA16_0==28) ) {
+                    if ( (LA16_0==29) ) {
                         alt16=1;
                     }
                     switch (alt16) {
                         case 1 :
-                            // InternalBDSL.g:939:6: otherlv_6= '[' ( (lv_siteArgs_7_0= ruleSiteVars ) ) (otherlv_8= ',' ( (lv_siteArgs_9_0= ruleSiteVars ) ) )* otherlv_10= ']'
+                            // InternalBDSL.g:988:6: otherlv_6= '[' ( (lv_siteArgs_7_0= ruleSiteVars ) ) (otherlv_8= ',' ( (lv_siteArgs_9_0= ruleSiteVars ) ) )* otherlv_10= ']'
                             {
-                            otherlv_6=(Token)match(input,28,FOLLOW_6); 
+                            otherlv_6=(Token)match(input,29,FOLLOW_6); 
 
                             						newLeafNode(otherlv_6, grammarAccess.getLocalVarDeclAccess().getLeftSquareBracketKeyword_2_2_0_0());
                             					
-                            // InternalBDSL.g:943:6: ( (lv_siteArgs_7_0= ruleSiteVars ) )
-                            // InternalBDSL.g:944:7: (lv_siteArgs_7_0= ruleSiteVars )
+                            // InternalBDSL.g:992:6: ( (lv_siteArgs_7_0= ruleSiteVars ) )
+                            // InternalBDSL.g:993:7: (lv_siteArgs_7_0= ruleSiteVars )
                             {
-                            // InternalBDSL.g:944:7: (lv_siteArgs_7_0= ruleSiteVars )
-                            // InternalBDSL.g:945:8: lv_siteArgs_7_0= ruleSiteVars
+                            // InternalBDSL.g:993:7: (lv_siteArgs_7_0= ruleSiteVars )
+                            // InternalBDSL.g:994:8: lv_siteArgs_7_0= ruleSiteVars
                             {
 
                             								newCompositeNode(grammarAccess.getLocalVarDeclAccess().getSiteArgsSiteVarsParserRuleCall_2_2_0_1_0());
                             							
-                            pushFollow(FOLLOW_25);
+                            pushFollow(FOLLOW_26);
                             lv_siteArgs_7_0=ruleSiteVars();
 
                             state._fsp--;
@@ -2547,7 +2664,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
                             }
 
-                            // InternalBDSL.g:962:6: (otherlv_8= ',' ( (lv_siteArgs_9_0= ruleSiteVars ) ) )*
+                            // InternalBDSL.g:1011:6: (otherlv_8= ',' ( (lv_siteArgs_9_0= ruleSiteVars ) ) )*
                             loop15:
                             do {
                                 int alt15=2;
@@ -2560,22 +2677,22 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
                                 switch (alt15) {
                             	case 1 :
-                            	    // InternalBDSL.g:963:7: otherlv_8= ',' ( (lv_siteArgs_9_0= ruleSiteVars ) )
+                            	    // InternalBDSL.g:1012:7: otherlv_8= ',' ( (lv_siteArgs_9_0= ruleSiteVars ) )
                             	    {
                             	    otherlv_8=(Token)match(input,23,FOLLOW_6); 
 
                             	    							newLeafNode(otherlv_8, grammarAccess.getLocalVarDeclAccess().getCommaKeyword_2_2_0_2_0());
                             	    						
-                            	    // InternalBDSL.g:967:7: ( (lv_siteArgs_9_0= ruleSiteVars ) )
-                            	    // InternalBDSL.g:968:8: (lv_siteArgs_9_0= ruleSiteVars )
+                            	    // InternalBDSL.g:1016:7: ( (lv_siteArgs_9_0= ruleSiteVars ) )
+                            	    // InternalBDSL.g:1017:8: (lv_siteArgs_9_0= ruleSiteVars )
                             	    {
-                            	    // InternalBDSL.g:968:8: (lv_siteArgs_9_0= ruleSiteVars )
-                            	    // InternalBDSL.g:969:9: lv_siteArgs_9_0= ruleSiteVars
+                            	    // InternalBDSL.g:1017:8: (lv_siteArgs_9_0= ruleSiteVars )
+                            	    // InternalBDSL.g:1018:9: lv_siteArgs_9_0= ruleSiteVars
                             	    {
 
                             	    									newCompositeNode(grammarAccess.getLocalVarDeclAccess().getSiteArgsSiteVarsParserRuleCall_2_2_0_2_1_0());
                             	    								
-                            	    pushFollow(FOLLOW_25);
+                            	    pushFollow(FOLLOW_26);
                             	    lv_siteArgs_9_0=ruleSiteVars();
 
                             	    state._fsp--;
@@ -2606,7 +2723,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
                                 }
                             } while (true);
 
-                            otherlv_10=(Token)match(input,29,FOLLOW_20); 
+                            otherlv_10=(Token)match(input,30,FOLLOW_22); 
 
                             						newLeafNode(otherlv_10, grammarAccess.getLocalVarDeclAccess().getRightSquareBracketKeyword_2_2_0_3());
                             					
@@ -2616,15 +2733,15 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_11=(Token)match(input,25,FOLLOW_6); 
+                    otherlv_11=(Token)match(input,28,FOLLOW_6); 
 
                     					newLeafNode(otherlv_11, grammarAccess.getLocalVarDeclAccess().getColonKeyword_2_2_1());
                     				
-                    // InternalBDSL.g:996:5: ( ( ruleFQN ) )
-                    // InternalBDSL.g:997:6: ( ruleFQN )
+                    // InternalBDSL.g:1045:5: ( ( ruleFQN ) )
+                    // InternalBDSL.g:1046:6: ( ruleFQN )
                     {
-                    // InternalBDSL.g:997:6: ( ruleFQN )
-                    // InternalBDSL.g:998:7: ruleFQN
+                    // InternalBDSL.g:1046:6: ( ruleFQN )
+                    // InternalBDSL.g:1047:7: ruleFQN
                     {
 
                     							if (current==null) {
@@ -2654,39 +2771,39 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalBDSL.g:1013:4: (otherlv_13= '=' otherlv_14= '{' ( (lv_definition_15_0= ruleBigraphExpression ) )* otherlv_16= '}' )
-            // InternalBDSL.g:1014:5: otherlv_13= '=' otherlv_14= '{' ( (lv_definition_15_0= ruleBigraphExpression ) )* otherlv_16= '}'
+            // InternalBDSL.g:1062:4: (otherlv_13= '=' otherlv_14= '{' ( (lv_definition_15_0= ruleBigraphExpression ) )* otherlv_16= '}' )
+            // InternalBDSL.g:1063:5: otherlv_13= '=' otherlv_14= '{' ( (lv_definition_15_0= ruleBigraphExpression ) )* otherlv_16= '}'
             {
             otherlv_13=(Token)match(input,16,FOLLOW_10); 
 
             					newLeafNode(otherlv_13, grammarAccess.getLocalVarDeclAccess().getEqualsSignKeyword_2_3_0());
             				
-            otherlv_14=(Token)match(input,17,FOLLOW_21); 
+            otherlv_14=(Token)match(input,17,FOLLOW_23); 
 
             					newLeafNode(otherlv_14, grammarAccess.getLocalVarDeclAccess().getLeftCurlyBracketKeyword_2_3_1());
             				
-            // InternalBDSL.g:1022:5: ( (lv_definition_15_0= ruleBigraphExpression ) )*
+            // InternalBDSL.g:1071:5: ( (lv_definition_15_0= ruleBigraphExpression ) )*
             loop18:
             do {
                 int alt18=2;
                 int LA18_0 = input.LA(1);
 
-                if ( (LA18_0==RULE_ID||LA18_0==13||LA18_0==24||LA18_0==26) ) {
+                if ( (LA18_0==RULE_ID||LA18_0==13||(LA18_0>=24 && LA18_0<=25)||LA18_0==27) ) {
                     alt18=1;
                 }
 
 
                 switch (alt18) {
             	case 1 :
-            	    // InternalBDSL.g:1023:6: (lv_definition_15_0= ruleBigraphExpression )
+            	    // InternalBDSL.g:1072:6: (lv_definition_15_0= ruleBigraphExpression )
             	    {
-            	    // InternalBDSL.g:1023:6: (lv_definition_15_0= ruleBigraphExpression )
-            	    // InternalBDSL.g:1024:7: lv_definition_15_0= ruleBigraphExpression
+            	    // InternalBDSL.g:1072:6: (lv_definition_15_0= ruleBigraphExpression )
+            	    // InternalBDSL.g:1073:7: lv_definition_15_0= ruleBigraphExpression
             	    {
 
             	    							newCompositeNode(grammarAccess.getLocalVarDeclAccess().getDefinitionBigraphExpressionParserRuleCall_2_3_2_0());
             	    						
-            	    pushFollow(FOLLOW_21);
+            	    pushFollow(FOLLOW_23);
             	    lv_definition_15_0=ruleBigraphExpression();
 
             	    state._fsp--;
@@ -2747,7 +2864,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleBigraphVarReference"
-    // InternalBDSL.g:1051:1: entryRuleBigraphVarReference returns [EObject current=null] : iv_ruleBigraphVarReference= ruleBigraphVarReference EOF ;
+    // InternalBDSL.g:1100:1: entryRuleBigraphVarReference returns [EObject current=null] : iv_ruleBigraphVarReference= ruleBigraphVarReference EOF ;
     public final EObject entryRuleBigraphVarReference() throws RecognitionException {
         EObject current = null;
 
@@ -2755,8 +2872,8 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalBDSL.g:1051:60: (iv_ruleBigraphVarReference= ruleBigraphVarReference EOF )
-            // InternalBDSL.g:1052:2: iv_ruleBigraphVarReference= ruleBigraphVarReference EOF
+            // InternalBDSL.g:1100:60: (iv_ruleBigraphVarReference= ruleBigraphVarReference EOF )
+            // InternalBDSL.g:1101:2: iv_ruleBigraphVarReference= ruleBigraphVarReference EOF
             {
              newCompositeNode(grammarAccess.getBigraphVarReferenceRule()); 
             pushFollow(FOLLOW_1);
@@ -2783,7 +2900,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleBigraphVarReference"
-    // InternalBDSL.g:1058:1: ruleBigraphVarReference returns [EObject current=null] : ( ( ruleBigraphVarReferenceID ) ) ;
+    // InternalBDSL.g:1107:1: ruleBigraphVarReference returns [EObject current=null] : ( ( ruleBigraphVarReferenceID ) ) ;
     public final EObject ruleBigraphVarReference() throws RecognitionException {
         EObject current = null;
 
@@ -2791,14 +2908,14 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBDSL.g:1064:2: ( ( ( ruleBigraphVarReferenceID ) ) )
-            // InternalBDSL.g:1065:2: ( ( ruleBigraphVarReferenceID ) )
+            // InternalBDSL.g:1113:2: ( ( ( ruleBigraphVarReferenceID ) ) )
+            // InternalBDSL.g:1114:2: ( ( ruleBigraphVarReferenceID ) )
             {
-            // InternalBDSL.g:1065:2: ( ( ruleBigraphVarReferenceID ) )
-            // InternalBDSL.g:1066:3: ( ruleBigraphVarReferenceID )
+            // InternalBDSL.g:1114:2: ( ( ruleBigraphVarReferenceID ) )
+            // InternalBDSL.g:1115:3: ( ruleBigraphVarReferenceID )
             {
-            // InternalBDSL.g:1066:3: ( ruleBigraphVarReferenceID )
-            // InternalBDSL.g:1067:4: ruleBigraphVarReferenceID
+            // InternalBDSL.g:1115:3: ( ruleBigraphVarReferenceID )
+            // InternalBDSL.g:1116:4: ruleBigraphVarReferenceID
             {
 
             				if (current==null) {
@@ -2842,7 +2959,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleAbstractBigraphDeclaration"
-    // InternalBDSL.g:1084:1: entryRuleAbstractBigraphDeclaration returns [EObject current=null] : iv_ruleAbstractBigraphDeclaration= ruleAbstractBigraphDeclaration EOF ;
+    // InternalBDSL.g:1133:1: entryRuleAbstractBigraphDeclaration returns [EObject current=null] : iv_ruleAbstractBigraphDeclaration= ruleAbstractBigraphDeclaration EOF ;
     public final EObject entryRuleAbstractBigraphDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -2850,8 +2967,8 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalBDSL.g:1084:67: (iv_ruleAbstractBigraphDeclaration= ruleAbstractBigraphDeclaration EOF )
-            // InternalBDSL.g:1085:2: iv_ruleAbstractBigraphDeclaration= ruleAbstractBigraphDeclaration EOF
+            // InternalBDSL.g:1133:67: (iv_ruleAbstractBigraphDeclaration= ruleAbstractBigraphDeclaration EOF )
+            // InternalBDSL.g:1134:2: iv_ruleAbstractBigraphDeclaration= ruleAbstractBigraphDeclaration EOF
             {
              newCompositeNode(grammarAccess.getAbstractBigraphDeclarationRule()); 
             pushFollow(FOLLOW_1);
@@ -2878,7 +2995,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleAbstractBigraphDeclaration"
-    // InternalBDSL.g:1091:1: ruleAbstractBigraphDeclaration returns [EObject current=null] : (this_BigraphVarReference_0= ruleBigraphVarReference | this_NodeExpressionCall_1= ruleNodeExpressionCall | this_LVD2_2= ruleLVD2 ) ;
+    // InternalBDSL.g:1140:1: ruleAbstractBigraphDeclaration returns [EObject current=null] : (this_BigraphVarReference_0= ruleBigraphVarReference | this_NodeExpressionCall_1= ruleNodeExpressionCall | this_LVD2_2= ruleLVD2 | this_Site_3= ruleSite ) ;
     public final EObject ruleAbstractBigraphDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -2888,16 +3005,18 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
         EObject this_LVD2_2 = null;
 
+        EObject this_Site_3 = null;
+
 
 
         	enterRule();
 
         try {
-            // InternalBDSL.g:1097:2: ( (this_BigraphVarReference_0= ruleBigraphVarReference | this_NodeExpressionCall_1= ruleNodeExpressionCall | this_LVD2_2= ruleLVD2 ) )
-            // InternalBDSL.g:1098:2: (this_BigraphVarReference_0= ruleBigraphVarReference | this_NodeExpressionCall_1= ruleNodeExpressionCall | this_LVD2_2= ruleLVD2 )
+            // InternalBDSL.g:1146:2: ( (this_BigraphVarReference_0= ruleBigraphVarReference | this_NodeExpressionCall_1= ruleNodeExpressionCall | this_LVD2_2= ruleLVD2 | this_Site_3= ruleSite ) )
+            // InternalBDSL.g:1147:2: (this_BigraphVarReference_0= ruleBigraphVarReference | this_NodeExpressionCall_1= ruleNodeExpressionCall | this_LVD2_2= ruleLVD2 | this_Site_3= ruleSite )
             {
-            // InternalBDSL.g:1098:2: (this_BigraphVarReference_0= ruleBigraphVarReference | this_NodeExpressionCall_1= ruleNodeExpressionCall | this_LVD2_2= ruleLVD2 )
-            int alt19=3;
+            // InternalBDSL.g:1147:2: (this_BigraphVarReference_0= ruleBigraphVarReference | this_NodeExpressionCall_1= ruleNodeExpressionCall | this_LVD2_2= ruleLVD2 | this_Site_3= ruleSite )
+            int alt19=4;
             switch ( input.LA(1) ) {
             case 13:
                 {
@@ -2909,9 +3028,14 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
                 alt19=2;
                 }
                 break;
-            case 24:
+            case 27:
                 {
                 alt19=3;
+                }
+                break;
+            case 24:
+                {
+                alt19=4;
                 }
                 break;
             default:
@@ -2923,7 +3047,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
             switch (alt19) {
                 case 1 :
-                    // InternalBDSL.g:1099:3: this_BigraphVarReference_0= ruleBigraphVarReference
+                    // InternalBDSL.g:1148:3: this_BigraphVarReference_0= ruleBigraphVarReference
                     {
 
                     			newCompositeNode(grammarAccess.getAbstractBigraphDeclarationAccess().getBigraphVarReferenceParserRuleCall_0());
@@ -2941,7 +3065,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalBDSL.g:1108:3: this_NodeExpressionCall_1= ruleNodeExpressionCall
+                    // InternalBDSL.g:1157:3: this_NodeExpressionCall_1= ruleNodeExpressionCall
                     {
 
                     			newCompositeNode(grammarAccess.getAbstractBigraphDeclarationAccess().getNodeExpressionCallParserRuleCall_1());
@@ -2959,7 +3083,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalBDSL.g:1117:3: this_LVD2_2= ruleLVD2
+                    // InternalBDSL.g:1166:3: this_LVD2_2= ruleLVD2
                     {
 
                     			newCompositeNode(grammarAccess.getAbstractBigraphDeclarationAccess().getLVD2ParserRuleCall_2());
@@ -2971,6 +3095,24 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
                     			current = this_LVD2_2;
+                    			afterParserOrEnumRuleCall();
+                    		
+
+                    }
+                    break;
+                case 4 :
+                    // InternalBDSL.g:1175:3: this_Site_3= ruleSite
+                    {
+
+                    			newCompositeNode(grammarAccess.getAbstractBigraphDeclarationAccess().getSiteParserRuleCall_3());
+                    		
+                    pushFollow(FOLLOW_2);
+                    this_Site_3=ruleSite();
+
+                    state._fsp--;
+
+
+                    			current = this_Site_3;
                     			afterParserOrEnumRuleCall();
                     		
 
@@ -2999,7 +3141,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleNodeExpressionCall"
-    // InternalBDSL.g:1129:1: entryRuleNodeExpressionCall returns [EObject current=null] : iv_ruleNodeExpressionCall= ruleNodeExpressionCall EOF ;
+    // InternalBDSL.g:1187:1: entryRuleNodeExpressionCall returns [EObject current=null] : iv_ruleNodeExpressionCall= ruleNodeExpressionCall EOF ;
     public final EObject entryRuleNodeExpressionCall() throws RecognitionException {
         EObject current = null;
 
@@ -3007,8 +3149,8 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalBDSL.g:1129:59: (iv_ruleNodeExpressionCall= ruleNodeExpressionCall EOF )
-            // InternalBDSL.g:1130:2: iv_ruleNodeExpressionCall= ruleNodeExpressionCall EOF
+            // InternalBDSL.g:1187:59: (iv_ruleNodeExpressionCall= ruleNodeExpressionCall EOF )
+            // InternalBDSL.g:1188:2: iv_ruleNodeExpressionCall= ruleNodeExpressionCall EOF
             {
              newCompositeNode(grammarAccess.getNodeExpressionCallRule()); 
             pushFollow(FOLLOW_1);
@@ -3035,7 +3177,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleNodeExpressionCall"
-    // InternalBDSL.g:1136:1: ruleNodeExpressionCall returns [EObject current=null] : ( ( ( ruleFQN ) ) (otherlv_1= '[' ( (lv_links_2_0= ruleLinkNames ) )* otherlv_3= ']' )? ) ;
+    // InternalBDSL.g:1194:1: ruleNodeExpressionCall returns [EObject current=null] : ( ( ( ruleFQN ) ) (otherlv_1= '[' ( (lv_links_2_0= ruleLinkNames ) )* otherlv_3= ']' )? ) ;
     public final EObject ruleNodeExpressionCall() throws RecognitionException {
         EObject current = null;
 
@@ -3048,17 +3190,17 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBDSL.g:1142:2: ( ( ( ( ruleFQN ) ) (otherlv_1= '[' ( (lv_links_2_0= ruleLinkNames ) )* otherlv_3= ']' )? ) )
-            // InternalBDSL.g:1143:2: ( ( ( ruleFQN ) ) (otherlv_1= '[' ( (lv_links_2_0= ruleLinkNames ) )* otherlv_3= ']' )? )
+            // InternalBDSL.g:1200:2: ( ( ( ( ruleFQN ) ) (otherlv_1= '[' ( (lv_links_2_0= ruleLinkNames ) )* otherlv_3= ']' )? ) )
+            // InternalBDSL.g:1201:2: ( ( ( ruleFQN ) ) (otherlv_1= '[' ( (lv_links_2_0= ruleLinkNames ) )* otherlv_3= ']' )? )
             {
-            // InternalBDSL.g:1143:2: ( ( ( ruleFQN ) ) (otherlv_1= '[' ( (lv_links_2_0= ruleLinkNames ) )* otherlv_3= ']' )? )
-            // InternalBDSL.g:1144:3: ( ( ruleFQN ) ) (otherlv_1= '[' ( (lv_links_2_0= ruleLinkNames ) )* otherlv_3= ']' )?
+            // InternalBDSL.g:1201:2: ( ( ( ruleFQN ) ) (otherlv_1= '[' ( (lv_links_2_0= ruleLinkNames ) )* otherlv_3= ']' )? )
+            // InternalBDSL.g:1202:3: ( ( ruleFQN ) ) (otherlv_1= '[' ( (lv_links_2_0= ruleLinkNames ) )* otherlv_3= ']' )?
             {
-            // InternalBDSL.g:1144:3: ( ( ruleFQN ) )
-            // InternalBDSL.g:1145:4: ( ruleFQN )
+            // InternalBDSL.g:1202:3: ( ( ruleFQN ) )
+            // InternalBDSL.g:1203:4: ( ruleFQN )
             {
-            // InternalBDSL.g:1145:4: ( ruleFQN )
-            // InternalBDSL.g:1146:5: ruleFQN
+            // InternalBDSL.g:1203:4: ( ruleFQN )
+            // InternalBDSL.g:1204:5: ruleFQN
             {
 
             					if (current==null) {
@@ -3068,7 +3210,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
             					newCompositeNode(grammarAccess.getNodeExpressionCallAccess().getValueControlVariableCrossReference_0_0());
             				
-            pushFollow(FOLLOW_26);
+            pushFollow(FOLLOW_27);
             ruleFQN();
 
             state._fsp--;
@@ -3082,22 +3224,22 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalBDSL.g:1160:3: (otherlv_1= '[' ( (lv_links_2_0= ruleLinkNames ) )* otherlv_3= ']' )?
+            // InternalBDSL.g:1218:3: (otherlv_1= '[' ( (lv_links_2_0= ruleLinkNames ) )* otherlv_3= ']' )?
             int alt21=2;
             int LA21_0 = input.LA(1);
 
-            if ( (LA21_0==28) ) {
+            if ( (LA21_0==29) ) {
                 alt21=1;
             }
             switch (alt21) {
                 case 1 :
-                    // InternalBDSL.g:1161:4: otherlv_1= '[' ( (lv_links_2_0= ruleLinkNames ) )* otherlv_3= ']'
+                    // InternalBDSL.g:1219:4: otherlv_1= '[' ( (lv_links_2_0= ruleLinkNames ) )* otherlv_3= ']'
                     {
-                    otherlv_1=(Token)match(input,28,FOLLOW_27); 
+                    otherlv_1=(Token)match(input,29,FOLLOW_28); 
 
                     				newLeafNode(otherlv_1, grammarAccess.getNodeExpressionCallAccess().getLeftSquareBracketKeyword_1_0());
                     			
-                    // InternalBDSL.g:1165:4: ( (lv_links_2_0= ruleLinkNames ) )*
+                    // InternalBDSL.g:1223:4: ( (lv_links_2_0= ruleLinkNames ) )*
                     loop20:
                     do {
                         int alt20=2;
@@ -3110,15 +3252,15 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
                         switch (alt20) {
                     	case 1 :
-                    	    // InternalBDSL.g:1166:5: (lv_links_2_0= ruleLinkNames )
+                    	    // InternalBDSL.g:1224:5: (lv_links_2_0= ruleLinkNames )
                     	    {
-                    	    // InternalBDSL.g:1166:5: (lv_links_2_0= ruleLinkNames )
-                    	    // InternalBDSL.g:1167:6: lv_links_2_0= ruleLinkNames
+                    	    // InternalBDSL.g:1224:5: (lv_links_2_0= ruleLinkNames )
+                    	    // InternalBDSL.g:1225:6: lv_links_2_0= ruleLinkNames
                     	    {
 
                     	    						newCompositeNode(grammarAccess.getNodeExpressionCallAccess().getLinksLinkNamesParserRuleCall_1_1_0());
                     	    					
-                    	    pushFollow(FOLLOW_27);
+                    	    pushFollow(FOLLOW_28);
                     	    lv_links_2_0=ruleLinkNames();
 
                     	    state._fsp--;
@@ -3146,7 +3288,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
                         }
                     } while (true);
 
-                    otherlv_3=(Token)match(input,29,FOLLOW_2); 
+                    otherlv_3=(Token)match(input,30,FOLLOW_2); 
 
                     				newLeafNode(otherlv_3, grammarAccess.getNodeExpressionCallAccess().getRightSquareBracketKeyword_1_2());
                     			
@@ -3179,7 +3321,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleBigraphExpression"
-    // InternalBDSL.g:1193:1: entryRuleBigraphExpression returns [EObject current=null] : iv_ruleBigraphExpression= ruleBigraphExpression EOF ;
+    // InternalBDSL.g:1251:1: entryRuleBigraphExpression returns [EObject current=null] : iv_ruleBigraphExpression= ruleBigraphExpression EOF ;
     public final EObject entryRuleBigraphExpression() throws RecognitionException {
         EObject current = null;
 
@@ -3187,8 +3329,8 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalBDSL.g:1193:58: (iv_ruleBigraphExpression= ruleBigraphExpression EOF )
-            // InternalBDSL.g:1194:2: iv_ruleBigraphExpression= ruleBigraphExpression EOF
+            // InternalBDSL.g:1251:58: (iv_ruleBigraphExpression= ruleBigraphExpression EOF )
+            // InternalBDSL.g:1252:2: iv_ruleBigraphExpression= ruleBigraphExpression EOF
             {
              newCompositeNode(grammarAccess.getBigraphExpressionRule()); 
             pushFollow(FOLLOW_1);
@@ -3215,7 +3357,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleBigraphExpression"
-    // InternalBDSL.g:1200:1: ruleBigraphExpression returns [EObject current=null] : this_Addition_0= ruleAddition ;
+    // InternalBDSL.g:1258:1: ruleBigraphExpression returns [EObject current=null] : this_Addition_0= ruleAddition ;
     public final EObject ruleBigraphExpression() throws RecognitionException {
         EObject current = null;
 
@@ -3226,8 +3368,8 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBDSL.g:1206:2: (this_Addition_0= ruleAddition )
-            // InternalBDSL.g:1207:2: this_Addition_0= ruleAddition
+            // InternalBDSL.g:1264:2: (this_Addition_0= ruleAddition )
+            // InternalBDSL.g:1265:2: this_Addition_0= ruleAddition
             {
 
             		newCompositeNode(grammarAccess.getBigraphExpressionAccess().getAdditionParserRuleCall());
@@ -3261,7 +3403,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleAddition"
-    // InternalBDSL.g:1218:1: entryRuleAddition returns [EObject current=null] : iv_ruleAddition= ruleAddition EOF ;
+    // InternalBDSL.g:1276:1: entryRuleAddition returns [EObject current=null] : iv_ruleAddition= ruleAddition EOF ;
     public final EObject entryRuleAddition() throws RecognitionException {
         EObject current = null;
 
@@ -3269,8 +3411,8 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalBDSL.g:1218:49: (iv_ruleAddition= ruleAddition EOF )
-            // InternalBDSL.g:1219:2: iv_ruleAddition= ruleAddition EOF
+            // InternalBDSL.g:1276:49: (iv_ruleAddition= ruleAddition EOF )
+            // InternalBDSL.g:1277:2: iv_ruleAddition= ruleAddition EOF
             {
              newCompositeNode(grammarAccess.getAdditionRule()); 
             pushFollow(FOLLOW_1);
@@ -3297,7 +3439,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleAddition"
-    // InternalBDSL.g:1225:1: ruleAddition returns [EObject current=null] : (this_Multiplication_0= ruleMultiplication ( ( () ( (lv_operator_2_0= ruleBinaryParallelOperator ) ) ) ( (lv_right_3_0= ruleMultiplication ) ) )* ) ;
+    // InternalBDSL.g:1283:1: ruleAddition returns [EObject current=null] : (this_Multiplication_0= ruleMultiplication ( ( () ( (lv_operator_2_0= ruleBinaryParallelOperator ) ) ) ( (lv_right_3_0= ruleMultiplication ) ) )* ) ;
     public final EObject ruleAddition() throws RecognitionException {
         EObject current = null;
 
@@ -3312,16 +3454,16 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBDSL.g:1231:2: ( (this_Multiplication_0= ruleMultiplication ( ( () ( (lv_operator_2_0= ruleBinaryParallelOperator ) ) ) ( (lv_right_3_0= ruleMultiplication ) ) )* ) )
-            // InternalBDSL.g:1232:2: (this_Multiplication_0= ruleMultiplication ( ( () ( (lv_operator_2_0= ruleBinaryParallelOperator ) ) ) ( (lv_right_3_0= ruleMultiplication ) ) )* )
+            // InternalBDSL.g:1289:2: ( (this_Multiplication_0= ruleMultiplication ( ( () ( (lv_operator_2_0= ruleBinaryParallelOperator ) ) ) ( (lv_right_3_0= ruleMultiplication ) ) )* ) )
+            // InternalBDSL.g:1290:2: (this_Multiplication_0= ruleMultiplication ( ( () ( (lv_operator_2_0= ruleBinaryParallelOperator ) ) ) ( (lv_right_3_0= ruleMultiplication ) ) )* )
             {
-            // InternalBDSL.g:1232:2: (this_Multiplication_0= ruleMultiplication ( ( () ( (lv_operator_2_0= ruleBinaryParallelOperator ) ) ) ( (lv_right_3_0= ruleMultiplication ) ) )* )
-            // InternalBDSL.g:1233:3: this_Multiplication_0= ruleMultiplication ( ( () ( (lv_operator_2_0= ruleBinaryParallelOperator ) ) ) ( (lv_right_3_0= ruleMultiplication ) ) )*
+            // InternalBDSL.g:1290:2: (this_Multiplication_0= ruleMultiplication ( ( () ( (lv_operator_2_0= ruleBinaryParallelOperator ) ) ) ( (lv_right_3_0= ruleMultiplication ) ) )* )
+            // InternalBDSL.g:1291:3: this_Multiplication_0= ruleMultiplication ( ( () ( (lv_operator_2_0= ruleBinaryParallelOperator ) ) ) ( (lv_right_3_0= ruleMultiplication ) ) )*
             {
 
             			newCompositeNode(grammarAccess.getAdditionAccess().getMultiplicationParserRuleCall_0());
             		
-            pushFollow(FOLLOW_28);
+            pushFollow(FOLLOW_29);
             this_Multiplication_0=ruleMultiplication();
 
             state._fsp--;
@@ -3330,26 +3472,26 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
             			current = this_Multiplication_0;
             			afterParserOrEnumRuleCall();
             		
-            // InternalBDSL.g:1241:3: ( ( () ( (lv_operator_2_0= ruleBinaryParallelOperator ) ) ) ( (lv_right_3_0= ruleMultiplication ) ) )*
+            // InternalBDSL.g:1299:3: ( ( () ( (lv_operator_2_0= ruleBinaryParallelOperator ) ) ) ( (lv_right_3_0= ruleMultiplication ) ) )*
             loop22:
             do {
                 int alt22=2;
                 int LA22_0 = input.LA(1);
 
-                if ( ((LA22_0>=31 && LA22_0<=33)) ) {
+                if ( ((LA22_0>=32 && LA22_0<=34)) ) {
                     alt22=1;
                 }
 
 
                 switch (alt22) {
             	case 1 :
-            	    // InternalBDSL.g:1242:4: ( () ( (lv_operator_2_0= ruleBinaryParallelOperator ) ) ) ( (lv_right_3_0= ruleMultiplication ) )
+            	    // InternalBDSL.g:1300:4: ( () ( (lv_operator_2_0= ruleBinaryParallelOperator ) ) ) ( (lv_right_3_0= ruleMultiplication ) )
             	    {
-            	    // InternalBDSL.g:1242:4: ( () ( (lv_operator_2_0= ruleBinaryParallelOperator ) ) )
-            	    // InternalBDSL.g:1243:5: () ( (lv_operator_2_0= ruleBinaryParallelOperator ) )
+            	    // InternalBDSL.g:1300:4: ( () ( (lv_operator_2_0= ruleBinaryParallelOperator ) ) )
+            	    // InternalBDSL.g:1301:5: () ( (lv_operator_2_0= ruleBinaryParallelOperator ) )
             	    {
-            	    // InternalBDSL.g:1243:5: ()
-            	    // InternalBDSL.g:1244:6: 
+            	    // InternalBDSL.g:1301:5: ()
+            	    // InternalBDSL.g:1302:6: 
             	    {
 
             	    						current = forceCreateModelElementAndSet(
@@ -3359,16 +3501,16 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    // InternalBDSL.g:1250:5: ( (lv_operator_2_0= ruleBinaryParallelOperator ) )
-            	    // InternalBDSL.g:1251:6: (lv_operator_2_0= ruleBinaryParallelOperator )
+            	    // InternalBDSL.g:1308:5: ( (lv_operator_2_0= ruleBinaryParallelOperator ) )
+            	    // InternalBDSL.g:1309:6: (lv_operator_2_0= ruleBinaryParallelOperator )
             	    {
-            	    // InternalBDSL.g:1251:6: (lv_operator_2_0= ruleBinaryParallelOperator )
-            	    // InternalBDSL.g:1252:7: lv_operator_2_0= ruleBinaryParallelOperator
+            	    // InternalBDSL.g:1309:6: (lv_operator_2_0= ruleBinaryParallelOperator )
+            	    // InternalBDSL.g:1310:7: lv_operator_2_0= ruleBinaryParallelOperator
             	    {
 
             	    							newCompositeNode(grammarAccess.getAdditionAccess().getOperatorBinaryParallelOperatorEnumRuleCall_1_0_1_0());
             	    						
-            	    pushFollow(FOLLOW_29);
+            	    pushFollow(FOLLOW_30);
             	    lv_operator_2_0=ruleBinaryParallelOperator();
 
             	    state._fsp--;
@@ -3393,16 +3535,16 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    // InternalBDSL.g:1270:4: ( (lv_right_3_0= ruleMultiplication ) )
-            	    // InternalBDSL.g:1271:5: (lv_right_3_0= ruleMultiplication )
+            	    // InternalBDSL.g:1328:4: ( (lv_right_3_0= ruleMultiplication ) )
+            	    // InternalBDSL.g:1329:5: (lv_right_3_0= ruleMultiplication )
             	    {
-            	    // InternalBDSL.g:1271:5: (lv_right_3_0= ruleMultiplication )
-            	    // InternalBDSL.g:1272:6: lv_right_3_0= ruleMultiplication
+            	    // InternalBDSL.g:1329:5: (lv_right_3_0= ruleMultiplication )
+            	    // InternalBDSL.g:1330:6: lv_right_3_0= ruleMultiplication
             	    {
 
             	    						newCompositeNode(grammarAccess.getAdditionAccess().getRightMultiplicationParserRuleCall_1_1_0());
             	    					
-            	    pushFollow(FOLLOW_28);
+            	    pushFollow(FOLLOW_29);
             	    lv_right_3_0=ruleMultiplication();
 
             	    state._fsp--;
@@ -3456,7 +3598,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleMultiplication"
-    // InternalBDSL.g:1294:1: entryRuleMultiplication returns [EObject current=null] : iv_ruleMultiplication= ruleMultiplication EOF ;
+    // InternalBDSL.g:1352:1: entryRuleMultiplication returns [EObject current=null] : iv_ruleMultiplication= ruleMultiplication EOF ;
     public final EObject entryRuleMultiplication() throws RecognitionException {
         EObject current = null;
 
@@ -3464,8 +3606,8 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalBDSL.g:1294:55: (iv_ruleMultiplication= ruleMultiplication EOF )
-            // InternalBDSL.g:1295:2: iv_ruleMultiplication= ruleMultiplication EOF
+            // InternalBDSL.g:1352:55: (iv_ruleMultiplication= ruleMultiplication EOF )
+            // InternalBDSL.g:1353:2: iv_ruleMultiplication= ruleMultiplication EOF
             {
              newCompositeNode(grammarAccess.getMultiplicationRule()); 
             pushFollow(FOLLOW_1);
@@ -3492,7 +3634,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleMultiplication"
-    // InternalBDSL.g:1301:1: ruleMultiplication returns [EObject current=null] : (this_PrimaryExpression_0= rulePrimaryExpression ( ( () ( (lv_operator_2_0= ruleBinaryNestingOperator ) ) ) ( (lv_right_3_0= rulePrimaryExpression ) ) )* ) ;
+    // InternalBDSL.g:1359:1: ruleMultiplication returns [EObject current=null] : (this_PrimaryExpression_0= rulePrimaryExpression ( ( () ( (lv_operator_2_0= ruleBinaryNestingOperator ) ) ) ( (lv_right_3_0= rulePrimaryExpression ) ) )* ) ;
     public final EObject ruleMultiplication() throws RecognitionException {
         EObject current = null;
 
@@ -3507,16 +3649,16 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBDSL.g:1307:2: ( (this_PrimaryExpression_0= rulePrimaryExpression ( ( () ( (lv_operator_2_0= ruleBinaryNestingOperator ) ) ) ( (lv_right_3_0= rulePrimaryExpression ) ) )* ) )
-            // InternalBDSL.g:1308:2: (this_PrimaryExpression_0= rulePrimaryExpression ( ( () ( (lv_operator_2_0= ruleBinaryNestingOperator ) ) ) ( (lv_right_3_0= rulePrimaryExpression ) ) )* )
+            // InternalBDSL.g:1365:2: ( (this_PrimaryExpression_0= rulePrimaryExpression ( ( () ( (lv_operator_2_0= ruleBinaryNestingOperator ) ) ) ( (lv_right_3_0= rulePrimaryExpression ) ) )* ) )
+            // InternalBDSL.g:1366:2: (this_PrimaryExpression_0= rulePrimaryExpression ( ( () ( (lv_operator_2_0= ruleBinaryNestingOperator ) ) ) ( (lv_right_3_0= rulePrimaryExpression ) ) )* )
             {
-            // InternalBDSL.g:1308:2: (this_PrimaryExpression_0= rulePrimaryExpression ( ( () ( (lv_operator_2_0= ruleBinaryNestingOperator ) ) ) ( (lv_right_3_0= rulePrimaryExpression ) ) )* )
-            // InternalBDSL.g:1309:3: this_PrimaryExpression_0= rulePrimaryExpression ( ( () ( (lv_operator_2_0= ruleBinaryNestingOperator ) ) ) ( (lv_right_3_0= rulePrimaryExpression ) ) )*
+            // InternalBDSL.g:1366:2: (this_PrimaryExpression_0= rulePrimaryExpression ( ( () ( (lv_operator_2_0= ruleBinaryNestingOperator ) ) ) ( (lv_right_3_0= rulePrimaryExpression ) ) )* )
+            // InternalBDSL.g:1367:3: this_PrimaryExpression_0= rulePrimaryExpression ( ( () ( (lv_operator_2_0= ruleBinaryNestingOperator ) ) ) ( (lv_right_3_0= rulePrimaryExpression ) ) )*
             {
 
             			newCompositeNode(grammarAccess.getMultiplicationAccess().getPrimaryExpressionParserRuleCall_0());
             		
-            pushFollow(FOLLOW_30);
+            pushFollow(FOLLOW_31);
             this_PrimaryExpression_0=rulePrimaryExpression();
 
             state._fsp--;
@@ -3525,26 +3667,26 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
             			current = this_PrimaryExpression_0;
             			afterParserOrEnumRuleCall();
             		
-            // InternalBDSL.g:1317:3: ( ( () ( (lv_operator_2_0= ruleBinaryNestingOperator ) ) ) ( (lv_right_3_0= rulePrimaryExpression ) ) )*
+            // InternalBDSL.g:1375:3: ( ( () ( (lv_operator_2_0= ruleBinaryNestingOperator ) ) ) ( (lv_right_3_0= rulePrimaryExpression ) ) )*
             loop23:
             do {
                 int alt23=2;
                 int LA23_0 = input.LA(1);
 
-                if ( (LA23_0==14||(LA23_0>=34 && LA23_0<=35)) ) {
+                if ( (LA23_0==14||(LA23_0>=35 && LA23_0<=36)) ) {
                     alt23=1;
                 }
 
 
                 switch (alt23) {
             	case 1 :
-            	    // InternalBDSL.g:1318:4: ( () ( (lv_operator_2_0= ruleBinaryNestingOperator ) ) ) ( (lv_right_3_0= rulePrimaryExpression ) )
+            	    // InternalBDSL.g:1376:4: ( () ( (lv_operator_2_0= ruleBinaryNestingOperator ) ) ) ( (lv_right_3_0= rulePrimaryExpression ) )
             	    {
-            	    // InternalBDSL.g:1318:4: ( () ( (lv_operator_2_0= ruleBinaryNestingOperator ) ) )
-            	    // InternalBDSL.g:1319:5: () ( (lv_operator_2_0= ruleBinaryNestingOperator ) )
+            	    // InternalBDSL.g:1376:4: ( () ( (lv_operator_2_0= ruleBinaryNestingOperator ) ) )
+            	    // InternalBDSL.g:1377:5: () ( (lv_operator_2_0= ruleBinaryNestingOperator ) )
             	    {
-            	    // InternalBDSL.g:1319:5: ()
-            	    // InternalBDSL.g:1320:6: 
+            	    // InternalBDSL.g:1377:5: ()
+            	    // InternalBDSL.g:1378:6: 
             	    {
 
             	    						current = forceCreateModelElementAndSet(
@@ -3554,16 +3696,16 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    // InternalBDSL.g:1326:5: ( (lv_operator_2_0= ruleBinaryNestingOperator ) )
-            	    // InternalBDSL.g:1327:6: (lv_operator_2_0= ruleBinaryNestingOperator )
+            	    // InternalBDSL.g:1384:5: ( (lv_operator_2_0= ruleBinaryNestingOperator ) )
+            	    // InternalBDSL.g:1385:6: (lv_operator_2_0= ruleBinaryNestingOperator )
             	    {
-            	    // InternalBDSL.g:1327:6: (lv_operator_2_0= ruleBinaryNestingOperator )
-            	    // InternalBDSL.g:1328:7: lv_operator_2_0= ruleBinaryNestingOperator
+            	    // InternalBDSL.g:1385:6: (lv_operator_2_0= ruleBinaryNestingOperator )
+            	    // InternalBDSL.g:1386:7: lv_operator_2_0= ruleBinaryNestingOperator
             	    {
 
             	    							newCompositeNode(grammarAccess.getMultiplicationAccess().getOperatorBinaryNestingOperatorEnumRuleCall_1_0_1_0());
             	    						
-            	    pushFollow(FOLLOW_29);
+            	    pushFollow(FOLLOW_30);
             	    lv_operator_2_0=ruleBinaryNestingOperator();
 
             	    state._fsp--;
@@ -3588,16 +3730,16 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    // InternalBDSL.g:1346:4: ( (lv_right_3_0= rulePrimaryExpression ) )
-            	    // InternalBDSL.g:1347:5: (lv_right_3_0= rulePrimaryExpression )
+            	    // InternalBDSL.g:1404:4: ( (lv_right_3_0= rulePrimaryExpression ) )
+            	    // InternalBDSL.g:1405:5: (lv_right_3_0= rulePrimaryExpression )
             	    {
-            	    // InternalBDSL.g:1347:5: (lv_right_3_0= rulePrimaryExpression )
-            	    // InternalBDSL.g:1348:6: lv_right_3_0= rulePrimaryExpression
+            	    // InternalBDSL.g:1405:5: (lv_right_3_0= rulePrimaryExpression )
+            	    // InternalBDSL.g:1406:6: lv_right_3_0= rulePrimaryExpression
             	    {
 
             	    						newCompositeNode(grammarAccess.getMultiplicationAccess().getRightPrimaryExpressionParserRuleCall_1_1_0());
             	    					
-            	    pushFollow(FOLLOW_30);
+            	    pushFollow(FOLLOW_31);
             	    lv_right_3_0=rulePrimaryExpression();
 
             	    state._fsp--;
@@ -3651,7 +3793,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRulePrimaryExpression"
-    // InternalBDSL.g:1370:1: entryRulePrimaryExpression returns [EObject current=null] : iv_rulePrimaryExpression= rulePrimaryExpression EOF ;
+    // InternalBDSL.g:1428:1: entryRulePrimaryExpression returns [EObject current=null] : iv_rulePrimaryExpression= rulePrimaryExpression EOF ;
     public final EObject entryRulePrimaryExpression() throws RecognitionException {
         EObject current = null;
 
@@ -3659,8 +3801,8 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalBDSL.g:1370:58: (iv_rulePrimaryExpression= rulePrimaryExpression EOF )
-            // InternalBDSL.g:1371:2: iv_rulePrimaryExpression= rulePrimaryExpression EOF
+            // InternalBDSL.g:1428:58: (iv_rulePrimaryExpression= rulePrimaryExpression EOF )
+            // InternalBDSL.g:1429:2: iv_rulePrimaryExpression= rulePrimaryExpression EOF
             {
              newCompositeNode(grammarAccess.getPrimaryExpressionRule()); 
             pushFollow(FOLLOW_1);
@@ -3687,7 +3829,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "rulePrimaryExpression"
-    // InternalBDSL.g:1377:1: rulePrimaryExpression returns [EObject current=null] : ( (otherlv_0= '(' this_BigraphExpression_1= ruleBigraphExpression otherlv_2= ')' ) | this_AbstractBigraphDeclaration_3= ruleAbstractBigraphDeclaration ) ;
+    // InternalBDSL.g:1435:1: rulePrimaryExpression returns [EObject current=null] : ( (otherlv_0= '(' this_BigraphExpression_1= ruleBigraphExpression otherlv_2= ')' ) | this_AbstractBigraphDeclaration_3= ruleAbstractBigraphDeclaration ) ;
     public final EObject rulePrimaryExpression() throws RecognitionException {
         EObject current = null;
 
@@ -3702,17 +3844,17 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBDSL.g:1383:2: ( ( (otherlv_0= '(' this_BigraphExpression_1= ruleBigraphExpression otherlv_2= ')' ) | this_AbstractBigraphDeclaration_3= ruleAbstractBigraphDeclaration ) )
-            // InternalBDSL.g:1384:2: ( (otherlv_0= '(' this_BigraphExpression_1= ruleBigraphExpression otherlv_2= ')' ) | this_AbstractBigraphDeclaration_3= ruleAbstractBigraphDeclaration )
+            // InternalBDSL.g:1441:2: ( ( (otherlv_0= '(' this_BigraphExpression_1= ruleBigraphExpression otherlv_2= ')' ) | this_AbstractBigraphDeclaration_3= ruleAbstractBigraphDeclaration ) )
+            // InternalBDSL.g:1442:2: ( (otherlv_0= '(' this_BigraphExpression_1= ruleBigraphExpression otherlv_2= ')' ) | this_AbstractBigraphDeclaration_3= ruleAbstractBigraphDeclaration )
             {
-            // InternalBDSL.g:1384:2: ( (otherlv_0= '(' this_BigraphExpression_1= ruleBigraphExpression otherlv_2= ')' ) | this_AbstractBigraphDeclaration_3= ruleAbstractBigraphDeclaration )
+            // InternalBDSL.g:1442:2: ( (otherlv_0= '(' this_BigraphExpression_1= ruleBigraphExpression otherlv_2= ')' ) | this_AbstractBigraphDeclaration_3= ruleAbstractBigraphDeclaration )
             int alt24=2;
             int LA24_0 = input.LA(1);
 
-            if ( (LA24_0==26) ) {
+            if ( (LA24_0==25) ) {
                 alt24=1;
             }
-            else if ( (LA24_0==RULE_ID||LA24_0==13||LA24_0==24) ) {
+            else if ( (LA24_0==RULE_ID||LA24_0==13||LA24_0==24||LA24_0==27) ) {
                 alt24=2;
             }
             else {
@@ -3723,19 +3865,19 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
             }
             switch (alt24) {
                 case 1 :
-                    // InternalBDSL.g:1385:3: (otherlv_0= '(' this_BigraphExpression_1= ruleBigraphExpression otherlv_2= ')' )
+                    // InternalBDSL.g:1443:3: (otherlv_0= '(' this_BigraphExpression_1= ruleBigraphExpression otherlv_2= ')' )
                     {
-                    // InternalBDSL.g:1385:3: (otherlv_0= '(' this_BigraphExpression_1= ruleBigraphExpression otherlv_2= ')' )
-                    // InternalBDSL.g:1386:4: otherlv_0= '(' this_BigraphExpression_1= ruleBigraphExpression otherlv_2= ')'
+                    // InternalBDSL.g:1443:3: (otherlv_0= '(' this_BigraphExpression_1= ruleBigraphExpression otherlv_2= ')' )
+                    // InternalBDSL.g:1444:4: otherlv_0= '(' this_BigraphExpression_1= ruleBigraphExpression otherlv_2= ')'
                     {
-                    otherlv_0=(Token)match(input,26,FOLLOW_29); 
+                    otherlv_0=(Token)match(input,25,FOLLOW_30); 
 
                     				newLeafNode(otherlv_0, grammarAccess.getPrimaryExpressionAccess().getLeftParenthesisKeyword_0_0());
                     			
 
                     				newCompositeNode(grammarAccess.getPrimaryExpressionAccess().getBigraphExpressionParserRuleCall_0_1());
                     			
-                    pushFollow(FOLLOW_23);
+                    pushFollow(FOLLOW_21);
                     this_BigraphExpression_1=ruleBigraphExpression();
 
                     state._fsp--;
@@ -3744,7 +3886,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
                     				current = this_BigraphExpression_1;
                     				afterParserOrEnumRuleCall();
                     			
-                    otherlv_2=(Token)match(input,27,FOLLOW_2); 
+                    otherlv_2=(Token)match(input,26,FOLLOW_2); 
 
                     				newLeafNode(otherlv_2, grammarAccess.getPrimaryExpressionAccess().getRightParenthesisKeyword_0_2());
                     			
@@ -3755,7 +3897,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalBDSL.g:1404:3: this_AbstractBigraphDeclaration_3= ruleAbstractBigraphDeclaration
+                    // InternalBDSL.g:1462:3: this_AbstractBigraphDeclaration_3= ruleAbstractBigraphDeclaration
                     {
 
                     			newCompositeNode(grammarAccess.getPrimaryExpressionAccess().getAbstractBigraphDeclarationParserRuleCall_1());
@@ -3795,7 +3937,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleMainDeclaration"
-    // InternalBDSL.g:1416:1: entryRuleMainDeclaration returns [EObject current=null] : iv_ruleMainDeclaration= ruleMainDeclaration EOF ;
+    // InternalBDSL.g:1474:1: entryRuleMainDeclaration returns [EObject current=null] : iv_ruleMainDeclaration= ruleMainDeclaration EOF ;
     public final EObject entryRuleMainDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -3803,8 +3945,8 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalBDSL.g:1416:56: (iv_ruleMainDeclaration= ruleMainDeclaration EOF )
-            // InternalBDSL.g:1417:2: iv_ruleMainDeclaration= ruleMainDeclaration EOF
+            // InternalBDSL.g:1474:56: (iv_ruleMainDeclaration= ruleMainDeclaration EOF )
+            // InternalBDSL.g:1475:2: iv_ruleMainDeclaration= ruleMainDeclaration EOF
             {
              newCompositeNode(grammarAccess.getMainDeclarationRule()); 
             pushFollow(FOLLOW_1);
@@ -3831,7 +3973,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleMainDeclaration"
-    // InternalBDSL.g:1423:1: ruleMainDeclaration returns [EObject current=null] : ( () ( (lv_definition_1_0= ruleAbstractMainStatements ) ) otherlv_2= ';' ) ;
+    // InternalBDSL.g:1481:1: ruleMainDeclaration returns [EObject current=null] : ( () ( (lv_definition_1_0= ruleAbstractMainStatements ) ) otherlv_2= ';' ) ;
     public final EObject ruleMainDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -3843,14 +3985,14 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBDSL.g:1429:2: ( ( () ( (lv_definition_1_0= ruleAbstractMainStatements ) ) otherlv_2= ';' ) )
-            // InternalBDSL.g:1430:2: ( () ( (lv_definition_1_0= ruleAbstractMainStatements ) ) otherlv_2= ';' )
+            // InternalBDSL.g:1487:2: ( ( () ( (lv_definition_1_0= ruleAbstractMainStatements ) ) otherlv_2= ';' ) )
+            // InternalBDSL.g:1488:2: ( () ( (lv_definition_1_0= ruleAbstractMainStatements ) ) otherlv_2= ';' )
             {
-            // InternalBDSL.g:1430:2: ( () ( (lv_definition_1_0= ruleAbstractMainStatements ) ) otherlv_2= ';' )
-            // InternalBDSL.g:1431:3: () ( (lv_definition_1_0= ruleAbstractMainStatements ) ) otherlv_2= ';'
+            // InternalBDSL.g:1488:2: ( () ( (lv_definition_1_0= ruleAbstractMainStatements ) ) otherlv_2= ';' )
+            // InternalBDSL.g:1489:3: () ( (lv_definition_1_0= ruleAbstractMainStatements ) ) otherlv_2= ';'
             {
-            // InternalBDSL.g:1431:3: ()
-            // InternalBDSL.g:1432:4: 
+            // InternalBDSL.g:1489:3: ()
+            // InternalBDSL.g:1490:4: 
             {
 
             				current = forceCreateModelElement(
@@ -3860,11 +4002,11 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalBDSL.g:1438:3: ( (lv_definition_1_0= ruleAbstractMainStatements ) )
-            // InternalBDSL.g:1439:4: (lv_definition_1_0= ruleAbstractMainStatements )
+            // InternalBDSL.g:1496:3: ( (lv_definition_1_0= ruleAbstractMainStatements ) )
+            // InternalBDSL.g:1497:4: (lv_definition_1_0= ruleAbstractMainStatements )
             {
-            // InternalBDSL.g:1439:4: (lv_definition_1_0= ruleAbstractMainStatements )
-            // InternalBDSL.g:1440:5: lv_definition_1_0= ruleAbstractMainStatements
+            // InternalBDSL.g:1497:4: (lv_definition_1_0= ruleAbstractMainStatements )
+            // InternalBDSL.g:1498:5: lv_definition_1_0= ruleAbstractMainStatements
             {
 
             					newCompositeNode(grammarAccess.getMainDeclarationAccess().getDefinitionAbstractMainStatementsParserRuleCall_1_0());
@@ -3918,7 +4060,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleAbstractMainStatements"
-    // InternalBDSL.g:1465:1: entryRuleAbstractMainStatements returns [EObject current=null] : iv_ruleAbstractMainStatements= ruleAbstractMainStatements EOF ;
+    // InternalBDSL.g:1523:1: entryRuleAbstractMainStatements returns [EObject current=null] : iv_ruleAbstractMainStatements= ruleAbstractMainStatements EOF ;
     public final EObject entryRuleAbstractMainStatements() throws RecognitionException {
         EObject current = null;
 
@@ -3926,8 +4068,8 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalBDSL.g:1465:63: (iv_ruleAbstractMainStatements= ruleAbstractMainStatements EOF )
-            // InternalBDSL.g:1466:2: iv_ruleAbstractMainStatements= ruleAbstractMainStatements EOF
+            // InternalBDSL.g:1523:63: (iv_ruleAbstractMainStatements= ruleAbstractMainStatements EOF )
+            // InternalBDSL.g:1524:2: iv_ruleAbstractMainStatements= ruleAbstractMainStatements EOF
             {
              newCompositeNode(grammarAccess.getAbstractMainStatementsRule()); 
             pushFollow(FOLLOW_1);
@@ -3954,7 +4096,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleAbstractMainStatements"
-    // InternalBDSL.g:1472:1: ruleAbstractMainStatements returns [EObject current=null] : (this_BigraphVarReference_0= ruleBigraphVarReference | this_PrintLn_1= rulePrintLn ) ;
+    // InternalBDSL.g:1530:1: ruleAbstractMainStatements returns [EObject current=null] : (this_BigraphVarReference_0= ruleBigraphVarReference | this_PrintLn_1= rulePrintLn ) ;
     public final EObject ruleAbstractMainStatements() throws RecognitionException {
         EObject current = null;
 
@@ -3967,17 +4109,17 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBDSL.g:1478:2: ( (this_BigraphVarReference_0= ruleBigraphVarReference | this_PrintLn_1= rulePrintLn ) )
-            // InternalBDSL.g:1479:2: (this_BigraphVarReference_0= ruleBigraphVarReference | this_PrintLn_1= rulePrintLn )
+            // InternalBDSL.g:1536:2: ( (this_BigraphVarReference_0= ruleBigraphVarReference | this_PrintLn_1= rulePrintLn ) )
+            // InternalBDSL.g:1537:2: (this_BigraphVarReference_0= ruleBigraphVarReference | this_PrintLn_1= rulePrintLn )
             {
-            // InternalBDSL.g:1479:2: (this_BigraphVarReference_0= ruleBigraphVarReference | this_PrintLn_1= rulePrintLn )
+            // InternalBDSL.g:1537:2: (this_BigraphVarReference_0= ruleBigraphVarReference | this_PrintLn_1= rulePrintLn )
             int alt25=2;
             int LA25_0 = input.LA(1);
 
             if ( (LA25_0==13) ) {
                 alt25=1;
             }
-            else if ( (LA25_0==30) ) {
+            else if ( (LA25_0==31) ) {
                 alt25=2;
             }
             else {
@@ -3988,7 +4130,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
             }
             switch (alt25) {
                 case 1 :
-                    // InternalBDSL.g:1480:3: this_BigraphVarReference_0= ruleBigraphVarReference
+                    // InternalBDSL.g:1538:3: this_BigraphVarReference_0= ruleBigraphVarReference
                     {
 
                     			newCompositeNode(grammarAccess.getAbstractMainStatementsAccess().getBigraphVarReferenceParserRuleCall_0());
@@ -4006,7 +4148,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalBDSL.g:1489:3: this_PrintLn_1= rulePrintLn
+                    // InternalBDSL.g:1547:3: this_PrintLn_1= rulePrintLn
                     {
 
                     			newCompositeNode(grammarAccess.getAbstractMainStatementsAccess().getPrintLnParserRuleCall_1());
@@ -4046,7 +4188,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRulePrintLn"
-    // InternalBDSL.g:1501:1: entryRulePrintLn returns [EObject current=null] : iv_rulePrintLn= rulePrintLn EOF ;
+    // InternalBDSL.g:1559:1: entryRulePrintLn returns [EObject current=null] : iv_rulePrintLn= rulePrintLn EOF ;
     public final EObject entryRulePrintLn() throws RecognitionException {
         EObject current = null;
 
@@ -4054,8 +4196,8 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalBDSL.g:1501:48: (iv_rulePrintLn= rulePrintLn EOF )
-            // InternalBDSL.g:1502:2: iv_rulePrintLn= rulePrintLn EOF
+            // InternalBDSL.g:1559:48: (iv_rulePrintLn= rulePrintLn EOF )
+            // InternalBDSL.g:1560:2: iv_rulePrintLn= rulePrintLn EOF
             {
              newCompositeNode(grammarAccess.getPrintLnRule()); 
             pushFollow(FOLLOW_1);
@@ -4082,45 +4224,56 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "rulePrintLn"
-    // InternalBDSL.g:1508:1: rulePrintLn returns [EObject current=null] : (otherlv_0= 'println' otherlv_1= '(' ( (lv_text_2_0= rulePrintableExpression ) ) otherlv_3= ')' ) ;
+    // InternalBDSL.g:1566:1: rulePrintLn returns [EObject current=null] : ( () otherlv_1= 'println' otherlv_2= '(' ( (lv_text_3_0= rulePrintableExpression ) ) otherlv_4= ')' ) ;
     public final EObject rulePrintLn() throws RecognitionException {
         EObject current = null;
 
-        Token otherlv_0=null;
         Token otherlv_1=null;
-        Token otherlv_3=null;
-        EObject lv_text_2_0 = null;
+        Token otherlv_2=null;
+        Token otherlv_4=null;
+        EObject lv_text_3_0 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalBDSL.g:1514:2: ( (otherlv_0= 'println' otherlv_1= '(' ( (lv_text_2_0= rulePrintableExpression ) ) otherlv_3= ')' ) )
-            // InternalBDSL.g:1515:2: (otherlv_0= 'println' otherlv_1= '(' ( (lv_text_2_0= rulePrintableExpression ) ) otherlv_3= ')' )
+            // InternalBDSL.g:1572:2: ( ( () otherlv_1= 'println' otherlv_2= '(' ( (lv_text_3_0= rulePrintableExpression ) ) otherlv_4= ')' ) )
+            // InternalBDSL.g:1573:2: ( () otherlv_1= 'println' otherlv_2= '(' ( (lv_text_3_0= rulePrintableExpression ) ) otherlv_4= ')' )
             {
-            // InternalBDSL.g:1515:2: (otherlv_0= 'println' otherlv_1= '(' ( (lv_text_2_0= rulePrintableExpression ) ) otherlv_3= ')' )
-            // InternalBDSL.g:1516:3: otherlv_0= 'println' otherlv_1= '(' ( (lv_text_2_0= rulePrintableExpression ) ) otherlv_3= ')'
+            // InternalBDSL.g:1573:2: ( () otherlv_1= 'println' otherlv_2= '(' ( (lv_text_3_0= rulePrintableExpression ) ) otherlv_4= ')' )
+            // InternalBDSL.g:1574:3: () otherlv_1= 'println' otherlv_2= '(' ( (lv_text_3_0= rulePrintableExpression ) ) otherlv_4= ')'
             {
-            otherlv_0=(Token)match(input,30,FOLLOW_31); 
+            // InternalBDSL.g:1574:3: ()
+            // InternalBDSL.g:1575:4: 
+            {
 
-            			newLeafNode(otherlv_0, grammarAccess.getPrintLnAccess().getPrintlnKeyword_0());
+            				current = forceCreateModelElement(
+            					grammarAccess.getPrintLnAccess().getPrintLnAction_0(),
+            					current);
+            			
+
+            }
+
+            otherlv_1=(Token)match(input,31,FOLLOW_20); 
+
+            			newLeafNode(otherlv_1, grammarAccess.getPrintLnAccess().getPrintlnKeyword_1());
             		
-            otherlv_1=(Token)match(input,26,FOLLOW_32); 
+            otherlv_2=(Token)match(input,25,FOLLOW_32); 
 
-            			newLeafNode(otherlv_1, grammarAccess.getPrintLnAccess().getLeftParenthesisKeyword_1());
+            			newLeafNode(otherlv_2, grammarAccess.getPrintLnAccess().getLeftParenthesisKeyword_2());
             		
-            // InternalBDSL.g:1524:3: ( (lv_text_2_0= rulePrintableExpression ) )
-            // InternalBDSL.g:1525:4: (lv_text_2_0= rulePrintableExpression )
+            // InternalBDSL.g:1589:3: ( (lv_text_3_0= rulePrintableExpression ) )
+            // InternalBDSL.g:1590:4: (lv_text_3_0= rulePrintableExpression )
             {
-            // InternalBDSL.g:1525:4: (lv_text_2_0= rulePrintableExpression )
-            // InternalBDSL.g:1526:5: lv_text_2_0= rulePrintableExpression
+            // InternalBDSL.g:1590:4: (lv_text_3_0= rulePrintableExpression )
+            // InternalBDSL.g:1591:5: lv_text_3_0= rulePrintableExpression
             {
 
-            					newCompositeNode(grammarAccess.getPrintLnAccess().getTextPrintableExpressionParserRuleCall_2_0());
+            					newCompositeNode(grammarAccess.getPrintLnAccess().getTextPrintableExpressionParserRuleCall_3_0());
             				
-            pushFollow(FOLLOW_23);
-            lv_text_2_0=rulePrintableExpression();
+            pushFollow(FOLLOW_21);
+            lv_text_3_0=rulePrintableExpression();
 
             state._fsp--;
 
@@ -4131,7 +4284,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
             					set(
             						current,
             						"text",
-            						lv_text_2_0,
+            						lv_text_3_0,
             						"de.tudresden.inf.st.bigraphs.dsl.BDSL.PrintableExpression");
             					afterParserOrEnumRuleCall();
             				
@@ -4141,9 +4294,9 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_3=(Token)match(input,27,FOLLOW_2); 
+            otherlv_4=(Token)match(input,26,FOLLOW_2); 
 
-            			newLeafNode(otherlv_3, grammarAccess.getPrintLnAccess().getRightParenthesisKeyword_3());
+            			newLeafNode(otherlv_4, grammarAccess.getPrintLnAccess().getRightParenthesisKeyword_4());
             		
 
             }
@@ -4168,7 +4321,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRulePrintableExpression"
-    // InternalBDSL.g:1551:1: entryRulePrintableExpression returns [EObject current=null] : iv_rulePrintableExpression= rulePrintableExpression EOF ;
+    // InternalBDSL.g:1616:1: entryRulePrintableExpression returns [EObject current=null] : iv_rulePrintableExpression= rulePrintableExpression EOF ;
     public final EObject entryRulePrintableExpression() throws RecognitionException {
         EObject current = null;
 
@@ -4176,8 +4329,8 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalBDSL.g:1551:60: (iv_rulePrintableExpression= rulePrintableExpression EOF )
-            // InternalBDSL.g:1552:2: iv_rulePrintableExpression= rulePrintableExpression EOF
+            // InternalBDSL.g:1616:60: (iv_rulePrintableExpression= rulePrintableExpression EOF )
+            // InternalBDSL.g:1617:2: iv_rulePrintableExpression= rulePrintableExpression EOF
             {
              newCompositeNode(grammarAccess.getPrintableExpressionRule()); 
             pushFollow(FOLLOW_1);
@@ -4204,22 +4357,22 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "rulePrintableExpression"
-    // InternalBDSL.g:1558:1: rulePrintableExpression returns [EObject current=null] : (this_STRING_0= RULE_STRING | this_BigraphVarReference_1= ruleBigraphVarReference ) ;
+    // InternalBDSL.g:1623:1: rulePrintableExpression returns [EObject current=null] : ( ( () ( (lv_value_1_0= RULE_STRING ) ) ) | this_BigraphVarReference_2= ruleBigraphVarReference ) ;
     public final EObject rulePrintableExpression() throws RecognitionException {
         EObject current = null;
 
-        Token this_STRING_0=null;
-        EObject this_BigraphVarReference_1 = null;
+        Token lv_value_1_0=null;
+        EObject this_BigraphVarReference_2 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalBDSL.g:1564:2: ( (this_STRING_0= RULE_STRING | this_BigraphVarReference_1= ruleBigraphVarReference ) )
-            // InternalBDSL.g:1565:2: (this_STRING_0= RULE_STRING | this_BigraphVarReference_1= ruleBigraphVarReference )
+            // InternalBDSL.g:1629:2: ( ( ( () ( (lv_value_1_0= RULE_STRING ) ) ) | this_BigraphVarReference_2= ruleBigraphVarReference ) )
+            // InternalBDSL.g:1630:2: ( ( () ( (lv_value_1_0= RULE_STRING ) ) ) | this_BigraphVarReference_2= ruleBigraphVarReference )
             {
-            // InternalBDSL.g:1565:2: (this_STRING_0= RULE_STRING | this_BigraphVarReference_1= ruleBigraphVarReference )
+            // InternalBDSL.g:1630:2: ( ( () ( (lv_value_1_0= RULE_STRING ) ) ) | this_BigraphVarReference_2= ruleBigraphVarReference )
             int alt26=2;
             int LA26_0 = input.LA(1);
 
@@ -4237,28 +4390,67 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
             }
             switch (alt26) {
                 case 1 :
-                    // InternalBDSL.g:1566:3: this_STRING_0= RULE_STRING
+                    // InternalBDSL.g:1631:3: ( () ( (lv_value_1_0= RULE_STRING ) ) )
                     {
-                    this_STRING_0=(Token)match(input,RULE_STRING,FOLLOW_2); 
+                    // InternalBDSL.g:1631:3: ( () ( (lv_value_1_0= RULE_STRING ) ) )
+                    // InternalBDSL.g:1632:4: () ( (lv_value_1_0= RULE_STRING ) )
+                    {
+                    // InternalBDSL.g:1632:4: ()
+                    // InternalBDSL.g:1633:5: 
+                    {
 
-                    			newLeafNode(this_STRING_0, grammarAccess.getPrintableExpressionAccess().getSTRINGTerminalRuleCall_0());
-                    		
+                    					current = forceCreateModelElement(
+                    						grammarAccess.getPrintableExpressionAccess().getStringLiteralAction_0_0(),
+                    						current);
+                    				
+
+                    }
+
+                    // InternalBDSL.g:1639:4: ( (lv_value_1_0= RULE_STRING ) )
+                    // InternalBDSL.g:1640:5: (lv_value_1_0= RULE_STRING )
+                    {
+                    // InternalBDSL.g:1640:5: (lv_value_1_0= RULE_STRING )
+                    // InternalBDSL.g:1641:6: lv_value_1_0= RULE_STRING
+                    {
+                    lv_value_1_0=(Token)match(input,RULE_STRING,FOLLOW_2); 
+
+                    						newLeafNode(lv_value_1_0, grammarAccess.getPrintableExpressionAccess().getValueSTRINGTerminalRuleCall_0_1_0());
+                    					
+
+                    						if (current==null) {
+                    							current = createModelElement(grammarAccess.getPrintableExpressionRule());
+                    						}
+                    						setWithLastConsumed(
+                    							current,
+                    							"value",
+                    							lv_value_1_0,
+                    							"org.eclipse.xtext.common.Terminals.STRING");
+                    					
+
+                    }
+
+
+                    }
+
+
+                    }
+
 
                     }
                     break;
                 case 2 :
-                    // InternalBDSL.g:1571:3: this_BigraphVarReference_1= ruleBigraphVarReference
+                    // InternalBDSL.g:1659:3: this_BigraphVarReference_2= ruleBigraphVarReference
                     {
 
                     			newCompositeNode(grammarAccess.getPrintableExpressionAccess().getBigraphVarReferenceParserRuleCall_1());
                     		
                     pushFollow(FOLLOW_2);
-                    this_BigraphVarReference_1=ruleBigraphVarReference();
+                    this_BigraphVarReference_2=ruleBigraphVarReference();
 
                     state._fsp--;
 
 
-                    			current = this_BigraphVarReference_1;
+                    			current = this_BigraphVarReference_2;
                     			afterParserOrEnumRuleCall();
                     		
 
@@ -4287,7 +4479,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleBinaryParallelOperator"
-    // InternalBDSL.g:1583:1: ruleBinaryParallelOperator returns [Enumerator current=null] : ( (enumLiteral_0= 'UNSET' ) | (enumLiteral_1= '|' ) | (enumLiteral_2= '||' ) ) ;
+    // InternalBDSL.g:1671:1: ruleBinaryParallelOperator returns [Enumerator current=null] : ( (enumLiteral_0= 'UNSET' ) | (enumLiteral_1= '|' ) | (enumLiteral_2= '||' ) ) ;
     public final Enumerator ruleBinaryParallelOperator() throws RecognitionException {
         Enumerator current = null;
 
@@ -4299,23 +4491,23 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBDSL.g:1589:2: ( ( (enumLiteral_0= 'UNSET' ) | (enumLiteral_1= '|' ) | (enumLiteral_2= '||' ) ) )
-            // InternalBDSL.g:1590:2: ( (enumLiteral_0= 'UNSET' ) | (enumLiteral_1= '|' ) | (enumLiteral_2= '||' ) )
+            // InternalBDSL.g:1677:2: ( ( (enumLiteral_0= 'UNSET' ) | (enumLiteral_1= '|' ) | (enumLiteral_2= '||' ) ) )
+            // InternalBDSL.g:1678:2: ( (enumLiteral_0= 'UNSET' ) | (enumLiteral_1= '|' ) | (enumLiteral_2= '||' ) )
             {
-            // InternalBDSL.g:1590:2: ( (enumLiteral_0= 'UNSET' ) | (enumLiteral_1= '|' ) | (enumLiteral_2= '||' ) )
+            // InternalBDSL.g:1678:2: ( (enumLiteral_0= 'UNSET' ) | (enumLiteral_1= '|' ) | (enumLiteral_2= '||' ) )
             int alt27=3;
             switch ( input.LA(1) ) {
-            case 31:
+            case 32:
                 {
                 alt27=1;
                 }
                 break;
-            case 32:
+            case 33:
                 {
                 alt27=2;
                 }
                 break;
-            case 33:
+            case 34:
                 {
                 alt27=3;
                 }
@@ -4329,12 +4521,12 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
             switch (alt27) {
                 case 1 :
-                    // InternalBDSL.g:1591:3: (enumLiteral_0= 'UNSET' )
+                    // InternalBDSL.g:1679:3: (enumLiteral_0= 'UNSET' )
                     {
-                    // InternalBDSL.g:1591:3: (enumLiteral_0= 'UNSET' )
-                    // InternalBDSL.g:1592:4: enumLiteral_0= 'UNSET'
+                    // InternalBDSL.g:1679:3: (enumLiteral_0= 'UNSET' )
+                    // InternalBDSL.g:1680:4: enumLiteral_0= 'UNSET'
                     {
-                    enumLiteral_0=(Token)match(input,31,FOLLOW_2); 
+                    enumLiteral_0=(Token)match(input,32,FOLLOW_2); 
 
                     				current = grammarAccess.getBinaryParallelOperatorAccess().getUNSETEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_0, grammarAccess.getBinaryParallelOperatorAccess().getUNSETEnumLiteralDeclaration_0());
@@ -4346,12 +4538,12 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalBDSL.g:1599:3: (enumLiteral_1= '|' )
+                    // InternalBDSL.g:1687:3: (enumLiteral_1= '|' )
                     {
-                    // InternalBDSL.g:1599:3: (enumLiteral_1= '|' )
-                    // InternalBDSL.g:1600:4: enumLiteral_1= '|'
+                    // InternalBDSL.g:1687:3: (enumLiteral_1= '|' )
+                    // InternalBDSL.g:1688:4: enumLiteral_1= '|'
                     {
-                    enumLiteral_1=(Token)match(input,32,FOLLOW_2); 
+                    enumLiteral_1=(Token)match(input,33,FOLLOW_2); 
 
                     				current = grammarAccess.getBinaryParallelOperatorAccess().getMERGEEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_1, grammarAccess.getBinaryParallelOperatorAccess().getMERGEEnumLiteralDeclaration_1());
@@ -4363,12 +4555,12 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalBDSL.g:1607:3: (enumLiteral_2= '||' )
+                    // InternalBDSL.g:1695:3: (enumLiteral_2= '||' )
                     {
-                    // InternalBDSL.g:1607:3: (enumLiteral_2= '||' )
-                    // InternalBDSL.g:1608:4: enumLiteral_2= '||'
+                    // InternalBDSL.g:1695:3: (enumLiteral_2= '||' )
+                    // InternalBDSL.g:1696:4: enumLiteral_2= '||'
                     {
-                    enumLiteral_2=(Token)match(input,33,FOLLOW_2); 
+                    enumLiteral_2=(Token)match(input,34,FOLLOW_2); 
 
                     				current = grammarAccess.getBinaryParallelOperatorAccess().getPARALLELEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_2, grammarAccess.getBinaryParallelOperatorAccess().getPARALLELEnumLiteralDeclaration_2());
@@ -4402,7 +4594,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleBinaryNestingOperator"
-    // InternalBDSL.g:1618:1: ruleBinaryNestingOperator returns [Enumerator current=null] : ( (enumLiteral_0= 'UNSET2' ) | (enumLiteral_1= '-' ) | (enumLiteral_2= '*' ) ) ;
+    // InternalBDSL.g:1706:1: ruleBinaryNestingOperator returns [Enumerator current=null] : ( (enumLiteral_0= 'UNSET2' ) | (enumLiteral_1= '-' ) | (enumLiteral_2= '*' ) ) ;
     public final Enumerator ruleBinaryNestingOperator() throws RecognitionException {
         Enumerator current = null;
 
@@ -4414,13 +4606,13 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBDSL.g:1624:2: ( ( (enumLiteral_0= 'UNSET2' ) | (enumLiteral_1= '-' ) | (enumLiteral_2= '*' ) ) )
-            // InternalBDSL.g:1625:2: ( (enumLiteral_0= 'UNSET2' ) | (enumLiteral_1= '-' ) | (enumLiteral_2= '*' ) )
+            // InternalBDSL.g:1712:2: ( ( (enumLiteral_0= 'UNSET2' ) | (enumLiteral_1= '-' ) | (enumLiteral_2= '*' ) ) )
+            // InternalBDSL.g:1713:2: ( (enumLiteral_0= 'UNSET2' ) | (enumLiteral_1= '-' ) | (enumLiteral_2= '*' ) )
             {
-            // InternalBDSL.g:1625:2: ( (enumLiteral_0= 'UNSET2' ) | (enumLiteral_1= '-' ) | (enumLiteral_2= '*' ) )
+            // InternalBDSL.g:1713:2: ( (enumLiteral_0= 'UNSET2' ) | (enumLiteral_1= '-' ) | (enumLiteral_2= '*' ) )
             int alt28=3;
             switch ( input.LA(1) ) {
-            case 34:
+            case 35:
                 {
                 alt28=1;
                 }
@@ -4430,7 +4622,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
                 alt28=2;
                 }
                 break;
-            case 35:
+            case 36:
                 {
                 alt28=3;
                 }
@@ -4444,12 +4636,12 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
             switch (alt28) {
                 case 1 :
-                    // InternalBDSL.g:1626:3: (enumLiteral_0= 'UNSET2' )
+                    // InternalBDSL.g:1714:3: (enumLiteral_0= 'UNSET2' )
                     {
-                    // InternalBDSL.g:1626:3: (enumLiteral_0= 'UNSET2' )
-                    // InternalBDSL.g:1627:4: enumLiteral_0= 'UNSET2'
+                    // InternalBDSL.g:1714:3: (enumLiteral_0= 'UNSET2' )
+                    // InternalBDSL.g:1715:4: enumLiteral_0= 'UNSET2'
                     {
-                    enumLiteral_0=(Token)match(input,34,FOLLOW_2); 
+                    enumLiteral_0=(Token)match(input,35,FOLLOW_2); 
 
                     				current = grammarAccess.getBinaryNestingOperatorAccess().getUNSET2EnumLiteralDeclaration_0().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_0, grammarAccess.getBinaryNestingOperatorAccess().getUNSET2EnumLiteralDeclaration_0());
@@ -4461,10 +4653,10 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalBDSL.g:1634:3: (enumLiteral_1= '-' )
+                    // InternalBDSL.g:1722:3: (enumLiteral_1= '-' )
                     {
-                    // InternalBDSL.g:1634:3: (enumLiteral_1= '-' )
-                    // InternalBDSL.g:1635:4: enumLiteral_1= '-'
+                    // InternalBDSL.g:1722:3: (enumLiteral_1= '-' )
+                    // InternalBDSL.g:1723:4: enumLiteral_1= '-'
                     {
                     enumLiteral_1=(Token)match(input,14,FOLLOW_2); 
 
@@ -4478,12 +4670,12 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalBDSL.g:1642:3: (enumLiteral_2= '*' )
+                    // InternalBDSL.g:1730:3: (enumLiteral_2= '*' )
                     {
-                    // InternalBDSL.g:1642:3: (enumLiteral_2= '*' )
-                    // InternalBDSL.g:1643:4: enumLiteral_2= '*'
+                    // InternalBDSL.g:1730:3: (enumLiteral_2= '*' )
+                    // InternalBDSL.g:1731:4: enumLiteral_2= '*'
                     {
-                    enumLiteral_2=(Token)match(input,35,FOLLOW_2); 
+                    enumLiteral_2=(Token)match(input,36,FOLLOW_2); 
 
                     				current = grammarAccess.getBinaryNestingOperatorAccess().getCOMPOSITIONEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_2, grammarAccess.getBinaryNestingOperatorAccess().getCOMPOSITIONEnumLiteralDeclaration_2());
@@ -4517,7 +4709,7 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleControlType"
-    // InternalBDSL.g:1653:1: ruleControlType returns [Enumerator current=null] : ( (enumLiteral_0= 'atomic' ) | (enumLiteral_1= 'active' ) | (enumLiteral_2= 'passive' ) ) ;
+    // InternalBDSL.g:1741:1: ruleControlType returns [Enumerator current=null] : ( (enumLiteral_0= 'atomic' ) | (enumLiteral_1= 'active' ) | (enumLiteral_2= 'passive' ) ) ;
     public final Enumerator ruleControlType() throws RecognitionException {
         Enumerator current = null;
 
@@ -4529,23 +4721,23 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBDSL.g:1659:2: ( ( (enumLiteral_0= 'atomic' ) | (enumLiteral_1= 'active' ) | (enumLiteral_2= 'passive' ) ) )
-            // InternalBDSL.g:1660:2: ( (enumLiteral_0= 'atomic' ) | (enumLiteral_1= 'active' ) | (enumLiteral_2= 'passive' ) )
+            // InternalBDSL.g:1747:2: ( ( (enumLiteral_0= 'atomic' ) | (enumLiteral_1= 'active' ) | (enumLiteral_2= 'passive' ) ) )
+            // InternalBDSL.g:1748:2: ( (enumLiteral_0= 'atomic' ) | (enumLiteral_1= 'active' ) | (enumLiteral_2= 'passive' ) )
             {
-            // InternalBDSL.g:1660:2: ( (enumLiteral_0= 'atomic' ) | (enumLiteral_1= 'active' ) | (enumLiteral_2= 'passive' ) )
+            // InternalBDSL.g:1748:2: ( (enumLiteral_0= 'atomic' ) | (enumLiteral_1= 'active' ) | (enumLiteral_2= 'passive' ) )
             int alt29=3;
             switch ( input.LA(1) ) {
-            case 36:
+            case 37:
                 {
                 alt29=1;
                 }
                 break;
-            case 37:
+            case 38:
                 {
                 alt29=2;
                 }
                 break;
-            case 38:
+            case 39:
                 {
                 alt29=3;
                 }
@@ -4559,12 +4751,12 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
             switch (alt29) {
                 case 1 :
-                    // InternalBDSL.g:1661:3: (enumLiteral_0= 'atomic' )
+                    // InternalBDSL.g:1749:3: (enumLiteral_0= 'atomic' )
                     {
-                    // InternalBDSL.g:1661:3: (enumLiteral_0= 'atomic' )
-                    // InternalBDSL.g:1662:4: enumLiteral_0= 'atomic'
+                    // InternalBDSL.g:1749:3: (enumLiteral_0= 'atomic' )
+                    // InternalBDSL.g:1750:4: enumLiteral_0= 'atomic'
                     {
-                    enumLiteral_0=(Token)match(input,36,FOLLOW_2); 
+                    enumLiteral_0=(Token)match(input,37,FOLLOW_2); 
 
                     				current = grammarAccess.getControlTypeAccess().getATOMICEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_0, grammarAccess.getControlTypeAccess().getATOMICEnumLiteralDeclaration_0());
@@ -4576,12 +4768,12 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalBDSL.g:1669:3: (enumLiteral_1= 'active' )
+                    // InternalBDSL.g:1757:3: (enumLiteral_1= 'active' )
                     {
-                    // InternalBDSL.g:1669:3: (enumLiteral_1= 'active' )
-                    // InternalBDSL.g:1670:4: enumLiteral_1= 'active'
+                    // InternalBDSL.g:1757:3: (enumLiteral_1= 'active' )
+                    // InternalBDSL.g:1758:4: enumLiteral_1= 'active'
                     {
-                    enumLiteral_1=(Token)match(input,37,FOLLOW_2); 
+                    enumLiteral_1=(Token)match(input,38,FOLLOW_2); 
 
                     				current = grammarAccess.getControlTypeAccess().getACTIVEEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_1, grammarAccess.getControlTypeAccess().getACTIVEEnumLiteralDeclaration_1());
@@ -4593,12 +4785,12 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalBDSL.g:1677:3: (enumLiteral_2= 'passive' )
+                    // InternalBDSL.g:1765:3: (enumLiteral_2= 'passive' )
                     {
-                    // InternalBDSL.g:1677:3: (enumLiteral_2= 'passive' )
-                    // InternalBDSL.g:1678:4: enumLiteral_2= 'passive'
+                    // InternalBDSL.g:1765:3: (enumLiteral_2= 'passive' )
+                    // InternalBDSL.g:1766:4: enumLiteral_2= 'passive'
                     {
-                    enumLiteral_2=(Token)match(input,38,FOLLOW_2); 
+                    enumLiteral_2=(Token)match(input,39,FOLLOW_2); 
 
                     				current = grammarAccess.getControlTypeAccess().getPASSIVEEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_2, grammarAccess.getControlTypeAccess().getPASSIVEEnumLiteralDeclaration_2());
@@ -4637,35 +4829,35 @@ public class InternalBDSLParser extends AbstractInternalAntlrParser {
 
     public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000001108000L});
-    public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000001008002L});
+    public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000008108000L});
+    public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000008008002L});
     public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000000802L});
     public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000001002L});
     public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000000020L});
     public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000010000L});
     public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000040042000L});
+    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000080042000L});
     public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000000080000L});
     public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000020002L});
-    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000007000200000L});
-    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000007000240000L});
+    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x000000E000200000L});
+    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x000000E000240000L});
     public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000000200000L});
     public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000000400000L});
     public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000000000004020L});
     public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000000800000L});
     public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000002000000L});
-    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000000005042010L});
-    public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0000000016010000L});
-    public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0000000008000000L});
-    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0000000012010000L});
-    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000000020800000L});
-    public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x0000000010000002L});
-    public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0000000020000050L});
-    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000000380000002L});
-    public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000000005002010L});
-    public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x0000000C00004002L});
-    public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0000000004000000L});
+    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000000004000000L});
+    public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0000000010000000L});
+    public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x000000000B042010L});
+    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0000000032010000L});
+    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000000030010000L});
+    public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x0000000040800000L});
+    public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0000000020000002L});
+    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000000040000050L});
+    public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000000700000002L});
+    public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x000000000B002010L});
+    public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0000001800004002L});
     public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x0000000000002040L});
 
 }

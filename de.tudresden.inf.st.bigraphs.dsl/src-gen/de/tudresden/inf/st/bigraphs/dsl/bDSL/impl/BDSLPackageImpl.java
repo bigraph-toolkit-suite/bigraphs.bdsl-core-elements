@@ -21,7 +21,6 @@ import de.tudresden.inf.st.bigraphs.dsl.bDSL.LinkNames;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalVarDecl;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.MainDeclaration;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.MainElement;
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.MainLiteral;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.Multi;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.NameConstant;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.NodeExpressionCall;
@@ -29,7 +28,9 @@ import de.tudresden.inf.st.bigraphs.dsl.bDSL.Plus;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.PrintLn;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.PrintableExpression;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.Signature;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.Site;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.SiteVars;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.StringLiteral;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -122,6 +123,13 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass siteEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass lvd2EClass = null;
 
   /**
@@ -192,13 +200,6 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass mainLiteralEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   private EClass plusEClass = null;
 
   /**
@@ -207,6 +208,13 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
    * @generated
    */
   private EClass multiEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass stringLiteralEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -386,6 +394,17 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
    * @generated
    */
   @Override
+  public EReference getMainElement_Value()
+  {
+    return (EReference)mainElementEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getSignature()
   {
     return signatureEClass;
@@ -532,6 +551,28 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
   public EAttribute getSiteVars_Name()
   {
     return (EAttribute)siteVarsEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getSite()
+  {
+    return siteEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getSite_Index()
+  {
+    return (EAttribute)siteEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -760,28 +801,6 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
    * @generated
    */
   @Override
-  public EClass getMainLiteral()
-  {
-    return mainLiteralEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getMainLiteral_Value()
-  {
-    return (EReference)mainLiteralEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EClass getPlus()
   {
     return plusEClass;
@@ -870,6 +889,28 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
    * @generated
    */
   @Override
+  public EClass getStringLiteral()
+  {
+    return stringLiteralEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getStringLiteral_Value()
+  {
+    return (EAttribute)stringLiteralEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EEnum getBinaryParallelOperator()
   {
     return binaryParallelOperatorEEnum;
@@ -939,6 +980,7 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
     abstractElementEClass = createEClass(ABSTRACT_ELEMENT);
 
     mainElementEClass = createEClass(MAIN_ELEMENT);
+    createEReference(mainElementEClass, MAIN_ELEMENT__VALUE);
 
     signatureEClass = createEClass(SIGNATURE);
     createEAttribute(signatureEClass, SIGNATURE__NAME);
@@ -959,6 +1001,9 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
 
     siteVarsEClass = createEClass(SITE_VARS);
     createEAttribute(siteVarsEClass, SITE_VARS__NAME);
+
+    siteEClass = createEClass(SITE);
+    createEAttribute(siteEClass, SITE__INDEX);
 
     lvd2EClass = createEClass(LVD2);
 
@@ -990,9 +1035,6 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
 
     printableExpressionEClass = createEClass(PRINTABLE_EXPRESSION);
 
-    mainLiteralEClass = createEClass(MAIN_LITERAL);
-    createEReference(mainLiteralEClass, MAIN_LITERAL__VALUE);
-
     plusEClass = createEClass(PLUS);
     createEReference(plusEClass, PLUS__LEFT);
     createEAttribute(plusEClass, PLUS__OPERATOR);
@@ -1002,6 +1044,9 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
     createEReference(multiEClass, MULTI__LEFT);
     createEAttribute(multiEClass, MULTI__OPERATOR);
     createEReference(multiEClass, MULTI__RIGHT);
+
+    stringLiteralEClass = createEClass(STRING_LITERAL);
+    createEAttribute(stringLiteralEClass, STRING_LITERAL__VALUE);
 
     // Create enums
     binaryParallelOperatorEEnum = createEEnum(BINARY_PARALLEL_OPERATOR);
@@ -1039,6 +1084,7 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
 
     // Add supertypes to classes
     nameConstantEClass.getESuperTypes().add(this.getLinkNames());
+    siteEClass.getESuperTypes().add(this.getAbstractBigraphDeclaration());
     lvd2EClass.getESuperTypes().add(this.getAbstractBigraphDeclaration());
     localVarDeclEClass.getESuperTypes().add(this.getAbstractElement());
     localVarDeclEClass.getESuperTypes().add(this.getLVD2());
@@ -1048,9 +1094,9 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
     abstractBigraphDeclarationEClass.getESuperTypes().add(this.getBigraphExpression());
     nodeExpressionCallEClass.getESuperTypes().add(this.getAbstractBigraphDeclaration());
     printLnEClass.getESuperTypes().add(this.getAbstractMainStatements());
-    mainLiteralEClass.getESuperTypes().add(this.getMainElement());
     plusEClass.getESuperTypes().add(this.getBigraphExpression());
     multiEClass.getESuperTypes().add(this.getBigraphExpression());
+    stringLiteralEClass.getESuperTypes().add(this.getPrintableExpression());
 
     // Initialize classes and features; add operations and parameters
     initEClass(brsModelEClass, BRSModel.class, "BRSModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1064,6 +1110,7 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
     initEClass(abstractElementEClass, AbstractElement.class, "AbstractElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(mainElementEClass, MainElement.class, "MainElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getMainElement_Value(), this.getMainDeclaration(), null, "value", null, 0, -1, MainElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(signatureEClass, Signature.class, "Signature", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getSignature_Name(), ecorePackage.getEString(), "name", null, 0, 1, Signature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1084,6 +1131,9 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
 
     initEClass(siteVarsEClass, SiteVars.class, "SiteVars", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getSiteVars_Name(), ecorePackage.getEString(), "name", null, 0, 1, SiteVars.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(siteEClass, Site.class, "Site", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getSite_Index(), ecorePackage.getEInt(), "index", null, 0, 1, Site.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(lvd2EClass, de.tudresden.inf.st.bigraphs.dsl.bDSL.LVD2.class, "LVD2", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1115,9 +1165,6 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
 
     initEClass(printableExpressionEClass, PrintableExpression.class, "PrintableExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(mainLiteralEClass, MainLiteral.class, "MainLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getMainLiteral_Value(), this.getMainDeclaration(), null, "value", null, 0, -1, MainLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
     initEClass(plusEClass, Plus.class, "Plus", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getPlus_Left(), this.getBigraphExpression(), null, "left", null, 0, 1, Plus.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getPlus_Operator(), this.getBinaryParallelOperator(), "operator", null, 0, 1, Plus.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1127,6 +1174,9 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
     initEReference(getMulti_Left(), this.getBigraphExpression(), null, "left", null, 0, 1, Multi.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getMulti_Operator(), this.getBinaryNestingOperator(), "operator", null, 0, 1, Multi.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getMulti_Right(), this.getBigraphExpression(), null, "right", null, 0, 1, Multi.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(stringLiteralEClass, StringLiteral.class, "StringLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getStringLiteral_Value(), ecorePackage.getEString(), "value", null, 0, 1, StringLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Initialize enums and add enum literals
     initEEnum(binaryParallelOperatorEEnum, BinaryParallelOperator.class, "BinaryParallelOperator");

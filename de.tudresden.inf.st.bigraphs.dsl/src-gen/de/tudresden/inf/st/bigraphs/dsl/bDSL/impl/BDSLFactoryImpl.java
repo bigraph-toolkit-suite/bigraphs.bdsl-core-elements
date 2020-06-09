@@ -76,6 +76,7 @@ public class BDSLFactoryImpl extends EFactoryImpl implements BDSLFactory
       case BDSLPackage.NAME_CONSTANT: return createNameConstant();
       case BDSLPackage.LINK_NAMES: return createLinkNames();
       case BDSLPackage.SITE_VARS: return createSiteVars();
+      case BDSLPackage.SITE: return createSite();
       case BDSLPackage.LVD2: return createLVD2();
       case BDSLPackage.LOCAL_VAR_DECL: return createLocalVarDecl();
       case BDSLPackage.BIGRAPH_VAR_REFERENCE: return createBigraphVarReference();
@@ -86,9 +87,9 @@ public class BDSLFactoryImpl extends EFactoryImpl implements BDSLFactory
       case BDSLPackage.ABSTRACT_MAIN_STATEMENTS: return createAbstractMainStatements();
       case BDSLPackage.PRINT_LN: return createPrintLn();
       case BDSLPackage.PRINTABLE_EXPRESSION: return createPrintableExpression();
-      case BDSLPackage.MAIN_LITERAL: return createMainLiteral();
       case BDSLPackage.PLUS: return createPlus();
       case BDSLPackage.MULTI: return createMulti();
+      case BDSLPackage.STRING_LITERAL: return createStringLiteral();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -262,6 +263,18 @@ public class BDSLFactoryImpl extends EFactoryImpl implements BDSLFactory
    * @generated
    */
   @Override
+  public Site createSite()
+  {
+    SiteImpl site = new SiteImpl();
+    return site;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public LVD2 createLVD2()
   {
     LVD2Impl lvd2 = new LVD2Impl();
@@ -382,18 +395,6 @@ public class BDSLFactoryImpl extends EFactoryImpl implements BDSLFactory
    * @generated
    */
   @Override
-  public MainLiteral createMainLiteral()
-  {
-    MainLiteralImpl mainLiteral = new MainLiteralImpl();
-    return mainLiteral;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public Plus createPlus()
   {
     PlusImpl plus = new PlusImpl();
@@ -410,6 +411,18 @@ public class BDSLFactoryImpl extends EFactoryImpl implements BDSLFactory
   {
     MultiImpl multi = new MultiImpl();
     return multi;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public StringLiteral createStringLiteral()
+  {
+    StringLiteralImpl stringLiteral = new StringLiteralImpl();
+    return stringLiteral;
   }
 
   /**

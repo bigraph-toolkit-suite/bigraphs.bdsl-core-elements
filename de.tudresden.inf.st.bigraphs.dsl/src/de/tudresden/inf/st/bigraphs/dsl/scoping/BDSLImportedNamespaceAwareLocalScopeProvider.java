@@ -7,6 +7,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.inject.Singleton;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -63,6 +65,7 @@ import de.tudresden.inf.st.bigraphs.dsl.bDSL.Signature;
  * @author Dominik Grzelak
  *
  */
+@Singleton
 public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamespaceAwareLocalScopeProvider {
 	@Inject
 	IQualifiedNameProvider nameProvider;

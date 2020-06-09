@@ -3,6 +3,8 @@
  */
 package de.tudresden.inf.st.bigraphs.dsl.bDSL;
 
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -10,6 +12,12 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Main Element</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <p>
+ * The following features are supported:
+ * </p>
+ * <ul>
+ *   <li>{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.MainElement#getValue <em>Value</em>}</li>
+ * </ul>
  *
  * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLPackage#getMainElement()
  * @model
@@ -17,4 +25,16 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface MainElement extends EObject
 {
+  /**
+   * Returns the value of the '<em><b>Value</b></em>' containment reference list.
+   * The list contents are of type {@link de.tudresden.inf.st.bigraphs.dsl.bDSL.MainDeclaration}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Value</em>' containment reference list.
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLPackage#getMainElement_Value()
+   * @model containment="true"
+   * @generated
+   */
+  EList<MainDeclaration> getValue();
+
 } // MainElement

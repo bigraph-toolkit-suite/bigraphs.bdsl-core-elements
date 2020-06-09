@@ -12,7 +12,8 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentProposalLabelProvider;
 /**
  * Use this class to register components to be used within the Eclipse IDE.
  */
-/* @FinalFieldsConstructor */@SuppressWarnings("all")
+@FinalFieldsConstructor
+@SuppressWarnings("all")
 public class BDSLUiModule /* implements AbstractBDSLUiModule  */{
   @Override
   public void configureContentProposalLabelProvider(final Binder binder) {

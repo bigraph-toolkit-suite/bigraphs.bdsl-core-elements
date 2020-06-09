@@ -4,52 +4,55 @@
 package de.tudresden.inf.st.bigraphs.dsl.bDSL.impl;
 
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLPackage;
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.MainDeclaration;
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.MainLiteral;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.StringLiteral;
 
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Main Literal</b></em>'.
+ * An implementation of the model object '<em><b>String Literal</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.MainLiteralImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.StringLiteralImpl#getValue <em>Value</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class MainLiteralImpl extends MainElementImpl implements MainLiteral
+public class StringLiteralImpl extends PrintableExpressionImpl implements StringLiteral
 {
   /**
-   * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference list.
+   * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getValue()
    * @generated
    * @ordered
    */
-  protected EList<MainDeclaration> value;
+  protected static final String VALUE_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getValue()
+   * @generated
+   * @ordered
+   */
+  protected String value = VALUE_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected MainLiteralImpl()
+  protected StringLiteralImpl()
   {
     super();
   }
@@ -62,7 +65,7 @@ public class MainLiteralImpl extends MainElementImpl implements MainLiteral
   @Override
   protected EClass eStaticClass()
   {
-    return BDSLPackage.Literals.MAIN_LITERAL;
+    return BDSLPackage.Literals.STRING_LITERAL;
   }
 
   /**
@@ -71,12 +74,8 @@ public class MainLiteralImpl extends MainElementImpl implements MainLiteral
    * @generated
    */
   @Override
-  public EList<MainDeclaration> getValue()
+  public String getValue()
   {
-    if (value == null)
-    {
-      value = new EObjectContainmentEList<MainDeclaration>(MainDeclaration.class, this, BDSLPackage.MAIN_LITERAL__VALUE);
-    }
     return value;
   }
 
@@ -86,14 +85,12 @@ public class MainLiteralImpl extends MainElementImpl implements MainLiteral
    * @generated
    */
   @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  public void setValue(String newValue)
   {
-    switch (featureID)
-    {
-      case BDSLPackage.MAIN_LITERAL__VALUE:
-        return ((InternalEList<?>)getValue()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
+    String oldValue = value;
+    value = newValue;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, BDSLPackage.STRING_LITERAL__VALUE, oldValue, value));
   }
 
   /**
@@ -106,7 +103,7 @@ public class MainLiteralImpl extends MainElementImpl implements MainLiteral
   {
     switch (featureID)
     {
-      case BDSLPackage.MAIN_LITERAL__VALUE:
+      case BDSLPackage.STRING_LITERAL__VALUE:
         return getValue();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -117,15 +114,13 @@ public class MainLiteralImpl extends MainElementImpl implements MainLiteral
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
-      case BDSLPackage.MAIN_LITERAL__VALUE:
-        getValue().clear();
-        getValue().addAll((Collection<? extends MainDeclaration>)newValue);
+      case BDSLPackage.STRING_LITERAL__VALUE:
+        setValue((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -141,8 +136,8 @@ public class MainLiteralImpl extends MainElementImpl implements MainLiteral
   {
     switch (featureID)
     {
-      case BDSLPackage.MAIN_LITERAL__VALUE:
-        getValue().clear();
+      case BDSLPackage.STRING_LITERAL__VALUE:
+        setValue(VALUE_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -158,10 +153,27 @@ public class MainLiteralImpl extends MainElementImpl implements MainLiteral
   {
     switch (featureID)
     {
-      case BDSLPackage.MAIN_LITERAL__VALUE:
-        return value != null && !value.isEmpty();
+      case BDSLPackage.STRING_LITERAL__VALUE:
+        return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
     }
     return super.eIsSet(featureID);
   }
 
-} //MainLiteralImpl
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (value: ");
+    result.append(value);
+    result.append(')');
+    return result.toString();
+  }
+
+} //StringLiteralImpl

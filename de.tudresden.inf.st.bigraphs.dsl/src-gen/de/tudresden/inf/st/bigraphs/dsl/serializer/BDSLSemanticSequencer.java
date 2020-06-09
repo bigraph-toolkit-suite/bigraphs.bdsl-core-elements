@@ -12,14 +12,16 @@ import de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.EInt;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalVarDecl;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.MainDeclaration;
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.MainLiteral;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.MainElement;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.Multi;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.NameConstant;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.NodeExpressionCall;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.Plus;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.PrintLn;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.Signature;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.Site;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.SiteVars;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.StringLiteral;
 import de.tudresden.inf.st.bigraphs.dsl.services.BDSLGrammarAccess;
 import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
@@ -82,8 +84,8 @@ public class BDSLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case BDSLPackage.MAIN_DECLARATION:
 				sequence_MainDeclaration(context, (MainDeclaration) semanticObject); 
 				return; 
-			case BDSLPackage.MAIN_LITERAL:
-				sequence_MainElement(context, (MainLiteral) semanticObject); 
+			case BDSLPackage.MAIN_ELEMENT:
+				sequence_MainElement(context, (MainElement) semanticObject); 
 				return; 
 			case BDSLPackage.MULTI:
 				sequence_Multiplication(context, (Multi) semanticObject); 
@@ -103,8 +105,14 @@ public class BDSLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case BDSLPackage.SIGNATURE:
 				sequence_Signature(context, (Signature) semanticObject); 
 				return; 
+			case BDSLPackage.SITE:
+				sequence_Site(context, (Site) semanticObject); 
+				return; 
 			case BDSLPackage.SITE_VARS:
 				sequence_SiteVars(context, (SiteVars) semanticObject); 
+				return; 
+			case BDSLPackage.STRING_LITERAL:
+				sequence_PrintableExpression(context, (StringLiteral) semanticObject); 
 				return; 
 			}
 		if (errorAcceptor != null)
@@ -279,12 +287,12 @@ public class BDSLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
-	 *     MainElement returns MainLiteral
+	 *     MainElement returns MainElement
 	 *
 	 * Constraint:
 	 *     value+=MainDeclaration*
 	 */
-	protected void sequence_MainElement(ISerializationContext context, MainLiteral semanticObject) {
+	protected void sequence_MainElement(ISerializationContext context, MainElement semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -370,7 +378,25 @@ public class BDSLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BDSLPackage.Literals.PRINT_LN__TEXT));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getPrintLnAccess().getTextPrintableExpressionParserRuleCall_2_0(), semanticObject.getText());
+		feeder.accept(grammarAccess.getPrintLnAccess().getTextPrintableExpressionParserRuleCall_3_0(), semanticObject.getText());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     PrintableExpression returns StringLiteral
+	 *
+	 * Constraint:
+	 *     value=STRING
+	 */
+	protected void sequence_PrintableExpression(ISerializationContext context, StringLiteral semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, BDSLPackage.Literals.STRING_LITERAL__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BDSLPackage.Literals.STRING_LITERAL__VALUE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getPrintableExpressionAccess().getValueSTRINGTerminalRuleCall_0_1_0(), semanticObject.getValue());
 		feeder.finish();
 	}
 	
@@ -401,6 +427,31 @@ public class BDSLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getSiteVarsAccess().getNameIDTerminalRuleCall_0(), semanticObject.getName());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Site returns Site
+	 *     AbstractBigraphDeclaration returns Site
+	 *     BigraphExpression returns Site
+	 *     Addition returns Site
+	 *     Addition.Plus_1_0_0 returns Site
+	 *     Multiplication returns Site
+	 *     Multiplication.Multi_1_0_0 returns Site
+	 *     PrimaryExpression returns Site
+	 *
+	 * Constraint:
+	 *     index=INT
+	 */
+	protected void sequence_Site(ISerializationContext context, Site semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, BDSLPackage.Literals.SITE__INDEX) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BDSLPackage.Literals.SITE__INDEX));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getSiteAccess().getIndexINTTerminalRuleCall_2_0(), semanticObject.getIndex());
 		feeder.finish();
 	}
 	

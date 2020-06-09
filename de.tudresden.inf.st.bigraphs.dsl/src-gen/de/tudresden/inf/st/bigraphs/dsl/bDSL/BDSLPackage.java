@@ -162,13 +162,22 @@ public interface BDSLPackage extends EPackage
   int MAIN_ELEMENT = 3;
 
   /**
+   * The feature id for the '<em><b>Value</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MAIN_ELEMENT__VALUE = 0;
+
+  /**
    * The number of structural features of the '<em>Main Element</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MAIN_ELEMENT_FEATURE_COUNT = 0;
+  int MAIN_ELEMENT_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.SignatureImpl <em>Signature</em>}' class.
@@ -364,7 +373,7 @@ public interface BDSLPackage extends EPackage
    * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getBigraphExpression()
    * @generated
    */
-  int BIGRAPH_EXPRESSION = 15;
+  int BIGRAPH_EXPRESSION = 16;
 
   /**
    * The number of structural features of the '<em>Bigraph Expression</em>' class.
@@ -383,7 +392,7 @@ public interface BDSLPackage extends EPackage
    * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getAbstractBigraphDeclaration()
    * @generated
    */
-  int ABSTRACT_BIGRAPH_DECLARATION = 13;
+  int ABSTRACT_BIGRAPH_DECLARATION = 14;
 
   /**
    * The number of structural features of the '<em>Abstract Bigraph Declaration</em>' class.
@@ -395,6 +404,34 @@ public interface BDSLPackage extends EPackage
   int ABSTRACT_BIGRAPH_DECLARATION_FEATURE_COUNT = BIGRAPH_EXPRESSION_FEATURE_COUNT + 0;
 
   /**
+   * The meta object id for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.SiteImpl <em>Site</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.SiteImpl
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getSite()
+   * @generated
+   */
+  int SITE = 10;
+
+  /**
+   * The feature id for the '<em><b>Index</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SITE__INDEX = ABSTRACT_BIGRAPH_DECLARATION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Site</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SITE_FEATURE_COUNT = ABSTRACT_BIGRAPH_DECLARATION_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.LVD2Impl <em>LVD2</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -402,7 +439,7 @@ public interface BDSLPackage extends EPackage
    * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getLVD2()
    * @generated
    */
-  int LVD2 = 10;
+  int LVD2 = 11;
 
   /**
    * The number of structural features of the '<em>LVD2</em>' class.
@@ -421,7 +458,7 @@ public interface BDSLPackage extends EPackage
    * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getLocalVarDecl()
    * @generated
    */
-  int LOCAL_VAR_DECL = 11;
+  int LOCAL_VAR_DECL = 12;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -485,7 +522,7 @@ public interface BDSLPackage extends EPackage
    * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getBigraphVarReference()
    * @generated
    */
-  int BIGRAPH_VAR_REFERENCE = 12;
+  int BIGRAPH_VAR_REFERENCE = 13;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' reference.
@@ -513,7 +550,7 @@ public interface BDSLPackage extends EPackage
    * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getNodeExpressionCall()
    * @generated
    */
-  int NODE_EXPRESSION_CALL = 14;
+  int NODE_EXPRESSION_CALL = 15;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' reference.
@@ -550,7 +587,7 @@ public interface BDSLPackage extends EPackage
    * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getMainDeclaration()
    * @generated
    */
-  int MAIN_DECLARATION = 16;
+  int MAIN_DECLARATION = 17;
 
   /**
    * The feature id for the '<em><b>Definition</b></em>' containment reference.
@@ -578,7 +615,7 @@ public interface BDSLPackage extends EPackage
    * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getAbstractMainStatements()
    * @generated
    */
-  int ABSTRACT_MAIN_STATEMENTS = 17;
+  int ABSTRACT_MAIN_STATEMENTS = 18;
 
   /**
    * The number of structural features of the '<em>Abstract Main Statements</em>' class.
@@ -597,7 +634,7 @@ public interface BDSLPackage extends EPackage
    * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getPrintLn()
    * @generated
    */
-  int PRINT_LN = 18;
+  int PRINT_LN = 19;
 
   /**
    * The feature id for the '<em><b>Text</b></em>' containment reference.
@@ -625,7 +662,7 @@ public interface BDSLPackage extends EPackage
    * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getPrintableExpression()
    * @generated
    */
-  int PRINTABLE_EXPRESSION = 19;
+  int PRINTABLE_EXPRESSION = 20;
 
   /**
    * The number of structural features of the '<em>Printable Expression</em>' class.
@@ -635,34 +672,6 @@ public interface BDSLPackage extends EPackage
    * @ordered
    */
   int PRINTABLE_EXPRESSION_FEATURE_COUNT = 0;
-
-  /**
-   * The meta object id for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.MainLiteralImpl <em>Main Literal</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.MainLiteralImpl
-   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getMainLiteral()
-   * @generated
-   */
-  int MAIN_LITERAL = 20;
-
-  /**
-   * The feature id for the '<em><b>Value</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MAIN_LITERAL__VALUE = MAIN_ELEMENT_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Main Literal</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MAIN_LITERAL_FEATURE_COUNT = MAIN_ELEMENT_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.PlusImpl <em>Plus</em>}' class.
@@ -757,6 +766,34 @@ public interface BDSLPackage extends EPackage
   int MULTI_FEATURE_COUNT = BIGRAPH_EXPRESSION_FEATURE_COUNT + 3;
 
   /**
+   * The meta object id for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.StringLiteralImpl <em>String Literal</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.StringLiteralImpl
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getStringLiteral()
+   * @generated
+   */
+  int STRING_LITERAL = 23;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STRING_LITERAL__VALUE = PRINTABLE_EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>String Literal</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STRING_LITERAL_FEATURE_COUNT = PRINTABLE_EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.BinaryParallelOperator <em>Binary Parallel Operator</em>}' enum.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -764,7 +801,7 @@ public interface BDSLPackage extends EPackage
    * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getBinaryParallelOperator()
    * @generated
    */
-  int BINARY_PARALLEL_OPERATOR = 23;
+  int BINARY_PARALLEL_OPERATOR = 24;
 
   /**
    * The meta object id for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.BinaryNestingOperator <em>Binary Nesting Operator</em>}' enum.
@@ -774,7 +811,7 @@ public interface BDSLPackage extends EPackage
    * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getBinaryNestingOperator()
    * @generated
    */
-  int BINARY_NESTING_OPERATOR = 24;
+  int BINARY_NESTING_OPERATOR = 25;
 
   /**
    * The meta object id for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlType <em>Control Type</em>}' enum.
@@ -784,7 +821,7 @@ public interface BDSLPackage extends EPackage
    * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getControlType()
    * @generated
    */
-  int CONTROL_TYPE = 25;
+  int CONTROL_TYPE = 26;
 
 
   /**
@@ -870,6 +907,17 @@ public interface BDSLPackage extends EPackage
    * @generated
    */
   EClass getMainElement();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.MainElement#getValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Value</em>'.
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.MainElement#getValue()
+   * @see #getMainElement()
+   * @generated
+   */
+  EReference getMainElement_Value();
 
   /**
    * Returns the meta object for class '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.Signature <em>Signature</em>}'.
@@ -1018,6 +1066,27 @@ public interface BDSLPackage extends EPackage
    * @generated
    */
   EAttribute getSiteVars_Name();
+
+  /**
+   * Returns the meta object for class '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.Site <em>Site</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Site</em>'.
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.Site
+   * @generated
+   */
+  EClass getSite();
+
+  /**
+   * Returns the meta object for the attribute '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.Site#getIndex <em>Index</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Index</em>'.
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.Site#getIndex()
+   * @see #getSite()
+   * @generated
+   */
+  EAttribute getSite_Index();
 
   /**
    * Returns the meta object for class '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.LVD2 <em>LVD2</em>}'.
@@ -1230,27 +1299,6 @@ public interface BDSLPackage extends EPackage
   EClass getPrintableExpression();
 
   /**
-   * Returns the meta object for class '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.MainLiteral <em>Main Literal</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Main Literal</em>'.
-   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.MainLiteral
-   * @generated
-   */
-  EClass getMainLiteral();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.MainLiteral#getValue <em>Value</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Value</em>'.
-   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.MainLiteral#getValue()
-   * @see #getMainLiteral()
-   * @generated
-   */
-  EReference getMainLiteral_Value();
-
-  /**
    * Returns the meta object for class '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.Plus <em>Plus</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1335,6 +1383,27 @@ public interface BDSLPackage extends EPackage
    * @generated
    */
   EReference getMulti_Right();
+
+  /**
+   * Returns the meta object for class '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.StringLiteral <em>String Literal</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>String Literal</em>'.
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.StringLiteral
+   * @generated
+   */
+  EClass getStringLiteral();
+
+  /**
+   * Returns the meta object for the attribute '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.StringLiteral#getValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Value</em>'.
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.StringLiteral#getValue()
+   * @see #getStringLiteral()
+   * @generated
+   */
+  EAttribute getStringLiteral_Value();
 
   /**
    * Returns the meta object for enum '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.BinaryParallelOperator <em>Binary Parallel Operator</em>}'.
@@ -1462,6 +1531,14 @@ public interface BDSLPackage extends EPackage
     EClass MAIN_ELEMENT = eINSTANCE.getMainElement();
 
     /**
+     * The meta object literal for the '<em><b>Value</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MAIN_ELEMENT__VALUE = eINSTANCE.getMainElement_Value();
+
+    /**
      * The meta object literal for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.SignatureImpl <em>Signature</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1584,6 +1661,24 @@ public interface BDSLPackage extends EPackage
      * @generated
      */
     EAttribute SITE_VARS__NAME = eINSTANCE.getSiteVars_Name();
+
+    /**
+     * The meta object literal for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.SiteImpl <em>Site</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.SiteImpl
+     * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getSite()
+     * @generated
+     */
+    EClass SITE = eINSTANCE.getSite();
+
+    /**
+     * The meta object literal for the '<em><b>Index</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute SITE__INDEX = eINSTANCE.getSite_Index();
 
     /**
      * The meta object literal for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.LVD2Impl <em>LVD2</em>}' class.
@@ -1766,24 +1861,6 @@ public interface BDSLPackage extends EPackage
     EClass PRINTABLE_EXPRESSION = eINSTANCE.getPrintableExpression();
 
     /**
-     * The meta object literal for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.MainLiteralImpl <em>Main Literal</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.MainLiteralImpl
-     * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getMainLiteral()
-     * @generated
-     */
-    EClass MAIN_LITERAL = eINSTANCE.getMainLiteral();
-
-    /**
-     * The meta object literal for the '<em><b>Value</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference MAIN_LITERAL__VALUE = eINSTANCE.getMainLiteral_Value();
-
-    /**
      * The meta object literal for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.PlusImpl <em>Plus</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1850,6 +1927,24 @@ public interface BDSLPackage extends EPackage
      * @generated
      */
     EReference MULTI__RIGHT = eINSTANCE.getMulti_Right();
+
+    /**
+     * The meta object literal for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.StringLiteralImpl <em>String Literal</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.StringLiteralImpl
+     * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getStringLiteral()
+     * @generated
+     */
+    EClass STRING_LITERAL = eINSTANCE.getStringLiteral();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute STRING_LITERAL__VALUE = eINSTANCE.getStringLiteral_Value();
 
     /**
      * The meta object literal for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.BinaryParallelOperator <em>Binary Parallel Operator</em>}' enum.

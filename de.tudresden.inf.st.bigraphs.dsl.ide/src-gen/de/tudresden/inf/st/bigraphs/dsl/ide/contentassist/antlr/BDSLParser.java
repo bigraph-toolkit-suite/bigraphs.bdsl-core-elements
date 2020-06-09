@@ -52,6 +52,7 @@ public class BDSLParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getSignatureAccess().getGroup_3(), "rule__Signature__Group_3__0");
 			builder.put(grammarAccess.getControlDefAccess().getGroup(), "rule__ControlDef__Group__0");
 			builder.put(grammarAccess.getLinkNamesAccess().getGroup_1(), "rule__LinkNames__Group_1__0");
+			builder.put(grammarAccess.getSiteAccess().getGroup(), "rule__Site__Group__0");
 			builder.put(grammarAccess.getLVD2Access().getGroup(), "rule__LVD2__Group__0");
 			builder.put(grammarAccess.getLocalVarDeclAccess().getGroup(), "rule__LocalVarDecl__Group__0");
 			builder.put(grammarAccess.getLocalVarDeclAccess().getGroup_2(), "rule__LocalVarDecl__Group_2__0");
@@ -71,6 +72,7 @@ public class BDSLParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getPrimaryExpressionAccess().getGroup_0(), "rule__PrimaryExpression__Group_0__0");
 			builder.put(grammarAccess.getMainDeclarationAccess().getGroup(), "rule__MainDeclaration__Group__0");
 			builder.put(grammarAccess.getPrintLnAccess().getGroup(), "rule__PrintLn__Group__0");
+			builder.put(grammarAccess.getPrintableExpressionAccess().getGroup_0(), "rule__PrintableExpression__Group_0__0");
 			builder.put(grammarAccess.getBRSModelAccess().getSignatureAssignment_0(), "rule__BRSModel__SignatureAssignment_0");
 			builder.put(grammarAccess.getBRSModelAccess().getStatementsAssignment_1_0(), "rule__BRSModel__StatementsAssignment_1_0");
 			builder.put(grammarAccess.getBRSModelAccess().getMainAssignment_1_1(), "rule__BRSModel__MainAssignment_1_1");
@@ -84,6 +86,7 @@ public class BDSLParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getArityValueAccess().getValueAssignment(), "rule__ArityValue__ValueAssignment");
 			builder.put(grammarAccess.getNameConstantAccess().getValueAssignment(), "rule__NameConstant__ValueAssignment");
 			builder.put(grammarAccess.getSiteVarsAccess().getNameAssignment(), "rule__SiteVars__NameAssignment");
+			builder.put(grammarAccess.getSiteAccess().getIndexAssignment_2(), "rule__Site__IndexAssignment_2");
 			builder.put(grammarAccess.getLVD2Access().getNameAssignment_2(), "rule__LVD2__NameAssignment_2");
 			builder.put(grammarAccess.getLVD2Access().getTypeAssignment_4(), "rule__LVD2__TypeAssignment_4");
 			builder.put(grammarAccess.getLVD2Access().getDefinitionAssignment_7(), "rule__LVD2__DefinitionAssignment_7");
@@ -101,7 +104,8 @@ public class BDSLParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getMultiplicationAccess().getOperatorAssignment_1_0_1(), "rule__Multiplication__OperatorAssignment_1_0_1");
 			builder.put(grammarAccess.getMultiplicationAccess().getRightAssignment_1_1(), "rule__Multiplication__RightAssignment_1_1");
 			builder.put(grammarAccess.getMainDeclarationAccess().getDefinitionAssignment_1(), "rule__MainDeclaration__DefinitionAssignment_1");
-			builder.put(grammarAccess.getPrintLnAccess().getTextAssignment_2(), "rule__PrintLn__TextAssignment_2");
+			builder.put(grammarAccess.getPrintLnAccess().getTextAssignment_3(), "rule__PrintLn__TextAssignment_3");
+			builder.put(grammarAccess.getPrintableExpressionAccess().getValueAssignment_0_1(), "rule__PrintableExpression__ValueAssignment_0_1");
 			builder.put(grammarAccess.getBRSModelAccess().getUnorderedGroup_1(), "rule__BRSModel__UnorderedGroup_1");
 		}
 	}

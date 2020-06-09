@@ -144,6 +144,15 @@ public class BDSLSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case BDSLPackage.SITE:
+      {
+        Site site = (Site)theEObject;
+        T result = caseSite(site);
+        if (result == null) result = caseAbstractBigraphDeclaration(site);
+        if (result == null) result = caseBigraphExpression(site);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case BDSLPackage.LVD2:
       {
         LVD2 lvd2 = (LVD2)theEObject;
@@ -228,14 +237,6 @@ public class BDSLSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case BDSLPackage.MAIN_LITERAL:
-      {
-        MainLiteral mainLiteral = (MainLiteral)theEObject;
-        T result = caseMainLiteral(mainLiteral);
-        if (result == null) result = caseMainElement(mainLiteral);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case BDSLPackage.PLUS:
       {
         Plus plus = (Plus)theEObject;
@@ -249,6 +250,14 @@ public class BDSLSwitch<T> extends Switch<T>
         Multi multi = (Multi)theEObject;
         T result = caseMulti(multi);
         if (result == null) result = caseBigraphExpression(multi);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case BDSLPackage.STRING_LITERAL:
+      {
+        StringLiteral stringLiteral = (StringLiteral)theEObject;
+        T result = caseStringLiteral(stringLiteral);
+        if (result == null) result = casePrintableExpression(stringLiteral);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -417,6 +426,22 @@ public class BDSLSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Site</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Site</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSite(Site object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>LVD2</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -577,22 +602,6 @@ public class BDSLSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Main Literal</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Main Literal</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseMainLiteral(MainLiteral object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Plus</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -620,6 +629,22 @@ public class BDSLSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseMulti(Multi object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>String Literal</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>String Literal</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseStringLiteral(StringLiteral object)
   {
     return null;
   }

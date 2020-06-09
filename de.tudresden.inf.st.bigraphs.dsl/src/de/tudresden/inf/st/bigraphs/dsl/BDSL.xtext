@@ -37,7 +37,7 @@ AbstractElement:
 ;
 
 MainElement:
-	"main" "=" '{' {MainLiteral} value+=(MainDeclaration)* '}' ';';
+	"main" "=" '{' {MainElement} value+=(MainDeclaration)* '}' ';';
 
 	//creates a signature class with the same name: shortcut for "signature returns signature"
 Signature:
@@ -66,6 +66,9 @@ LinkNames:
 SiteVars:
 	name=ID;
 
+Site:
+	'id' '(' index=INT ')'
+;
 	//(args+=LVD2)*
 LVD2:
 	{LocalVarDecl} "val" name=ID ':' type=[ControlVariable|FQN] '=' "{" definition+=(BigraphExpression)* "}";
@@ -93,13 +96,10 @@ BigraphVarReference:
 	////(DeclaredParameter | 
 AbstractBigraphDeclaration:
 //	NodeExpression //| BigraphVarReference
-	BigraphVarReference | NodeExpressionCall | LVD2;
+	BigraphVarReference | NodeExpressionCall | LVD2 | Site;
 
 NodeExpressionCall :
 	value=[ControlVariable|FQN] ('[' links+=LinkNames* ']')?;
-
-	//Call:
-//	var=[Signature] "." op=[ControlDef];
 
 BigraphExpression:
 	Addition
@@ -126,7 +126,7 @@ PrimaryExpression returns BigraphExpression:
 //terminal BASICID: ('a'..'z'|'A'..'Z'|'0'..'9' | 'å' | 'ä' | 'ö')*;
 //terminal STRING: '"' -> '"';
 //terminal WS: (' '|'\t')+;
-//terminal ANY_OTHER: .;
+//terminal ANY_OTHER: .;m
 
 MainDeclaration:
 	{MainDeclaration} definition=AbstractMainStatements ';';
@@ -135,10 +135,10 @@ AbstractMainStatements:
 	BigraphVarReference | PrintLn;
 
 PrintLn:
-	'println' '(' text=PrintableExpression ')';
+	{PrintLn} 'println' '(' text=(PrintableExpression) ')';
 
 PrintableExpression:
-	STRING | BigraphVarReference
+	({StringLiteral} value=STRING) | (BigraphVarReference)
 ;
 
 enum BinaryParallelOperator:

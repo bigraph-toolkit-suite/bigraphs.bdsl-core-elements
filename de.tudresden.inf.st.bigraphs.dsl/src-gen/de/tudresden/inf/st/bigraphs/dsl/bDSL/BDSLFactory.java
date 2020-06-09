@@ -114,6 +114,15 @@ public interface BDSLFactory extends EFactory
   SiteVars createSiteVars();
 
   /**
+   * Returns a new object of class '<em>Site</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Site</em>'.
+   * @generated
+   */
+  Site createSite();
+
+  /**
    * Returns a new object of class '<em>LVD2</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -204,15 +213,6 @@ public interface BDSLFactory extends EFactory
   PrintableExpression createPrintableExpression();
 
   /**
-   * Returns a new object of class '<em>Main Literal</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Main Literal</em>'.
-   * @generated
-   */
-  MainLiteral createMainLiteral();
-
-  /**
    * Returns a new object of class '<em>Plus</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -229,6 +229,15 @@ public interface BDSLFactory extends EFactory
    * @generated
    */
   Multi createMulti();
+
+  /**
+   * Returns a new object of class '<em>String Literal</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>String Literal</em>'.
+   * @generated
+   */
+  StringLiteral createStringLiteral();
 
   /**
    * Returns the package supported by this factory.

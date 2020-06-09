@@ -126,6 +126,11 @@ public class BDSLAdapterFactory extends AdapterFactoryImpl
         return createSiteVarsAdapter();
       }
       @Override
+      public Adapter caseSite(Site object)
+      {
+        return createSiteAdapter();
+      }
+      @Override
       public Adapter caseLVD2(LVD2 object)
       {
         return createLVD2Adapter();
@@ -176,11 +181,6 @@ public class BDSLAdapterFactory extends AdapterFactoryImpl
         return createPrintableExpressionAdapter();
       }
       @Override
-      public Adapter caseMainLiteral(MainLiteral object)
-      {
-        return createMainLiteralAdapter();
-      }
-      @Override
       public Adapter casePlus(Plus object)
       {
         return createPlusAdapter();
@@ -189,6 +189,11 @@ public class BDSLAdapterFactory extends AdapterFactoryImpl
       public Adapter caseMulti(Multi object)
       {
         return createMultiAdapter();
+      }
+      @Override
+      public Adapter caseStringLiteral(StringLiteral object)
+      {
+        return createStringLiteralAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -363,6 +368,21 @@ public class BDSLAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.Site <em>Site</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.Site
+   * @generated
+   */
+  public Adapter createSiteAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.LVD2 <em>LVD2</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -513,21 +533,6 @@ public class BDSLAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.MainLiteral <em>Main Literal</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.MainLiteral
-   * @generated
-   */
-  public Adapter createMainLiteralAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.Plus <em>Plus</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -553,6 +558,21 @@ public class BDSLAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createMultiAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.StringLiteral <em>String Literal</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.StringLiteral
+   * @generated
+   */
+  public Adapter createStringLiteralAdapter()
   {
     return null;
   }

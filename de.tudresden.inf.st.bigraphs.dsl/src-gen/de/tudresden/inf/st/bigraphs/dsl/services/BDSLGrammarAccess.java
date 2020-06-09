@@ -214,17 +214,17 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cMainKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cEqualsSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Action cMainLiteralAction_3 = (Action)cGroup.eContents().get(3);
+		private final Action cMainElementAction_3 = (Action)cGroup.eContents().get(3);
 		private final Assignment cValueAssignment_4 = (Assignment)cGroup.eContents().get(4);
 		private final RuleCall cValueMainDeclarationParserRuleCall_4_0 = (RuleCall)cValueAssignment_4.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		private final Keyword cSemicolonKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//MainElement:
-		//	"main" "=" '{' {MainLiteral} value+=MainDeclaration* '}' ';';
+		//	"main" "=" '{' {MainElement} value+=MainDeclaration* '}' ';';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"main" "=" '{' {MainLiteral} value+=MainDeclaration* '}' ';'
+		//"main" "=" '{' {MainElement} value+=MainDeclaration* '}' ';'
 		public Group getGroup() { return cGroup; }
 		
 		//"main"
@@ -236,8 +236,8 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 		
-		//{MainLiteral}
-		public Action getMainLiteralAction_3() { return cMainLiteralAction_3; }
+		//{MainElement}
+		public Action getMainElementAction_3() { return cMainElementAction_3; }
 		
 		//value+=MainDeclaration*
 		public Assignment getValueAssignment_4() { return cValueAssignment_4; }
@@ -426,6 +426,37 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0() { return cNameIDTerminalRuleCall_0; }
+	}
+	public class SiteElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.tudresden.inf.st.bigraphs.dsl.BDSL.Site");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cIdKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cIndexAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cIndexINTTerminalRuleCall_2_0 = (RuleCall)cIndexAssignment_2.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		
+		//Site:
+		//	'id' '(' index=INT ')';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'id' '(' index=INT ')'
+		public Group getGroup() { return cGroup; }
+		
+		//'id'
+		public Keyword getIdKeyword_0() { return cIdKeyword_0; }
+		
+		//'('
+		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
+		
+		//index=INT
+		public Assignment getIndexAssignment_2() { return cIndexAssignment_2; }
+		
+		//INT
+		public RuleCall getIndexINTTerminalRuleCall_2_0() { return cIndexINTTerminalRuleCall_2_0; }
+		
+		//')'
+		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
 	}
 	public class LVD2Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.tudresden.inf.st.bigraphs.dsl.BDSL.LVD2");
@@ -667,14 +698,15 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cBigraphVarReferenceParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cNodeExpressionCallParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cLVD2ParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cSiteParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
 		//////(DeclaredParameter | 
 		//AbstractBigraphDeclaration:
-		//	BigraphVarReference | NodeExpressionCall | LVD2;
+		//	BigraphVarReference | NodeExpressionCall | LVD2 | Site;
 		@Override public ParserRule getRule() { return rule; }
 		
 		////	NodeExpression //| BigraphVarReference
-		//BigraphVarReference | NodeExpressionCall | LVD2
+		//BigraphVarReference | NodeExpressionCall | LVD2 | Site
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		////	NodeExpression //| BigraphVarReference
@@ -686,6 +718,9 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//LVD2
 		public RuleCall getLVD2ParserRuleCall_2() { return cLVD2ParserRuleCall_2; }
+		
+		//Site
+		public RuleCall getSiteParserRuleCall_3() { return cSiteParserRuleCall_3; }
 	}
 	public class NodeExpressionCallElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.tudresden.inf.st.bigraphs.dsl.BDSL.NodeExpressionCall");
@@ -879,7 +914,7 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 		////terminal BASICID: ('a'..'z'|'A'..'Z'|'0'..'9' | 'å' | 'ä' | 'ö')*;
 		////terminal STRING: '"' -> '"';
 		////terminal WS: (' '|'\t')+;
-		////terminal ANY_OTHER: .;
+		////terminal ANY_OTHER: .;m
 		//MainDeclaration:
 		//	{MainDeclaration} definition=AbstractMainStatements ';';
 		@Override public ParserRule getRule() { return rule; }
@@ -921,49 +956,65 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 	public class PrintLnElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.tudresden.inf.st.bigraphs.dsl.BDSL.PrintLn");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cPrintlnKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cTextAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cTextPrintableExpressionParserRuleCall_2_0 = (RuleCall)cTextAssignment_2.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Action cPrintLnAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cPrintlnKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cLeftParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cTextAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cTextPrintableExpressionParserRuleCall_3_0 = (RuleCall)cTextAssignment_3.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//PrintLn:
-		//	'println' '(' text=PrintableExpression ')';
+		//	{PrintLn} 'println' '(' text=PrintableExpression ')';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'println' '(' text=PrintableExpression ')'
+		//{PrintLn} 'println' '(' text=PrintableExpression ')'
 		public Group getGroup() { return cGroup; }
 		
+		//{PrintLn}
+		public Action getPrintLnAction_0() { return cPrintLnAction_0; }
+		
 		//'println'
-		public Keyword getPrintlnKeyword_0() { return cPrintlnKeyword_0; }
+		public Keyword getPrintlnKeyword_1() { return cPrintlnKeyword_1; }
 		
 		//'('
-		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
+		public Keyword getLeftParenthesisKeyword_2() { return cLeftParenthesisKeyword_2; }
 		
 		//text=PrintableExpression
-		public Assignment getTextAssignment_2() { return cTextAssignment_2; }
+		public Assignment getTextAssignment_3() { return cTextAssignment_3; }
 		
 		//PrintableExpression
-		public RuleCall getTextPrintableExpressionParserRuleCall_2_0() { return cTextPrintableExpressionParserRuleCall_2_0; }
+		public RuleCall getTextPrintableExpressionParserRuleCall_3_0() { return cTextPrintableExpressionParserRuleCall_3_0; }
 		
 		//')'
-		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
+		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
 	}
 	public class PrintableExpressionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.tudresden.inf.st.bigraphs.dsl.BDSL.PrintableExpression");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cSTRINGTerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
+		private final Action cStringLiteralAction_0_0 = (Action)cGroup_0.eContents().get(0);
+		private final Assignment cValueAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
+		private final RuleCall cValueSTRINGTerminalRuleCall_0_1_0 = (RuleCall)cValueAssignment_0_1.eContents().get(0);
 		private final RuleCall cBigraphVarReferenceParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//PrintableExpression:
-		//	STRING | BigraphVarReference;
+		//	{StringLiteral} value=STRING | BigraphVarReference;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//STRING | BigraphVarReference
+		//{StringLiteral} value=STRING | BigraphVarReference
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
+		//{StringLiteral} value=STRING
+		public Group getGroup_0() { return cGroup_0; }
+		
+		//{StringLiteral}
+		public Action getStringLiteralAction_0_0() { return cStringLiteralAction_0_0; }
+		
+		//value=STRING
+		public Assignment getValueAssignment_0_1() { return cValueAssignment_0_1; }
+		
 		//STRING
-		public RuleCall getSTRINGTerminalRuleCall_0() { return cSTRINGTerminalRuleCall_0; }
+		public RuleCall getValueSTRINGTerminalRuleCall_0_1_0() { return cValueSTRINGTerminalRuleCall_0_1_0; }
 		
 		//BigraphVarReference
 		public RuleCall getBigraphVarReferenceParserRuleCall_1() { return cBigraphVarReferenceParserRuleCall_1; }
@@ -1091,6 +1142,7 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 	private final NameConstantElements pNameConstant;
 	private final LinkNamesElements pLinkNames;
 	private final SiteVarsElements pSiteVars;
+	private final SiteElements pSite;
 	private final LVD2Elements pLVD2;
 	private final LocalVarDeclElements pLocalVarDecl;
 	private final BigraphVarReferenceElements pBigraphVarReference;
@@ -1132,6 +1184,7 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 		this.pNameConstant = new NameConstantElements();
 		this.pLinkNames = new LinkNamesElements();
 		this.pSiteVars = new SiteVarsElements();
+		this.pSite = new SiteElements();
 		this.pLVD2 = new LVD2Elements();
 		this.pLocalVarDecl = new LocalVarDeclElements();
 		this.pBigraphVarReference = new BigraphVarReferenceElements();
@@ -1262,7 +1315,7 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//MainElement:
-	//	"main" "=" '{' {MainLiteral} value+=MainDeclaration* '}' ';';
+	//	"main" "=" '{' {MainElement} value+=MainDeclaration* '}' ';';
 	public MainElementElements getMainElementAccess() {
 		return pMainElement;
 	}
@@ -1337,6 +1390,16 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 		return getSiteVarsAccess().getRule();
 	}
 	
+	//Site:
+	//	'id' '(' index=INT ')';
+	public SiteElements getSiteAccess() {
+		return pSite;
+	}
+	
+	public ParserRule getSiteRule() {
+		return getSiteAccess().getRule();
+	}
+	
 	////(args+=LVD2)*
 	//LVD2:
 	//	{LocalVarDecl} "val" name=ID ':' type=[ControlVariable|FQN] '=' "{" definition+=BigraphExpression* "}";
@@ -1378,7 +1441,7 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//////(DeclaredParameter | 
 	//AbstractBigraphDeclaration:
-	//	BigraphVarReference | NodeExpressionCall | LVD2;
+	//	BigraphVarReference | NodeExpressionCall | LVD2 | Site;
 	public AbstractBigraphDeclarationElements getAbstractBigraphDeclarationAccess() {
 		return pAbstractBigraphDeclaration;
 	}
@@ -1449,7 +1512,7 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 	////terminal BASICID: ('a'..'z'|'A'..'Z'|'0'..'9' | 'å' | 'ä' | 'ö')*;
 	////terminal STRING: '"' -> '"';
 	////terminal WS: (' '|'\t')+;
-	////terminal ANY_OTHER: .;
+	////terminal ANY_OTHER: .;m
 	//MainDeclaration:
 	//	{MainDeclaration} definition=AbstractMainStatements ';';
 	public MainDeclarationElements getMainDeclarationAccess() {
@@ -1471,7 +1534,7 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//PrintLn:
-	//	'println' '(' text=PrintableExpression ')';
+	//	{PrintLn} 'println' '(' text=PrintableExpression ')';
 	public PrintLnElements getPrintLnAccess() {
 		return pPrintLn;
 	}
@@ -1481,7 +1544,7 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//PrintableExpression:
-	//	STRING | BigraphVarReference;
+	//	{StringLiteral} value=STRING | BigraphVarReference;
 	public PrintableExpressionElements getPrintableExpressionAccess() {
 		return pPrintableExpression;
 	}

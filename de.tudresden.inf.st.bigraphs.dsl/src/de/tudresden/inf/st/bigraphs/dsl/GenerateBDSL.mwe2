@@ -18,13 +18,13 @@ Workflow {
 				web = {
 					enabled = true
 				}
-//				eclipsePlugin = {
-//					enabled = true
-//				}
-//				eclipsePluginTest = {
-//					enabled = true
-//				}
-//				createEclipseMetaData = true
+				//				eclipsePlugin = {
+				//					enabled = true
+				//				}
+				//				eclipsePluginTest = {
+				//					enabled = true
+				//				}
+				//				createEclipseMetaData = true
 			}
 			code = {
 				encoding = "UTF-8"
@@ -37,7 +37,6 @@ Workflow {
 			name = "de.tudresden.inf.st.bigraphs.dsl.BDSL"
 			fileExtensions = "bdsl"
 			referencedResource = "platform:/resource/BigraphBaseModel/model/bigraphBaseModel.genmodel"
-			
 			fragment = ecore2xtext.Ecore2XtextValueConverterServiceFragment2 auto-inject {}
 			fragment = ui.quickfix.QuickfixProviderFragment2 auto-inject {}
 
@@ -48,6 +47,9 @@ Workflow {
 
 			serializer = {
 				generateStub = false
+			}
+			scopeProvider = {
+				ignoreCase = false
 			}
 			validator = {
 			// composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"

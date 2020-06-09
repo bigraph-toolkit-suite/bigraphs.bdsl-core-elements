@@ -30,7 +30,9 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//BRSModelImport/importedNamespace"/>
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//AbstractElement"/>
-    <genClasses ecoreClass="BDSL.ecore#//MainElement"/>
+    <genClasses ecoreClass="BDSL.ecore#//MainElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//MainElement/value"/>
+    </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//Signature">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//Signature/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//Signature/controls"/>
@@ -49,6 +51,9 @@
     <genClasses ecoreClass="BDSL.ecore#//LinkNames"/>
     <genClasses ecoreClass="BDSL.ecore#//SiteVars">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//SiteVars/name"/>
+    </genClasses>
+    <genClasses ecoreClass="BDSL.ecore#//Site">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//Site/index"/>
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//LVD2"/>
     <genClasses ecoreClass="BDSL.ecore#//LocalVarDecl">
@@ -75,9 +80,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//PrintLn/text"/>
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//PrintableExpression"/>
-    <genClasses ecoreClass="BDSL.ecore#//MainLiteral">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//MainLiteral/value"/>
-    </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//Plus">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//Plus/left"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//Plus/operator"/>
@@ -87,6 +89,9 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//Multi/left"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//Multi/operator"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//Multi/right"/>
+    </genClasses>
+    <genClasses ecoreClass="BDSL.ecore#//StringLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//StringLiteral/value"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

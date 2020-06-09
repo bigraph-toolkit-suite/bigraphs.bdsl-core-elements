@@ -412,7 +412,7 @@ ruleMainElement returns [EObject current=null]
 		(
 			{
 				$current = forceCreateModelElement(
-					grammarAccess.getMainElementAccess().getMainLiteralAction_3(),
+					grammarAccess.getMainElementAccess().getMainElementAction_3(),
 					$current);
 			}
 		)
@@ -763,6 +763,55 @@ ruleSiteVars returns [EObject current=null]
 					"org.eclipse.xtext.common.Terminals.ID");
 			}
 		)
+	)
+;
+
+// Entry rule entryRuleSite
+entryRuleSite returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getSiteRule()); }
+	iv_ruleSite=ruleSite
+	{ $current=$iv_ruleSite.current; }
+	EOF;
+
+// Rule Site
+ruleSite returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='id'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getSiteAccess().getIdKeyword_0());
+		}
+		otherlv_1='('
+		{
+			newLeafNode(otherlv_1, grammarAccess.getSiteAccess().getLeftParenthesisKeyword_1());
+		}
+		(
+			(
+				lv_index_2_0=RULE_INT
+				{
+					newLeafNode(lv_index_2_0, grammarAccess.getSiteAccess().getIndexINTTerminalRuleCall_2_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getSiteRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"index",
+						lv_index_2_0,
+						"org.eclipse.xtext.common.Terminals.INT");
+				}
+			)
+		)
+		otherlv_3=')'
+		{
+			newLeafNode(otherlv_3, grammarAccess.getSiteAccess().getRightParenthesisKeyword_3());
+		}
 	)
 ;
 
@@ -1120,6 +1169,15 @@ ruleAbstractBigraphDeclaration returns [EObject current=null]
 		this_LVD2_2=ruleLVD2
 		{
 			$current = $this_LVD2_2.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getAbstractBigraphDeclarationAccess().getSiteParserRuleCall_3());
+		}
+		this_Site_3=ruleSite
+		{
+			$current = $this_Site_3.current;
 			afterParserOrEnumRuleCall();
 		}
 	)
@@ -1513,20 +1571,27 @@ rulePrintLn returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0='println'
+		(
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getPrintLnAccess().getPrintLnAction_0(),
+					$current);
+			}
+		)
+		otherlv_1='println'
 		{
-			newLeafNode(otherlv_0, grammarAccess.getPrintLnAccess().getPrintlnKeyword_0());
+			newLeafNode(otherlv_1, grammarAccess.getPrintLnAccess().getPrintlnKeyword_1());
 		}
-		otherlv_1='('
+		otherlv_2='('
 		{
-			newLeafNode(otherlv_1, grammarAccess.getPrintLnAccess().getLeftParenthesisKeyword_1());
+			newLeafNode(otherlv_2, grammarAccess.getPrintLnAccess().getLeftParenthesisKeyword_2());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getPrintLnAccess().getTextPrintableExpressionParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getPrintLnAccess().getTextPrintableExpressionParserRuleCall_3_0());
 				}
-				lv_text_2_0=rulePrintableExpression
+				lv_text_3_0=rulePrintableExpression
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getPrintLnRule());
@@ -1534,15 +1599,15 @@ rulePrintLn returns [EObject current=null]
 					set(
 						$current,
 						"text",
-						lv_text_2_0,
+						lv_text_3_0,
 						"de.tudresden.inf.st.bigraphs.dsl.BDSL.PrintableExpression");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)
-		otherlv_3=')'
+		otherlv_4=')'
 		{
-			newLeafNode(otherlv_3, grammarAccess.getPrintLnAccess().getRightParenthesisKeyword_3());
+			newLeafNode(otherlv_4, grammarAccess.getPrintLnAccess().getRightParenthesisKeyword_4());
 		}
 	)
 ;
@@ -1563,17 +1628,40 @@ rulePrintableExpression returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		this_STRING_0=RULE_STRING
-		{
-			newLeafNode(this_STRING_0, grammarAccess.getPrintableExpressionAccess().getSTRINGTerminalRuleCall_0());
-		}
+		(
+			(
+				{
+					$current = forceCreateModelElement(
+						grammarAccess.getPrintableExpressionAccess().getStringLiteralAction_0_0(),
+						$current);
+				}
+			)
+			(
+				(
+					lv_value_1_0=RULE_STRING
+					{
+						newLeafNode(lv_value_1_0, grammarAccess.getPrintableExpressionAccess().getValueSTRINGTerminalRuleCall_0_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getPrintableExpressionRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"value",
+							lv_value_1_0,
+							"org.eclipse.xtext.common.Terminals.STRING");
+					}
+				)
+			)
+		)
 		    |
 		{
 			newCompositeNode(grammarAccess.getPrintableExpressionAccess().getBigraphVarReferenceParserRuleCall_1());
 		}
-		this_BigraphVarReference_1=ruleBigraphVarReference
+		this_BigraphVarReference_2=ruleBigraphVarReference
 		{
-			$current = $this_BigraphVarReference_1.current;
+			$current = $this_BigraphVarReference_2.current;
 			afterParserOrEnumRuleCall();
 		}
 	)
