@@ -792,9 +792,9 @@ ruleSite returns [EObject current=null]
 		}
 		(
 			(
-				lv_index_2_0=RULE_INT
+				lv_index_2_0=RULE_INT_SITE
 				{
-					newLeafNode(lv_index_2_0, grammarAccess.getSiteAccess().getIndexINTTerminalRuleCall_2_0());
+					newLeafNode(lv_index_2_0, grammarAccess.getSiteAccess().getIndexINT_SITETerminalRuleCall_2_0());
 				}
 				{
 					if ($current==null) {
@@ -804,7 +804,7 @@ ruleSite returns [EObject current=null]
 						$current,
 						"index",
 						lv_index_2_0,
-						"org.eclipse.xtext.common.Terminals.INT");
+						"de.tudresden.inf.st.bigraphs.dsl.BDSL.INT_SITE");
 				}
 			)
 		)
@@ -1605,9 +1605,34 @@ rulePrintLn returns [EObject current=null]
 				}
 			)
 		)
-		otherlv_4=')'
+		(
+			otherlv_4=','
+			{
+				newLeafNode(otherlv_4, grammarAccess.getPrintLnAccess().getCommaKeyword_4_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getPrintLnAccess().getModeOutputModeModelEnumRuleCall_4_1_0());
+					}
+					lv_mode_5_0=ruleOutputModeModel
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getPrintLnRule());
+						}
+						set(
+							$current,
+							"mode",
+							lv_mode_5_0,
+							"de.tudresden.inf.st.bigraphs.dsl.BDSL.OutputModeModel");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)?
+		otherlv_6=')'
 		{
-			newLeafNode(otherlv_4, grammarAccess.getPrintLnAccess().getRightParenthesisKeyword_4());
+			newLeafNode(otherlv_6, grammarAccess.getPrintLnAccess().getRightParenthesisKeyword_5());
 		}
 	)
 ;
@@ -1771,6 +1796,35 @@ ruleControlType returns [Enumerator current=null]
 		)
 	)
 ;
+
+// Rule OutputModeModel
+ruleOutputModeModel returns [Enumerator current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			enumLiteral_0='xmi'
+			{
+				$current = grammarAccess.getOutputModeModelAccess().getINSTANCE_MODELEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_0, grammarAccess.getOutputModeModelAccess().getINSTANCE_MODELEnumLiteralDeclaration_0());
+			}
+		)
+		    |
+		(
+			enumLiteral_1='ecore'
+			{
+				$current = grammarAccess.getOutputModeModelAccess().getMETA_MODELEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_1, grammarAccess.getOutputModeModelAccess().getMETA_MODELEnumLiteralDeclaration_1());
+			}
+		)
+	)
+;
+
+RULE_INT_SITE : ('1'..'9')+;
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 

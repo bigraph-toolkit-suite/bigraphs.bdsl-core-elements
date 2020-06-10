@@ -40,6 +40,7 @@ public class BDSLParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getBinaryParallelOperatorAccess().getAlternatives(), "rule__BinaryParallelOperator__Alternatives");
 			builder.put(grammarAccess.getBinaryNestingOperatorAccess().getAlternatives(), "rule__BinaryNestingOperator__Alternatives");
 			builder.put(grammarAccess.getControlTypeAccess().getAlternatives(), "rule__ControlType__Alternatives");
+			builder.put(grammarAccess.getOutputModeModelAccess().getAlternatives(), "rule__OutputModeModel__Alternatives");
 			builder.put(grammarAccess.getBRSModelAccess().getGroup(), "rule__BRSModel__Group__0");
 			builder.put(grammarAccess.getBRSModelImportAccess().getGroup(), "rule__BRSModelImport__Group__0");
 			builder.put(grammarAccess.getFQNAccess().getGroup(), "rule__FQN__Group__0");
@@ -72,6 +73,7 @@ public class BDSLParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getPrimaryExpressionAccess().getGroup_0(), "rule__PrimaryExpression__Group_0__0");
 			builder.put(grammarAccess.getMainDeclarationAccess().getGroup(), "rule__MainDeclaration__Group__0");
 			builder.put(grammarAccess.getPrintLnAccess().getGroup(), "rule__PrintLn__Group__0");
+			builder.put(grammarAccess.getPrintLnAccess().getGroup_4(), "rule__PrintLn__Group_4__0");
 			builder.put(grammarAccess.getPrintableExpressionAccess().getGroup_0(), "rule__PrintableExpression__Group_0__0");
 			builder.put(grammarAccess.getBRSModelAccess().getSignatureAssignment_0(), "rule__BRSModel__SignatureAssignment_0");
 			builder.put(grammarAccess.getBRSModelAccess().getStatementsAssignment_1_0(), "rule__BRSModel__StatementsAssignment_1_0");
@@ -105,6 +107,7 @@ public class BDSLParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getMultiplicationAccess().getRightAssignment_1_1(), "rule__Multiplication__RightAssignment_1_1");
 			builder.put(grammarAccess.getMainDeclarationAccess().getDefinitionAssignment_1(), "rule__MainDeclaration__DefinitionAssignment_1");
 			builder.put(grammarAccess.getPrintLnAccess().getTextAssignment_3(), "rule__PrintLn__TextAssignment_3");
+			builder.put(grammarAccess.getPrintLnAccess().getModeAssignment_4_1(), "rule__PrintLn__ModeAssignment_4_1");
 			builder.put(grammarAccess.getPrintableExpressionAccess().getValueAssignment_0_1(), "rule__PrintableExpression__ValueAssignment_0_1");
 			builder.put(grammarAccess.getBRSModelAccess().getUnorderedGroup_1(), "rule__BRSModel__UnorderedGroup_1");
 		}

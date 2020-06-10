@@ -21,6 +21,10 @@
       <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//ControlType/ACTIVE"/>
       <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//ControlType/PASSIVE"/>
     </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="BDSL.ecore#//OutputModeModel">
+      <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//OutputModeModel/INSTANCE_MODEL"/>
+      <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//OutputModeModel/META_MODEL"/>
+    </genEnums>
     <genClasses ecoreClass="BDSL.ecore#//BRSModel">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//BRSModel/signature"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//BRSModel/statements"/>
@@ -78,6 +82,7 @@
     <genClasses ecoreClass="BDSL.ecore#//AbstractMainStatements"/>
     <genClasses ecoreClass="BDSL.ecore#//PrintLn">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//PrintLn/text"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//PrintLn/mode"/>
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//PrintableExpression"/>
     <genClasses ecoreClass="BDSL.ecore#//Plus">

@@ -370,16 +370,10 @@ public class BDSLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     PrintLn returns PrintLn
 	 *
 	 * Constraint:
-	 *     text=PrintableExpression
+	 *     (text=PrintableExpression mode=OutputModeModel?)
 	 */
 	protected void sequence_PrintLn(ISerializationContext context, PrintLn semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, BDSLPackage.Literals.PRINT_LN__TEXT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BDSLPackage.Literals.PRINT_LN__TEXT));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getPrintLnAccess().getTextPrintableExpressionParserRuleCall_3_0(), semanticObject.getText());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -443,7 +437,7 @@ public class BDSLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     PrimaryExpression returns Site
 	 *
 	 * Constraint:
-	 *     index=INT
+	 *     index=INT_SITE
 	 */
 	protected void sequence_Site(ISerializationContext context, Site semanticObject) {
 		if (errorAcceptor != null) {
@@ -451,7 +445,7 @@ public class BDSLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BDSLPackage.Literals.SITE__INDEX));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getSiteAccess().getIndexINTTerminalRuleCall_2_0(), semanticObject.getIndex());
+		feeder.accept(grammarAccess.getSiteAccess().getIndexINT_SITETerminalRuleCall_2_0(), semanticObject.getIndex());
 		feeder.finish();
 	}
 	

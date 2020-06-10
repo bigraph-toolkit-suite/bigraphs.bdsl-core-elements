@@ -7,7 +7,6 @@ generate bDSL "http://www.tudresden.de/inf/st/bigraphs/dsl/BDSL"
 //types are in italic font
 BRSModel:
 	signature+=(Signature)*
-
 	// unordered group
 	((statements+=(AbstractElement)*) & (main=MainElement))
 	
@@ -27,6 +26,8 @@ BigraphVarReferenceID hidden():
 	('$' FQN); //returns ecore::EString 
 EInt returns ecore::EInt:
 	'-'? INT;
+
+terminal INT_SITE returns ecore::EInt: ('1'..'9')+;
 
 EString returns ecore::EString:
 	STRING | ID;
@@ -67,7 +68,7 @@ SiteVars:
 	name=ID;
 
 Site:
-	'id' '(' index=INT ')'
+	'id' '(' index=INT_SITE ')'
 ;
 	//(args+=LVD2)*
 LVD2:
@@ -135,7 +136,7 @@ AbstractMainStatements:
 	BigraphVarReference | PrintLn;
 
 PrintLn:
-	{PrintLn} 'println' '(' text=(PrintableExpression) ')';
+	{PrintLn} 'println' '(' text=(PrintableExpression) (',' mode=OutputModeModel)? ')';
 
 PrintableExpression:
 	({StringLiteral} value=STRING) | (BigraphVarReference)
@@ -150,4 +151,6 @@ enum BinaryNestingOperator:
 enum ControlType:
 	ATOMIC='atomic' | ACTIVE='active' | PASSIVE='passive';
 	
-
+enum OutputModeModel:
+	INSTANCE_MODEL='xmi' | META_MODEL='ecore'
+;

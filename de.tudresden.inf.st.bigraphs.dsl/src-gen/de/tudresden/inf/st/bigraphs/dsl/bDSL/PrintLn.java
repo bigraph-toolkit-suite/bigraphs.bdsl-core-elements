@@ -14,6 +14,7 @@ package de.tudresden.inf.st.bigraphs.dsl.bDSL;
  * </p>
  * <ul>
  *   <li>{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.PrintLn#getText <em>Text</em>}</li>
+ *   <li>{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.PrintLn#getMode <em>Mode</em>}</li>
  * </ul>
  *
  * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLPackage#getPrintLn()
@@ -43,5 +44,30 @@ public interface PrintLn extends AbstractMainStatements
    * @generated
    */
   void setText(PrintableExpression value);
+
+  /**
+   * Returns the value of the '<em><b>Mode</b></em>' attribute.
+   * The literals are from the enumeration {@link de.tudresden.inf.st.bigraphs.dsl.bDSL.OutputModeModel}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Mode</em>' attribute.
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.OutputModeModel
+   * @see #setMode(OutputModeModel)
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLPackage#getPrintLn_Mode()
+   * @model
+   * @generated
+   */
+  OutputModeModel getMode();
+
+  /**
+   * Sets the value of the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.PrintLn#getMode <em>Mode</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Mode</em>' attribute.
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.OutputModeModel
+   * @see #getMode()
+   * @generated
+   */
+  void setMode(OutputModeModel value);
 
 } // PrintLn

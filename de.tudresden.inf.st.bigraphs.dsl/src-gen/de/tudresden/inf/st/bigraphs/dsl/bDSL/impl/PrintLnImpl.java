@@ -4,6 +4,7 @@
 package de.tudresden.inf.st.bigraphs.dsl.bDSL.impl;
 
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLPackage;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.OutputModeModel;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.PrintLn;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.PrintableExpression;
 
@@ -24,6 +25,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * </p>
  * <ul>
  *   <li>{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.PrintLnImpl#getText <em>Text</em>}</li>
+ *   <li>{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.PrintLnImpl#getMode <em>Mode</em>}</li>
  * </ul>
  *
  * @generated
@@ -39,6 +41,26 @@ public class PrintLnImpl extends AbstractMainStatementsImpl implements PrintLn
    * @ordered
    */
   protected PrintableExpression text;
+
+  /**
+   * The default value of the '{@link #getMode() <em>Mode</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getMode()
+   * @generated
+   * @ordered
+   */
+  protected static final OutputModeModel MODE_EDEFAULT = OutputModeModel.INSTANCE_MODEL;
+
+  /**
+   * The cached value of the '{@link #getMode() <em>Mode</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getMode()
+   * @generated
+   * @ordered
+   */
+  protected OutputModeModel mode = MODE_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -117,6 +139,31 @@ public class PrintLnImpl extends AbstractMainStatementsImpl implements PrintLn
    * @generated
    */
   @Override
+  public OutputModeModel getMode()
+  {
+    return mode;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setMode(OutputModeModel newMode)
+  {
+    OutputModeModel oldMode = mode;
+    mode = newMode == null ? MODE_EDEFAULT : newMode;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, BDSLPackage.PRINT_LN__MODE, oldMode, mode));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
     switch (featureID)
@@ -139,6 +186,8 @@ public class PrintLnImpl extends AbstractMainStatementsImpl implements PrintLn
     {
       case BDSLPackage.PRINT_LN__TEXT:
         return getText();
+      case BDSLPackage.PRINT_LN__MODE:
+        return getMode();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -155,6 +204,9 @@ public class PrintLnImpl extends AbstractMainStatementsImpl implements PrintLn
     {
       case BDSLPackage.PRINT_LN__TEXT:
         setText((PrintableExpression)newValue);
+        return;
+      case BDSLPackage.PRINT_LN__MODE:
+        setMode((OutputModeModel)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -173,6 +225,9 @@ public class PrintLnImpl extends AbstractMainStatementsImpl implements PrintLn
       case BDSLPackage.PRINT_LN__TEXT:
         setText((PrintableExpression)null);
         return;
+      case BDSLPackage.PRINT_LN__MODE:
+        setMode(MODE_EDEFAULT);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -189,8 +244,27 @@ public class PrintLnImpl extends AbstractMainStatementsImpl implements PrintLn
     {
       case BDSLPackage.PRINT_LN__TEXT:
         return text != null;
+      case BDSLPackage.PRINT_LN__MODE:
+        return mode != MODE_EDEFAULT;
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (mode: ");
+    result.append(mode);
+    result.append(')');
+    return result.toString();
   }
 
 } //PrintLnImpl

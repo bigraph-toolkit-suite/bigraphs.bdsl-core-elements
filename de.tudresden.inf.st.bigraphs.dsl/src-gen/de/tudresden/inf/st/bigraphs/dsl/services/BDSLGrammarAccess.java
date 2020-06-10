@@ -433,14 +433,14 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cIdKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cIndexAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cIndexINTTerminalRuleCall_2_0 = (RuleCall)cIndexAssignment_2.eContents().get(0);
+		private final RuleCall cIndexINT_SITETerminalRuleCall_2_0 = (RuleCall)cIndexAssignment_2.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//Site:
-		//	'id' '(' index=INT ')';
+		//	'id' '(' index=INT_SITE ')';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'id' '(' index=INT ')'
+		//'id' '(' index=INT_SITE ')'
 		public Group getGroup() { return cGroup; }
 		
 		//'id'
@@ -449,11 +449,11 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 		//'('
 		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
 		
-		//index=INT
+		//index=INT_SITE
 		public Assignment getIndexAssignment_2() { return cIndexAssignment_2; }
 		
-		//INT
-		public RuleCall getIndexINTTerminalRuleCall_2_0() { return cIndexINTTerminalRuleCall_2_0; }
+		//INT_SITE
+		public RuleCall getIndexINT_SITETerminalRuleCall_2_0() { return cIndexINT_SITETerminalRuleCall_2_0; }
 		
 		//')'
 		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
@@ -959,13 +959,17 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cLeftParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Assignment cTextAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cTextPrintableExpressionParserRuleCall_3_0 = (RuleCall)cTextAssignment_3.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
+		private final Keyword cCommaKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final Assignment cModeAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
+		private final RuleCall cModeOutputModeModelEnumRuleCall_4_1_0 = (RuleCall)cModeAssignment_4_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//PrintLn:
-		//	{PrintLn} 'println' '(' text=PrintableExpression ')';
+		//	{PrintLn} 'println' '(' text=PrintableExpression (',' mode=OutputModeModel)? ')';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{PrintLn} 'println' '(' text=PrintableExpression ')'
+		//{PrintLn} 'println' '(' text=PrintableExpression (',' mode=OutputModeModel)? ')'
 		public Group getGroup() { return cGroup; }
 		
 		//{PrintLn}
@@ -983,8 +987,20 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 		//PrintableExpression
 		public RuleCall getTextPrintableExpressionParserRuleCall_3_0() { return cTextPrintableExpressionParserRuleCall_3_0; }
 		
+		//(',' mode=OutputModeModel)?
+		public Group getGroup_4() { return cGroup_4; }
+		
+		//','
+		public Keyword getCommaKeyword_4_0() { return cCommaKeyword_4_0; }
+		
+		//mode=OutputModeModel
+		public Assignment getModeAssignment_4_1() { return cModeAssignment_4_1; }
+		
+		//OutputModeModel
+		public RuleCall getModeOutputModeModelEnumRuleCall_4_1_0() { return cModeOutputModeModelEnumRuleCall_4_1_0; }
+		
 		//')'
-		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
+		public Keyword getRightParenthesisKeyword_5() { return cRightParenthesisKeyword_5; }
 	}
 	public class PrintableExpressionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.tudresden.inf.st.bigraphs.dsl.BDSL.PrintableExpression");
@@ -1124,6 +1140,33 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 		//'passive'
 		public Keyword getPASSIVEPassiveKeyword_2_0() { return cPASSIVEPassiveKeyword_2_0; }
 	}
+	public class OutputModeModelElements extends AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "de.tudresden.inf.st.bigraphs.dsl.BDSL.OutputModeModel");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final EnumLiteralDeclaration cINSTANCE_MODELEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
+		private final Keyword cINSTANCE_MODELXmiKeyword_0_0 = (Keyword)cINSTANCE_MODELEnumLiteralDeclaration_0.eContents().get(0);
+		private final EnumLiteralDeclaration cMETA_MODELEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
+		private final Keyword cMETA_MODELEcoreKeyword_1_0 = (Keyword)cMETA_MODELEnumLiteralDeclaration_1.eContents().get(0);
+		
+		//enum OutputModeModel:
+		//	INSTANCE_MODEL='xmi' | META_MODEL='ecore';
+		public EnumRule getRule() { return rule; }
+		
+		//INSTANCE_MODEL='xmi' | META_MODEL='ecore'
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//INSTANCE_MODEL='xmi'
+		public EnumLiteralDeclaration getINSTANCE_MODELEnumLiteralDeclaration_0() { return cINSTANCE_MODELEnumLiteralDeclaration_0; }
+		
+		//'xmi'
+		public Keyword getINSTANCE_MODELXmiKeyword_0_0() { return cINSTANCE_MODELXmiKeyword_0_0; }
+		
+		//META_MODEL='ecore'
+		public EnumLiteralDeclaration getMETA_MODELEnumLiteralDeclaration_1() { return cMETA_MODELEnumLiteralDeclaration_1; }
+		
+		//'ecore'
+		public Keyword getMETA_MODELEcoreKeyword_1_0() { return cMETA_MODELEcoreKeyword_1_0; }
+	}
 	
 	private final BRSModelElements pBRSModel;
 	private final BRSModelImportElements pBRSModelImport;
@@ -1131,6 +1174,7 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 	private final FqnWithWildCardElements pFqnWithWildCard;
 	private final BigraphVarReferenceIDElements pBigraphVarReferenceID;
 	private final EIntElements pEInt;
+	private final TerminalRule tINT_SITE;
 	private final EStringElements pEString;
 	private final AbstractElementElements pAbstractElement;
 	private final MainElementElements pMainElement;
@@ -1157,6 +1201,7 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 	private final BinaryParallelOperatorElements eBinaryParallelOperator;
 	private final BinaryNestingOperatorElements eBinaryNestingOperator;
 	private final ControlTypeElements eControlType;
+	private final OutputModeModelElements eOutputModeModel;
 	
 	private final Grammar grammar;
 	
@@ -1173,6 +1218,7 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 		this.pFqnWithWildCard = new FqnWithWildCardElements();
 		this.pBigraphVarReferenceID = new BigraphVarReferenceIDElements();
 		this.pEInt = new EIntElements();
+		this.tINT_SITE = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "de.tudresden.inf.st.bigraphs.dsl.BDSL.INT_SITE");
 		this.pEString = new EStringElements();
 		this.pAbstractElement = new AbstractElementElements();
 		this.pMainElement = new MainElementElements();
@@ -1199,6 +1245,7 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 		this.eBinaryParallelOperator = new BinaryParallelOperatorElements();
 		this.eBinaryNestingOperator = new BinaryNestingOperatorElements();
 		this.eControlType = new ControlTypeElements();
+		this.eOutputModeModel = new OutputModeModelElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -1288,6 +1335,12 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getEIntRule() {
 		return getEIntAccess().getRule();
+	}
+	
+	//terminal INT_SITE returns ecore::EInt:
+	//	'1'..'9'+;
+	public TerminalRule getINT_SITERule() {
+		return tINT_SITE;
 	}
 	
 	//EString:
@@ -1389,7 +1442,7 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Site:
-	//	'id' '(' index=INT ')';
+	//	'id' '(' index=INT_SITE ')';
 	public SiteElements getSiteAccess() {
 		return pSite;
 	}
@@ -1530,7 +1583,7 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//PrintLn:
-	//	{PrintLn} 'println' '(' text=PrintableExpression ')';
+	//	{PrintLn} 'println' '(' text=PrintableExpression (',' mode=OutputModeModel)? ')';
 	public PrintLnElements getPrintLnAccess() {
 		return pPrintLn;
 	}
@@ -1578,6 +1631,16 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public EnumRule getControlTypeRule() {
 		return getControlTypeAccess().getRule();
+	}
+	
+	//enum OutputModeModel:
+	//	INSTANCE_MODEL='xmi' | META_MODEL='ecore';
+	public OutputModeModelElements getOutputModeModelAccess() {
+		return eOutputModeModel;
+	}
+	
+	public EnumRule getOutputModeModelRule() {
+		return getOutputModeModelAccess().getRule();
 	}
 	
 	//terminal ID:

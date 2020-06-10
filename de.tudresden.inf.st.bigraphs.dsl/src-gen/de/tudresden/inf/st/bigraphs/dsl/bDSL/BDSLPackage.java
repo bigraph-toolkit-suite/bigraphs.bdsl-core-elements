@@ -646,13 +646,22 @@ public interface BDSLPackage extends EPackage
   int PRINT_LN__TEXT = ABSTRACT_MAIN_STATEMENTS_FEATURE_COUNT + 0;
 
   /**
+   * The feature id for the '<em><b>Mode</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PRINT_LN__MODE = ABSTRACT_MAIN_STATEMENTS_FEATURE_COUNT + 1;
+
+  /**
    * The number of structural features of the '<em>Print Ln</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int PRINT_LN_FEATURE_COUNT = ABSTRACT_MAIN_STATEMENTS_FEATURE_COUNT + 1;
+  int PRINT_LN_FEATURE_COUNT = ABSTRACT_MAIN_STATEMENTS_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.PrintableExpressionImpl <em>Printable Expression</em>}' class.
@@ -822,6 +831,16 @@ public interface BDSLPackage extends EPackage
    * @generated
    */
   int CONTROL_TYPE = 26;
+
+  /**
+   * The meta object id for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.OutputModeModel <em>Output Mode Model</em>}' enum.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.OutputModeModel
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getOutputModeModel()
+   * @generated
+   */
+  int OUTPUT_MODE_MODEL = 27;
 
 
   /**
@@ -1289,6 +1308,17 @@ public interface BDSLPackage extends EPackage
   EReference getPrintLn_Text();
 
   /**
+   * Returns the meta object for the attribute '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.PrintLn#getMode <em>Mode</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Mode</em>'.
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.PrintLn#getMode()
+   * @see #getPrintLn()
+   * @generated
+   */
+  EAttribute getPrintLn_Mode();
+
+  /**
    * Returns the meta object for class '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.PrintableExpression <em>Printable Expression</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1434,6 +1464,16 @@ public interface BDSLPackage extends EPackage
    * @generated
    */
   EEnum getControlType();
+
+  /**
+   * Returns the meta object for enum '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.OutputModeModel <em>Output Mode Model</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for enum '<em>Output Mode Model</em>'.
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.OutputModeModel
+   * @generated
+   */
+  EEnum getOutputModeModel();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -1851,6 +1891,14 @@ public interface BDSLPackage extends EPackage
     EReference PRINT_LN__TEXT = eINSTANCE.getPrintLn_Text();
 
     /**
+     * The meta object literal for the '<em><b>Mode</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute PRINT_LN__MODE = eINSTANCE.getPrintLn_Mode();
+
+    /**
      * The meta object literal for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.PrintableExpressionImpl <em>Printable Expression</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1975,6 +2023,16 @@ public interface BDSLPackage extends EPackage
      * @generated
      */
     EEnum CONTROL_TYPE = eINSTANCE.getControlType();
+
+    /**
+     * The meta object literal for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.OutputModeModel <em>Output Mode Model</em>}' enum.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.OutputModeModel
+     * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getOutputModeModel()
+     * @generated
+     */
+    EEnum OUTPUT_MODE_MODEL = eINSTANCE.getOutputModeModel();
 
   }
 

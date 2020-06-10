@@ -71,7 +71,7 @@ public class BDSLSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     '('*
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     (rule start) (ambiguity) 'id' '(' index=INT
+	 *     (rule start) (ambiguity) 'id' '(' index=INT_SITE
 	 *     (rule start) (ambiguity) 'val' name=ID
 	 *     (rule start) (ambiguity) value=[ControlVariable|FQN]
 	 *     (rule start) (ambiguity) value=[LocalVarDecl|BigraphVarReferenceID]

@@ -111,6 +111,8 @@ public class BDSLFactoryImpl extends EFactoryImpl implements BDSLFactory
         return createBinaryNestingOperatorFromString(eDataType, initialValue);
       case BDSLPackage.CONTROL_TYPE:
         return createControlTypeFromString(eDataType, initialValue);
+      case BDSLPackage.OUTPUT_MODE_MODEL:
+        return createOutputModeModelFromString(eDataType, initialValue);
       default:
         throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
     }
@@ -132,6 +134,8 @@ public class BDSLFactoryImpl extends EFactoryImpl implements BDSLFactory
         return convertBinaryNestingOperatorToString(eDataType, instanceValue);
       case BDSLPackage.CONTROL_TYPE:
         return convertControlTypeToString(eDataType, instanceValue);
+      case BDSLPackage.OUTPUT_MODE_MODEL:
+        return convertOutputModeModelToString(eDataType, instanceValue);
       default:
         throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
     }
@@ -487,6 +491,28 @@ public class BDSLFactoryImpl extends EFactoryImpl implements BDSLFactory
    * @generated
    */
   public String convertControlTypeToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public OutputModeModel createOutputModeModelFromString(EDataType eDataType, String initialValue)
+  {
+    OutputModeModel result = OutputModeModel.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertOutputModeModelToString(EDataType eDataType, Object instanceValue)
   {
     return instanceValue == null ? null : instanceValue.toString();
   }

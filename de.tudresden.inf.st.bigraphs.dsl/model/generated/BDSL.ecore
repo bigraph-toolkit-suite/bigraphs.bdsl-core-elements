@@ -70,6 +70,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="PrintLn" eSuperTypes="#//AbstractMainStatements">
     <eStructuralFeatures xsi:type="ecore:EReference" name="text" eType="#//PrintableExpression"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mode" eType="#//OutputModeModel"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PrintableExpression"/>
   <eClassifiers xsi:type="ecore:EEnum" name="BinaryParallelOperator">
@@ -86,6 +87,10 @@
     <eLiterals name="ATOMIC" literal="atomic"/>
     <eLiterals name="ACTIVE" value="1" literal="active"/>
     <eLiterals name="PASSIVE" value="2" literal="passive"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="OutputModeModel">
+    <eLiterals name="INSTANCE_MODEL" literal="xmi"/>
+    <eLiterals name="META_MODEL" value="1" literal="ecore"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Plus" eSuperTypes="#//BigraphExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//BigraphExpression"

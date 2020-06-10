@@ -24,6 +24,7 @@ import de.tudresden.inf.st.bigraphs.dsl.bDSL.MainElement;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.Multi;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.NameConstant;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.NodeExpressionCall;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.OutputModeModel;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.Plus;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.PrintLn;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.PrintableExpression;
@@ -236,6 +237,13 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
    * @generated
    */
   private EEnum controlTypeEEnum = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EEnum outputModeModelEEnum = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -790,6 +798,17 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
    * @generated
    */
   @Override
+  public EAttribute getPrintLn_Mode()
+  {
+    return (EAttribute)printLnEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getPrintableExpression()
   {
     return printableExpressionEClass;
@@ -944,6 +963,17 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
    * @generated
    */
   @Override
+  public EEnum getOutputModeModel()
+  {
+    return outputModeModelEEnum;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public BDSLFactory getBDSLFactory()
   {
     return (BDSLFactory)getEFactoryInstance();
@@ -1032,6 +1062,7 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
 
     printLnEClass = createEClass(PRINT_LN);
     createEReference(printLnEClass, PRINT_LN__TEXT);
+    createEAttribute(printLnEClass, PRINT_LN__MODE);
 
     printableExpressionEClass = createEClass(PRINTABLE_EXPRESSION);
 
@@ -1052,6 +1083,7 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
     binaryParallelOperatorEEnum = createEEnum(BINARY_PARALLEL_OPERATOR);
     binaryNestingOperatorEEnum = createEEnum(BINARY_NESTING_OPERATOR);
     controlTypeEEnum = createEEnum(CONTROL_TYPE);
+    outputModeModelEEnum = createEEnum(OUTPUT_MODE_MODEL);
   }
 
   /**
@@ -1162,6 +1194,7 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
 
     initEClass(printLnEClass, PrintLn.class, "PrintLn", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getPrintLn_Text(), this.getPrintableExpression(), null, "text", null, 0, 1, PrintLn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getPrintLn_Mode(), this.getOutputModeModel(), "mode", null, 0, 1, PrintLn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(printableExpressionEClass, PrintableExpression.class, "PrintableExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1193,6 +1226,10 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
     addEEnumLiteral(controlTypeEEnum, ControlType.ATOMIC);
     addEEnumLiteral(controlTypeEEnum, ControlType.ACTIVE);
     addEEnumLiteral(controlTypeEEnum, ControlType.PASSIVE);
+
+    initEEnum(outputModeModelEEnum, OutputModeModel.class, "OutputModeModel");
+    addEEnumLiteral(outputModeModelEEnum, OutputModeModel.INSTANCE_MODEL);
+    addEEnumLiteral(outputModeModelEEnum, OutputModeModel.META_MODEL);
 
     // Create resource
     createResource(eNS_URI);
