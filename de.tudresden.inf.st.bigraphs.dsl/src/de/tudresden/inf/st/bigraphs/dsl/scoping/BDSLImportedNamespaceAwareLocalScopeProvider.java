@@ -73,17 +73,17 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 	@Override
 	protected IScope getLocalElementsScope(IScope parentScope, EObject context, EReference reference) {
 		// TODO Auto-generated method stub
-		System.out.println("getLocalElementsScope");
+//		System.out.println("getLocalElementsScope");
 		return super.getLocalElementsScope(parentScope, context, reference);
 	}
 
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
-		System.out.println("Context: " + context);
+//		System.out.println("Context: " + context);
 //		System.out.println("Reference.eContainer: " + reference.eContainer());
 
 		if (reference == BDSLPackage.Literals.BRS_MODEL_IMPORT) {
-			System.out.println("BRS_MODEL_IMPORT: looking into global scope");
+//			System.out.println("BRS_MODEL_IMPORT: looking into global scope");
 			return super.getGlobalScope(context.eResource(), reference);
 		}
 
@@ -110,7 +110,7 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 		if (context instanceof LocalVarDecl && reference.eContainer() == BDSLPackage.Literals.BIGRAPH_VAR_REFERENCE) {
 			EObject containerElement = EcoreUtil2.getContainerOfType(context, LocalVarDecl.class);
 			if (containerElement != null) {
-				System.out.println("containerElement: " + containerElement);
+//				System.out.println("containerElement: " + containerElement);
 
 //				Scopes.selectCompatible(IScope.NULLSCOPE.getAllElements(), BDSLPackage.Literals.BIGRAPH_VAR_REFERENCE);
 //				EObject rootElement = EcoreUtil2.getRootContainer(context);
@@ -125,8 +125,8 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 
 					@Override
 					public boolean apply(LocalVarDecl arg0) {
-						System.out.println(arg0);
-						System.out.println(correctSignature);
+//						System.out.println(arg0);
+//						System.out.println(correctSignature);
 						Signature infered = inferSignature(arg0);
 						if (infered == null)
 							return false;
@@ -142,8 +142,8 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 					}
 				};
 				Collection<LocalVarDecl> filtered = Collections2.filter(allVarDeclarations, signatureFilterPredicate);
-				System.out.println("correctSignature is: " + correctSignature);
-				System.out.println("filtered: " + filtered);
+//				System.out.println("correctSignature is: " + correctSignature);
+//				System.out.println("filtered: " + filtered);
 				IScope existingScope = Scopes.scopeFor(filtered);
 				return existingScope; //new FilteringScope(existingScope, filter);
 			}
@@ -179,7 +179,7 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 					}
 				}
 				IScope existingScope = new SimpleScope(IScope.NULLSCOPE, scopesy, false);
-				System.out.println("existingScope: " + existingScope);
+//				System.out.println("existingScope: " + existingScope);
 				return existingScope;
 			}
 		}
@@ -204,7 +204,7 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 	 * @param collect a list to collect all occurring declarations
 	 */
 	public void findAllLocalBigraphVariableDeclarations(EObject context, List<LocalVarDecl> collect) {
-		System.out.println("context: " + context);
+//		System.out.println("context: " + context);
 		List<LocalVarDecl> allVarDeclarations = EcoreUtil2.getAllContentsOfType(context, LocalVarDecl.class);
 		List<String> names = collect.stream().map(x -> x.getName()).collect(Collectors.toList());
 		for (LocalVarDecl each : allVarDeclarations) {
@@ -241,7 +241,7 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 	}
 
 	public IScope getBRSModelScope(EObject context, EReference reference, BRSModel module, IScope parent) {
-		System.out.println("getBRSModelScope");
+//		System.out.println("getBRSModelScope");
 		Collection<AbstractElement> allDefinitions = module.getStatements();
 //				Collections2.filter(module.getStatements(),
 //				e -> e.getClass().equals(LocalVarDecl.class));
@@ -254,7 +254,7 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 //			EObject rootElement = EcoreUtil2.getRootContainer(context);
 			Signature correctSignature = ((LocalVarDecl) containerElement).getSig();
 			final QualifiedName fqn1 = getQualifiedNameProvider().getFullyQualifiedName(correctSignature);
-			System.out.println("fqn1 of sig: " + fqn1);
+//			System.out.println("fqn1 of sig: " + fqn1);
 			IScope mbsSig = MapBasedScope.createScope(parent,
 					Collections.singleton(EObjectDescription.create(fqn1, correctSignature)));
 			return mbsSig;
@@ -263,7 +263,7 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 	}
 
 	public IScope getDefinitionScope(EObject context, EReference reference, IScope parent) {
-		System.out.println("reference: " + reference.eContainer());
+//		System.out.println("reference: " + reference.eContainer());
 		if (context instanceof NodeExpressionCall
 				&& reference.eContainer() == BDSLPackage.Literals.NODE_EXPRESSION_CALL) {
 			// && reference.eContainer() ==
@@ -289,7 +289,7 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 //				Scopes.filterDuplicates(result);
 			IScope scopeControls = MapBasedScope.createScope(parent, result);
 
-			System.out.println("MapBasedScope:\t" + scopeControls);
+//			System.out.println("MapBasedScope:\t" + scopeControls);
 
 //				IScope cool = Scopes.scopeFor(correctSignature.getControls(), new Function<ControlDef, QualifiedName>() {
 //
