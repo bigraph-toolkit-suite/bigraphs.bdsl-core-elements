@@ -14,10 +14,8 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalVarDecl#getName <em>Name</em>}</li>
  *   <li>{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalVarDecl#getType <em>Type</em>}</li>
  *   <li>{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalVarDecl#getDefinition <em>Definition</em>}</li>
- *   <li>{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalVarDecl#getSig <em>Sig</em>}</li>
  *   <li>{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalVarDecl#getSiteArgs <em>Site Args</em>}</li>
  * </ul>
  *
@@ -27,28 +25,6 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface LocalVarDecl extends AbstractElement, LVD2
 {
-  /**
-   * Returns the value of the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Name</em>' attribute.
-   * @see #setName(String)
-   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLPackage#getLocalVarDecl_Name()
-   * @model
-   * @generated
-   */
-  String getName();
-
-  /**
-   * Sets the value of the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalVarDecl#getName <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Name</em>' attribute.
-   * @see #getName()
-   * @generated
-   */
-  void setName(String value);
-
   /**
    * Returns the value of the '<em><b>Type</b></em>' reference.
    * <!-- begin-user-doc -->
@@ -82,28 +58,6 @@ public interface LocalVarDecl extends AbstractElement, LVD2
    * @generated
    */
   EList<BigraphExpression> getDefinition();
-
-  /**
-   * Returns the value of the '<em><b>Sig</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Sig</em>' reference.
-   * @see #setSig(Signature)
-   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLPackage#getLocalVarDecl_Sig()
-   * @model
-   * @generated
-   */
-  Signature getSig();
-
-  /**
-   * Sets the value of the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalVarDecl#getSig <em>Sig</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Sig</em>' reference.
-   * @see #getSig()
-   * @generated
-   */
-  void setSig(Signature value);
 
   /**
    * Returns the value of the '<em><b>Site Args</b></em>' containment reference list.

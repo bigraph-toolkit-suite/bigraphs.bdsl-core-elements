@@ -21,6 +21,8 @@ import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 public class BDSLSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected BDSLGrammarAccess grammarAccess;
+	protected AbstractElementAlias match_BRSDefinition___LeftSquareBracketKeyword_3_2_0_RightSquareBracketKeyword_3_2_3__q;
+	protected AbstractElementAlias match_BRSDefinition___LeftSquareBracketKeyword_5_2_0_RightSquareBracketKeyword_5_2_3__q;
 	protected AbstractElementAlias match_NodeExpressionCall___LeftSquareBracketKeyword_1_0_RightSquareBracketKeyword_1_2__q;
 	protected AbstractElementAlias match_PrimaryExpression_LeftParenthesisKeyword_0_0_a;
 	protected AbstractElementAlias match_PrimaryExpression_LeftParenthesisKeyword_0_0_p;
@@ -28,6 +30,8 @@ public class BDSLSyntacticSequencer extends AbstractSyntacticSequencer {
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (BDSLGrammarAccess) access;
+		match_BRSDefinition___LeftSquareBracketKeyword_3_2_0_RightSquareBracketKeyword_3_2_3__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getBRSDefinitionAccess().getLeftSquareBracketKeyword_3_2_0()), new TokenAlias(false, false, grammarAccess.getBRSDefinitionAccess().getRightSquareBracketKeyword_3_2_3()));
+		match_BRSDefinition___LeftSquareBracketKeyword_5_2_0_RightSquareBracketKeyword_5_2_3__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getBRSDefinitionAccess().getLeftSquareBracketKeyword_5_2_0()), new TokenAlias(false, false, grammarAccess.getBRSDefinitionAccess().getRightSquareBracketKeyword_5_2_3()));
 		match_NodeExpressionCall___LeftSquareBracketKeyword_1_0_RightSquareBracketKeyword_1_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getNodeExpressionCallAccess().getLeftSquareBracketKeyword_1_0()), new TokenAlias(false, false, grammarAccess.getNodeExpressionCallAccess().getRightSquareBracketKeyword_1_2()));
 		match_PrimaryExpression_LeftParenthesisKeyword_0_0_a = new TokenAlias(true, true, grammarAccess.getPrimaryExpressionAccess().getLeftParenthesisKeyword_0_0());
 		match_PrimaryExpression_LeftParenthesisKeyword_0_0_p = new TokenAlias(true, false, grammarAccess.getPrimaryExpressionAccess().getLeftParenthesisKeyword_0_0());
@@ -45,7 +49,11 @@ public class BDSLSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if (match_NodeExpressionCall___LeftSquareBracketKeyword_1_0_RightSquareBracketKeyword_1_2__q.equals(syntax))
+			if (match_BRSDefinition___LeftSquareBracketKeyword_3_2_0_RightSquareBracketKeyword_3_2_3__q.equals(syntax))
+				emit_BRSDefinition___LeftSquareBracketKeyword_3_2_0_RightSquareBracketKeyword_3_2_3__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_BRSDefinition___LeftSquareBracketKeyword_5_2_0_RightSquareBracketKeyword_5_2_3__q.equals(syntax))
+				emit_BRSDefinition___LeftSquareBracketKeyword_5_2_0_RightSquareBracketKeyword_5_2_3__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_NodeExpressionCall___LeftSquareBracketKeyword_1_0_RightSquareBracketKeyword_1_2__q.equals(syntax))
 				emit_NodeExpressionCall___LeftSquareBracketKeyword_1_0_RightSquareBracketKeyword_1_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_PrimaryExpression_LeftParenthesisKeyword_0_0_a.equals(syntax))
 				emit_PrimaryExpression_LeftParenthesisKeyword_0_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
@@ -55,6 +63,31 @@ public class BDSLSyntacticSequencer extends AbstractSyntacticSequencer {
 		}
 	}
 
+	/**
+	 * Ambiguous syntax:
+	 *     ('[' ']')?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) 'brs' '{' 'agents' '=' (ambiguity) ',' 'rules' '=' '[' ',' agents+=RuleVarReference
+	 *     (rule start) 'brs' '{' 'agents' '=' (ambiguity) ',' 'rules' '=' '[' rules+=RuleVarReference
+	 *     (rule start) 'brs' '{' 'agents' '=' (ambiguity) ',' 'rules' '=' ('[' ']')? '}' (rule start)
+	 */
+	protected void emit_BRSDefinition___LeftSquareBracketKeyword_3_2_0_RightSquareBracketKeyword_3_2_3__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ('[' ']')?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) 'brs' '{' 'agents' '=' ('[' ']')? ',' 'rules' '=' (ambiguity) '}' (rule start)
+	 *     agents+=BigraphVarReference ']' ',' 'rules' '=' (ambiguity) '}' (rule end)
+	 */
+	protected void emit_BRSDefinition___LeftSquareBracketKeyword_5_2_0_RightSquareBracketKeyword_5_2_3__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
 	/**
 	 * Ambiguous syntax:
 	 *     ('[' ']')?
@@ -71,7 +104,7 @@ public class BDSLSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     '('*
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     (rule start) (ambiguity) 'id' '(' index=INT_SITE
+	 *     (rule start) (ambiguity) 'id' '(' index=INT
 	 *     (rule start) (ambiguity) 'val' name=ID
 	 *     (rule start) (ambiguity) value=[ControlVariable|FQN]
 	 *     (rule start) (ambiguity) value=[LocalVarDecl|BigraphVarReferenceID]

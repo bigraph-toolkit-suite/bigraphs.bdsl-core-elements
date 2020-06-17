@@ -13,7 +13,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="BRSModelImport">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="importedNamespace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AbstractElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sig" eType="#//Signature"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MainElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" upperBound="-1"
         eType="#//MainDeclaration" containment="true"/>
@@ -26,11 +29,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="ControlVariable">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//ControlType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="arity" eType="#//EInt"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EInt">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="arity" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NameConstant" eSuperTypes="#//LinkNames">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -44,16 +43,23 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LVD2" eSuperTypes="#//AbstractBigraphDeclaration"/>
   <eClassifiers xsi:type="ecore:EClass" name="LocalVarDecl" eSuperTypes="#//AbstractElement #//LVD2">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//ControlVariable"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="definition" upperBound="-1"
         eType="#//BigraphExpression" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="sig" eType="#//Signature"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="siteArgs" upperBound="-1"
         eType="#//SiteVars" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LocalRuleDecl" eSuperTypes="#//AbstractElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="redex" eType="#//BigraphExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reactum" eType="#//BigraphExpression"
+        containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BigraphVarReference" eSuperTypes="#//AbstractBigraphDeclaration #//AbstractMainStatements #//PrintableExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//LocalVarDecl"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RuleVarReference">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//LocalRuleDecl"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractBigraphDeclaration" eSuperTypes="#//BigraphExpression"/>
   <eClassifiers xsi:type="ecore:EClass" name="NodeExpressionCall" eSuperTypes="#//AbstractBigraphDeclaration">
@@ -67,6 +73,12 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractMainStatements"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BRSDefinition" eSuperTypes="#//AbstractMainStatements">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="agents" upperBound="-1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rules" upperBound="-1"
+        eType="#//RuleVarReference" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PrintLn" eSuperTypes="#//AbstractMainStatements">
     <eStructuralFeatures xsi:type="ecore:EReference" name="text" eType="#//PrintableExpression"
         containment="true"/>

@@ -73,25 +73,25 @@ public interface ControlVariable extends EObject
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Arity</b></em>' containment reference.
+   * Returns the value of the '<em><b>Arity</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Arity</em>' containment reference.
-   * @see #setArity(EInt)
+   * @return the value of the '<em>Arity</em>' attribute.
+   * @see #setArity(int)
    * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLPackage#getControlVariable_Arity()
-   * @model containment="true"
+   * @model
    * @generated
    */
-  EInt getArity();
+  int getArity();
 
   /**
-   * Sets the value of the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable#getArity <em>Arity</em>}' containment reference.
+   * Sets the value of the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable#getArity <em>Arity</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Arity</em>' containment reference.
+   * @param value the new value of the '<em>Arity</em>' attribute.
    * @see #getArity()
    * @generated
    */
-  void setArity(EInt value);
+  void setArity(int value);
 
 } // ControlVariable

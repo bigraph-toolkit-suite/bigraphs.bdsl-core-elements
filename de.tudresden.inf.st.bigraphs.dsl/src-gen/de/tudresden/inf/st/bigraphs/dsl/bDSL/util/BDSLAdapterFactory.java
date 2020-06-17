@@ -106,11 +106,6 @@ public class BDSLAdapterFactory extends AdapterFactoryImpl
         return createControlVariableAdapter();
       }
       @Override
-      public Adapter caseEInt(EInt object)
-      {
-        return createEIntAdapter();
-      }
-      @Override
       public Adapter caseNameConstant(NameConstant object)
       {
         return createNameConstantAdapter();
@@ -141,9 +136,19 @@ public class BDSLAdapterFactory extends AdapterFactoryImpl
         return createLocalVarDeclAdapter();
       }
       @Override
+      public Adapter caseLocalRuleDecl(LocalRuleDecl object)
+      {
+        return createLocalRuleDeclAdapter();
+      }
+      @Override
       public Adapter caseBigraphVarReference(BigraphVarReference object)
       {
         return createBigraphVarReferenceAdapter();
+      }
+      @Override
+      public Adapter caseRuleVarReference(RuleVarReference object)
+      {
+        return createRuleVarReferenceAdapter();
       }
       @Override
       public Adapter caseAbstractBigraphDeclaration(AbstractBigraphDeclaration object)
@@ -169,6 +174,11 @@ public class BDSLAdapterFactory extends AdapterFactoryImpl
       public Adapter caseAbstractMainStatements(AbstractMainStatements object)
       {
         return createAbstractMainStatementsAdapter();
+      }
+      @Override
+      public Adapter caseBRSDefinition(BRSDefinition object)
+      {
+        return createBRSDefinitionAdapter();
       }
       @Override
       public Adapter casePrintLn(PrintLn object)
@@ -308,21 +318,6 @@ public class BDSLAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.EInt <em>EInt</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.EInt
-   * @generated
-   */
-  public Adapter createEIntAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.NameConstant <em>Name Constant</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -413,6 +408,21 @@ public class BDSLAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalRuleDecl <em>Local Rule Decl</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalRuleDecl
+   * @generated
+   */
+  public Adapter createLocalRuleDeclAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphVarReference <em>Bigraph Var Reference</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -423,6 +433,21 @@ public class BDSLAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createBigraphVarReferenceAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.RuleVarReference <em>Rule Var Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.RuleVarReference
+   * @generated
+   */
+  public Adapter createRuleVarReferenceAdapter()
   {
     return null;
   }
@@ -498,6 +523,21 @@ public class BDSLAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createAbstractMainStatementsAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.BRSDefinition <em>BRS Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.BRSDefinition
+   * @generated
+   */
+  public Adapter createBRSDefinitionAdapter()
   {
     return null;
   }

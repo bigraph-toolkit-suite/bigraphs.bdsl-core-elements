@@ -72,19 +72,21 @@ public class BDSLFactoryImpl extends EFactoryImpl implements BDSLFactory
       case BDSLPackage.MAIN_ELEMENT: return createMainElement();
       case BDSLPackage.SIGNATURE: return createSignature();
       case BDSLPackage.CONTROL_VARIABLE: return createControlVariable();
-      case BDSLPackage.EINT: return createEInt();
       case BDSLPackage.NAME_CONSTANT: return createNameConstant();
       case BDSLPackage.LINK_NAMES: return createLinkNames();
       case BDSLPackage.SITE_VARS: return createSiteVars();
       case BDSLPackage.SITE: return createSite();
       case BDSLPackage.LVD2: return createLVD2();
       case BDSLPackage.LOCAL_VAR_DECL: return createLocalVarDecl();
+      case BDSLPackage.LOCAL_RULE_DECL: return createLocalRuleDecl();
       case BDSLPackage.BIGRAPH_VAR_REFERENCE: return createBigraphVarReference();
+      case BDSLPackage.RULE_VAR_REFERENCE: return createRuleVarReference();
       case BDSLPackage.ABSTRACT_BIGRAPH_DECLARATION: return createAbstractBigraphDeclaration();
       case BDSLPackage.NODE_EXPRESSION_CALL: return createNodeExpressionCall();
       case BDSLPackage.BIGRAPH_EXPRESSION: return createBigraphExpression();
       case BDSLPackage.MAIN_DECLARATION: return createMainDeclaration();
       case BDSLPackage.ABSTRACT_MAIN_STATEMENTS: return createAbstractMainStatements();
+      case BDSLPackage.BRS_DEFINITION: return createBRSDefinition();
       case BDSLPackage.PRINT_LN: return createPrintLn();
       case BDSLPackage.PRINTABLE_EXPRESSION: return createPrintableExpression();
       case BDSLPackage.PLUS: return createPlus();
@@ -219,18 +221,6 @@ public class BDSLFactoryImpl extends EFactoryImpl implements BDSLFactory
    * @generated
    */
   @Override
-  public EInt createEInt()
-  {
-    EIntImpl eInt = new EIntImpl();
-    return eInt;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public NameConstant createNameConstant()
   {
     NameConstantImpl nameConstant = new NameConstantImpl();
@@ -303,10 +293,34 @@ public class BDSLFactoryImpl extends EFactoryImpl implements BDSLFactory
    * @generated
    */
   @Override
+  public LocalRuleDecl createLocalRuleDecl()
+  {
+    LocalRuleDeclImpl localRuleDecl = new LocalRuleDeclImpl();
+    return localRuleDecl;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public BigraphVarReference createBigraphVarReference()
   {
     BigraphVarReferenceImpl bigraphVarReference = new BigraphVarReferenceImpl();
     return bigraphVarReference;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public RuleVarReference createRuleVarReference()
+  {
+    RuleVarReferenceImpl ruleVarReference = new RuleVarReferenceImpl();
+    return ruleVarReference;
   }
 
   /**
@@ -367,6 +381,18 @@ public class BDSLFactoryImpl extends EFactoryImpl implements BDSLFactory
   {
     AbstractMainStatementsImpl abstractMainStatements = new AbstractMainStatementsImpl();
     return abstractMainStatements;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public BRSDefinition createBRSDefinition()
+  {
+    BRSDefinitionImpl brsDefinition = new BRSDefinitionImpl();
+    return brsDefinition;
   }
 
   /**

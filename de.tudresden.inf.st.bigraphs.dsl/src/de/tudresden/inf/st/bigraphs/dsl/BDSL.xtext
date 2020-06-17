@@ -9,7 +9,7 @@ BRSModel:
 	signature+=(Signature)*
 	// unordered group
 	((statements+=(AbstractElement)*) & (main=MainElement))
-	
+
 	//brs etc.
 ;
 
@@ -24,16 +24,17 @@ FqnWithWildCard:
 
 BigraphVarReferenceID hidden():
 	('$' FQN); //returns ecore::EString 
-EInt returns ecore::EInt:
-	'-'? INT;
+//EInt returns ecore::EInt:
+//	'-'? INT;
 
-terminal INT_SITE returns ecore::EInt: ('1'..'9')+;
 
+//terminal INT_POSITIVE returns ecore::EInt: ('1'..'9')+;
+//terminal INT_SITE returns ecore::EInt: ('1'..'9');
 EString returns ecore::EString:
 	STRING | ID;
 
 AbstractElement:
-	LocalVarDecl
+	LocalVarDecl | LocalRuleDecl
 	// and rules
 ;
 
@@ -49,10 +50,13 @@ Signature:
 
 ControlDef returns ControlVariable:
 //	{ControlDef}
-	{ControlVariable} type=ControlType? 'ctrl' name=ID 'arity' arity=ArityValue ';';
+	{ControlVariable} type=ControlType? 'ctrl' name=ID 'arity' arity=INT ';';
 
-ArityValue returns EInt:
-	value=EInt;
+	//ArityValue returns ecore::EInt:
+//	INT
+//;
+
+//	value=EInt;
 
 //ControlVariable returns bigraph::BNode:
 //	name=ID;
@@ -63,13 +67,12 @@ NameConstant:
 LinkNames:
 	(NameConstant) | (NameConstant ",");
 
-//TODO: change to linkNamevars or so
+	//TODO: change to linkNamevars or so
 SiteVars:
 	name=ID;
 
 Site:
-	'id' '(' index=INT_SITE ')'
-;
+	'id' '(' index=INT ')';
 	//(args+=LVD2)*
 LVD2:
 	{LocalVarDecl} "val" name=ID ':' type=[ControlVariable|FQN] '=' "{" definition+=(BigraphExpression)* "}";
@@ -77,7 +80,8 @@ LVD2:
 	//
 LocalVarDecl:
 //	('(' args+=DeclaredParameter (',' args+=DeclaredParameter)* ')')?
-	"val" {LocalVarDecl} (name=ID ("(" sig=[Signature] ")")? (("[" siteArgs+=SiteVars (',' siteArgs+=SiteVars)* "]")? ':' type=[ControlVariable|FQN])?
+	"val" {LocalVarDecl} (name=ID ("(" sig=[Signature] ")")? (("[" siteArgs+=SiteVars (',' siteArgs+=SiteVars)* "]")? ':'
+	type=[ControlVariable|FQN])?
 	("="
 	"{"
 	//		(args+=LocalVarDecl)*
@@ -86,7 +90,23 @@ LocalVarDecl:
 	//		definition=BigraphExpression ";"
 );
 
-	//// "var" name=ID ":" type=Type ("=" init=Expr)?;
+LocalRuleDecl:
+	"react" {LocalRuleDecl} name=ID ("(" sig=[Signature] ")")?
+	("="
+	"{"
+	//		(args+=LocalVarDecl)*
+	redex=BigraphExpression
+	"}"
+	','
+	'{'
+	reactum=BigraphExpression
+	'}');
+
+	//BigraphExpressionOrBigraphReference:
+//	BigraphVarReference
+//;
+
+//// "var" name=ID ":" type=Type ("=" init=Expr)?;
 //LocalVarDecl:
 ////	('(' args+=DeclaredParameter (',' args+=DeclaredParameter)* ')')?
 //	{LocalVarDecl} "var" name=ID ("(" sig=[Signature] ")")? ("[" siteArgs+=SiteVars (',' siteArgs+=SiteVars)* "]")? ("="
@@ -94,19 +114,19 @@ LocalVarDecl:
 BigraphVarReference:
 	value=[LocalVarDecl|BigraphVarReferenceID];
 
-	////(DeclaredParameter | 
+RuleVarReference:
+	value=[LocalRuleDecl|BigraphVarReferenceID];
+
 AbstractBigraphDeclaration:
-//	NodeExpression //| BigraphVarReference
 	BigraphVarReference | NodeExpressionCall | LVD2 | Site;
 
-NodeExpressionCall :
+NodeExpressionCall:
 	value=[ControlVariable|FQN] ('[' links+=LinkNames* ']')?;
 
 BigraphExpression:
-	Addition
-;
+	Addition;
 
-//Addition returns BigraphExpression:
+	//Addition returns BigraphExpression:
 //	Multiplication (({Plus.left=current} '+' | {Minus.left=current} '||') right=Multiplication)*;
 //
 //Multiplication returns BigraphExpression:
@@ -128,29 +148,33 @@ PrimaryExpression returns BigraphExpression:
 //terminal STRING: '"' -> '"';
 //terminal WS: (' '|'\t')+;
 //terminal ANY_OTHER: .;m
-
 MainDeclaration:
 	{MainDeclaration} definition=AbstractMainStatements ';';
 
 AbstractMainStatements:
-	BigraphVarReference | PrintLn;
+	BigraphVarReference | BRSDefinition | PrintLn;
+
+BRSDefinition:
+	{BRSDefinition} 'brs' '{'
+	('agents' '=' ("[" agents+=BigraphVarReference? (',' agents+=BigraphVarReference)* "]")?) ','
+	('rules' '=' ("[" rules+=RuleVarReference? (',' agents+=RuleVarReference)* "]")?)
+	'}';
 
 PrintLn:
 	{PrintLn} 'println' '(' text=(PrintableExpression) (',' mode=OutputModeModel)? ')';
 
 PrintableExpression:
-	({StringLiteral} value=STRING) | (BigraphVarReference)
-;
+	({StringLiteral} value=STRING) | (BigraphVarReference);
 
 enum BinaryParallelOperator:
-	UNSET | MERGE='|' | PARALLEL='||'
-;
+	UNSET | MERGE='|' | PARALLEL='||';
+
 enum BinaryNestingOperator:
 	UNSET2 | NESTING='-' | COMPOSITION='*' //we cannot use a simple '.' right now
 ;
+
 enum ControlType:
 	ATOMIC='atomic' | ACTIVE='active' | PASSIVE='passive';
-	
+
 enum OutputModeModel:
-	INSTANCE_MODEL='xmi' | META_MODEL='ecore'
-;
+	INSTANCE_MODEL='xmi' | META_MODEL='ecore';

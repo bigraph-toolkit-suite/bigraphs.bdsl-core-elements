@@ -10,6 +10,13 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Abstract Element</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <p>
+ * The following features are supported:
+ * </p>
+ * <ul>
+ *   <li>{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.AbstractElement#getName <em>Name</em>}</li>
+ *   <li>{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.AbstractElement#getSig <em>Sig</em>}</li>
+ * </ul>
  *
  * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLPackage#getAbstractElement()
  * @model
@@ -17,4 +24,48 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface AbstractElement extends EObject
 {
+  /**
+   * Returns the value of the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Name</em>' attribute.
+   * @see #setName(String)
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLPackage#getAbstractElement_Name()
+   * @model
+   * @generated
+   */
+  String getName();
+
+  /**
+   * Sets the value of the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.AbstractElement#getName <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Name</em>' attribute.
+   * @see #getName()
+   * @generated
+   */
+  void setName(String value);
+
+  /**
+   * Returns the value of the '<em><b>Sig</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Sig</em>' reference.
+   * @see #setSig(Signature)
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLPackage#getAbstractElement_Sig()
+   * @model
+   * @generated
+   */
+  Signature getSig();
+
+  /**
+   * Sets the value of the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.AbstractElement#getSig <em>Sig</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Sig</em>' reference.
+   * @see #getSig()
+   * @generated
+   */
+  void setSig(Signature value);
+
 } // AbstractElement

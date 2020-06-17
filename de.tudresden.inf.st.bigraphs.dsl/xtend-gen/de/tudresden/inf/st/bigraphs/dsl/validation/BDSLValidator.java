@@ -8,6 +8,7 @@ import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLPackage;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphVarReference;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalVarDecl;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.Signature;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.Site;
 import de.tudresden.inf.st.bigraphs.dsl.validation.AbstractBDSLValidator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -28,6 +29,18 @@ public class BDSLValidator extends AbstractBDSLValidator {
   public static final String INVALID_NAME = "invalidName";
   
   public static final String CYCLIC_VARIABLE_USAGE = "cyclicBigraphVariable";
+  
+  public static final String SITE_INDEX_IS_POSITIVE = "siteIndexIsPositive";
+  
+  @Check
+  public void siteIndexIsPositive(final Site siteExpression) {
+    int _index = siteExpression.getIndex();
+    boolean _lessEqualsThan = (_index <= 0);
+    if (_lessEqualsThan) {
+      this.warning("The index of a site must be a positive integer", BDSLPackage.Literals.SITE__INDEX, 
+        BDSLValidator.SITE_INDEX_IS_POSITIVE);
+    }
+  }
   
   @Check
   public void checkNoCycleInEntityHierarchy(final BigraphVarReference varDecl) {

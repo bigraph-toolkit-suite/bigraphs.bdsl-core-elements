@@ -156,32 +156,17 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 		//FQN
 		public RuleCall getFQNParserRuleCall_1() { return cFQNParserRuleCall_1; }
 	}
-	public class EIntElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.tudresden.inf.st.bigraphs.dsl.BDSL.EInt");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cHyphenMinusKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final RuleCall cINTTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
-		
-		////returns ecore::EString 
-		//EInt ecore::EInt:
-		//	'-'? INT;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'-'? INT
-		public Group getGroup() { return cGroup; }
-		
-		//'-'?
-		public Keyword getHyphenMinusKeyword_0() { return cHyphenMinusKeyword_0; }
-		
-		//INT
-		public RuleCall getINTTerminalRuleCall_1() { return cINTTerminalRuleCall_1; }
-	}
 	public class EStringElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.tudresden.inf.st.bigraphs.dsl.BDSL.EString");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cSTRINGTerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cIDTerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
+		////returns ecore::EString 
+		////EInt returns ecore::EInt:
+		////	'-'? INT;
+		////terminal INT_POSITIVE returns ecore::EInt: ('1'..'9')+;
+		////terminal INT_SITE returns ecore::EInt: ('1'..'9');
 		//EString:
 		//	STRING | ID;
 		@Override public ParserRule getRule() { return rule; }
@@ -197,16 +182,24 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	public class AbstractElementElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.tudresden.inf.st.bigraphs.dsl.BDSL.AbstractElement");
-		private final RuleCall cLocalVarDeclParserRuleCall = (RuleCall)rule.eContents().get(1);
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cLocalVarDeclParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cLocalRuleDeclParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//AbstractElement:
-		//	LocalVarDecl
+		//	LocalVarDecl | LocalRuleDecl
 		//	// and rules
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
+		//LocalVarDecl | LocalRuleDecl
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
 		//LocalVarDecl
-		public RuleCall getLocalVarDeclParserRuleCall() { return cLocalVarDeclParserRuleCall; }
+		public RuleCall getLocalVarDeclParserRuleCall_0() { return cLocalVarDeclParserRuleCall_0; }
+		
+		//LocalRuleDecl
+		public RuleCall getLocalRuleDeclParserRuleCall_1() { return cLocalRuleDeclParserRuleCall_1; }
 	}
 	public class MainElementElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.tudresden.inf.st.bigraphs.dsl.BDSL.MainElement");
@@ -312,14 +305,14 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cNameIDTerminalRuleCall_3_0 = (RuleCall)cNameAssignment_3.eContents().get(0);
 		private final Keyword cArityKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		private final Assignment cArityAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cArityArityValueParserRuleCall_5_0 = (RuleCall)cArityAssignment_5.eContents().get(0);
+		private final RuleCall cArityINTTerminalRuleCall_5_0 = (RuleCall)cArityAssignment_5.eContents().get(0);
 		private final Keyword cSemicolonKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//ControlDef ControlVariable:
-		//	{ControlVariable} type=ControlType? 'ctrl' name=ID 'arity' arity=ArityValue ';';
+		//	{ControlVariable} type=ControlType? 'ctrl' name=ID 'arity' arity=INT ';';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{ControlVariable} type=ControlType? 'ctrl' name=ID 'arity' arity=ArityValue ';'
+		//{ControlVariable} type=ControlType? 'ctrl' name=ID 'arity' arity=INT ';'
 		public Group getGroup() { return cGroup; }
 		
 		//{ControlVariable}
@@ -343,35 +336,24 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 		//'arity'
 		public Keyword getArityKeyword_4() { return cArityKeyword_4; }
 		
-		//arity=ArityValue
+		//arity=INT
 		public Assignment getArityAssignment_5() { return cArityAssignment_5; }
 		
-		//ArityValue
-		public RuleCall getArityArityValueParserRuleCall_5_0() { return cArityArityValueParserRuleCall_5_0; }
+		//INT
+		public RuleCall getArityINTTerminalRuleCall_5_0() { return cArityINTTerminalRuleCall_5_0; }
 		
 		//';'
 		public Keyword getSemicolonKeyword_6() { return cSemicolonKeyword_6; }
-	}
-	public class ArityValueElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.tudresden.inf.st.bigraphs.dsl.BDSL.ArityValue");
-		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cValueEIntParserRuleCall_0 = (RuleCall)cValueAssignment.eContents().get(0);
-		
-		//ArityValue EInt:
-		//	value=EInt;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//value=EInt
-		public Assignment getValueAssignment() { return cValueAssignment; }
-		
-		//EInt
-		public RuleCall getValueEIntParserRuleCall_0() { return cValueEIntParserRuleCall_0; }
 	}
 	public class NameConstantElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.tudresden.inf.st.bigraphs.dsl.BDSL.NameConstant");
 		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cValueEStringParserRuleCall_0 = (RuleCall)cValueAssignment.eContents().get(0);
 		
+		////ArityValue returns ecore::EInt:
+		////	INT
+		////;
+		////	value=EInt;
 		////ControlVariable returns bigraph::BNode:
 		////	name=ID;
 		//NameConstant:
@@ -433,14 +415,14 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cIdKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cIndexAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cIndexINT_SITETerminalRuleCall_2_0 = (RuleCall)cIndexAssignment_2.eContents().get(0);
+		private final RuleCall cIndexINTTerminalRuleCall_2_0 = (RuleCall)cIndexAssignment_2.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//Site:
-		//	'id' '(' index=INT_SITE ')';
+		//	'id' '(' index=INT ')';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'id' '(' index=INT_SITE ')'
+		//'id' '(' index=INT ')'
 		public Group getGroup() { return cGroup; }
 		
 		//'id'
@@ -449,11 +431,11 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 		//'('
 		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
 		
-		//index=INT_SITE
+		//index=INT
 		public Assignment getIndexAssignment_2() { return cIndexAssignment_2; }
 		
-		//INT_SITE
-		public RuleCall getIndexINT_SITETerminalRuleCall_2_0() { return cIndexINT_SITETerminalRuleCall_2_0; }
+		//INT
+		public RuleCall getIndexINTTerminalRuleCall_2_0() { return cIndexINTTerminalRuleCall_2_0; }
 		
 		//')'
 		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
@@ -668,12 +650,121 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_2_3_3() { return cRightCurlyBracketKeyword_2_3_3; }
 	}
+	public class LocalRuleDeclElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.tudresden.inf.st.bigraphs.dsl.BDSL.LocalRuleDecl");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cReactKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Action cLocalRuleDeclAction_1 = (Action)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cLeftParenthesisKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cSigAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final CrossReference cSigSignatureCrossReference_3_1_0 = (CrossReference)cSigAssignment_3_1.eContents().get(0);
+		private final RuleCall cSigSignatureIDTerminalRuleCall_3_1_0_1 = (RuleCall)cSigSignatureCrossReference_3_1_0.eContents().get(1);
+		private final Keyword cRightParenthesisKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
+		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
+		private final Keyword cEqualsSignKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_4_1 = (Keyword)cGroup_4.eContents().get(1);
+		private final Assignment cRedexAssignment_4_2 = (Assignment)cGroup_4.eContents().get(2);
+		private final RuleCall cRedexBigraphExpressionParserRuleCall_4_2_0 = (RuleCall)cRedexAssignment_4_2.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_4_3 = (Keyword)cGroup_4.eContents().get(3);
+		private final Keyword cCommaKeyword_4_4 = (Keyword)cGroup_4.eContents().get(4);
+		private final Keyword cLeftCurlyBracketKeyword_4_5 = (Keyword)cGroup_4.eContents().get(5);
+		private final Assignment cReactumAssignment_4_6 = (Assignment)cGroup_4.eContents().get(6);
+		private final RuleCall cReactumBigraphExpressionParserRuleCall_4_6_0 = (RuleCall)cReactumAssignment_4_6.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_4_7 = (Keyword)cGroup_4.eContents().get(7);
+		
+		//LocalRuleDecl:
+		//	"react" {LocalRuleDecl} name=ID ("(" sig=[Signature] ")")? ("="
+		//	"{"
+		//	//		(args+=LocalVarDecl)*
+		//	redex=BigraphExpression
+		//	"}"
+		//	','
+		//	'{'
+		//	reactum=BigraphExpression
+		//	'}');
+		@Override public ParserRule getRule() { return rule; }
+		
+		//"react" {LocalRuleDecl} name=ID ("(" sig=[Signature] ")")? ("=" "{" //		(args+=LocalVarDecl)*
+		//redex=BigraphExpression "}" ',' '{' reactum=BigraphExpression '}')
+		public Group getGroup() { return cGroup; }
+		
+		//"react"
+		public Keyword getReactKeyword_0() { return cReactKeyword_0; }
+		
+		//{LocalRuleDecl}
+		public Action getLocalRuleDeclAction_1() { return cLocalRuleDeclAction_1; }
+		
+		//name=ID
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
+		
+		//("(" sig=[Signature] ")")?
+		public Group getGroup_3() { return cGroup_3; }
+		
+		//"("
+		public Keyword getLeftParenthesisKeyword_3_0() { return cLeftParenthesisKeyword_3_0; }
+		
+		//sig=[Signature]
+		public Assignment getSigAssignment_3_1() { return cSigAssignment_3_1; }
+		
+		//[Signature]
+		public CrossReference getSigSignatureCrossReference_3_1_0() { return cSigSignatureCrossReference_3_1_0; }
+		
+		//ID
+		public RuleCall getSigSignatureIDTerminalRuleCall_3_1_0_1() { return cSigSignatureIDTerminalRuleCall_3_1_0_1; }
+		
+		//")"
+		public Keyword getRightParenthesisKeyword_3_2() { return cRightParenthesisKeyword_3_2; }
+		
+		//("=" "{" //		(args+=LocalVarDecl)*
+		//redex=BigraphExpression "}" ',' '{' reactum=BigraphExpression '}')
+		public Group getGroup_4() { return cGroup_4; }
+		
+		//"="
+		public Keyword getEqualsSignKeyword_4_0() { return cEqualsSignKeyword_4_0; }
+		
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_4_1() { return cLeftCurlyBracketKeyword_4_1; }
+		
+		////		(args+=LocalVarDecl)*
+		//redex=BigraphExpression
+		public Assignment getRedexAssignment_4_2() { return cRedexAssignment_4_2; }
+		
+		//BigraphExpression
+		public RuleCall getRedexBigraphExpressionParserRuleCall_4_2_0() { return cRedexBigraphExpressionParserRuleCall_4_2_0; }
+		
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_4_3() { return cRightCurlyBracketKeyword_4_3; }
+		
+		//','
+		public Keyword getCommaKeyword_4_4() { return cCommaKeyword_4_4; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_4_5() { return cLeftCurlyBracketKeyword_4_5; }
+		
+		//reactum=BigraphExpression
+		public Assignment getReactumAssignment_4_6() { return cReactumAssignment_4_6; }
+		
+		//BigraphExpression
+		public RuleCall getReactumBigraphExpressionParserRuleCall_4_6_0() { return cReactumBigraphExpressionParserRuleCall_4_6_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_4_7() { return cRightCurlyBracketKeyword_4_7; }
+	}
 	public class BigraphVarReferenceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.tudresden.inf.st.bigraphs.dsl.BDSL.BigraphVarReference");
 		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
 		private final CrossReference cValueLocalVarDeclCrossReference_0 = (CrossReference)cValueAssignment.eContents().get(0);
 		private final RuleCall cValueLocalVarDeclBigraphVarReferenceIDParserRuleCall_0_1 = (RuleCall)cValueLocalVarDeclCrossReference_0.eContents().get(1);
 		
+		////BigraphExpressionOrBigraphReference:
+		////	BigraphVarReference
+		////;
 		////// "var" name=ID ":" type=Type ("=" init=Expr)?;
 		////LocalVarDecl:
 		//////	('(' args+=DeclaredParameter (',' args+=DeclaredParameter)* ')')?
@@ -692,6 +783,25 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 		//BigraphVarReferenceID
 		public RuleCall getValueLocalVarDeclBigraphVarReferenceIDParserRuleCall_0_1() { return cValueLocalVarDeclBigraphVarReferenceIDParserRuleCall_0_1; }
 	}
+	public class RuleVarReferenceElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.tudresden.inf.st.bigraphs.dsl.BDSL.RuleVarReference");
+		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
+		private final CrossReference cValueLocalRuleDeclCrossReference_0 = (CrossReference)cValueAssignment.eContents().get(0);
+		private final RuleCall cValueLocalRuleDeclBigraphVarReferenceIDParserRuleCall_0_1 = (RuleCall)cValueLocalRuleDeclCrossReference_0.eContents().get(1);
+		
+		//RuleVarReference:
+		//	value=[LocalRuleDecl|BigraphVarReferenceID];
+		@Override public ParserRule getRule() { return rule; }
+		
+		//value=[LocalRuleDecl|BigraphVarReferenceID]
+		public Assignment getValueAssignment() { return cValueAssignment; }
+		
+		//[LocalRuleDecl|BigraphVarReferenceID]
+		public CrossReference getValueLocalRuleDeclCrossReference_0() { return cValueLocalRuleDeclCrossReference_0; }
+		
+		//BigraphVarReferenceID
+		public RuleCall getValueLocalRuleDeclBigraphVarReferenceIDParserRuleCall_0_1() { return cValueLocalRuleDeclBigraphVarReferenceIDParserRuleCall_0_1; }
+	}
 	public class AbstractBigraphDeclarationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.tudresden.inf.st.bigraphs.dsl.BDSL.AbstractBigraphDeclaration");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -700,16 +810,13 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cLVD2ParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cSiteParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
-		//////(DeclaredParameter | 
 		//AbstractBigraphDeclaration:
 		//	BigraphVarReference | NodeExpressionCall | LVD2 | Site;
 		@Override public ParserRule getRule() { return rule; }
 		
-		////	NodeExpression //| BigraphVarReference
 		//BigraphVarReference | NodeExpressionCall | LVD2 | Site
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		////	NodeExpression //| BigraphVarReference
 		//BigraphVarReference
 		public RuleCall getBigraphVarReferenceParserRuleCall_0() { return cBigraphVarReferenceParserRuleCall_0; }
 		
@@ -936,20 +1043,154 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.tudresden.inf.st.bigraphs.dsl.BDSL.AbstractMainStatements");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cBigraphVarReferenceParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cPrintLnParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cBRSDefinitionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cPrintLnParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//AbstractMainStatements:
-		//	BigraphVarReference | PrintLn;
+		//	BigraphVarReference | BRSDefinition | PrintLn;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//BigraphVarReference | PrintLn
+		//BigraphVarReference | BRSDefinition | PrintLn
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//BigraphVarReference
 		public RuleCall getBigraphVarReferenceParserRuleCall_0() { return cBigraphVarReferenceParserRuleCall_0; }
 		
+		//BRSDefinition
+		public RuleCall getBRSDefinitionParserRuleCall_1() { return cBRSDefinitionParserRuleCall_1; }
+		
 		//PrintLn
-		public RuleCall getPrintLnParserRuleCall_1() { return cPrintLnParserRuleCall_1; }
+		public RuleCall getPrintLnParserRuleCall_2() { return cPrintLnParserRuleCall_2; }
+	}
+	public class BRSDefinitionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.tudresden.inf.st.bigraphs.dsl.BDSL.BRSDefinition");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cBRSDefinitionAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cBrsKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cAgentsKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_3_1 = (Keyword)cGroup_3.eContents().get(1);
+		private final Group cGroup_3_2 = (Group)cGroup_3.eContents().get(2);
+		private final Keyword cLeftSquareBracketKeyword_3_2_0 = (Keyword)cGroup_3_2.eContents().get(0);
+		private final Assignment cAgentsAssignment_3_2_1 = (Assignment)cGroup_3_2.eContents().get(1);
+		private final RuleCall cAgentsBigraphVarReferenceParserRuleCall_3_2_1_0 = (RuleCall)cAgentsAssignment_3_2_1.eContents().get(0);
+		private final Group cGroup_3_2_2 = (Group)cGroup_3_2.eContents().get(2);
+		private final Keyword cCommaKeyword_3_2_2_0 = (Keyword)cGroup_3_2_2.eContents().get(0);
+		private final Assignment cAgentsAssignment_3_2_2_1 = (Assignment)cGroup_3_2_2.eContents().get(1);
+		private final RuleCall cAgentsBigraphVarReferenceParserRuleCall_3_2_2_1_0 = (RuleCall)cAgentsAssignment_3_2_2_1.eContents().get(0);
+		private final Keyword cRightSquareBracketKeyword_3_2_3 = (Keyword)cGroup_3_2.eContents().get(3);
+		private final Keyword cCommaKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
+		private final Keyword cRulesKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_5_1 = (Keyword)cGroup_5.eContents().get(1);
+		private final Group cGroup_5_2 = (Group)cGroup_5.eContents().get(2);
+		private final Keyword cLeftSquareBracketKeyword_5_2_0 = (Keyword)cGroup_5_2.eContents().get(0);
+		private final Assignment cRulesAssignment_5_2_1 = (Assignment)cGroup_5_2.eContents().get(1);
+		private final RuleCall cRulesRuleVarReferenceParserRuleCall_5_2_1_0 = (RuleCall)cRulesAssignment_5_2_1.eContents().get(0);
+		private final Group cGroup_5_2_2 = (Group)cGroup_5_2.eContents().get(2);
+		private final Keyword cCommaKeyword_5_2_2_0 = (Keyword)cGroup_5_2_2.eContents().get(0);
+		private final Assignment cAgentsAssignment_5_2_2_1 = (Assignment)cGroup_5_2_2.eContents().get(1);
+		private final RuleCall cAgentsRuleVarReferenceParserRuleCall_5_2_2_1_0 = (RuleCall)cAgentsAssignment_5_2_2_1.eContents().get(0);
+		private final Keyword cRightSquareBracketKeyword_5_2_3 = (Keyword)cGroup_5_2.eContents().get(3);
+		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		
+		//BRSDefinition:
+		//	{BRSDefinition} 'brs' '{' ('agents' '=' ("[" agents+=BigraphVarReference? (',' agents+=BigraphVarReference)* "]")?)
+		//	',' ('rules' '=' ("[" rules+=RuleVarReference? (',' agents+=RuleVarReference)* "]")?)
+		//	'}';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{BRSDefinition} 'brs' '{' ('agents' '=' ("[" agents+=BigraphVarReference? (',' agents+=BigraphVarReference)* "]")?) ','
+		//('rules' '=' ("[" rules+=RuleVarReference? (',' agents+=RuleVarReference)* "]")?) '}'
+		public Group getGroup() { return cGroup; }
+		
+		//{BRSDefinition}
+		public Action getBRSDefinitionAction_0() { return cBRSDefinitionAction_0; }
+		
+		//'brs'
+		public Keyword getBrsKeyword_1() { return cBrsKeyword_1; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
+		
+		//('agents' '=' ("[" agents+=BigraphVarReference? (',' agents+=BigraphVarReference)* "]")?)
+		public Group getGroup_3() { return cGroup_3; }
+		
+		//'agents'
+		public Keyword getAgentsKeyword_3_0() { return cAgentsKeyword_3_0; }
+		
+		//'='
+		public Keyword getEqualsSignKeyword_3_1() { return cEqualsSignKeyword_3_1; }
+		
+		//("[" agents+=BigraphVarReference? (',' agents+=BigraphVarReference)* "]")?
+		public Group getGroup_3_2() { return cGroup_3_2; }
+		
+		//"["
+		public Keyword getLeftSquareBracketKeyword_3_2_0() { return cLeftSquareBracketKeyword_3_2_0; }
+		
+		//agents+=BigraphVarReference?
+		public Assignment getAgentsAssignment_3_2_1() { return cAgentsAssignment_3_2_1; }
+		
+		//BigraphVarReference
+		public RuleCall getAgentsBigraphVarReferenceParserRuleCall_3_2_1_0() { return cAgentsBigraphVarReferenceParserRuleCall_3_2_1_0; }
+		
+		//(',' agents+=BigraphVarReference)*
+		public Group getGroup_3_2_2() { return cGroup_3_2_2; }
+		
+		//','
+		public Keyword getCommaKeyword_3_2_2_0() { return cCommaKeyword_3_2_2_0; }
+		
+		//agents+=BigraphVarReference
+		public Assignment getAgentsAssignment_3_2_2_1() { return cAgentsAssignment_3_2_2_1; }
+		
+		//BigraphVarReference
+		public RuleCall getAgentsBigraphVarReferenceParserRuleCall_3_2_2_1_0() { return cAgentsBigraphVarReferenceParserRuleCall_3_2_2_1_0; }
+		
+		//"]"
+		public Keyword getRightSquareBracketKeyword_3_2_3() { return cRightSquareBracketKeyword_3_2_3; }
+		
+		//','
+		public Keyword getCommaKeyword_4() { return cCommaKeyword_4; }
+		
+		//('rules' '=' ("[" rules+=RuleVarReference? (',' agents+=RuleVarReference)* "]")?)
+		public Group getGroup_5() { return cGroup_5; }
+		
+		//'rules'
+		public Keyword getRulesKeyword_5_0() { return cRulesKeyword_5_0; }
+		
+		//'='
+		public Keyword getEqualsSignKeyword_5_1() { return cEqualsSignKeyword_5_1; }
+		
+		//("[" rules+=RuleVarReference? (',' agents+=RuleVarReference)* "]")?
+		public Group getGroup_5_2() { return cGroup_5_2; }
+		
+		//"["
+		public Keyword getLeftSquareBracketKeyword_5_2_0() { return cLeftSquareBracketKeyword_5_2_0; }
+		
+		//rules+=RuleVarReference?
+		public Assignment getRulesAssignment_5_2_1() { return cRulesAssignment_5_2_1; }
+		
+		//RuleVarReference
+		public RuleCall getRulesRuleVarReferenceParserRuleCall_5_2_1_0() { return cRulesRuleVarReferenceParserRuleCall_5_2_1_0; }
+		
+		//(',' agents+=RuleVarReference)*
+		public Group getGroup_5_2_2() { return cGroup_5_2_2; }
+		
+		//','
+		public Keyword getCommaKeyword_5_2_2_0() { return cCommaKeyword_5_2_2_0; }
+		
+		//agents+=RuleVarReference
+		public Assignment getAgentsAssignment_5_2_2_1() { return cAgentsAssignment_5_2_2_1; }
+		
+		//RuleVarReference
+		public RuleCall getAgentsRuleVarReferenceParserRuleCall_5_2_2_1_0() { return cAgentsRuleVarReferenceParserRuleCall_5_2_2_1_0; }
+		
+		//"]"
+		public Keyword getRightSquareBracketKeyword_5_2_3() { return cRightSquareBracketKeyword_5_2_3; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
 	}
 	public class PrintLnElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.tudresden.inf.st.bigraphs.dsl.BDSL.PrintLn");
@@ -1173,21 +1414,20 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 	private final FQNElements pFQN;
 	private final FqnWithWildCardElements pFqnWithWildCard;
 	private final BigraphVarReferenceIDElements pBigraphVarReferenceID;
-	private final EIntElements pEInt;
-	private final TerminalRule tINT_SITE;
 	private final EStringElements pEString;
 	private final AbstractElementElements pAbstractElement;
 	private final MainElementElements pMainElement;
 	private final SignatureElements pSignature;
 	private final ControlDefElements pControlDef;
-	private final ArityValueElements pArityValue;
 	private final NameConstantElements pNameConstant;
 	private final LinkNamesElements pLinkNames;
 	private final SiteVarsElements pSiteVars;
 	private final SiteElements pSite;
 	private final LVD2Elements pLVD2;
 	private final LocalVarDeclElements pLocalVarDecl;
+	private final LocalRuleDeclElements pLocalRuleDecl;
 	private final BigraphVarReferenceElements pBigraphVarReference;
+	private final RuleVarReferenceElements pRuleVarReference;
 	private final AbstractBigraphDeclarationElements pAbstractBigraphDeclaration;
 	private final NodeExpressionCallElements pNodeExpressionCall;
 	private final BigraphExpressionElements pBigraphExpression;
@@ -1196,6 +1436,7 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 	private final PrimaryExpressionElements pPrimaryExpression;
 	private final MainDeclarationElements pMainDeclaration;
 	private final AbstractMainStatementsElements pAbstractMainStatements;
+	private final BRSDefinitionElements pBRSDefinition;
 	private final PrintLnElements pPrintLn;
 	private final PrintableExpressionElements pPrintableExpression;
 	private final BinaryParallelOperatorElements eBinaryParallelOperator;
@@ -1217,21 +1458,20 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 		this.pFQN = new FQNElements();
 		this.pFqnWithWildCard = new FqnWithWildCardElements();
 		this.pBigraphVarReferenceID = new BigraphVarReferenceIDElements();
-		this.pEInt = new EIntElements();
-		this.tINT_SITE = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "de.tudresden.inf.st.bigraphs.dsl.BDSL.INT_SITE");
 		this.pEString = new EStringElements();
 		this.pAbstractElement = new AbstractElementElements();
 		this.pMainElement = new MainElementElements();
 		this.pSignature = new SignatureElements();
 		this.pControlDef = new ControlDefElements();
-		this.pArityValue = new ArityValueElements();
 		this.pNameConstant = new NameConstantElements();
 		this.pLinkNames = new LinkNamesElements();
 		this.pSiteVars = new SiteVarsElements();
 		this.pSite = new SiteElements();
 		this.pLVD2 = new LVD2Elements();
 		this.pLocalVarDecl = new LocalVarDeclElements();
+		this.pLocalRuleDecl = new LocalRuleDeclElements();
 		this.pBigraphVarReference = new BigraphVarReferenceElements();
+		this.pRuleVarReference = new RuleVarReferenceElements();
 		this.pAbstractBigraphDeclaration = new AbstractBigraphDeclarationElements();
 		this.pNodeExpressionCall = new NodeExpressionCallElements();
 		this.pBigraphExpression = new BigraphExpressionElements();
@@ -1240,6 +1480,7 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 		this.pPrimaryExpression = new PrimaryExpressionElements();
 		this.pMainDeclaration = new MainDeclarationElements();
 		this.pAbstractMainStatements = new AbstractMainStatementsElements();
+		this.pBRSDefinition = new BRSDefinitionElements();
 		this.pPrintLn = new PrintLnElements();
 		this.pPrintableExpression = new PrintableExpressionElements();
 		this.eBinaryParallelOperator = new BinaryParallelOperatorElements();
@@ -1327,22 +1568,10 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	////returns ecore::EString 
-	//EInt ecore::EInt:
-	//	'-'? INT;
-	public EIntElements getEIntAccess() {
-		return pEInt;
-	}
-	
-	public ParserRule getEIntRule() {
-		return getEIntAccess().getRule();
-	}
-	
-	//terminal INT_SITE returns ecore::EInt:
-	//	'1'..'9'+;
-	public TerminalRule getINT_SITERule() {
-		return tINT_SITE;
-	}
-	
+	////EInt returns ecore::EInt:
+	////	'-'? INT;
+	////terminal INT_POSITIVE returns ecore::EInt: ('1'..'9')+;
+	////terminal INT_SITE returns ecore::EInt: ('1'..'9');
 	//EString:
 	//	STRING | ID;
 	public EStringElements getEStringAccess() {
@@ -1354,7 +1583,7 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//AbstractElement:
-	//	LocalVarDecl
+	//	LocalVarDecl | LocalRuleDecl
 	//	// and rules
 	//;
 	public AbstractElementElements getAbstractElementAccess() {
@@ -1389,7 +1618,7 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//ControlDef ControlVariable:
-	//	{ControlVariable} type=ControlType? 'ctrl' name=ID 'arity' arity=ArityValue ';';
+	//	{ControlVariable} type=ControlType? 'ctrl' name=ID 'arity' arity=INT ';';
 	public ControlDefElements getControlDefAccess() {
 		return pControlDef;
 	}
@@ -1398,16 +1627,10 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 		return getControlDefAccess().getRule();
 	}
 	
-	//ArityValue EInt:
-	//	value=EInt;
-	public ArityValueElements getArityValueAccess() {
-		return pArityValue;
-	}
-	
-	public ParserRule getArityValueRule() {
-		return getArityValueAccess().getRule();
-	}
-	
+	////ArityValue returns ecore::EInt:
+	////	INT
+	////;
+	////	value=EInt;
 	////ControlVariable returns bigraph::BNode:
 	////	name=ID;
 	//NameConstant:
@@ -1442,7 +1665,7 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Site:
-	//	'id' '(' index=INT_SITE ')';
+	//	'id' '(' index=INT ')';
 	public SiteElements getSiteAccess() {
 		return pSite;
 	}
@@ -1475,6 +1698,27 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 		return getLocalVarDeclAccess().getRule();
 	}
 	
+	//LocalRuleDecl:
+	//	"react" {LocalRuleDecl} name=ID ("(" sig=[Signature] ")")? ("="
+	//	"{"
+	//	//		(args+=LocalVarDecl)*
+	//	redex=BigraphExpression
+	//	"}"
+	//	','
+	//	'{'
+	//	reactum=BigraphExpression
+	//	'}');
+	public LocalRuleDeclElements getLocalRuleDeclAccess() {
+		return pLocalRuleDecl;
+	}
+	
+	public ParserRule getLocalRuleDeclRule() {
+		return getLocalRuleDeclAccess().getRule();
+	}
+	
+	////BigraphExpressionOrBigraphReference:
+	////	BigraphVarReference
+	////;
 	////// "var" name=ID ":" type=Type ("=" init=Expr)?;
 	////LocalVarDecl:
 	//////	('(' args+=DeclaredParameter (',' args+=DeclaredParameter)* ')')?
@@ -1490,7 +1734,16 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 		return getBigraphVarReferenceAccess().getRule();
 	}
 	
-	//////(DeclaredParameter | 
+	//RuleVarReference:
+	//	value=[LocalRuleDecl|BigraphVarReferenceID];
+	public RuleVarReferenceElements getRuleVarReferenceAccess() {
+		return pRuleVarReference;
+	}
+	
+	public ParserRule getRuleVarReferenceRule() {
+		return getRuleVarReferenceAccess().getRule();
+	}
+	
 	//AbstractBigraphDeclaration:
 	//	BigraphVarReference | NodeExpressionCall | LVD2 | Site;
 	public AbstractBigraphDeclarationElements getAbstractBigraphDeclarationAccess() {
@@ -1573,13 +1826,25 @@ public class BDSLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//AbstractMainStatements:
-	//	BigraphVarReference | PrintLn;
+	//	BigraphVarReference | BRSDefinition | PrintLn;
 	public AbstractMainStatementsElements getAbstractMainStatementsAccess() {
 		return pAbstractMainStatements;
 	}
 	
 	public ParserRule getAbstractMainStatementsRule() {
 		return getAbstractMainStatementsAccess().getRule();
+	}
+	
+	//BRSDefinition:
+	//	{BRSDefinition} 'brs' '{' ('agents' '=' ("[" agents+=BigraphVarReference? (',' agents+=BigraphVarReference)* "]")?)
+	//	',' ('rules' '=' ("[" rules+=RuleVarReference? (',' agents+=RuleVarReference)* "]")?)
+	//	'}';
+	public BRSDefinitionElements getBRSDefinitionAccess() {
+		return pBRSDefinition;
+	}
+	
+	public ParserRule getBRSDefinitionRule() {
+		return getBRSDefinitionAccess().getRule();
 	}
 	
 	//PrintLn:

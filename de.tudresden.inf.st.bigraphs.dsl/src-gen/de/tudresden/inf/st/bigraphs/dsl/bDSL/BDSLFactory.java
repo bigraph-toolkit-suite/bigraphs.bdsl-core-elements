@@ -78,15 +78,6 @@ public interface BDSLFactory extends EFactory
   ControlVariable createControlVariable();
 
   /**
-   * Returns a new object of class '<em>EInt</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>EInt</em>'.
-   * @generated
-   */
-  EInt createEInt();
-
-  /**
    * Returns a new object of class '<em>Name Constant</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -141,6 +132,15 @@ public interface BDSLFactory extends EFactory
   LocalVarDecl createLocalVarDecl();
 
   /**
+   * Returns a new object of class '<em>Local Rule Decl</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Local Rule Decl</em>'.
+   * @generated
+   */
+  LocalRuleDecl createLocalRuleDecl();
+
+  /**
    * Returns a new object of class '<em>Bigraph Var Reference</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -148,6 +148,15 @@ public interface BDSLFactory extends EFactory
    * @generated
    */
   BigraphVarReference createBigraphVarReference();
+
+  /**
+   * Returns a new object of class '<em>Rule Var Reference</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Rule Var Reference</em>'.
+   * @generated
+   */
+  RuleVarReference createRuleVarReference();
 
   /**
    * Returns a new object of class '<em>Abstract Bigraph Declaration</em>'.
@@ -193,6 +202,15 @@ public interface BDSLFactory extends EFactory
    * @generated
    */
   AbstractMainStatements createAbstractMainStatements();
+
+  /**
+   * Returns a new object of class '<em>BRS Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>BRS Definition</em>'.
+   * @generated
+   */
+  BRSDefinition createBRSDefinition();
 
   /**
    * Returns a new object of class '<em>Print Ln</em>'.

@@ -7,7 +7,6 @@ import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLPackage;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphExpression;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalVarDecl;
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.Signature;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.SiteVars;
 
 import java.util.Collection;
@@ -33,10 +32,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.LocalVarDeclImpl#getName <em>Name</em>}</li>
  *   <li>{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.LocalVarDeclImpl#getType <em>Type</em>}</li>
  *   <li>{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.LocalVarDeclImpl#getDefinition <em>Definition</em>}</li>
- *   <li>{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.LocalVarDeclImpl#getSig <em>Sig</em>}</li>
  *   <li>{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.LocalVarDeclImpl#getSiteArgs <em>Site Args</em>}</li>
  * </ul>
  *
@@ -44,26 +41,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class LocalVarDeclImpl extends AbstractElementImpl implements LocalVarDecl
 {
-  /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected static final String NAME_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected String name = NAME_EDEFAULT;
-
   /**
    * The cached value of the '{@link #getType() <em>Type</em>}' reference.
    * <!-- begin-user-doc -->
@@ -83,16 +60,6 @@ public class LocalVarDeclImpl extends AbstractElementImpl implements LocalVarDec
    * @ordered
    */
   protected EList<BigraphExpression> definition;
-
-  /**
-   * The cached value of the '{@link #getSig() <em>Sig</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getSig()
-   * @generated
-   * @ordered
-   */
-  protected Signature sig;
 
   /**
    * The cached value of the '{@link #getSiteArgs() <em>Site Args</em>}' containment reference list.
@@ -123,31 +90,6 @@ public class LocalVarDeclImpl extends AbstractElementImpl implements LocalVarDec
   protected EClass eStaticClass()
   {
     return BDSLPackage.Literals.LOCAL_VAR_DECL;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String getName()
-  {
-    return name;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setName(String newName)
-  {
-    String oldName = name;
-    name = newName;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, BDSLPackage.LOCAL_VAR_DECL__NAME, oldName, name));
   }
 
   /**
@@ -216,51 +158,6 @@ public class LocalVarDeclImpl extends AbstractElementImpl implements LocalVarDec
    * @generated
    */
   @Override
-  public Signature getSig()
-  {
-    if (sig != null && sig.eIsProxy())
-    {
-      InternalEObject oldSig = (InternalEObject)sig;
-      sig = (Signature)eResolveProxy(oldSig);
-      if (sig != oldSig)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, BDSLPackage.LOCAL_VAR_DECL__SIG, oldSig, sig));
-      }
-    }
-    return sig;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Signature basicGetSig()
-  {
-    return sig;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setSig(Signature newSig)
-  {
-    Signature oldSig = sig;
-    sig = newSig;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, BDSLPackage.LOCAL_VAR_DECL__SIG, oldSig, sig));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EList<SiteVars> getSiteArgs()
   {
     if (siteArgs == null)
@@ -298,16 +195,11 @@ public class LocalVarDeclImpl extends AbstractElementImpl implements LocalVarDec
   {
     switch (featureID)
     {
-      case BDSLPackage.LOCAL_VAR_DECL__NAME:
-        return getName();
       case BDSLPackage.LOCAL_VAR_DECL__TYPE:
         if (resolve) return getType();
         return basicGetType();
       case BDSLPackage.LOCAL_VAR_DECL__DEFINITION:
         return getDefinition();
-      case BDSLPackage.LOCAL_VAR_DECL__SIG:
-        if (resolve) return getSig();
-        return basicGetSig();
       case BDSLPackage.LOCAL_VAR_DECL__SITE_ARGS:
         return getSiteArgs();
     }
@@ -325,18 +217,12 @@ public class LocalVarDeclImpl extends AbstractElementImpl implements LocalVarDec
   {
     switch (featureID)
     {
-      case BDSLPackage.LOCAL_VAR_DECL__NAME:
-        setName((String)newValue);
-        return;
       case BDSLPackage.LOCAL_VAR_DECL__TYPE:
         setType((ControlVariable)newValue);
         return;
       case BDSLPackage.LOCAL_VAR_DECL__DEFINITION:
         getDefinition().clear();
         getDefinition().addAll((Collection<? extends BigraphExpression>)newValue);
-        return;
-      case BDSLPackage.LOCAL_VAR_DECL__SIG:
-        setSig((Signature)newValue);
         return;
       case BDSLPackage.LOCAL_VAR_DECL__SITE_ARGS:
         getSiteArgs().clear();
@@ -356,17 +242,11 @@ public class LocalVarDeclImpl extends AbstractElementImpl implements LocalVarDec
   {
     switch (featureID)
     {
-      case BDSLPackage.LOCAL_VAR_DECL__NAME:
-        setName(NAME_EDEFAULT);
-        return;
       case BDSLPackage.LOCAL_VAR_DECL__TYPE:
         setType((ControlVariable)null);
         return;
       case BDSLPackage.LOCAL_VAR_DECL__DEFINITION:
         getDefinition().clear();
-        return;
-      case BDSLPackage.LOCAL_VAR_DECL__SIG:
-        setSig((Signature)null);
         return;
       case BDSLPackage.LOCAL_VAR_DECL__SITE_ARGS:
         getSiteArgs().clear();
@@ -385,35 +265,14 @@ public class LocalVarDeclImpl extends AbstractElementImpl implements LocalVarDec
   {
     switch (featureID)
     {
-      case BDSLPackage.LOCAL_VAR_DECL__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case BDSLPackage.LOCAL_VAR_DECL__TYPE:
         return type != null;
       case BDSLPackage.LOCAL_VAR_DECL__DEFINITION:
         return definition != null && !definition.isEmpty();
-      case BDSLPackage.LOCAL_VAR_DECL__SIG:
-        return sig != null;
       case BDSLPackage.LOCAL_VAR_DECL__SITE_ARGS:
         return siteArgs != null && !siteArgs.isEmpty();
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (name: ");
-    result.append(name);
-    result.append(')');
-    return result.toString();
   }
 
 } //LocalVarDeclImpl

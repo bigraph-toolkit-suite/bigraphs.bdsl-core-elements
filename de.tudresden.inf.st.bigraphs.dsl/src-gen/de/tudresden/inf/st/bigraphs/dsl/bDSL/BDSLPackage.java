@@ -143,13 +143,31 @@ public interface BDSLPackage extends EPackage
   int ABSTRACT_ELEMENT = 2;
 
   /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ABSTRACT_ELEMENT__NAME = 0;
+
+  /**
+   * The feature id for the '<em><b>Sig</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ABSTRACT_ELEMENT__SIG = 1;
+
+  /**
    * The number of structural features of the '<em>Abstract Element</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ABSTRACT_ELEMENT_FEATURE_COUNT = 0;
+  int ABSTRACT_ELEMENT_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.MainElementImpl <em>Main Element</em>}' class.
@@ -245,7 +263,7 @@ public interface BDSLPackage extends EPackage
   int CONTROL_VARIABLE__NAME = 1;
 
   /**
-   * The feature id for the '<em><b>Arity</b></em>' containment reference.
+   * The feature id for the '<em><b>Arity</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -263,34 +281,6 @@ public interface BDSLPackage extends EPackage
   int CONTROL_VARIABLE_FEATURE_COUNT = 3;
 
   /**
-   * The meta object id for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.EIntImpl <em>EInt</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.EIntImpl
-   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getEInt()
-   * @generated
-   */
-  int EINT = 6;
-
-  /**
-   * The feature id for the '<em><b>Value</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EINT__VALUE = 0;
-
-  /**
-   * The number of structural features of the '<em>EInt</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EINT_FEATURE_COUNT = 1;
-
-  /**
    * The meta object id for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.LinkNamesImpl <em>Link Names</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -298,7 +288,7 @@ public interface BDSLPackage extends EPackage
    * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getLinkNames()
    * @generated
    */
-  int LINK_NAMES = 8;
+  int LINK_NAMES = 7;
 
   /**
    * The number of structural features of the '<em>Link Names</em>' class.
@@ -317,7 +307,7 @@ public interface BDSLPackage extends EPackage
    * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getNameConstant()
    * @generated
    */
-  int NAME_CONSTANT = 7;
+  int NAME_CONSTANT = 6;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -345,7 +335,7 @@ public interface BDSLPackage extends EPackage
    * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getSiteVars()
    * @generated
    */
-  int SITE_VARS = 9;
+  int SITE_VARS = 8;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -373,7 +363,7 @@ public interface BDSLPackage extends EPackage
    * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getBigraphExpression()
    * @generated
    */
-  int BIGRAPH_EXPRESSION = 16;
+  int BIGRAPH_EXPRESSION = 17;
 
   /**
    * The number of structural features of the '<em>Bigraph Expression</em>' class.
@@ -392,7 +382,7 @@ public interface BDSLPackage extends EPackage
    * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getAbstractBigraphDeclaration()
    * @generated
    */
-  int ABSTRACT_BIGRAPH_DECLARATION = 14;
+  int ABSTRACT_BIGRAPH_DECLARATION = 15;
 
   /**
    * The number of structural features of the '<em>Abstract Bigraph Declaration</em>' class.
@@ -411,7 +401,7 @@ public interface BDSLPackage extends EPackage
    * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getSite()
    * @generated
    */
-  int SITE = 10;
+  int SITE = 9;
 
   /**
    * The feature id for the '<em><b>Index</b></em>' attribute.
@@ -439,7 +429,7 @@ public interface BDSLPackage extends EPackage
    * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getLVD2()
    * @generated
    */
-  int LVD2 = 11;
+  int LVD2 = 10;
 
   /**
    * The number of structural features of the '<em>LVD2</em>' class.
@@ -458,7 +448,7 @@ public interface BDSLPackage extends EPackage
    * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getLocalVarDecl()
    * @generated
    */
-  int LOCAL_VAR_DECL = 12;
+  int LOCAL_VAR_DECL = 11;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -467,25 +457,7 @@ public interface BDSLPackage extends EPackage
    * @generated
    * @ordered
    */
-  int LOCAL_VAR_DECL__NAME = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Type</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int LOCAL_VAR_DECL__TYPE = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
-
-  /**
-   * The feature id for the '<em><b>Definition</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int LOCAL_VAR_DECL__DEFINITION = ABSTRACT_ELEMENT_FEATURE_COUNT + 2;
+  int LOCAL_VAR_DECL__NAME = ABSTRACT_ELEMENT__NAME;
 
   /**
    * The feature id for the '<em><b>Sig</b></em>' reference.
@@ -494,7 +466,25 @@ public interface BDSLPackage extends EPackage
    * @generated
    * @ordered
    */
-  int LOCAL_VAR_DECL__SIG = ABSTRACT_ELEMENT_FEATURE_COUNT + 3;
+  int LOCAL_VAR_DECL__SIG = ABSTRACT_ELEMENT__SIG;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOCAL_VAR_DECL__TYPE = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Definition</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOCAL_VAR_DECL__DEFINITION = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Site Args</b></em>' containment reference list.
@@ -503,7 +493,7 @@ public interface BDSLPackage extends EPackage
    * @generated
    * @ordered
    */
-  int LOCAL_VAR_DECL__SITE_ARGS = ABSTRACT_ELEMENT_FEATURE_COUNT + 4;
+  int LOCAL_VAR_DECL__SITE_ARGS = ABSTRACT_ELEMENT_FEATURE_COUNT + 2;
 
   /**
    * The number of structural features of the '<em>Local Var Decl</em>' class.
@@ -512,7 +502,62 @@ public interface BDSLPackage extends EPackage
    * @generated
    * @ordered
    */
-  int LOCAL_VAR_DECL_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 5;
+  int LOCAL_VAR_DECL_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 3;
+
+  /**
+   * The meta object id for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.LocalRuleDeclImpl <em>Local Rule Decl</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.LocalRuleDeclImpl
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getLocalRuleDecl()
+   * @generated
+   */
+  int LOCAL_RULE_DECL = 12;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOCAL_RULE_DECL__NAME = ABSTRACT_ELEMENT__NAME;
+
+  /**
+   * The feature id for the '<em><b>Sig</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOCAL_RULE_DECL__SIG = ABSTRACT_ELEMENT__SIG;
+
+  /**
+   * The feature id for the '<em><b>Redex</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOCAL_RULE_DECL__REDEX = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Reactum</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOCAL_RULE_DECL__REACTUM = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Local Rule Decl</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOCAL_RULE_DECL_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BigraphVarReferenceImpl <em>Bigraph Var Reference</em>}' class.
@@ -543,6 +588,34 @@ public interface BDSLPackage extends EPackage
   int BIGRAPH_VAR_REFERENCE_FEATURE_COUNT = ABSTRACT_BIGRAPH_DECLARATION_FEATURE_COUNT + 1;
 
   /**
+   * The meta object id for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.RuleVarReferenceImpl <em>Rule Var Reference</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.RuleVarReferenceImpl
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getRuleVarReference()
+   * @generated
+   */
+  int RULE_VAR_REFERENCE = 14;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE_VAR_REFERENCE__VALUE = 0;
+
+  /**
+   * The number of structural features of the '<em>Rule Var Reference</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE_VAR_REFERENCE_FEATURE_COUNT = 1;
+
+  /**
    * The meta object id for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.NodeExpressionCallImpl <em>Node Expression Call</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -550,7 +623,7 @@ public interface BDSLPackage extends EPackage
    * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getNodeExpressionCall()
    * @generated
    */
-  int NODE_EXPRESSION_CALL = 15;
+  int NODE_EXPRESSION_CALL = 16;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' reference.
@@ -587,7 +660,7 @@ public interface BDSLPackage extends EPackage
    * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getMainDeclaration()
    * @generated
    */
-  int MAIN_DECLARATION = 17;
+  int MAIN_DECLARATION = 18;
 
   /**
    * The feature id for the '<em><b>Definition</b></em>' containment reference.
@@ -615,7 +688,7 @@ public interface BDSLPackage extends EPackage
    * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getAbstractMainStatements()
    * @generated
    */
-  int ABSTRACT_MAIN_STATEMENTS = 18;
+  int ABSTRACT_MAIN_STATEMENTS = 19;
 
   /**
    * The number of structural features of the '<em>Abstract Main Statements</em>' class.
@@ -627,6 +700,43 @@ public interface BDSLPackage extends EPackage
   int ABSTRACT_MAIN_STATEMENTS_FEATURE_COUNT = 0;
 
   /**
+   * The meta object id for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BRSDefinitionImpl <em>BRS Definition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BRSDefinitionImpl
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getBRSDefinition()
+   * @generated
+   */
+  int BRS_DEFINITION = 20;
+
+  /**
+   * The feature id for the '<em><b>Agents</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BRS_DEFINITION__AGENTS = ABSTRACT_MAIN_STATEMENTS_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Rules</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BRS_DEFINITION__RULES = ABSTRACT_MAIN_STATEMENTS_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>BRS Definition</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BRS_DEFINITION_FEATURE_COUNT = ABSTRACT_MAIN_STATEMENTS_FEATURE_COUNT + 2;
+
+  /**
    * The meta object id for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.PrintLnImpl <em>Print Ln</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -634,7 +744,7 @@ public interface BDSLPackage extends EPackage
    * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getPrintLn()
    * @generated
    */
-  int PRINT_LN = 19;
+  int PRINT_LN = 21;
 
   /**
    * The feature id for the '<em><b>Text</b></em>' containment reference.
@@ -671,7 +781,7 @@ public interface BDSLPackage extends EPackage
    * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getPrintableExpression()
    * @generated
    */
-  int PRINTABLE_EXPRESSION = 20;
+  int PRINTABLE_EXPRESSION = 22;
 
   /**
    * The number of structural features of the '<em>Printable Expression</em>' class.
@@ -690,7 +800,7 @@ public interface BDSLPackage extends EPackage
    * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getPlus()
    * @generated
    */
-  int PLUS = 21;
+  int PLUS = 23;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -736,7 +846,7 @@ public interface BDSLPackage extends EPackage
    * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getMulti()
    * @generated
    */
-  int MULTI = 22;
+  int MULTI = 24;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -782,7 +892,7 @@ public interface BDSLPackage extends EPackage
    * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getStringLiteral()
    * @generated
    */
-  int STRING_LITERAL = 23;
+  int STRING_LITERAL = 25;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -810,7 +920,7 @@ public interface BDSLPackage extends EPackage
    * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getBinaryParallelOperator()
    * @generated
    */
-  int BINARY_PARALLEL_OPERATOR = 24;
+  int BINARY_PARALLEL_OPERATOR = 26;
 
   /**
    * The meta object id for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.BinaryNestingOperator <em>Binary Nesting Operator</em>}' enum.
@@ -820,7 +930,7 @@ public interface BDSLPackage extends EPackage
    * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getBinaryNestingOperator()
    * @generated
    */
-  int BINARY_NESTING_OPERATOR = 25;
+  int BINARY_NESTING_OPERATOR = 27;
 
   /**
    * The meta object id for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlType <em>Control Type</em>}' enum.
@@ -830,7 +940,7 @@ public interface BDSLPackage extends EPackage
    * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getControlType()
    * @generated
    */
-  int CONTROL_TYPE = 26;
+  int CONTROL_TYPE = 28;
 
   /**
    * The meta object id for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.OutputModeModel <em>Output Mode Model</em>}' enum.
@@ -840,7 +950,7 @@ public interface BDSLPackage extends EPackage
    * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getOutputModeModel()
    * @generated
    */
-  int OUTPUT_MODE_MODEL = 27;
+  int OUTPUT_MODE_MODEL = 29;
 
 
   /**
@@ -916,6 +1026,28 @@ public interface BDSLPackage extends EPackage
    * @generated
    */
   EClass getAbstractElement();
+
+  /**
+   * Returns the meta object for the attribute '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.AbstractElement#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.AbstractElement#getName()
+   * @see #getAbstractElement()
+   * @generated
+   */
+  EAttribute getAbstractElement_Name();
+
+  /**
+   * Returns the meta object for the reference '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.AbstractElement#getSig <em>Sig</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Sig</em>'.
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.AbstractElement#getSig()
+   * @see #getAbstractElement()
+   * @generated
+   */
+  EReference getAbstractElement_Sig();
 
   /**
    * Returns the meta object for class '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.MainElement <em>Main Element</em>}'.
@@ -1003,36 +1135,15 @@ public interface BDSLPackage extends EPackage
   EAttribute getControlVariable_Name();
 
   /**
-   * Returns the meta object for the containment reference '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable#getArity <em>Arity</em>}'.
+   * Returns the meta object for the attribute '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable#getArity <em>Arity</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Arity</em>'.
+   * @return the meta object for the attribute '<em>Arity</em>'.
    * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable#getArity()
    * @see #getControlVariable()
    * @generated
    */
-  EReference getControlVariable_Arity();
-
-  /**
-   * Returns the meta object for class '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.EInt <em>EInt</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>EInt</em>'.
-   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.EInt
-   * @generated
-   */
-  EClass getEInt();
-
-  /**
-   * Returns the meta object for the attribute '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.EInt#getValue <em>Value</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Value</em>'.
-   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.EInt#getValue()
-   * @see #getEInt()
-   * @generated
-   */
-  EAttribute getEInt_Value();
+  EAttribute getControlVariable_Arity();
 
   /**
    * Returns the meta object for class '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.NameConstant <em>Name Constant</em>}'.
@@ -1128,17 +1239,6 @@ public interface BDSLPackage extends EPackage
   EClass getLocalVarDecl();
 
   /**
-   * Returns the meta object for the attribute '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalVarDecl#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalVarDecl#getName()
-   * @see #getLocalVarDecl()
-   * @generated
-   */
-  EAttribute getLocalVarDecl_Name();
-
-  /**
    * Returns the meta object for the reference '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalVarDecl#getType <em>Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1161,17 +1261,6 @@ public interface BDSLPackage extends EPackage
   EReference getLocalVarDecl_Definition();
 
   /**
-   * Returns the meta object for the reference '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalVarDecl#getSig <em>Sig</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Sig</em>'.
-   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalVarDecl#getSig()
-   * @see #getLocalVarDecl()
-   * @generated
-   */
-  EReference getLocalVarDecl_Sig();
-
-  /**
    * Returns the meta object for the containment reference list '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalVarDecl#getSiteArgs <em>Site Args</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1181,6 +1270,38 @@ public interface BDSLPackage extends EPackage
    * @generated
    */
   EReference getLocalVarDecl_SiteArgs();
+
+  /**
+   * Returns the meta object for class '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalRuleDecl <em>Local Rule Decl</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Local Rule Decl</em>'.
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalRuleDecl
+   * @generated
+   */
+  EClass getLocalRuleDecl();
+
+  /**
+   * Returns the meta object for the containment reference '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalRuleDecl#getRedex <em>Redex</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Redex</em>'.
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalRuleDecl#getRedex()
+   * @see #getLocalRuleDecl()
+   * @generated
+   */
+  EReference getLocalRuleDecl_Redex();
+
+  /**
+   * Returns the meta object for the containment reference '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalRuleDecl#getReactum <em>Reactum</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Reactum</em>'.
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalRuleDecl#getReactum()
+   * @see #getLocalRuleDecl()
+   * @generated
+   */
+  EReference getLocalRuleDecl_Reactum();
 
   /**
    * Returns the meta object for class '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphVarReference <em>Bigraph Var Reference</em>}'.
@@ -1202,6 +1323,27 @@ public interface BDSLPackage extends EPackage
    * @generated
    */
   EReference getBigraphVarReference_Value();
+
+  /**
+   * Returns the meta object for class '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.RuleVarReference <em>Rule Var Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Rule Var Reference</em>'.
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.RuleVarReference
+   * @generated
+   */
+  EClass getRuleVarReference();
+
+  /**
+   * Returns the meta object for the reference '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.RuleVarReference#getValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Value</em>'.
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.RuleVarReference#getValue()
+   * @see #getRuleVarReference()
+   * @generated
+   */
+  EReference getRuleVarReference_Value();
 
   /**
    * Returns the meta object for class '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.AbstractBigraphDeclaration <em>Abstract Bigraph Declaration</em>}'.
@@ -1285,6 +1427,38 @@ public interface BDSLPackage extends EPackage
    * @generated
    */
   EClass getAbstractMainStatements();
+
+  /**
+   * Returns the meta object for class '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.BRSDefinition <em>BRS Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>BRS Definition</em>'.
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.BRSDefinition
+   * @generated
+   */
+  EClass getBRSDefinition();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.BRSDefinition#getAgents <em>Agents</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Agents</em>'.
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.BRSDefinition#getAgents()
+   * @see #getBRSDefinition()
+   * @generated
+   */
+  EReference getBRSDefinition_Agents();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.BRSDefinition#getRules <em>Rules</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Rules</em>'.
+   * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.BRSDefinition#getRules()
+   * @see #getBRSDefinition()
+   * @generated
+   */
+  EReference getBRSDefinition_Rules();
 
   /**
    * Returns the meta object for class '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.PrintLn <em>Print Ln</em>}'.
@@ -1561,6 +1735,22 @@ public interface BDSLPackage extends EPackage
     EClass ABSTRACT_ELEMENT = eINSTANCE.getAbstractElement();
 
     /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ABSTRACT_ELEMENT__NAME = eINSTANCE.getAbstractElement_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Sig</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ABSTRACT_ELEMENT__SIG = eINSTANCE.getAbstractElement_Sig();
+
+    /**
      * The meta object literal for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.MainElementImpl <em>Main Element</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1631,30 +1821,12 @@ public interface BDSLPackage extends EPackage
     EAttribute CONTROL_VARIABLE__NAME = eINSTANCE.getControlVariable_Name();
 
     /**
-     * The meta object literal for the '<em><b>Arity</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Arity</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference CONTROL_VARIABLE__ARITY = eINSTANCE.getControlVariable_Arity();
-
-    /**
-     * The meta object literal for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.EIntImpl <em>EInt</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.EIntImpl
-     * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getEInt()
-     * @generated
-     */
-    EClass EINT = eINSTANCE.getEInt();
-
-    /**
-     * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute EINT__VALUE = eINSTANCE.getEInt_Value();
+    EAttribute CONTROL_VARIABLE__ARITY = eINSTANCE.getControlVariable_Arity();
 
     /**
      * The meta object literal for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.NameConstantImpl <em>Name Constant</em>}' class.
@@ -1741,14 +1913,6 @@ public interface BDSLPackage extends EPackage
     EClass LOCAL_VAR_DECL = eINSTANCE.getLocalVarDecl();
 
     /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute LOCAL_VAR_DECL__NAME = eINSTANCE.getLocalVarDecl_Name();
-
-    /**
      * The meta object literal for the '<em><b>Type</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1765,20 +1929,38 @@ public interface BDSLPackage extends EPackage
     EReference LOCAL_VAR_DECL__DEFINITION = eINSTANCE.getLocalVarDecl_Definition();
 
     /**
-     * The meta object literal for the '<em><b>Sig</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference LOCAL_VAR_DECL__SIG = eINSTANCE.getLocalVarDecl_Sig();
-
-    /**
      * The meta object literal for the '<em><b>Site Args</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     EReference LOCAL_VAR_DECL__SITE_ARGS = eINSTANCE.getLocalVarDecl_SiteArgs();
+
+    /**
+     * The meta object literal for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.LocalRuleDeclImpl <em>Local Rule Decl</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.LocalRuleDeclImpl
+     * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getLocalRuleDecl()
+     * @generated
+     */
+    EClass LOCAL_RULE_DECL = eINSTANCE.getLocalRuleDecl();
+
+    /**
+     * The meta object literal for the '<em><b>Redex</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference LOCAL_RULE_DECL__REDEX = eINSTANCE.getLocalRuleDecl_Redex();
+
+    /**
+     * The meta object literal for the '<em><b>Reactum</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference LOCAL_RULE_DECL__REACTUM = eINSTANCE.getLocalRuleDecl_Reactum();
 
     /**
      * The meta object literal for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BigraphVarReferenceImpl <em>Bigraph Var Reference</em>}' class.
@@ -1797,6 +1979,24 @@ public interface BDSLPackage extends EPackage
      * @generated
      */
     EReference BIGRAPH_VAR_REFERENCE__VALUE = eINSTANCE.getBigraphVarReference_Value();
+
+    /**
+     * The meta object literal for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.RuleVarReferenceImpl <em>Rule Var Reference</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.RuleVarReferenceImpl
+     * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getRuleVarReference()
+     * @generated
+     */
+    EClass RULE_VAR_REFERENCE = eINSTANCE.getRuleVarReference();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference RULE_VAR_REFERENCE__VALUE = eINSTANCE.getRuleVarReference_Value();
 
     /**
      * The meta object literal for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.AbstractBigraphDeclarationImpl <em>Abstract Bigraph Declaration</em>}' class.
@@ -1871,6 +2071,32 @@ public interface BDSLPackage extends EPackage
      * @generated
      */
     EClass ABSTRACT_MAIN_STATEMENTS = eINSTANCE.getAbstractMainStatements();
+
+    /**
+     * The meta object literal for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BRSDefinitionImpl <em>BRS Definition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BRSDefinitionImpl
+     * @see de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BDSLPackageImpl#getBRSDefinition()
+     * @generated
+     */
+    EClass BRS_DEFINITION = eINSTANCE.getBRSDefinition();
+
+    /**
+     * The meta object literal for the '<em><b>Agents</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference BRS_DEFINITION__AGENTS = eINSTANCE.getBRSDefinition_Agents();
+
+    /**
+     * The meta object literal for the '<em><b>Rules</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference BRS_DEFINITION__RULES = eINSTANCE.getBRSDefinition_Rules();
 
     /**
      * The meta object literal for the '{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.PrintLnImpl <em>Print Ln</em>}' class.

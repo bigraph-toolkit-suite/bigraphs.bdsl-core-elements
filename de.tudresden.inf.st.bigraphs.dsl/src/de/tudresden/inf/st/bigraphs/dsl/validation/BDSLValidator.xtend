@@ -12,6 +12,7 @@ import de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalVarDecl
 import java.util.Objects
 import org.eclipse.emf.ecore.EObject
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphVarReference
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.Site
 
 //import java.security.Signature
 /**
@@ -29,15 +30,16 @@ class BDSLValidator extends AbstractBDSLValidator {
 
 	public static val CYCLIC_VARIABLE_USAGE = 'cyclicBigraphVariable';
 
-//
-//	@Check
-//	def checkGreetingStartsWithCapital(Greeting greeting) {
-//		if (!Character.isUpperCase(greeting.name.charAt(0))) {
-//			warning('Name should start with a capital', 
-//					BDSLPackage.Literals.GREETING__NAME,
-//					INVALID_NAME)
-//		}
-//	}
+	public static val SITE_INDEX_IS_POSITIVE = 'siteIndexIsPositive';
+
+	@Check
+	def siteIndexIsPositive(Site siteExpression) {
+		if (siteExpression.index <= 0) {
+			warning("The index of a site must be a positive integer", BDSLPackage.Literals.SITE__INDEX,
+				SITE_INDEX_IS_POSITIVE);
+		}
+	}
+
 	@Check
 	def checkNoCycleInEntityHierarchy(BigraphVarReference varDecl) {
 		if (varDecl.eContainer.eClass == BDSLPackage.Literals.BRS_MODEL) {

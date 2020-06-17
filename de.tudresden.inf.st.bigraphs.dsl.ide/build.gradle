@@ -10,6 +10,7 @@ dependencies {
 
 apply plugin: 'application'
 apply plugin: 'com.github.johnrengelman.shadow'
+//This is a class shipped with Xtext that enables Language Server support
 mainClassName = "org.eclipse.xtext.ide.server.ServerLauncher"
 
 shadowJar {

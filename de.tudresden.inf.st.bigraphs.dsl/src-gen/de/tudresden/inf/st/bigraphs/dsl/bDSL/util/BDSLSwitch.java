@@ -115,13 +115,6 @@ public class BDSLSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case BDSLPackage.EINT:
-      {
-        EInt eInt = (EInt)theEObject;
-        T result = caseEInt(eInt);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case BDSLPackage.NAME_CONSTANT:
       {
         NameConstant nameConstant = (NameConstant)theEObject;
@@ -173,6 +166,14 @@ public class BDSLSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case BDSLPackage.LOCAL_RULE_DECL:
+      {
+        LocalRuleDecl localRuleDecl = (LocalRuleDecl)theEObject;
+        T result = caseLocalRuleDecl(localRuleDecl);
+        if (result == null) result = caseAbstractElement(localRuleDecl);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case BDSLPackage.BIGRAPH_VAR_REFERENCE:
       {
         BigraphVarReference bigraphVarReference = (BigraphVarReference)theEObject;
@@ -181,6 +182,13 @@ public class BDSLSwitch<T> extends Switch<T>
         if (result == null) result = caseAbstractMainStatements(bigraphVarReference);
         if (result == null) result = casePrintableExpression(bigraphVarReference);
         if (result == null) result = caseBigraphExpression(bigraphVarReference);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case BDSLPackage.RULE_VAR_REFERENCE:
+      {
+        RuleVarReference ruleVarReference = (RuleVarReference)theEObject;
+        T result = caseRuleVarReference(ruleVarReference);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -219,6 +227,14 @@ public class BDSLSwitch<T> extends Switch<T>
       {
         AbstractMainStatements abstractMainStatements = (AbstractMainStatements)theEObject;
         T result = caseAbstractMainStatements(abstractMainStatements);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case BDSLPackage.BRS_DEFINITION:
+      {
+        BRSDefinition brsDefinition = (BRSDefinition)theEObject;
+        T result = caseBRSDefinition(brsDefinition);
+        if (result == null) result = caseAbstractMainStatements(brsDefinition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -362,22 +378,6 @@ public class BDSLSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>EInt</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>EInt</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseEInt(EInt object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Name Constant</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -474,6 +474,22 @@ public class BDSLSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Local Rule Decl</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Local Rule Decl</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseLocalRuleDecl(LocalRuleDecl object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Bigraph Var Reference</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -485,6 +501,22 @@ public class BDSLSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseBigraphVarReference(BigraphVarReference object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Rule Var Reference</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Rule Var Reference</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseRuleVarReference(RuleVarReference object)
   {
     return null;
   }
@@ -565,6 +597,22 @@ public class BDSLSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseAbstractMainStatements(AbstractMainStatements object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>BRS Definition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>BRS Definition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseBRSDefinition(BRSDefinition object)
   {
     return null;
   }

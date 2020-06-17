@@ -6,13 +6,10 @@ package de.tudresden.inf.st.bigraphs.dsl.bDSL.impl;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLPackage;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlType;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable;
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.EInt;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
@@ -75,14 +72,24 @@ public class ControlVariableImpl extends MinimalEObjectImpl.Container implements
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getArity() <em>Arity</em>}' containment reference.
+   * The default value of the '{@link #getArity() <em>Arity</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getArity()
    * @generated
    * @ordered
    */
-  protected EInt arity;
+  protected static final int ARITY_EDEFAULT = 0;
+
+  /**
+   * The cached value of the '{@link #getArity() <em>Arity</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getArity()
+   * @generated
+   * @ordered
+   */
+  protected int arity = ARITY_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -161,7 +168,7 @@ public class ControlVariableImpl extends MinimalEObjectImpl.Container implements
    * @generated
    */
   @Override
-  public EInt getArity()
+  public int getArity()
   {
     return arity;
   }
@@ -171,54 +178,13 @@ public class ControlVariableImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetArity(EInt newArity, NotificationChain msgs)
+  @Override
+  public void setArity(int newArity)
   {
-    EInt oldArity = arity;
+    int oldArity = arity;
     arity = newArity;
     if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BDSLPackage.CONTROL_VARIABLE__ARITY, oldArity, newArity);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setArity(EInt newArity)
-  {
-    if (newArity != arity)
-    {
-      NotificationChain msgs = null;
-      if (arity != null)
-        msgs = ((InternalEObject)arity).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BDSLPackage.CONTROL_VARIABLE__ARITY, null, msgs);
-      if (newArity != null)
-        msgs = ((InternalEObject)newArity).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BDSLPackage.CONTROL_VARIABLE__ARITY, null, msgs);
-      msgs = basicSetArity(newArity, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, BDSLPackage.CONTROL_VARIABLE__ARITY, newArity, newArity));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
-    switch (featureID)
-    {
-      case BDSLPackage.CONTROL_VARIABLE__ARITY:
-        return basicSetArity(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
+      eNotify(new ENotificationImpl(this, Notification.SET, BDSLPackage.CONTROL_VARIABLE__ARITY, oldArity, arity));
   }
 
   /**
@@ -258,7 +224,7 @@ public class ControlVariableImpl extends MinimalEObjectImpl.Container implements
         setName((String)newValue);
         return;
       case BDSLPackage.CONTROL_VARIABLE__ARITY:
-        setArity((EInt)newValue);
+        setArity((Integer)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -281,7 +247,7 @@ public class ControlVariableImpl extends MinimalEObjectImpl.Container implements
         setName(NAME_EDEFAULT);
         return;
       case BDSLPackage.CONTROL_VARIABLE__ARITY:
-        setArity((EInt)null);
+        setArity(ARITY_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -302,7 +268,7 @@ public class ControlVariableImpl extends MinimalEObjectImpl.Container implements
       case BDSLPackage.CONTROL_VARIABLE__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case BDSLPackage.CONTROL_VARIABLE__ARITY:
-        return arity != null;
+        return arity != ARITY_EDEFAULT;
     }
     return super.eIsSet(featureID);
   }
@@ -322,6 +288,8 @@ public class ControlVariableImpl extends MinimalEObjectImpl.Container implements
     result.append(type);
     result.append(", name: ");
     result.append(name);
+    result.append(", arity: ");
+    result.append(arity);
     result.append(')');
     return result.toString();
   }

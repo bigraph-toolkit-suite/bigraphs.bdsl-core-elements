@@ -33,7 +33,10 @@
     <genClasses ecoreClass="BDSL.ecore#//BRSModelImport">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//BRSModelImport/importedNamespace"/>
     </genClasses>
-    <genClasses ecoreClass="BDSL.ecore#//AbstractElement"/>
+    <genClasses ecoreClass="BDSL.ecore#//AbstractElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//AbstractElement/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BDSL.ecore#//AbstractElement/sig"/>
+    </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//MainElement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//MainElement/value"/>
     </genClasses>
@@ -44,10 +47,7 @@
     <genClasses ecoreClass="BDSL.ecore#//ControlVariable">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//ControlVariable/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//ControlVariable/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//ControlVariable/arity"/>
-    </genClasses>
-    <genClasses ecoreClass="BDSL.ecore#//EInt">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//EInt/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//ControlVariable/arity"/>
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//NameConstant">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//NameConstant/value"/>
@@ -61,14 +61,19 @@
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//LVD2"/>
     <genClasses ecoreClass="BDSL.ecore#//LocalVarDecl">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//LocalVarDecl/name"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BDSL.ecore#//LocalVarDecl/type"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//LocalVarDecl/definition"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BDSL.ecore#//LocalVarDecl/sig"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//LocalVarDecl/siteArgs"/>
+    </genClasses>
+    <genClasses ecoreClass="BDSL.ecore#//LocalRuleDecl">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//LocalRuleDecl/redex"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//LocalRuleDecl/reactum"/>
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//BigraphVarReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BDSL.ecore#//BigraphVarReference/value"/>
+    </genClasses>
+    <genClasses ecoreClass="BDSL.ecore#//RuleVarReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BDSL.ecore#//RuleVarReference/value"/>
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//AbstractBigraphDeclaration"/>
     <genClasses ecoreClass="BDSL.ecore#//NodeExpressionCall">
@@ -80,6 +85,10 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//MainDeclaration/definition"/>
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//AbstractMainStatements"/>
+    <genClasses ecoreClass="BDSL.ecore#//BRSDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//BRSDefinition/agents"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//BRSDefinition/rules"/>
+    </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//PrintLn">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//PrintLn/text"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//PrintLn/mode"/>

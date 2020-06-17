@@ -5,11 +5,12 @@ package de.tudresden.inf.st.bigraphs.dsl.serializer;
 
 import com.google.inject.Inject;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLPackage;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.BRSDefinition;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BRSModel;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BRSModelImport;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphVarReference;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable;
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.EInt;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalRuleDecl;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalVarDecl;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.MainDeclaration;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.MainElement;
@@ -18,6 +19,7 @@ import de.tudresden.inf.st.bigraphs.dsl.bDSL.NameConstant;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.NodeExpressionCall;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.Plus;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.PrintLn;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.RuleVarReference;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.Signature;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.Site;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.SiteVars;
@@ -48,6 +50,9 @@ public class BDSLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		Set<Parameter> parameters = context.getEnabledBooleanParameters();
 		if (epackage == BDSLPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
+			case BDSLPackage.BRS_DEFINITION:
+				sequence_BRSDefinition(context, (BRSDefinition) semanticObject); 
+				return; 
 			case BDSLPackage.BRS_MODEL:
 				sequence_BRSModel(context, (BRSModel) semanticObject); 
 				return; 
@@ -60,8 +65,8 @@ public class BDSLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case BDSLPackage.CONTROL_VARIABLE:
 				sequence_ControlDef(context, (ControlVariable) semanticObject); 
 				return; 
-			case BDSLPackage.EINT:
-				sequence_ArityValue(context, (EInt) semanticObject); 
+			case BDSLPackage.LOCAL_RULE_DECL:
+				sequence_LocalRuleDecl(context, (LocalRuleDecl) semanticObject); 
 				return; 
 			case BDSLPackage.LOCAL_VAR_DECL:
 				if (rule == grammarAccess.getLVD2Rule()
@@ -101,6 +106,9 @@ public class BDSLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				return; 
 			case BDSLPackage.PRINT_LN:
 				sequence_PrintLn(context, (PrintLn) semanticObject); 
+				return; 
+			case BDSLPackage.RULE_VAR_REFERENCE:
+				sequence_RuleVarReference(context, (RuleVarReference) semanticObject); 
 				return; 
 			case BDSLPackage.SIGNATURE:
 				sequence_Signature(context, (Signature) semanticObject); 
@@ -150,19 +158,14 @@ public class BDSLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
-	 *     ArityValue returns EInt
+	 *     AbstractMainStatements returns BRSDefinition
+	 *     BRSDefinition returns BRSDefinition
 	 *
 	 * Constraint:
-	 *     value=EInt
+	 *     (agents+=BigraphVarReference? agents+=BigraphVarReference* rules+=RuleVarReference? agents+=RuleVarReference*)
 	 */
-	protected void sequence_ArityValue(ISerializationContext context, EInt semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, BDSLPackage.Literals.EINT__VALUE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BDSLPackage.Literals.EINT__VALUE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getArityValueAccess().getValueEIntParserRuleCall_0(), semanticObject.getValue());
-		feeder.finish();
+	protected void sequence_BRSDefinition(ISerializationContext context, BRSDefinition semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -228,7 +231,7 @@ public class BDSLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     ControlDef returns ControlVariable
 	 *
 	 * Constraint:
-	 *     (type=ControlType? name=ID arity=ArityValue)
+	 *     (type=ControlType? name=ID arity=INT)
 	 */
 	protected void sequence_ControlDef(ISerializationContext context, ControlVariable semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -250,6 +253,19 @@ public class BDSLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     (name=ID type=[ControlVariable|FQN] definition+=BigraphExpression*)
 	 */
 	protected void sequence_LVD2(ISerializationContext context, LocalVarDecl semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     AbstractElement returns LocalRuleDecl
+	 *     LocalRuleDecl returns LocalRuleDecl
+	 *
+	 * Constraint:
+	 *     (name=ID sig=[Signature|ID]? redex=BigraphExpression reactum=BigraphExpression)
+	 */
+	protected void sequence_LocalRuleDecl(ISerializationContext context, LocalRuleDecl semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -397,6 +413,24 @@ public class BDSLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     RuleVarReference returns RuleVarReference
+	 *
+	 * Constraint:
+	 *     value=[LocalRuleDecl|BigraphVarReferenceID]
+	 */
+	protected void sequence_RuleVarReference(ISerializationContext context, RuleVarReference semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, BDSLPackage.Literals.RULE_VAR_REFERENCE__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BDSLPackage.Literals.RULE_VAR_REFERENCE__VALUE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getRuleVarReferenceAccess().getValueLocalRuleDeclBigraphVarReferenceIDParserRuleCall_0_1(), semanticObject.eGet(BDSLPackage.Literals.RULE_VAR_REFERENCE__VALUE, false));
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     Signature returns Signature
 	 *
 	 * Constraint:
@@ -437,7 +471,7 @@ public class BDSLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     PrimaryExpression returns Site
 	 *
 	 * Constraint:
-	 *     index=INT_SITE
+	 *     index=INT
 	 */
 	protected void sequence_Site(ISerializationContext context, Site semanticObject) {
 		if (errorAcceptor != null) {
@@ -445,7 +479,7 @@ public class BDSLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BDSLPackage.Literals.SITE__INDEX));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getSiteAccess().getIndexINT_SITETerminalRuleCall_2_0(), semanticObject.getIndex());
+		feeder.accept(grammarAccess.getSiteAccess().getIndexINTTerminalRuleCall_2_0(), semanticObject.getIndex());
 		feeder.finish();
 	}
 	

@@ -4,56 +4,48 @@
 package de.tudresden.inf.st.bigraphs.dsl.bDSL.impl;
 
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLPackage;
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.EInt;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalRuleDecl;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.RuleVarReference;
 
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>EInt</b></em>'.
+ * An implementation of the model object '<em><b>Rule Var Reference</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.EIntImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.RuleVarReferenceImpl#getValue <em>Value</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class EIntImpl extends MinimalEObjectImpl.Container implements EInt
+public class RuleVarReferenceImpl extends MinimalEObjectImpl.Container implements RuleVarReference
 {
   /**
-   * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
+   * The cached value of the '{@link #getValue() <em>Value</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getValue()
    * @generated
    * @ordered
    */
-  protected static final int VALUE_EDEFAULT = 0;
-
-  /**
-   * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getValue()
-   * @generated
-   * @ordered
-   */
-  protected int value = VALUE_EDEFAULT;
+  protected LocalRuleDecl value;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected EIntImpl()
+  protected RuleVarReferenceImpl()
   {
     super();
   }
@@ -66,7 +58,7 @@ public class EIntImpl extends MinimalEObjectImpl.Container implements EInt
   @Override
   protected EClass eStaticClass()
   {
-    return BDSLPackage.Literals.EINT;
+    return BDSLPackage.Literals.RULE_VAR_REFERENCE;
   }
 
   /**
@@ -75,7 +67,27 @@ public class EIntImpl extends MinimalEObjectImpl.Container implements EInt
    * @generated
    */
   @Override
-  public int getValue()
+  public LocalRuleDecl getValue()
+  {
+    if (value != null && value.eIsProxy())
+    {
+      InternalEObject oldValue = (InternalEObject)value;
+      value = (LocalRuleDecl)eResolveProxy(oldValue);
+      if (value != oldValue)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, BDSLPackage.RULE_VAR_REFERENCE__VALUE, oldValue, value));
+      }
+    }
+    return value;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public LocalRuleDecl basicGetValue()
   {
     return value;
   }
@@ -86,12 +98,12 @@ public class EIntImpl extends MinimalEObjectImpl.Container implements EInt
    * @generated
    */
   @Override
-  public void setValue(int newValue)
+  public void setValue(LocalRuleDecl newValue)
   {
-    int oldValue = value;
+    LocalRuleDecl oldValue = value;
     value = newValue;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, BDSLPackage.EINT__VALUE, oldValue, value));
+      eNotify(new ENotificationImpl(this, Notification.SET, BDSLPackage.RULE_VAR_REFERENCE__VALUE, oldValue, value));
   }
 
   /**
@@ -104,8 +116,9 @@ public class EIntImpl extends MinimalEObjectImpl.Container implements EInt
   {
     switch (featureID)
     {
-      case BDSLPackage.EINT__VALUE:
-        return getValue();
+      case BDSLPackage.RULE_VAR_REFERENCE__VALUE:
+        if (resolve) return getValue();
+        return basicGetValue();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -120,8 +133,8 @@ public class EIntImpl extends MinimalEObjectImpl.Container implements EInt
   {
     switch (featureID)
     {
-      case BDSLPackage.EINT__VALUE:
-        setValue((Integer)newValue);
+      case BDSLPackage.RULE_VAR_REFERENCE__VALUE:
+        setValue((LocalRuleDecl)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -137,8 +150,8 @@ public class EIntImpl extends MinimalEObjectImpl.Container implements EInt
   {
     switch (featureID)
     {
-      case BDSLPackage.EINT__VALUE:
-        setValue(VALUE_EDEFAULT);
+      case BDSLPackage.RULE_VAR_REFERENCE__VALUE:
+        setValue((LocalRuleDecl)null);
         return;
     }
     super.eUnset(featureID);
@@ -154,27 +167,10 @@ public class EIntImpl extends MinimalEObjectImpl.Container implements EInt
   {
     switch (featureID)
     {
-      case BDSLPackage.EINT__VALUE:
-        return value != VALUE_EDEFAULT;
+      case BDSLPackage.RULE_VAR_REFERENCE__VALUE:
+        return value != null;
     }
     return super.eIsSet(featureID);
   }
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (value: ");
-    result.append(value);
-    result.append(')');
-    return result.toString();
-  }
-
-} //EIntImpl
+} //RuleVarReferenceImpl

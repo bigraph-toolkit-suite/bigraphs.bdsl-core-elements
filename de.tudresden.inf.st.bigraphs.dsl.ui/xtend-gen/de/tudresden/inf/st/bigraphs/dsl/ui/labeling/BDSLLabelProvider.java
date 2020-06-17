@@ -40,14 +40,8 @@ public class BDSLLabelProvider extends DefaultEObjectLabelProvider {
   }
   
   public String text(final ControlVariable event) {
-    String _name = event.getName();
-    String _plus = (_name + " (");
-    int _value = event.getArity().getValue();
-    String _plus_1 = (_plus + Integer.valueOf(_value));
-    String _plus_2 = (_plus_1 + ", ");
-    String _name_1 = event.getType().getName();
-    String _plus_3 = (_plus_2 + _name_1);
-    return (_plus_3 + ")");
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe field value is not visible");
   }
   
   public String text(final LocalVarDecl event) {

@@ -8,6 +8,7 @@ import de.tudresden.inf.st.bigraphs.dsl.bDSL.AbstractElement;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.AbstractMainStatements;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLFactory;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLPackage;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.BRSDefinition;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BRSModel;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BRSModelImport;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphExpression;
@@ -16,8 +17,8 @@ import de.tudresden.inf.st.bigraphs.dsl.bDSL.BinaryNestingOperator;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BinaryParallelOperator;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlType;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable;
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.EInt;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.LinkNames;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalRuleDecl;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalVarDecl;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.MainDeclaration;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.MainElement;
@@ -28,6 +29,7 @@ import de.tudresden.inf.st.bigraphs.dsl.bDSL.OutputModeModel;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.Plus;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.PrintLn;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.PrintableExpression;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.RuleVarReference;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.Signature;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.Site;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.SiteVars;
@@ -96,13 +98,6 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass eIntEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   private EClass nameConstantEClass = null;
 
   /**
@@ -145,7 +140,21 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass localRuleDeclEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass bigraphVarReferenceEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass ruleVarReferenceEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -181,6 +190,13 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
    * @generated
    */
   private EClass abstractMainStatementsEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass brsDefinitionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -391,6 +407,28 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
    * @generated
    */
   @Override
+  public EAttribute getAbstractElement_Name()
+  {
+    return (EAttribute)abstractElementEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getAbstractElement_Sig()
+  {
+    return (EReference)abstractElementEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getMainElement()
   {
     return mainElementEClass;
@@ -479,31 +517,9 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
    * @generated
    */
   @Override
-  public EReference getControlVariable_Arity()
+  public EAttribute getControlVariable_Arity()
   {
-    return (EReference)controlVariableEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getEInt()
-  {
-    return eIntEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getEInt_Value()
-  {
-    return (EAttribute)eIntEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)controlVariableEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -611,20 +627,9 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
    * @generated
    */
   @Override
-  public EAttribute getLocalVarDecl_Name()
-  {
-    return (EAttribute)localVarDeclEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EReference getLocalVarDecl_Type()
   {
-    return (EReference)localVarDeclEClass.getEStructuralFeatures().get(1);
+    return (EReference)localVarDeclEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -635,18 +640,7 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
   @Override
   public EReference getLocalVarDecl_Definition()
   {
-    return (EReference)localVarDeclEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getLocalVarDecl_Sig()
-  {
-    return (EReference)localVarDeclEClass.getEStructuralFeatures().get(3);
+    return (EReference)localVarDeclEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -657,7 +651,40 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
   @Override
   public EReference getLocalVarDecl_SiteArgs()
   {
-    return (EReference)localVarDeclEClass.getEStructuralFeatures().get(4);
+    return (EReference)localVarDeclEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getLocalRuleDecl()
+  {
+    return localRuleDeclEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getLocalRuleDecl_Redex()
+  {
+    return (EReference)localRuleDeclEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getLocalRuleDecl_Reactum()
+  {
+    return (EReference)localRuleDeclEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -680,6 +707,28 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
   public EReference getBigraphVarReference_Value()
   {
     return (EReference)bigraphVarReferenceEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getRuleVarReference()
+  {
+    return ruleVarReferenceEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getRuleVarReference_Value()
+  {
+    return (EReference)ruleVarReferenceEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -768,6 +817,39 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
   public EClass getAbstractMainStatements()
   {
     return abstractMainStatementsEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getBRSDefinition()
+  {
+    return brsDefinitionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getBRSDefinition_Agents()
+  {
+    return (EReference)brsDefinitionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getBRSDefinition_Rules()
+  {
+    return (EReference)brsDefinitionEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1008,6 +1090,8 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
     createEAttribute(brsModelImportEClass, BRS_MODEL_IMPORT__IMPORTED_NAMESPACE);
 
     abstractElementEClass = createEClass(ABSTRACT_ELEMENT);
+    createEAttribute(abstractElementEClass, ABSTRACT_ELEMENT__NAME);
+    createEReference(abstractElementEClass, ABSTRACT_ELEMENT__SIG);
 
     mainElementEClass = createEClass(MAIN_ELEMENT);
     createEReference(mainElementEClass, MAIN_ELEMENT__VALUE);
@@ -1019,10 +1103,7 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
     controlVariableEClass = createEClass(CONTROL_VARIABLE);
     createEAttribute(controlVariableEClass, CONTROL_VARIABLE__TYPE);
     createEAttribute(controlVariableEClass, CONTROL_VARIABLE__NAME);
-    createEReference(controlVariableEClass, CONTROL_VARIABLE__ARITY);
-
-    eIntEClass = createEClass(EINT);
-    createEAttribute(eIntEClass, EINT__VALUE);
+    createEAttribute(controlVariableEClass, CONTROL_VARIABLE__ARITY);
 
     nameConstantEClass = createEClass(NAME_CONSTANT);
     createEAttribute(nameConstantEClass, NAME_CONSTANT__VALUE);
@@ -1038,14 +1119,19 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
     lvd2EClass = createEClass(LVD2);
 
     localVarDeclEClass = createEClass(LOCAL_VAR_DECL);
-    createEAttribute(localVarDeclEClass, LOCAL_VAR_DECL__NAME);
     createEReference(localVarDeclEClass, LOCAL_VAR_DECL__TYPE);
     createEReference(localVarDeclEClass, LOCAL_VAR_DECL__DEFINITION);
-    createEReference(localVarDeclEClass, LOCAL_VAR_DECL__SIG);
     createEReference(localVarDeclEClass, LOCAL_VAR_DECL__SITE_ARGS);
+
+    localRuleDeclEClass = createEClass(LOCAL_RULE_DECL);
+    createEReference(localRuleDeclEClass, LOCAL_RULE_DECL__REDEX);
+    createEReference(localRuleDeclEClass, LOCAL_RULE_DECL__REACTUM);
 
     bigraphVarReferenceEClass = createEClass(BIGRAPH_VAR_REFERENCE);
     createEReference(bigraphVarReferenceEClass, BIGRAPH_VAR_REFERENCE__VALUE);
+
+    ruleVarReferenceEClass = createEClass(RULE_VAR_REFERENCE);
+    createEReference(ruleVarReferenceEClass, RULE_VAR_REFERENCE__VALUE);
 
     abstractBigraphDeclarationEClass = createEClass(ABSTRACT_BIGRAPH_DECLARATION);
 
@@ -1059,6 +1145,10 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
     createEReference(mainDeclarationEClass, MAIN_DECLARATION__DEFINITION);
 
     abstractMainStatementsEClass = createEClass(ABSTRACT_MAIN_STATEMENTS);
+
+    brsDefinitionEClass = createEClass(BRS_DEFINITION);
+    createEReference(brsDefinitionEClass, BRS_DEFINITION__AGENTS);
+    createEReference(brsDefinitionEClass, BRS_DEFINITION__RULES);
 
     printLnEClass = createEClass(PRINT_LN);
     createEReference(printLnEClass, PRINT_LN__TEXT);
@@ -1120,11 +1210,13 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
     lvd2EClass.getESuperTypes().add(this.getAbstractBigraphDeclaration());
     localVarDeclEClass.getESuperTypes().add(this.getAbstractElement());
     localVarDeclEClass.getESuperTypes().add(this.getLVD2());
+    localRuleDeclEClass.getESuperTypes().add(this.getAbstractElement());
     bigraphVarReferenceEClass.getESuperTypes().add(this.getAbstractBigraphDeclaration());
     bigraphVarReferenceEClass.getESuperTypes().add(this.getAbstractMainStatements());
     bigraphVarReferenceEClass.getESuperTypes().add(this.getPrintableExpression());
     abstractBigraphDeclarationEClass.getESuperTypes().add(this.getBigraphExpression());
     nodeExpressionCallEClass.getESuperTypes().add(this.getAbstractBigraphDeclaration());
+    brsDefinitionEClass.getESuperTypes().add(this.getAbstractMainStatements());
     printLnEClass.getESuperTypes().add(this.getAbstractMainStatements());
     plusEClass.getESuperTypes().add(this.getBigraphExpression());
     multiEClass.getESuperTypes().add(this.getBigraphExpression());
@@ -1140,6 +1232,8 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
     initEAttribute(getBRSModelImport_ImportedNamespace(), ecorePackage.getEString(), "importedNamespace", null, 0, 1, BRSModelImport.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(abstractElementEClass, AbstractElement.class, "AbstractElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getAbstractElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, AbstractElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAbstractElement_Sig(), this.getSignature(), null, "sig", null, 0, 1, AbstractElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(mainElementEClass, MainElement.class, "MainElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getMainElement_Value(), this.getMainDeclaration(), null, "value", null, 0, -1, MainElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1151,10 +1245,7 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
     initEClass(controlVariableEClass, ControlVariable.class, "ControlVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getControlVariable_Type(), this.getControlType(), "type", null, 0, 1, ControlVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getControlVariable_Name(), ecorePackage.getEString(), "name", null, 0, 1, ControlVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getControlVariable_Arity(), this.getEInt(), null, "arity", null, 0, 1, ControlVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(eIntEClass, EInt.class, "EInt", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getEInt_Value(), ecorePackage.getEInt(), "value", null, 0, 1, EInt.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getControlVariable_Arity(), ecorePackage.getEInt(), "arity", null, 0, 1, ControlVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(nameConstantEClass, NameConstant.class, "NameConstant", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getNameConstant_Value(), ecorePackage.getEString(), "value", null, 0, 1, NameConstant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1170,14 +1261,19 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
     initEClass(lvd2EClass, de.tudresden.inf.st.bigraphs.dsl.bDSL.LVD2.class, "LVD2", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(localVarDeclEClass, LocalVarDecl.class, "LocalVarDecl", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getLocalVarDecl_Name(), ecorePackage.getEString(), "name", null, 0, 1, LocalVarDecl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getLocalVarDecl_Type(), this.getControlVariable(), null, "type", null, 0, 1, LocalVarDecl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getLocalVarDecl_Definition(), this.getBigraphExpression(), null, "definition", null, 0, -1, LocalVarDecl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getLocalVarDecl_Sig(), this.getSignature(), null, "sig", null, 0, 1, LocalVarDecl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getLocalVarDecl_SiteArgs(), this.getSiteVars(), null, "siteArgs", null, 0, -1, LocalVarDecl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(localRuleDeclEClass, LocalRuleDecl.class, "LocalRuleDecl", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getLocalRuleDecl_Redex(), this.getBigraphExpression(), null, "redex", null, 0, 1, LocalRuleDecl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getLocalRuleDecl_Reactum(), this.getBigraphExpression(), null, "reactum", null, 0, 1, LocalRuleDecl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(bigraphVarReferenceEClass, BigraphVarReference.class, "BigraphVarReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getBigraphVarReference_Value(), this.getLocalVarDecl(), null, "value", null, 0, 1, BigraphVarReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(ruleVarReferenceEClass, RuleVarReference.class, "RuleVarReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getRuleVarReference_Value(), this.getLocalRuleDecl(), null, "value", null, 0, 1, RuleVarReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(abstractBigraphDeclarationEClass, AbstractBigraphDeclaration.class, "AbstractBigraphDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1191,6 +1287,10 @@ public class BDSLPackageImpl extends EPackageImpl implements BDSLPackage
     initEReference(getMainDeclaration_Definition(), this.getAbstractMainStatements(), null, "definition", null, 0, 1, MainDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(abstractMainStatementsEClass, AbstractMainStatements.class, "AbstractMainStatements", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(brsDefinitionEClass, BRSDefinition.class, "BRSDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getBRSDefinition_Agents(), ecorePackage.getEObject(), null, "agents", null, 0, -1, BRSDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getBRSDefinition_Rules(), this.getRuleVarReference(), null, "rules", null, 0, -1, BRSDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(printLnEClass, PrintLn.class, "PrintLn", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getPrintLn_Text(), this.getPrintableExpression(), null, "text", null, 0, 1, PrintLn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
