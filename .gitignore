@@ -2,7 +2,6 @@
 *.iml
 out
 gen
-*.jar
 .directory
 /**/build/
 /BigraphBaseModl/
