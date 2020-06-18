@@ -19,7 +19,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MainElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" upperBound="-1"
-        eType="#//MainDeclaration" containment="true"/>
+        eType="#//AbstractMainStatements" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Signature">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -55,11 +55,21 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="reactum" eType="#//BigraphExpression"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LocalPredicateDeclaration" eSuperTypes="#//AbstractElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//PredicateType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="definition" eType="#//BigraphExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ElementaryBigraphs" eSuperTypes="#//AbstractBigraphDeclaration"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Barren" eSuperTypes="#//ElementaryBigraphs"/>
   <eClassifiers xsi:type="ecore:EClass" name="BigraphVarReference" eSuperTypes="#//AbstractBigraphDeclaration #//AbstractMainStatements #//PrintableExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//LocalVarDecl"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RuleVarReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//LocalRuleDecl"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PredicateVarReference">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//LocalPredicateDeclaration"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractBigraphDeclaration" eSuperTypes="#//BigraphExpression"/>
   <eClassifiers xsi:type="ecore:EClass" name="NodeExpressionCall" eSuperTypes="#//AbstractBigraphDeclaration">
@@ -68,16 +78,14 @@
         eType="#//LinkNames" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BigraphExpression"/>
-  <eClassifiers xsi:type="ecore:EClass" name="MainDeclaration">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="definition" eType="#//AbstractMainStatements"
-        containment="true"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractMainStatements"/>
   <eClassifiers xsi:type="ecore:EClass" name="BRSDefinition" eSuperTypes="#//AbstractMainStatements">
     <eStructuralFeatures xsi:type="ecore:EReference" name="agents" upperBound="-1"
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="rules" upperBound="-1"
         eType="#//RuleVarReference" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="predicates" upperBound="-1"
+        eType="#//PredicateVarReference" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PrintLn" eSuperTypes="#//AbstractMainStatements">
     <eStructuralFeatures xsi:type="ecore:EReference" name="text" eType="#//PrintableExpression"
@@ -99,6 +107,10 @@
     <eLiterals name="ATOMIC" literal="atomic"/>
     <eLiterals name="ACTIVE" value="1" literal="active"/>
     <eLiterals name="PASSIVE" value="2" literal="passive"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="PredicateType">
+    <eLiterals name="PARTIAL" literal="partial"/>
+    <eLiterals name="ISO" value="1" literal="iso"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="OutputModeModel">
     <eLiterals name="INSTANCE_MODEL" literal="xmi"/>

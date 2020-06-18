@@ -34,12 +34,12 @@ EString returns ecore::EString:
 	STRING | ID;
 
 AbstractElement:
-	LocalVarDecl | LocalRuleDecl
+	LocalVarDecl | LocalRuleDecl | LocalPredicateDeclaration
 	// and rules
 ;
 
 MainElement:
-	"main" "=" '{' {MainElement} value+=(MainDeclaration)* '}' ';';
+	"main" "=" '{' {MainElement} value+=(AbstractMainStatements)* '}';
 
 	//creates a signature class with the same name: shortcut for "signature returns signature"
 Signature:
@@ -50,7 +50,7 @@ Signature:
 
 ControlDef returns ControlVariable:
 //	{ControlDef}
-	{ControlVariable} type=ControlType? 'ctrl' name=ID 'arity' arity=INT ';';
+	{ControlVariable} type=ControlType? 'ctrl' name=ID 'arity' arity=INT;
 
 	//ArityValue returns ecore::EInt:
 //	INT
@@ -101,6 +101,20 @@ LocalRuleDecl:
 	'{'
 	reactum=BigraphExpression
 	'}');
+	
+LocalPredicateDeclaration:
+	'pred' {LocalPredicateDeclaration} name=ID ("(" sig=[Signature] ")")? (':' type=PredicateType)? '=' '{'
+	definition=BigraphExpression
+	'}'
+;
+
+ElementaryBigraphs:
+	Barren
+;
+
+Barren:
+	{Barren} '1'
+;
 
 	//BigraphExpressionOrBigraphReference:
 //	BigraphVarReference
@@ -117,8 +131,14 @@ BigraphVarReference:
 RuleVarReference:
 	value=[LocalRuleDecl|BigraphVarReferenceID];
 
+PredicateVarReference:
+	value=[LocalPredicateDeclaration|BigraphVarReferenceID]
+;	
+	
+
+
 AbstractBigraphDeclaration:
-	BigraphVarReference | NodeExpressionCall | LVD2 | Site;
+	BigraphVarReference | NodeExpressionCall | LVD2 | Site | ElementaryBigraphs;
 
 NodeExpressionCall:
 	value=[ControlVariable|FQN] ('[' links+=LinkNames* ']')?;
@@ -148,8 +168,8 @@ PrimaryExpression returns BigraphExpression:
 //terminal STRING: '"' -> '"';
 //terminal WS: (' '|'\t')+;
 //terminal ANY_OTHER: .;m
-MainDeclaration:
-	{MainDeclaration} definition=AbstractMainStatements ';';
+//MainDeclaration:
+//	{MainDeclaration} definition=AbstractMainStatements ';';
 
 AbstractMainStatements:
 	BigraphVarReference | BRSDefinition | PrintLn;
@@ -157,7 +177,8 @@ AbstractMainStatements:
 BRSDefinition:
 	{BRSDefinition} 'brs' '{'
 	('agents' '=' ("[" agents+=BigraphVarReference? (',' agents+=BigraphVarReference)* "]")?) ','
-	('rules' '=' ("[" rules+=RuleVarReference? (',' agents+=RuleVarReference)* "]")?)
+	('rules' '=' ("[" rules+=RuleVarReference? (',' agents+=RuleVarReference)* "]")?) ','
+	('preds' '=' ("[" predicates+=PredicateVarReference? (',' predicates+=PredicateVarReference)* "]")?)
 	'}';
 
 PrintLn:
@@ -175,6 +196,10 @@ enum BinaryNestingOperator:
 
 enum ControlType:
 	ATOMIC='atomic' | ACTIVE='active' | PASSIVE='passive';
+	
+enum PredicateType:
+	PARTIAL='partial' | ISO='iso' 
+;
 
 enum OutputModeModel:
 	INSTANCE_MODEL='xmi' | META_MODEL='ecore';
