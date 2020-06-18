@@ -6,6 +6,7 @@ gen
 /**/build/
 /**/src-gen/
 /**/xtend-gen/
+.gradle/**
 
 # User-specific stuff
 .idea/**/workspace.xml
