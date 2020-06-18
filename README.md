@@ -23,15 +23,12 @@ This will also clone the necessary [Ecore Bigraph Meta Model]() repository, whic
 
 > **Note:** [Ecore Bigraph Meta Model]() is configured as a Git submodule.
 
-### Changing the Ecore Bigraph Meta Model
+### ~~Changing the Ecore Bigraph Meta Model~~
 
-If you want to use another version of the meta model:
+~~If you want to use another version of the meta model:~~
 
 ```
-cd ./BigraphBaseModel
-git checkout [tag/branch/hash]
-cd ..
-git submodule update --init
+
 ```
 
 ### Generate Xtext Language Artifacts
