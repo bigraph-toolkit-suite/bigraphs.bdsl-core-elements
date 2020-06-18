@@ -179,9 +179,9 @@ AbstractMainStatements:
 
 BRSDefinition:
 	{BRSDefinition} 'brs' '{'
-	('agents' '=' ("[" agents+=BigraphVarReference? (',' agents+=BigraphVarReference)* "]") ',')?
-	('rules' '=' ("[" rules+=RuleVarReference? (',' agents+=RuleVarReference)* "]") ',')?
-	('preds' '=' ("[" predicates+=PredicateVarReference? (',' predicates+=PredicateVarReference)* "]"))?
+	('agents' '=' ("[" agents+=BigraphVarReference? (',' agents+=BigraphVarReference)* "]"))?
+	(',' 'rules' '=' ("[" rules+=RuleVarReference? (',' agents+=RuleVarReference)* "]"))?
+	(',' 'preds' '=' ("[" predicates+=PredicateVarReference? (',' predicates+=PredicateVarReference)* "]"))?
 	'}';
 
 PrintLn:
