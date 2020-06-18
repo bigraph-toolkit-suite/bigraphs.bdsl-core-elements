@@ -4,6 +4,8 @@ out
 gen
 *.jar
 .directory
+/**/build/
+/BigraphBaseModl/
 
 # User-specific stuff
 .idea/**/workspace.xml
@@ -40,6 +42,7 @@ gen
 .idea/modules
 *.iml
 *.ipr
+build/
 
 # CMake
 cmake-build-*/
@@ -148,5 +151,3 @@ buildNumber.properties
 .mvn/timing.properties
 # https://github.com/takari/maven-wrapper#usage-without-binary-jar
 .mvn/wrapper/maven-wrapper.jar
-
-
