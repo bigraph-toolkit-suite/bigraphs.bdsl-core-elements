@@ -109,13 +109,16 @@ LocalPredicateDeclaration:
 ;
 
 ElementaryBigraphs:
-	Barren
+	Barren | Merge
 ;
 
 Barren:
-	{Barren} '1'
+	{Barren} 'barren()'
 ;
 
+Merge:
+	{Merge} 'merge' '(' sites=INT ')'
+;
 	//BigraphExpressionOrBigraphReference:
 //	BigraphVarReference
 //;
