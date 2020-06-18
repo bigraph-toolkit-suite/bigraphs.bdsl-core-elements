@@ -6,6 +6,8 @@ gen
 .directory
 /**/build/
 /BigraphBaseModl/
+/**/src-gen/
+/**/xtend-gen/
 
 # User-specific stuff
 .idea/**/workspace.xml
