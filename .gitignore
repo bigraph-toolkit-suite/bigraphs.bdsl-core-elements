@@ -4,7 +4,6 @@ out
 gen
 .directory
 /**/build/
-/BigraphBaseModl/
 /**/src-gen/
 /**/xtend-gen/
 
