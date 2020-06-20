@@ -13,6 +13,7 @@ import java.util.Objects
 import org.eclipse.emf.ecore.EObject
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphVarReference
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.Site
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.Closure
 
 //import java.security.Signature
 /**
@@ -27,6 +28,8 @@ import de.tudresden.inf.st.bigraphs.dsl.bDSL.Site
 class BDSLValidator extends AbstractBDSLValidator {
 
 	public static val INVALID_NAME = 'invalidName'
+	
+	public static val INVALID_CLOSURE_DEFINITION = 'invalidClosure'
 
 	public static val CYCLIC_VARIABLE_USAGE = 'cyclicBigraphVariable';
 
@@ -35,8 +38,17 @@ class BDSLValidator extends AbstractBDSLValidator {
 	@Check
 	def siteIndexIsPositive(Site siteExpression) {
 		if (siteExpression.index <= 0) {
-			warning("The index of a site must be a positive integer", BDSLPackage.Literals.SITE__INDEX,
+			error("The index of a site must be a positive integer", BDSLPackage.Literals.SITE__INDEX,
 				SITE_INDEX_IS_POSITIVE);
+		}
+	}
+	
+	@Check
+	def closureNamesAreNotDistinct(Closure closureExpression) {
+		val t = newHashSet(closureExpression.value.toArray)
+		if (closureExpression.value.size != t.size) {
+			error("Names in the closure are not distinct.", BDSLPackage.Literals.CLOSURE__VALUE,
+				INVALID_CLOSURE_DEFINITION);
 		}
 	}
 

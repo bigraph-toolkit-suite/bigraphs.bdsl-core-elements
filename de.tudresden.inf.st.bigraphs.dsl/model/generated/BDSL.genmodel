@@ -54,9 +54,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//ControlVariable/arity"/>
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//NameConstant">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//NameConstant/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//NameConstant/name"/>
     </genClasses>
-    <genClasses ecoreClass="BDSL.ecore#//LinkNames"/>
     <genClasses ecoreClass="BDSL.ecore#//SiteVars">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//SiteVars/name"/>
     </genClasses>
@@ -81,6 +80,9 @@
     <genClasses ecoreClass="BDSL.ecore#//Barren"/>
     <genClasses ecoreClass="BDSL.ecore#//Merge">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//Merge/sites"/>
+    </genClasses>
+    <genClasses ecoreClass="BDSL.ecore#//Closure">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//Closure/value"/>
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//BigraphVarReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BDSL.ecore#//BigraphVarReference/value"/>

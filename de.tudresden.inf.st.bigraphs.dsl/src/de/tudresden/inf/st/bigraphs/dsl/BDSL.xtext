@@ -30,8 +30,8 @@ BigraphVarReferenceID hidden():
 
 //terminal INT_POSITIVE returns ecore::EInt: ('1'..'9')+;
 //terminal INT_SITE returns ecore::EInt: ('1'..'9');
-EString returns ecore::EString:
-	STRING | ID;
+//EString returns ecore::EString:
+//	STRING | ID;
 
 AbstractElement:
 	LocalVarDecl | LocalRuleDecl | LocalPredicateDeclaration
@@ -62,10 +62,22 @@ ControlDef returns ControlVariable:
 //	name=ID;
 
 NameConstant:
-	value=EString;
+	{NameConstant} name=STRING;
+	
+//LinkNameValue: //{LinkNameValue}
+//	 StringLiteral | LinkNameReference
+//;
+//
+//StringLiteral:
+//	value=STRING
+//;
+//    
+//LinkNameReference:
+//	ref=[NameConstant|STRING]
+//;
 
-LinkNames:
-	(NameConstant) | (NameConstant ",");
+//LinkNames:
+//	(NameConstant) | (NameConstant ",");
 
 	//TODO: change to linkNamevars or so
 SiteVars:
@@ -109,15 +121,19 @@ LocalPredicateDeclaration:
 ;
 
 ElementaryBigraphs:
-	Barren | Merge
+	Barren | Merge | Closure
 ;
 
 Barren:
-	{Barren} 'barren()'
+	'barren' {Barren} '()'
 ;
 
 Merge:
-	{Merge} 'merge' '(' sites=INT ')'
+	'merge' {Merge} '(' sites=INT ')'
+;
+
+Closure:
+	'closure' {Closure} '(' value+=STRING (',' value+=STRING)* ')'
 ;
 	//BigraphExpressionOrBigraphReference:
 //	BigraphVarReference
@@ -144,7 +160,10 @@ AbstractBigraphDeclaration:
 	BigraphVarReference | NodeExpressionCall | LVD2 | Site | ElementaryBigraphs;
 
 NodeExpressionCall:
-	value=[ControlVariable|FQN] ('[' links+=LinkNames* ']')?;
+	value=[ControlVariable|FQN] ("[" links+=NameConstant? (',' links+=NameConstant)* "]")?
+;
+	//('[' links+=LinkNames* ']')?; //(NameConstant) | (NameConstant ",");
+//	("[" links+=NameConstant? (',' links+=NameConstant)* "]")?
 
 BigraphExpression:
 	Addition;
