@@ -121,7 +121,7 @@ LocalPredicateDeclaration:
 ;
 
 ElementaryBigraphs:
-	Barren | Merge | Closure
+	Barren | Merge | Closure | Substitution
 ;
 
 Barren:
@@ -133,8 +133,15 @@ Merge:
 ;
 
 Closure:
-	'closure' {Closure} '(' value+=STRING (',' value+=STRING)* ')'
+	('closure' | 'clsre' | '/') {Closure} '(' value+=STRING (',' value+=STRING)* ')'
 ;
+
+Substitution:
+	('substitution' | 'subst') {Substitution} '(' from=STRING ',' ('[' to+=STRING (',' to+=STRING)* ']') ')'
+;
+
+
+
 	//BigraphExpressionOrBigraphReference:
 //	BigraphVarReference
 //;
@@ -197,7 +204,7 @@ AbstractMainStatements:
 	BigraphVarReference | BRSDefinition | PrintLn;
 
 BRSDefinition:
-	{BRSDefinition} 'brs' '{'
+	{BRSDefinition} 'brs' name=ID '{'
 	('agents' '=' ("[" agents+=BigraphVarReference? (',' agents+=BigraphVarReference)* "]"))?
 	(',' 'rules' '=' ("[" rules+=RuleVarReference? (',' agents+=RuleVarReference)* "]"))?
 	(',' 'preds' '=' ("[" predicates+=PredicateVarReference? (',' predicates+=PredicateVarReference)* "]"))?

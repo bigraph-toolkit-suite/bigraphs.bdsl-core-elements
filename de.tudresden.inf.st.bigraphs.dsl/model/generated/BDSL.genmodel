@@ -84,6 +84,10 @@
     <genClasses ecoreClass="BDSL.ecore#//Closure">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//Closure/value"/>
     </genClasses>
+    <genClasses ecoreClass="BDSL.ecore#//Substitution">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//Substitution/from"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//Substitution/to"/>
+    </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//BigraphVarReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BDSL.ecore#//BigraphVarReference/value"/>
     </genClasses>
@@ -101,6 +105,7 @@
     <genClasses ecoreClass="BDSL.ecore#//BigraphExpression"/>
     <genClasses ecoreClass="BDSL.ecore#//AbstractMainStatements"/>
     <genClasses ecoreClass="BDSL.ecore#//BRSDefinition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//BRSDefinition/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//BRSDefinition/agents"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//BRSDefinition/rules"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//BRSDefinition/predicates"/>
