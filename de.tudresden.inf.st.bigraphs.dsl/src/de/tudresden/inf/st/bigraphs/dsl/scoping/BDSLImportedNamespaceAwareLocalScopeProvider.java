@@ -47,6 +47,7 @@ import de.tudresden.inf.st.bigraphs.dsl.bDSL.BRSModel;
 //import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphLiteral;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphVarReference;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalRuleDecl;
 //import de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlDef;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalVarDecl;
 //import de.tudresden.inf.st.bigraphs.dsl.bDSL.NodeExpression;
@@ -107,24 +108,24 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 		// signature)
 		// Bigraph variable reference scope (excluding itself at the end, no recursive
 		// bigraph declaration allowed)
-		if (context instanceof LocalVarDecl && reference.eContainer() == BDSLPackage.Literals.BIGRAPH_VAR_REFERENCE) {
-			EObject containerElement = EcoreUtil2.getContainerOfType(context, LocalVarDecl.class);
+		if (context instanceof AbstractElement && reference.eContainer() == BDSLPackage.Literals.BIGRAPH_VAR_REFERENCE) {
+			EObject containerElement = EcoreUtil2.getContainerOfType(context, AbstractElement.class);
 			if (containerElement != null) {
 //				System.out.println("containerElement: " + containerElement);
 
 //				Scopes.selectCompatible(IScope.NULLSCOPE.getAllElements(), BDSLPackage.Literals.BIGRAPH_VAR_REFERENCE);
 //				EObject rootElement = EcoreUtil2.getRootContainer(context);
-				Signature correctSignature = inferSignature((LocalVarDecl) containerElement);// ((LocalVarDecl)
+				Signature correctSignature = inferSignature((AbstractElement) containerElement);// ((LocalVarDecl)
 																								// containerElement).getSig();
-				List<LocalVarDecl> allVarDeclarations = new ArrayList<LocalVarDecl>();
+				List<AbstractElement> allVarDeclarations = new ArrayList<AbstractElement>();
 //				= EcoreUtil2.getAllContentsOfType(rootElement,
 //						LocalVarDecl.class);
 //				collectScopeVarDeclarations(allVarDeclarations, containerElement);
 				findAllLocalBigraphVariableDeclarations(context, allVarDeclarations);
-				Predicate<LocalVarDecl> signatureFilterPredicate = new Predicate<LocalVarDecl>() {
+				Predicate<AbstractElement> signatureFilterPredicate = new Predicate<AbstractElement>() {
 
 					@Override
-					public boolean apply(LocalVarDecl arg0) {
+					public boolean apply(AbstractElement arg0) {
 //						System.out.println(arg0);
 //						System.out.println(correctSignature);
 						Signature infered = inferSignature(arg0);
@@ -141,7 +142,7 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 						return !Objects.equal(e.getEObjectOrProxy(), context);
 					}
 				};
-				Collection<LocalVarDecl> filtered = Collections2.filter(allVarDeclarations, signatureFilterPredicate);
+				Collection<AbstractElement> filtered = Collections2.filter(allVarDeclarations, signatureFilterPredicate);
 //				System.out.println("correctSignature is: " + correctSignature);
 //				System.out.println("filtered: " + filtered);
 				IScope existingScope = Scopes.scopeFor(filtered);
@@ -157,10 +158,11 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 			// && reference.eContainer() ==
 			// BDSLPackage.Literals.BIGRAPH_VAR_REFERENCE) {
 //			System.out.println("Reference.eContainer: " + reference.eContainer());
-			EObject containerElement = EcoreUtil2.getContainerOfType(context, LocalVarDecl.class);
+			EObject containerElement = EcoreUtil2.getContainerOfType(context, AbstractElement.class);
 //			System.out.println("containerElement: " + containerElement);
 			if (containerElement != null) {
-				Signature correctSignature = inferSignature((LocalVarDecl) containerElement);
+				Signature correctSignature = inferSignature((AbstractElement) containerElement);
+//				System.out.println("\t correctSignature: " + correctSignature);
 //						((LocalVarDecl) containerElement).getSig();
 //				if (correctSignature == null) {
 
@@ -203,11 +205,11 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 	 * @param context the current context element
 	 * @param collect a list to collect all occurring declarations
 	 */
-	public void findAllLocalBigraphVariableDeclarations(EObject context, List<LocalVarDecl> collect) {
+	public void findAllLocalBigraphVariableDeclarations(EObject context, List<AbstractElement> collect) {
 //		System.out.println("context: " + context);
-		List<LocalVarDecl> allVarDeclarations = EcoreUtil2.getAllContentsOfType(context, LocalVarDecl.class);
+		List<AbstractElement> allVarDeclarations = EcoreUtil2.getAllContentsOfType(context, AbstractElement.class);
 		List<String> names = collect.stream().map(x -> x.getName()).collect(Collectors.toList());
-		for (LocalVarDecl each : allVarDeclarations) {
+		for (AbstractElement each : allVarDeclarations) {
 			if (!names.contains(each.getName())) {
 				collect.add(each);
 			}
@@ -224,21 +226,34 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 	 * @param variable
 	 * @return
 	 */
-	public Signature inferSignature(LocalVarDecl variable) {
+	public Signature inferSignature(AbstractElement variable) {
 		if (variable.getSig() != null) {
 			return variable.getSig();
 		}
 		if (variable.eContainer() != null) {
-			EObject container = EcoreUtil2.getContainerOfType(variable.eContainer(), LocalVarDecl.class);
+			EObject container = EcoreUtil2.getContainerOfType(variable.eContainer(), AbstractElement.class);
 //			Signature sig = ((LocalVarDecl) variable.eContainer()).getSig();
 //			if (sig != null)
 //				return sig;
-			if (container instanceof LocalVarDecl)
-				return inferSignature(((LocalVarDecl) container));
+			if (container instanceof AbstractElement)
+				return inferSignature(((AbstractElement) container));
 		}
-
 		return null;
 	}
+	
+//	public Signature inferSignature(LocalRuleDecl variable) {
+//		if (variable.getSig() != null) {
+//			return variable.getSig();
+//		}
+//		if (variable.eContainer() != null) {
+//			EObject containerRule = EcoreUtil2.getContainerOfType(variable.eContainer(), LocalRuleDecl.class);
+//			if(containerRule instanceof LocalRuleDecl) {
+//				return inferSignature(((LocalRuleDecl) containerRule));
+//			}
+//		}
+//
+//		return null;
+//	}
 
 	public IScope getBRSModelScope(EObject context, EReference reference, BRSModel module, IScope parent) {
 //		System.out.println("getBRSModelScope");
@@ -249,10 +264,10 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 	}
 
 	public IScope getSigDefScope(EObject context, EReference reference, IScope parent) {
-		EObject containerElement = EcoreUtil2.getContainerOfType(context, LocalVarDecl.class);
+		EObject containerElement = EcoreUtil2.getContainerOfType(context, AbstractElement.class);
 		if (containerElement != null) {
 //			EObject rootElement = EcoreUtil2.getRootContainer(context);
-			Signature correctSignature = ((LocalVarDecl) containerElement).getSig();
+			Signature correctSignature = ((AbstractElement) containerElement).getSig();
 			final QualifiedName fqn1 = getQualifiedNameProvider().getFullyQualifiedName(correctSignature);
 //			System.out.println("fqn1 of sig: " + fqn1);
 			IScope mbsSig = MapBasedScope.createScope(parent,
@@ -272,7 +287,7 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 															// LocalVarDecl.class);
 //			if (containerElement != null) {
 ////				EObject rootElement = EcoreUtil2.getRootContainer(context);
-			Signature correctSignature = ((LocalVarDecl) containerElement).getSig();
+			Signature correctSignature = ((AbstractElement) containerElement).getSig();
 //				final QualifiedName fqn1 = getQualifiedNameProvider().getFullyQualifiedName(correctSignature);
 ////				System.out.println("fqn1 of sig: " + fqn1);
 //				IScope mbsSig = MapBasedScope.createScope(parent, Collections.singleton(EObjectDescription.create(fqn1, correctSignature)));
@@ -304,87 +319,5 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 //		}
 		return parent;
 	}
-
-//	@Override
-//	protected ISelectable internalGetAllDescriptions(final Resource resource) {
-//		Iterable<EObject> allContents = new Iterable<EObject>(){
-//			@Override
-//			public Iterator<EObject> iterator() {
-//				return EcoreUtil.getAllContents(resource, false);
-//			}
-//		}; 
-//		Iterable<IEObjectDescription> transformed = IterableExtensions.flatten(Iterables.transform(allContents,
-//				new Function<EObject, List<IEObjectDescription>>() {
-//					@Override
-//					public List<IEObjectDescription> apply(EObject from) {
-////						if (from instanceof BigraphLiteral) {
-//							List<IEObjectDescription> result = new ArrayList<IEObjectDescription>();
-//							AbstractBigraphDeclaration value = null; //((BigraphLiteral)from).getValue();
-//							if(value instanceof NodeExpression) {
-//								ControlDef cdef = ((NodeExpression)value).getName();
-//								System.out.println("Value is:\t" + value);
-//								System.out.println("cdef:\t" + cdef);
-//								System.out.println(cdef.getName());
-//////								String i = cdef.getName();
-//////								QualifiedName.create(i)
-//								final QualifiedName qualifiedName = getQualifiedNameProvider().apply(value);
-//								final QualifiedName fqn1 = getQualifiedNameProvider().getFullyQualifiedName(value);
-//								final QualifiedName qualifiedName2 = getQualifiedNameProvider().apply(cdef);
-//								final QualifiedName fqn2 = getQualifiedNameProvider().getFullyQualifiedName(cdef);
-//								
-//								System.out.println("qualifiedName is:\t" + qualifiedName + "//" + fqn1);
-//								System.out.println("qualifiedName2 is:\t" + qualifiedName2 + "//" + fqn2);
-////								result.add(EObjectDescription.create(qualifiedName, value));
-////							}
-////							if(value instanceof BigraphVarReference) {
-//////								LocalVarDecl cdef = ((BigraphVarReference)value).getReference();
-//////								String i = cdef.getName();
-////								final QualifiedName qualifiedName = getQualifiedNameProvider().apply(value);
-////								result.add(EObjectDescription.create(qualifiedName, value));
-////							}
-//							
-////							identifier_list l = ((Declarations) from).getIdentifiersList();
-////							for (String i : l.getIdentifers()) {
-////								result.add(EObjectDescription.create(QualifiedName.create(i), from));
-////							}
-//							return result;
-//						} else {
-//							final QualifiedName qualifiedName = getQualifiedNameProvider().apply(from);
-//							if (qualifiedName != null)
-//								return Lists.newArrayList(new EObjectDescription(qualifiedName, from, null));
-//							return Collections.emptyList();
-//						}
-//						
-//						
-//					}
-//				}));
-//		return new MultimapBasedSelectable( Iterables.filter(transformed, Predicates.notNull()));
-//	}
-
-//	@Override
-//	protected MultimapBasedSelectable internalGetAllDescriptions(Resource resource) {
-//
-//		Iterable<EObject> allContents = new Iterable<EObject>(){
-//				@Override
-//				public java.util.Iterator<EObject> iterator() {
-//					return EcoreUtil.getAllContents(resource, false);
-//				}
-//		}; 
-//		List<IEObjectDescription> allDescriptions = new ArrayList<IEObjectDescription>();
-//		for (EObject o : allContents) {
-////			if (o instanceof Sequence) {
-////				for (ArrowID arrowID :  ((Sequence)o).getArrowIDs()) {
-////					allDescriptions.add(EObjectDescription.create(QualifiedName.create(arrowID.getName()), o, null));
-////				}
-////			} else {
-////				QualifiedName name = getQualifiedNameProvider().getFullyQualifiedName(o);
-////				if (name != null) {
-////					allDescriptions.add(EObjectDescription.create(name, o, null));
-////				}
-////			}
-//		}
-//		return new MultimapBasedSelectable(allDescriptions);
-////		return null;
-//	}
 
 }
