@@ -73,7 +73,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="to" unique="false" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BigraphVarReference" eSuperTypes="#//AbstractBigraphDeclaration #//AbstractMainStatements #//PrintableExpression">
+  <eClassifiers xsi:type="ecore:EClass" name="BigraphVarReference" eSuperTypes="#//AbstractBigraphDeclaration #//PrintableExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//LocalVarDecl"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RuleVarReference">
@@ -81,6 +81,9 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PredicateVarReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//LocalPredicateDeclaration"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BRSVarReference">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//BRSDefinition"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractBigraphDeclaration" eSuperTypes="#//BigraphExpression"/>
   <eClassifiers xsi:type="ecore:EClass" name="NodeExpressionCall" eSuperTypes="#//AbstractBigraphDeclaration">
@@ -105,6 +108,13 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="mode" eType="#//OutputModeModel"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PrintableExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ExportMethod" eSuperTypes="#//AbstractMainStatements">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="brs" eType="#//BRSVarReference"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="format" eType="#//ExportFormat"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sink" eType="#//ExportSink"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="filename" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="BinaryParallelOperator">
     <eLiterals name="UNSET" literal="UNSET"/>
     <eLiterals name="MERGE" value="1" literal="|"/>
@@ -123,6 +133,16 @@
   <eClassifiers xsi:type="ecore:EEnum" name="PredicateType">
     <eLiterals name="PARTIAL" literal="partial"/>
     <eLiterals name="ISO" value="1" literal="iso"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ExportFormat">
+    <eLiterals name="XMI" literal="xmi"/>
+    <eLiterals name="ECORE" value="1" literal="ecore"/>
+    <eLiterals name="BIGRAPHER" value="2" literal="bigrapher"/>
+    <eLiterals name="BIGMC" value="3" literal="bigmc"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ExportSink">
+    <eLiterals name="STDOUT" literal="console"/>
+    <eLiterals name="FILE" value="1" literal="file"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="OutputModeModel">
     <eLiterals name="INSTANCE_MODEL" literal="xmi"/>

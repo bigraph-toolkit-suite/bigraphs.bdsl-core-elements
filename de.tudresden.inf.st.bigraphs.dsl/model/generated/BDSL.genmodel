@@ -25,6 +25,16 @@
       <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//PredicateType/PARTIAL"/>
       <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//PredicateType/ISO"/>
     </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="BDSL.ecore#//ExportFormat">
+      <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//ExportFormat/XMI"/>
+      <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//ExportFormat/ECORE"/>
+      <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//ExportFormat/BIGRAPHER"/>
+      <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//ExportFormat/BIGMC"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="BDSL.ecore#//ExportSink">
+      <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//ExportSink/STDOUT"/>
+      <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//ExportSink/FILE"/>
+    </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="BDSL.ecore#//OutputModeModel">
       <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//OutputModeModel/INSTANCE_MODEL"/>
       <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//OutputModeModel/META_MODEL"/>
@@ -97,6 +107,9 @@
     <genClasses ecoreClass="BDSL.ecore#//PredicateVarReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BDSL.ecore#//PredicateVarReference/value"/>
     </genClasses>
+    <genClasses ecoreClass="BDSL.ecore#//BRSVarReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BDSL.ecore#//BRSVarReference/value"/>
+    </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//AbstractBigraphDeclaration"/>
     <genClasses ecoreClass="BDSL.ecore#//NodeExpressionCall">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BDSL.ecore#//NodeExpressionCall/value"/>
@@ -115,6 +128,12 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//PrintLn/mode"/>
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//PrintableExpression"/>
+    <genClasses ecoreClass="BDSL.ecore#//ExportMethod">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//ExportMethod/brs"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//ExportMethod/format"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//ExportMethod/sink"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//ExportMethod/filename"/>
+    </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//Plus">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//Plus/left"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//Plus/operator"/>

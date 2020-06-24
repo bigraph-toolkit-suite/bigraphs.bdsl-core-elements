@@ -141,16 +141,6 @@ Substitution:
 ;
 
 
-
-	//BigraphExpressionOrBigraphReference:
-//	BigraphVarReference
-//;
-
-//// "var" name=ID ":" type=Type ("=" init=Expr)?;
-//LocalVarDecl:
-////	('(' args+=DeclaredParameter (',' args+=DeclaredParameter)* ')')?
-//	{LocalVarDecl} "var" name=ID ("(" sig=[Signature] ")")? ("[" siteArgs+=SiteVars (',' siteArgs+=SiteVars)* "]")? ("="
-//	definition=BigraphExpression ";");
 BigraphVarReference:
 	value=[LocalVarDecl|BigraphVarReferenceID];
 
@@ -160,6 +150,10 @@ RuleVarReference:
 PredicateVarReference:
 	value=[LocalPredicateDeclaration|BigraphVarReferenceID]
 ;	
+
+BRSVarReference:
+	value=[BRSDefinition|BigraphVarReferenceID]
+;
 	
 
 
@@ -201,7 +195,7 @@ PrimaryExpression returns BigraphExpression:
 //	{MainDeclaration} definition=AbstractMainStatements ';';
 
 AbstractMainStatements:
-	BigraphVarReference | BRSDefinition | PrintLn;
+	BRSDefinition | PrintLn | ExportMethod;
 
 BRSDefinition:
 	{BRSDefinition} 'brs' name=ID '{'
@@ -211,10 +205,14 @@ BRSDefinition:
 	'}';
 
 PrintLn:
-	{PrintLn} 'println' '(' text=(PrintableExpression) (',' mode=OutputModeModel)? ')';
+	'println' {PrintLn} '(' text=(PrintableExpression) (',' mode=OutputModeModel)? ')';
 
 PrintableExpression:
 	({StringLiteral} value=STRING) | (BigraphVarReference);
+	
+ExportMethod:
+	'export' {ExportMethod} '(' ((brs=BRSVarReference)) (',' 'as' '=' format=ExportFormat)? (',' 'to' '=' sink=ExportSink (',' 'filename' '=' filename=STRING)?)? ')'
+;
 
 enum BinaryParallelOperator:
 	UNSET | MERGE='|' | PARALLEL='||';
@@ -228,6 +226,14 @@ enum ControlType:
 	
 enum PredicateType:
 	PARTIAL='partial' | ISO='iso' 
+;
+
+enum ExportFormat:
+	XMI='xmi' | ECORE='ecore' | BIGRAPHER='bigrapher' | BIGMC='bigmc'
+;
+
+enum ExportSink:
+	STDOUT='console' | FILE='file'
 ;
 
 enum OutputModeModel:
