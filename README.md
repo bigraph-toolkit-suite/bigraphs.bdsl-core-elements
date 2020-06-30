@@ -15,8 +15,10 @@ IDE support is provided for the following platforms to be more productive when e
 
 To clone this repository, use:
 
-```
+```bash
 $ git clone --recursive [url]
+# To update the submodule
+$ git submodule update --recursive --remote
 ```
 
 This will also clone the necessary [Ecore Bigraph Meta Model]() repository, which is needed for this Eclipse-based project. 
@@ -33,13 +35,13 @@ This will also clone the necessary [Ecore Bigraph Meta Model]() repository, whic
 
 ### Generate Xtext Language Artifacts
 
-```
+```bash
 $ ./gradlew clean generateXtext
 ```
 
 ### Generate Language Server
 
-```
+```bash
 $ ./gradlew shadowJar
 ```
 The language server protocol `*.jar` is located under `de.tudresden.inf.st.bigraphs.dsl.ide/build/libs/`.
