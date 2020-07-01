@@ -93,6 +93,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BigraphExpression"/>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractMainStatements"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MethodStatements" eSuperTypes="#//AbstractMainStatements"/>
   <eClassifiers xsi:type="ecore:EClass" name="BRSDefinition" eSuperTypes="#//AbstractMainStatements">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="agents" upperBound="-1"
@@ -102,13 +103,13 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="predicates" upperBound="-1"
         eType="#//PredicateVarReference" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PrintLn" eSuperTypes="#//AbstractMainStatements">
+  <eClassifiers xsi:type="ecore:EClass" name="PrintLn" eSuperTypes="#//MethodStatements">
     <eStructuralFeatures xsi:type="ecore:EReference" name="text" eType="#//PrintableExpression"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="mode" eType="#//OutputModeModel"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PrintableExpression"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ExportMethod" eSuperTypes="#//AbstractMainStatements">
+  <eClassifiers xsi:type="ecore:EClass" name="ExportMethod" eSuperTypes="#//MethodStatements">
     <eStructuralFeatures xsi:type="ecore:EReference" name="brs" eType="#//BRSVarReference"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="format" eType="#//ExportFormat"/>

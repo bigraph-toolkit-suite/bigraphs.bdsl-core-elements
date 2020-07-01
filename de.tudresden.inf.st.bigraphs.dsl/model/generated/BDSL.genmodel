@@ -117,6 +117,7 @@
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//BigraphExpression"/>
     <genClasses ecoreClass="BDSL.ecore#//AbstractMainStatements"/>
+    <genClasses ecoreClass="BDSL.ecore#//MethodStatements"/>
     <genClasses ecoreClass="BDSL.ecore#//BRSDefinition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//BRSDefinition/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//BRSDefinition/agents"/>

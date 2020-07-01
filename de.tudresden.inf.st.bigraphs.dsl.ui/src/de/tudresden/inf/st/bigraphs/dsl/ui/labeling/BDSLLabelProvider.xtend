@@ -4,23 +4,20 @@
 package de.tudresden.inf.st.bigraphs.dsl.ui.labeling
 
 import com.google.inject.Inject
-import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider
-import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.Signature
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.AbstractBigraphDeclaration
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.BRSModel
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphExpression
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphVarReference
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.LVD2
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalVarDecl
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.MainElement
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.MainLiteral
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.LVD2
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.BRSModel
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.PrintLn
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.AbstractBigraphDeclaration
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphVarReference
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.NodeExpressionCall
-import org.eclipse.xtext.EcoreUtil2
-import org.eclipse.emf.ecore.util.EcoreUtil
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphExpression
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.Plus
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.PrintLn
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.Signature
+import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider
+import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider
 
 //import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphLiteral
 /**
@@ -40,7 +37,7 @@ class BDSLLabelProvider extends DefaultEObjectLabelProvider {
 	}
 
 	def String text(ControlVariable event) {
-		return event.getName() + " (" + event.arity.value + ", " + event.type.getName() + ")";
+		return event.getName() + " (" + event.arity + ", " + event.type.getName() + ")";
 	}
 
 	def String text(LocalVarDecl event) {

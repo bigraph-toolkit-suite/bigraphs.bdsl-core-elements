@@ -195,7 +195,11 @@ PrimaryExpression returns BigraphExpression:
 //	{MainDeclaration} definition=AbstractMainStatements ';';
 
 AbstractMainStatements:
-	BRSDefinition | PrintLn | ExportMethod;
+	BRSDefinition | MethodStatements;
+
+MethodStatements:
+	PrintLn | ExportMethod
+;
 
 BRSDefinition:
 	{BRSDefinition} 'brs' name=ID '{'

@@ -9,6 +9,8 @@ import de.tudresden.inf.st.bigraphs.dsl.ide.symbols.BdslHierarchicalDocumentSymb
 import org.eclipse.xtext.ide.server.symbol.HierarchicalDocumentSymbolService
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService
 import de.tudresden.inf.st.bigraphs.dsl.ide.symbols.BdslDocumentSymbolService
+import org.eclipse.xtext.ide.server.symbol.DocumentSymbolMapper.DocumentSymbolNameProvider
+import de.tudresden.inf.st.bigraphs.dsl.ide.symbols.BdslDocumentSymbolNameProvider
 
 /**
  * Use this class to register IDE components such as context proposal provider, code lens service, formatting, etc.
@@ -25,5 +27,9 @@ class BDSLIdeModule extends AbstractBDSLIdeModule {
 
 	def Class<? extends HierarchicalDocumentSymbolService> bindHierarchicalDocumentSymbolService() {
 		return BdslHierarchicalDocumentSymbolService;
+	}
+	
+	def Class<? extends DocumentSymbolNameProvider> bindDocumentSymbolNameProvider() {
+		return BdslDocumentSymbolNameProvider;
 	}
 }
