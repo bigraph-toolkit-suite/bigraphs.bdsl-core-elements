@@ -3,14 +3,17 @@
  */
 package de.tudresden.inf.st.bigraphs.dsl
 
-import com.google.inject.*
-import org.eclipse.xtext.scoping.IScopeProvider
+import com.google.inject.Binder
 import com.google.inject.name.Names
-import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider
-import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider
-import org.eclipse.xtext.conversion.IValueConverterService
-import de.tudresden.inf.st.bigraphs.dsl.scoping.BDSLScopeProvider
+import de.tudresden.inf.st.bigraphs.dsl.documentation.BDSLDocumentationProvider
+import de.tudresden.inf.st.bigraphs.dsl.resource.BDSLTokenUtil
 import de.tudresden.inf.st.bigraphs.dsl.scoping.BDSLImportedNamespaceAwareLocalScopeProvider
+import de.tudresden.inf.st.bigraphs.dsl.scoping.BDSLScopeProvider
+import org.eclipse.xtext.conversion.IValueConverterService
+import org.eclipse.xtext.documentation.IEObjectDocumentationProvider
+import org.eclipse.xtext.parsetree.reconstr.impl.TokenUtil
+import org.eclipse.xtext.scoping.IScopeProvider
+import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
@@ -34,5 +37,12 @@ class BDSLRuntimeModule extends AbstractBDSLRuntimeModule {
 	override Class<? extends IValueConverterService> bindIValueConverterService() {
 		return DefaultTerminalConverters;
 	}
+	
+	def Class<? extends IEObjectDocumentationProvider> bindIEObjectDocumentationProvider() {
+		return BDSLDocumentationProvider
+	}
 
+	def Class<? extends TokenUtil> bindTokenUtil() {
+		BDSLTokenUtil
+	}
 }

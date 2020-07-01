@@ -1,13 +1,15 @@
 dependencies {
 	compile project(':de.tudresden.inf.st.bigraphs.dsl')
+	compile project(':de.tudresden.inf.st.bigraphs.dsl.ide')
 	compile 'org.junit.jupiter:junit-jupiter-api'
 	runtime 'org.junit.jupiter:junit-jupiter-engine'
-	compile "org.eclipse.xtext:org.eclipse.xtext.testing:${xtextVersion}"
-	compile "org.eclipse.xtext:org.eclipse.xtext.xbase.testing:${xtextVersion}"
+	compile "org.eclipse.xtext:org.eclipse.xtext.testing:${versions.xtext}"
+	compile "org.eclipse.xtext:org.eclipse.xtext.xbase.testing:${versions.xtext}"
 }
 
 test {
 	useJUnitPlatform()
+	maxHeapSize '512m'
 }
 
 sourceSets {

@@ -2,10 +2,16 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
+ext.title = 'BDSL Language Server'
+description = 'Generic IDE services for Bigraph DSL (BDSL) offered via the Language Server Protocol'
+
+
 dependencies {
     compile project(':de.tudresden.inf.st.bigraphs.dsl')
-    compile "org.eclipse.xtext:org.eclipse.xtext.ide:${xtextVersion}"
-    compile "org.eclipse.xtext:org.eclipse.xtext.xbase.ide:${xtextVersion}"
+    compile "org.eclipse.xtext:org.eclipse.xtext.ide:${versions.xtext}"
+    compile "org.eclipse.xtext:org.eclipse.xtext.xbase.ide:${versions.xtext}"
+    
+    testCompile "org.eclipse.xtext:org.eclipse.xtext.testing:${versions.xtext}"
 }
 
 apply plugin: 'application'

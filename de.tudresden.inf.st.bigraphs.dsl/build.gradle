@@ -1,17 +1,5 @@
-apply plugin: 'java'
-apply plugin: 'maven'
-
-archivesBaseName = 'de.tudresden.inf.st.bigraphs.dsl'
-//version = '1.0-SNAPSHOT'
-//group = 'example'
-
-dependencies {
-	//providedCompile group: 'org.eclipselabs', name: 'cdo', version: '4.6.2' //, ext: 'pom'
-	compile project(":BigraphBaseModel")
-	compile "org.eclipse.xtext:org.eclipse.xtext:${xtextVersion}"
-	compile "org.eclipse.xtext:org.eclipse.xtext.xbase:${xtextVersion}"
-	//compile 'de.tudresden.inf.st.bigraphs.model:bigraph-ecore-model:1.1.0'
-}
+ext.title = 'Bigraph Language (BDSL)'
+description = 'Language infrastructure for Bigraph DSL (BDSL) based on Xtext'
 
 configurations {
 	mwe2 {
@@ -19,11 +7,21 @@ configurations {
 	}
 }
 
+apply plugin: 'java'
+apply plugin: 'maven'
+
+archivesBaseName = 'de.tudresden.inf.st.bigraphs.dsl'
+
 dependencies {
-	mwe2 'org.eclipse.emf:org.eclipse.emf.mwe2.launch'
-	mwe2 "org.eclipse.xtext:org.eclipse.xtext.common.types:${xtextVersion}"
-	mwe2 "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:${xtextVersion}"
-	mwe2 'org.eclipse.xtext:xtext-antlr-generator'
+	compile project(":BigraphBaseModel")
+	compile "org.eclipse.xtext:org.eclipse.xtext:${versions.xtext}"
+	compile "org.eclipse.xtext:org.eclipse.xtext.xbase:${versions.xtext}"
+	//compile 'de.tudresden.inf.st.bigraphs.model:bigraph-ecore-model:1.1.0'
+
+	mwe2 'org.eclipse.emf:org.eclipse.emf.mwe2.launch:${versions.mwe2}'
+	mwe2 "org.eclipse.xtext:org.eclipse.xtext.common.types:${versions.xtext}"
+	mwe2 "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:${versions.xtext}"
+	mwe2 'org.eclipse.xtext:xtext-antlr-generator' //${versions.antlrgen}
 }
 
 task generateXtextLanguage(type: JavaExec) {
@@ -50,3 +48,4 @@ project(':BigraphBaseModel') {
 	}
 }
 */
+

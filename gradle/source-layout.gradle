@@ -1,12 +1,15 @@
 if (name.endsWith(".tests")) {
 	sourceSets {
+		/*
 		main {
-			java.srcDirs = []
-			resources.srcDirs = []
-		}
-		test {
 			java.srcDirs = ['src', 'src-gen']
-			resources.srcDirs = ['src', 'src-gen']
+			resources.srcDirs = ['src', 'src-gen', 'xtext-gen']
+			xtendOutputDir = 'xtend-gen'
+		}
+		*/
+		test {
+			java.srcDirs = ['src'] //, 'src-gen']
+			resources.srcDirs = ['src-gen']
 			xtendOutputDir = 'xtend-gen'
 		}
 	}
@@ -14,7 +17,7 @@ if (name.endsWith(".tests")) {
 	sourceSets {
 		main {
 			java.srcDirs = ['src', 'src-gen']
-			resources.srcDirs = ['src', 'src-gen']
+			resources.srcDirs = ['src', 'src-gen', 'xtext-gen']
 			xtendOutputDir = 'xtend-gen'
 		}
 		test {
@@ -31,6 +34,9 @@ sourceSets.all {
 jar {
 	from('model') {
 		into('model')
+	}
+	from(sourceSets.main.allSource) {
+		include '**/*.xtext'
 	}
 	manifest {
 		attributes 'Bundle-SymbolicName': project.name
