@@ -8,8 +8,8 @@ if (name.endsWith(".tests")) {
 		}
 		*/
 		test {
-			java.srcDirs = ['src'] //, 'src-gen']
-			resources.srcDirs = ['src-gen']
+			java.srcDirs = ['src', 'src-gen']
+			//resources.srcDirs = ['src-gen']
 			xtendOutputDir = 'xtend-gen'
 		}
 	}

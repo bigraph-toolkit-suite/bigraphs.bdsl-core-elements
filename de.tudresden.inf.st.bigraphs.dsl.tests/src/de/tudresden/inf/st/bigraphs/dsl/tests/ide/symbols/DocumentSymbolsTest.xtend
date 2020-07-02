@@ -1,9 +1,13 @@
 package de.tudresden.inf.st.bigraphs.dsl.tests.ide.symbols
 
-//import org.junit.Test
+import org.junit.Test
 import de.tudresden.inf.st.bigraphs.dsl.tests.ide.AbstractBdslLSPTest
-import org.junit.jupiter.api.Test
+//import org.junit.jupiter.api.Test
+//import org.junit.jupiter.api.Test
 
+/*
+ * Some auto completion tests for BDSL
+ */
 class DocumentSymbolsTest extends AbstractBdslLSPTest {
 
 	@Test

@@ -4,20 +4,16 @@
 package de.tudresden.inf.st.bigraphs.dsl.tests
 
 import com.google.inject.Inject
-import de.tudresden.inf.st.bigraphs.models.bigraphBaseModel.BBigraph
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.BRSModel
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.extensions.InjectionExtension
 import org.eclipse.xtext.testing.util.ParseHelper
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.^extension.ExtendWith
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.BRSModel
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.AbstractElement
-import org.eclipse.emf.common.util.EList
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalVarDecl
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.LocalVarDeclImpl
+import org.junit.Test
 
-@ExtendWith(InjectionExtension)
+//import org.junit.jupiter.api.Test
+//import org.junit.jupiter.api.^extension.ExtendWith
+
+//@ExtendWith(InjectionExtension)
 @InjectWith(BDSLInjectorProvider)
 class BDSLParsingTest {
 	@Inject

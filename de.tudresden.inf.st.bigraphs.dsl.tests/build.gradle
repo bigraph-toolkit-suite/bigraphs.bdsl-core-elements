@@ -1,19 +1,29 @@
 dependencies {
 	compile project(':de.tudresden.inf.st.bigraphs.dsl')
 	compile project(':de.tudresden.inf.st.bigraphs.dsl.ide')
-	compile 'org.junit.jupiter:junit-jupiter-api'
-	runtime 'org.junit.jupiter:junit-jupiter-engine'
-	compile "org.eclipse.xtext:org.eclipse.xtext.testing:${versions.xtext}"
-	compile "org.eclipse.xtext:org.eclipse.xtext.xbase.testing:${versions.xtext}"
+	
+	//testRuntime 'org.junit.jupiter:junit-jupiter-engine'
+	//testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api' //, version: '5.7.0-M1'
+	//testCompile group: 'org.junit.platform', name: 'junit-platform-launcher' //, version: '1.7.0-M1'
+	
+	testCompile "org.eclipse.xtext:org.eclipse.xtext.testing:${versions.xtext}"
+	testCompile "org.eclipse.xtext:org.eclipse.xtext.xbase.testing:${versions.xtext}"
+	testCompile "junit:junit:4.13"
+	//compile "org.junit.platform:junit-platform-launcher:"
+	
 }
 
 test {
-	useJUnitPlatform()
+	//useJUnitPlatform()
+	useJUnit()
 	maxHeapSize '512m'
+	testLogging {
+        showStandardStreams = true
+    }
 }
 
-sourceSets {
-  main {
-    java.srcDirs += ["src-gen", "xtend-gen"]
-  }
-}
+//sourceSets {
+//  main {
+//    java.srcDirs += ["src-gen", "xtend-gen"]
+//  }
+//}

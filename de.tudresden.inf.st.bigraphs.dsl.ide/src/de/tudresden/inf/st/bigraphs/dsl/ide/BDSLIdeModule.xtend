@@ -11,11 +11,23 @@ import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService
 import de.tudresden.inf.st.bigraphs.dsl.ide.symbols.BdslDocumentSymbolService
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolMapper.DocumentSymbolNameProvider
 import de.tudresden.inf.st.bigraphs.dsl.ide.symbols.BdslDocumentSymbolNameProvider
+import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider
+import de.tudresden.inf.st.bigraphs.dsl.ide.completion.BdslContentProposalProvider
+import de.tudresden.inf.st.bigraphs.dsl.ide.completion.BdslContentProposalCreator
+import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalCreator
 
 /**
  * Use this class to register IDE components such as context proposal provider, code lens service, formatting, etc.
  */
 class BDSLIdeModule extends AbstractBDSLIdeModule {
+
+	def Class<? extends IdeContentProposalCreator> bindIdeContentProposalCreator() {
+		return BdslContentProposalCreator;
+	}
+
+	def Class<? extends IdeContentProposalProvider> bindIdeContentProposalProvider() {
+		return BdslContentProposalProvider
+	}
 
 	def Class<? extends DocumentSymbolService> bindDocumentSymbolService() {
 		return BdslDocumentSymbolService;
@@ -28,7 +40,7 @@ class BDSLIdeModule extends AbstractBDSLIdeModule {
 	def Class<? extends HierarchicalDocumentSymbolService> bindHierarchicalDocumentSymbolService() {
 		return BdslHierarchicalDocumentSymbolService;
 	}
-	
+
 	def Class<? extends DocumentSymbolNameProvider> bindDocumentSymbolNameProvider() {
 		return BdslDocumentSymbolNameProvider;
 	}
