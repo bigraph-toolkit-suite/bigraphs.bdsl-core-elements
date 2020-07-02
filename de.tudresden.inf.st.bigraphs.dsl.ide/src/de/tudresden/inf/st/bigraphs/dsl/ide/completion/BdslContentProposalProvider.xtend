@@ -41,7 +41,7 @@ class BdslContentProposalProvider extends IdeContentProposalProvider {
 			return null
 		}
 		val proposalString = group.elements.filter(Keyword).map[value].join(" ") + " "
-		val label = context.getPrefix()
+		val label = proposalString
 		val entry = proposalCreator.createProposal(proposalString, label, context, ContentAssistEntry.KIND_FUNCTION,
 			new Procedure1<ContentAssistEntry>() {
 				override apply(ContentAssistEntry p) {
