@@ -8,12 +8,17 @@ import de.tudresden.inf.st.bigraphs.dsl.bDSL.BRSModel
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.extensions.InjectionExtension
 import org.eclipse.xtext.testing.util.ParseHelper
-import org.junit.Test
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.^extension.ExtendWith
+import static extension org.junit.Assert.assertFalse
+import org.junit.jupiter.api.Assertions
+
+//import org.junit.Test
 
 //import org.junit.jupiter.api.Test
 //import org.junit.jupiter.api.^extension.ExtendWith
 
-//@ExtendWith(InjectionExtension)
+@ExtendWith(InjectionExtension)
 @InjectWith(BDSLInjectorProvider)
 class BDSLParsingTest {
 	@Inject
@@ -21,27 +26,32 @@ class BDSLParsingTest {
 	
 	@Test
 	def void loadModel() {
-//		val result = parseHelper.parse('''
-//signature sig1 {
-//	ctrl a1 arity 1;
-//	ctrl a2 arity 1;
-//}
-//
-//signature sig2 {
-//	ctrl a arity 1;
-//	ctrl big0 arity 2;
-//}
-//
-//var big0(sig1) = a1;
-//var big1(sig1) = a1 + a1 + a2 + $big0;
-//var big2(sig2) = a + big0["c", "a"];
-//«««var big2(sig1) = big1 * big2 + big1;
-//«««var big3(sig1) = sig1.a;
-//		''')
-//		Assertions.assertNotNull(result)
-//		val expr = result.statements
-//		val errors = result.eResource.errors
-//		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
+		val result = parseHelper.parse('''
+signature Sig1 {
+	atomic ctrl a arity 1
+	atomic ctrl b arity 1
+}
+
+main = {
+    val test = load(sig=Sig1, as=xmi, resourcePath="classpath:models/test.xmi")
+    $test23 = load(sig=Sig1, as=xmi, resourcePath="classpath:models/test.xmi")
+    println($test2)
+}
+
+
+val test2(Sig1) = {
+	a | b
+}
+
+		''')
+		
+		Assertions.assertNotNull(result)
+		val errors = result.eResource.errors
+		println('''Unexpected errors: «errors.join(", ")»''');
+		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
+		
+		
+		//		val expr = result.statements
 //		println(result.signature)
 //		val LocalVarDeclImpl stmt1 = expr.get(0) as LocalVarDeclImpl
 //		println(stmt1.sig)

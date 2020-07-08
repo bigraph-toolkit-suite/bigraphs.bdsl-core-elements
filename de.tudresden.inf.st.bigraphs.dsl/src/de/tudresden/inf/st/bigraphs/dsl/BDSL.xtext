@@ -32,10 +32,10 @@ AbstractElement:
 ;
 
 MainElement:
-	MainKeyword {MainElement} value+=(AbstractMainStatements)* '}';
+	MainKeyword {MainElement} body=BDSLBlock; //value+=(AbstractMainStatements)* 
 
 MainKeyword:
-	"main" "=" "{"
+	"main" "="
 ;
 
 IdOrKw :
@@ -71,11 +71,30 @@ Site:
 	'id' '(' index=INT ')';
 	
 LVD2:
-	{LocalVarDecl} "val" name=ID ':' type=[ControlVariable|FQN] '=' "{" definition+=(BigraphExpression)* "}";
+	{LocalVarDecl} "val" name=ID ':' controlType=[ControlVariable|FQN] '=' "{" definition+=(BigraphExpression)* "}";
 
-LocalVarDecl:
-	"val" {LocalVarDecl} (name=ID ("(" sig=[Signature] ")")? (("[" siteArgs+=SiteVars (',' siteArgs+=SiteVars)* "]")? ':'
-	type=[ControlVariable|FQN])?
+//BigraphVariableTypes:
+//	BigraphVariable | ReactionRuleVariable
+//;
+//
+BigraphVariable:
+	{BigraphVariable}
+////	'bigraph' //type=[BigraphVariable]
+	name=ID
+	sig=[Signature]
+	{BigraphVariable.type=current}
+;
+//
+//ReactionRuleVariable:
+//	{ReactionRuleVariable}
+////	'reactionrule' //type=[ReactionRuleVariable] 
+//	{ReactionRuleVariable.type=current}
+//;
+
+//TODO: integrate BigraphAssignmentExpr in LocalVarDecl
+LocalVarDecl returns BigraphVariable:
+	"val" {LocalVarDecl} (creationType=VariableCreationType)? (name=ID ("(" sig=[Signature] ")")? (("[" siteArgs+=SiteVars (',' siteArgs+=SiteVars)* "]")? ':'
+	controlType=[ControlVariable|FQN])?
 	("="
 	"{"
 	definition+=(BigraphExpression)*
@@ -120,17 +139,21 @@ Substitution:
 ;
 
 
-BigraphVarReference:
+BigraphVarReference: //; returns BigraphVariable:
+//	{BigraphVarReference}
 	value=[LocalVarDecl|BigraphVarReferenceID];
 
-RuleVarReference:
+RuleVarReference: //; returns ReactionRuleVariable:
+//	{RuleVarReference}
 	value=[LocalRuleDecl|BigraphVarReferenceID];
 
 PredicateVarReference:
+//	{PredicateVarReference}
 	value=[LocalPredicateDeclaration|BigraphVarReferenceID]
 ;	
 
 BRSVarReference:
+//	{BRSVarReference}
 	value=[BRSDefinition|BigraphVarReferenceID]
 ;
 	
@@ -142,6 +165,8 @@ AbstractBigraphDeclaration:
 NodeExpressionCall:
 	value=[ControlVariable|FQN] ("[" links+=NameConstant? (',' links+=NameConstant)* "]")?
 ;
+
+
 
 BigraphExpression:
 	Addition;
@@ -157,18 +182,65 @@ PrimaryExpression returns BigraphExpression:
 	//	{BigraphLiteral} value=AbstractBigraphDeclaration
 	AbstractBigraphDeclaration;
 
-	//terminal CHAR: ('a'..'z'|'A'..'Z'|'0'..'9' | 'å' | 'ä' | 'ö');
-//terminal BASICID: ('a'..'z'|'A'..'Z'|'0'..'9' | 'å' | 'ä' | 'ö')*;
-//terminal STRING: '"' -> '"';
-//terminal WS: (' '|'\t')+;
-//terminal ANY_OTHER: .;m
+
+//fragment BDSLTypedDeclaration *:
+////	(("val" reference=BigraphAssignmentExpr "=") | (reference=BigraphVarReference "="))?
+////////	'val' type=[LocalVarDecl] name=ID 
+//	(('val' reference=BigraphAssignmentExpr)? | (reference=BigraphVarReference)?)
+////////	(('val' {LocalVarDecl} name=ID (creationType=VariableCreationType)? "=") | (type=BigraphVarReference "="))? 
+//;
+
+BigraphAssignmentExpr: //; returns BigraphVariable:
+	'val' {LocalVarDecl} name=ID (creationType=VariableCreationType)?
+;
+
+BigraphVarDeclOrReference:
+	LocalVarDecl | BigraphVarReference
+;
+
+BDSLVariableDeclaration:
+// (("val" reference=BigraphAssignmentExpr "=") | (reference=BigraphVarReference "="))? 
+ (type=BigraphAssignmentExpr | type=BigraphVarReference) '=' expression=BDSLExpression
+// (('val' reference=BigraphAssignmentExpr)? | (reference=BigraphVarReference)?) '=' expression=BDSLExpression
+;
+
+BDSLExpression:
+	BDSLAssignment
+;
+
+BDSLAssignment returns BDSLExpression:
+//	{BDSLAssignment}
+	BDSLSelectionExpression
+	({BDSLAssignment.left=current} '=' right=BDSLExpression)? // Right associativity	
+;
+
+BDSLSelectionExpression returns BDSLExpression:
+	BDSLTerminalExpression
+;
+
+BDSLTerminalExpression returns BDSLExpression:
+//	{BDSLStringConstant} value=STRING |
+//	{BDSLIntConstant} value=INT |
+//	{BDSLBoolConstant} value = ('true' | 'false') |
+	AssignableBigraphExpression |
+	'(' BDSLExpression ')'
+;
+
+AssignableBigraphExpression:
+	LoadMethod | BigraphVarReference
+;
+
 
 AbstractMainStatements:
-	BRSDefinition | MethodStatements;
+	BRSDefinition | MethodStatements | BDSLVariableDeclaration;
 
 MethodStatements:
-	PrintLn | ExportMethod
+	PrintLn | ExportMethod | LoadMethod
 ;
+
+BDSLBlock:
+	{BDSLBlock} '{' statements += AbstractMainStatements* '}' ;
+
 
 BRSDefinition:
 	{BRSDefinition} 'brs' name=ID '{'
@@ -184,7 +256,21 @@ PrintableExpression:
 	({StringLiteral} value=STRING) | (BigraphVarReference);
 	
 ExportMethod:
-	'export' {ExportMethod} '(' ((brs=BRSVarReference)) (',' 'as' '=' format=ExportFormat)? (',' 'to' '=' sink=ExportSink (',' 'filename' '=' filename=STRING)?)? ')'
+	'export' {ExportMethod} '(' ((brs=BRSVarReference)) (',' 'as' '=' format=ExportFormat)? (',' 'to' '=' sink=DataSink (',' 'filename' '=' filename=STRING)?)? ')'
+;
+
+LoadMethod:
+	{LoadMethod}
+	'load' '(' ('sig' '=' sig=[Signature])? (',' 'as' '=' format=LoadFormat)? (',' 'resourcePath' '=' resourcePath=STRING)? ')'
+;
+
+
+
+
+
+
+enum VariableCreationType:
+	INSTANTIATED='instance' | LOADED='loaded'
 ;
 
 enum BinaryParallelOperator:
@@ -205,9 +291,26 @@ enum ExportFormat:
 	XMI='xmi' | ECORE='ecore' | BIGRAPHER='bigrapher' | BIGMC='bigmc'
 ;
 
-enum ExportSink:
-	STDOUT='console' | FILE='file'
+enum LoadFormat:
+	XMI='xmi' | ECORE='ecore'
+;
+
+enum DataSink:
+	STDOUT='console' | FILE='file' | DB='cdo'
+;
+
+enum DataSource:
+	LOCAL_FILE='file' | DB='cdo' | CLASSPATH='classpath'
 ;
 
 enum OutputModeModel:
 	INSTANCE_MODEL='xmi' | META_MODEL='ecore';
+	
+	
+	
+//terminal CHAR: ('a'..'z'|'A'..'Z'|'0'..'9' | 'å' | 'ä' | 'ö');
+//terminal BASICID: ('a'..'z'|'A'..'Z'|'0'..'9' | 'å' | 'ä' | 'ö')*;
+//terminal STRING: '"' -> '"';
+//terminal WS: (' '|'\t')+;
+//terminal ANY_OTHER: .;m
+	

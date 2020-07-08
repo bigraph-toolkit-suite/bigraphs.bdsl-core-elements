@@ -1,24 +1,27 @@
 dependencies {
 	compile project(':de.tudresden.inf.st.bigraphs.dsl')
 	compile project(':de.tudresden.inf.st.bigraphs.dsl.ide')
-	
-	//testRuntime 'org.junit.jupiter:junit-jupiter-engine'
-	//testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api' //, version: '5.7.0-M1'
+
+	testRuntime 'org.junit.jupiter:junit-jupiter-engine'
+	testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api' //, version: '5.7.0-M1'
 	//testCompile group: 'org.junit.platform', name: 'junit-platform-launcher' //, version: '1.7.0-M1'
 	
 	testCompile "org.eclipse.xtext:org.eclipse.xtext.testing:${versions.xtext}"
 	testCompile "org.eclipse.xtext:org.eclipse.xtext.xbase.testing:${versions.xtext}"
 	testCompile "junit:junit:4.13"
-	//compile "org.junit.platform:junit-platform-launcher:"
+	
 	
 }
 
 test {
-	//useJUnitPlatform()
-	useJUnit()
+	useJUnitPlatform()
+	//useJUnit()
 	maxHeapSize '512m'
 	testLogging {
         showStandardStreams = true
+    }
+    onlyIf {
+		project.hasProperty("withTests")
     }
 }
 

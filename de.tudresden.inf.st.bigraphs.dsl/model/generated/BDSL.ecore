@@ -18,8 +18,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="sig" eType="#//Signature"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MainElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" upperBound="-1"
-        eType="#//AbstractMainStatements" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//BDSLBlock"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Signature">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -41,12 +41,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LVD2" eSuperTypes="#//AbstractBigraphDeclaration"/>
-  <eClassifiers xsi:type="ecore:EClass" name="LocalVarDecl" eSuperTypes="#//AbstractElement #//LVD2">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//ControlVariable"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="definition" upperBound="-1"
-        eType="#//BigraphExpression" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="siteArgs" upperBound="-1"
-        eType="#//SiteVars" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BigraphVariable" eSuperTypes="#//AbstractElement #//BigraphVarDeclOrReference">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//BigraphVariable"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LocalRuleDecl" eSuperTypes="#//AbstractElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="redex" eType="#//BigraphExpression"
@@ -73,7 +70,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="to" unique="false" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BigraphVarReference" eSuperTypes="#//AbstractBigraphDeclaration #//PrintableExpression">
+  <eClassifiers xsi:type="ecore:EClass" name="BigraphVarReference" eSuperTypes="#//AbstractBigraphDeclaration #//BigraphVarDeclOrReference #//AssignableBigraphExpression #//PrintableExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//LocalVarDecl"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RuleVarReference">
@@ -92,8 +89,22 @@
         eType="#//NameConstant" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BigraphExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BigraphAssignmentExpr"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BigraphVarDeclOrReference"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BDSLVariableDeclaration" eSuperTypes="#//AbstractMainStatements">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//BDSLExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BDSLExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AssignableBigraphExpression" eSuperTypes="#//BDSLExpression"/>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractMainStatements"/>
   <eClassifiers xsi:type="ecore:EClass" name="MethodStatements" eSuperTypes="#//AbstractMainStatements"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BDSLBlock">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statements" upperBound="-1"
+        eType="#//AbstractMainStatements" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BRSDefinition" eSuperTypes="#//AbstractMainStatements">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="agents" upperBound="-1"
@@ -113,8 +124,17 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="brs" eType="#//BRSVarReference"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="format" eType="#//ExportFormat"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sink" eType="#//ExportSink"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sink" eType="#//DataSink"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="filename" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LoadMethod" eSuperTypes="#//AssignableBigraphExpression #//MethodStatements">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sig" eType="#//Signature"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="format" eType="#//LoadFormat"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resourcePath" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="VariableCreationType">
+    <eLiterals name="INSTANTIATED" literal="instance"/>
+    <eLiterals name="LOADED" value="1" literal="loaded"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="BinaryParallelOperator">
     <eLiterals name="UNSET" literal="UNSET"/>
@@ -141,13 +161,31 @@
     <eLiterals name="BIGRAPHER" value="2" literal="bigrapher"/>
     <eLiterals name="BIGMC" value="3" literal="bigmc"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="ExportSink">
+  <eClassifiers xsi:type="ecore:EEnum" name="LoadFormat">
+    <eLiterals name="XMI" literal="xmi"/>
+    <eLiterals name="ECORE" value="1" literal="ecore"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DataSink">
     <eLiterals name="STDOUT" literal="console"/>
     <eLiterals name="FILE" value="1" literal="file"/>
+    <eLiterals name="DB" value="2" literal="cdo"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DataSource">
+    <eLiterals name="LOCAL_FILE" literal="file"/>
+    <eLiterals name="DB" value="1" literal="cdo"/>
+    <eLiterals name="CLASSPATH" value="2" literal="classpath"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="OutputModeModel">
     <eLiterals name="INSTANCE_MODEL" literal="xmi"/>
     <eLiterals name="META_MODEL" value="1" literal="ecore"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LocalVarDecl" eSuperTypes="#//LVD2 #//BigraphVariable #//BigraphAssignmentExpr">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="controlType" eType="#//ControlVariable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="definition" upperBound="-1"
+        eType="#//BigraphExpression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="creationType" eType="#//VariableCreationType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="siteArgs" upperBound="-1"
+        eType="#//SiteVars" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Plus" eSuperTypes="#//BigraphExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//BigraphExpression"
@@ -161,6 +199,12 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//BinaryNestingOperator"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//BigraphExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BDSLAssignment" eSuperTypes="#//BDSLExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//BDSLExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//BDSLExpression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StringLiteral" eSuperTypes="#//PrintableExpression">

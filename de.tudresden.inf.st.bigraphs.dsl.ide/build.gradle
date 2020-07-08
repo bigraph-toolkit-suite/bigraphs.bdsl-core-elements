@@ -10,6 +10,7 @@ dependencies {
     compile project(':de.tudresden.inf.st.bigraphs.dsl')
     compile "org.eclipse.xtext:org.eclipse.xtext.ide:${versions.xtext}"
     compile "org.eclipse.xtext:org.eclipse.xtext.xbase.ide:${versions.xtext}"
+    compile "org.eclipse.lsp4j:org.eclipse.lsp4j:${versions.lsp4j}"
     
     testCompile "org.eclipse.xtext:org.eclipse.xtext.testing:${versions.xtext}"
 }

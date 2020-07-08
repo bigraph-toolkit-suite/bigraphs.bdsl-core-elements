@@ -6,6 +6,10 @@
     complianceLevel="8.0" copyrightFields="false" runtimeVersion="2.20">
   <genPackages prefix="BDSL" basePackage="de.tudresden.inf.st.bigraphs.dsl" disposableProviderFactory="true"
       fileExtensions="bdsl" ecorePackage="BDSL.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="BDSL.ecore#//VariableCreationType">
+      <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//VariableCreationType/INSTANTIATED"/>
+      <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//VariableCreationType/LOADED"/>
+    </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="BDSL.ecore#//BinaryParallelOperator">
       <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//BinaryParallelOperator/UNSET"/>
       <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//BinaryParallelOperator/MERGE"/>
@@ -31,9 +35,19 @@
       <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//ExportFormat/BIGRAPHER"/>
       <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//ExportFormat/BIGMC"/>
     </genEnums>
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="BDSL.ecore#//ExportSink">
-      <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//ExportSink/STDOUT"/>
-      <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//ExportSink/FILE"/>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="BDSL.ecore#//LoadFormat">
+      <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//LoadFormat/XMI"/>
+      <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//LoadFormat/ECORE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="BDSL.ecore#//DataSink">
+      <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//DataSink/STDOUT"/>
+      <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//DataSink/FILE"/>
+      <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//DataSink/DB"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="BDSL.ecore#//DataSource">
+      <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//DataSource/LOCAL_FILE"/>
+      <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//DataSource/DB"/>
+      <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//DataSource/CLASSPATH"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="BDSL.ecore#//OutputModeModel">
       <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//OutputModeModel/INSTANCE_MODEL"/>
@@ -52,7 +66,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BDSL.ecore#//AbstractElement/sig"/>
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//MainElement">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//MainElement/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//MainElement/body"/>
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//Signature">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//Signature/name"/>
@@ -73,10 +87,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//Site/index"/>
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//LVD2"/>
-    <genClasses ecoreClass="BDSL.ecore#//LocalVarDecl">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BDSL.ecore#//LocalVarDecl/type"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//LocalVarDecl/definition"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//LocalVarDecl/siteArgs"/>
+    <genClasses ecoreClass="BDSL.ecore#//BigraphVariable">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//BigraphVariable/type"/>
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//LocalRuleDecl">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//LocalRuleDecl/redex"/>
@@ -116,8 +128,19 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//NodeExpressionCall/links"/>
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//BigraphExpression"/>
+    <genClasses ecoreClass="BDSL.ecore#//BigraphAssignmentExpr"/>
+    <genClasses ecoreClass="BDSL.ecore#//BigraphVarDeclOrReference"/>
+    <genClasses ecoreClass="BDSL.ecore#//BDSLVariableDeclaration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//BDSLVariableDeclaration/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//BDSLVariableDeclaration/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="BDSL.ecore#//BDSLExpression"/>
+    <genClasses ecoreClass="BDSL.ecore#//AssignableBigraphExpression"/>
     <genClasses ecoreClass="BDSL.ecore#//AbstractMainStatements"/>
     <genClasses ecoreClass="BDSL.ecore#//MethodStatements"/>
+    <genClasses ecoreClass="BDSL.ecore#//BDSLBlock">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//BDSLBlock/statements"/>
+    </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//BRSDefinition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//BRSDefinition/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//BRSDefinition/agents"/>
@@ -135,6 +158,17 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//ExportMethod/sink"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//ExportMethod/filename"/>
     </genClasses>
+    <genClasses ecoreClass="BDSL.ecore#//LoadMethod">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BDSL.ecore#//LoadMethod/sig"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//LoadMethod/format"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//LoadMethod/resourcePath"/>
+    </genClasses>
+    <genClasses ecoreClass="BDSL.ecore#//LocalVarDecl">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BDSL.ecore#//LocalVarDecl/controlType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//LocalVarDecl/definition"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//LocalVarDecl/creationType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//LocalVarDecl/siteArgs"/>
+    </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//Plus">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//Plus/left"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//Plus/operator"/>
@@ -144,6 +178,10 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//Multi/left"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//Multi/operator"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//Multi/right"/>
+    </genClasses>
+    <genClasses ecoreClass="BDSL.ecore#//BDSLAssignment">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//BDSLAssignment/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//BDSLAssignment/right"/>
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//StringLiteral">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//StringLiteral/value"/>
