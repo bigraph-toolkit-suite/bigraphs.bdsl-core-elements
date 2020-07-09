@@ -85,7 +85,7 @@ class BDSLValidator extends AbstractBDSLValidator {
 
 	@Check
 	def checkNoCycleInEntityHierarchy(BigraphVarReference varDecl) {
-		if (varDecl.eContainer.eClass == BDSLPackage.Literals.BRS_MODEL) {
+		if (varDecl.eContainer.eClass == BDSLPackage.Literals.BDSL_DOCUMENT) {
 			return
 		}
 

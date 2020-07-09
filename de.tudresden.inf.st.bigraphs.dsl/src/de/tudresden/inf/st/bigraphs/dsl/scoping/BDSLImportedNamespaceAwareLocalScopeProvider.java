@@ -3,53 +3,35 @@ package de.tudresden.inf.st.bigraphs.dsl.scoping;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.inject.Singleton;
 
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.ISelectable;
 import org.eclipse.xtext.resource.impl.AliasedEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
-import org.eclipse.xtext.scoping.impl.FilteringScope;
 import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider;
 import org.eclipse.xtext.scoping.impl.MapBasedScope;
-import org.eclipse.xtext.scoping.impl.MultimapBasedSelectable;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
-import com.google.common.base.Function;
 import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.collect.Collections2;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
-import com.google.inject.Scope;
 
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.AbstractBigraphDeclaration;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.AbstractElement;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.AbstractMainStatements;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLDocument;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLPackage;
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.BRSModel;
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphVarReference;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable;
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalRuleDecl;
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalVarDecl;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.NodeExpressionCall;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.Signature;
 
@@ -82,13 +64,13 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 //		System.out.println("Context: " + context);
 //		System.out.println("Reference.eContainer: " + reference.eContainer());
 
-		if (reference == BDSLPackage.Literals.BRS_MODEL_IMPORT) {
+		if (reference == BDSLPackage.Literals.BDSL_DOCUMENT_IMPORT) {
 //			System.out.println("BRS_MODEL_IMPORT: looking into global scope");
 			return super.getGlobalScope(context.eResource(), reference);
 		}
 
 		IScope parentScope = IScope.NULLSCOPE;
-		BRSModel module = EcoreUtil2.getContainerOfType(context, BRSModel.class);
+		BDSLDocument module = EcoreUtil2.getContainerOfType(context, BDSLDocument.class);
 //		for (import : module) {
 //			if (!import.module.eIsProxy)
 //				result = getBRSModelScope(context, reference, module, result);
@@ -261,7 +243,7 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 //		return null;
 //	}
 
-	public IScope getBRSModelScope(EObject context, EReference reference, BRSModel module, IScope parent) {
+	public IScope getBRSModelScope(EObject context, EReference reference, BDSLDocument module, IScope parent) {
 //		System.out.println("getBRSModelScope");
 		Collection<AbstractElement> allDefinitions = module.getStatements();
 		IScope ad1 = Scopes.scopeFor(allDefinitions, parent); //Scopes.scopeFor(allDefinitions2, parent);

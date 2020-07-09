@@ -54,13 +54,13 @@
       <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//OutputModeModel/INSTANCE_MODEL"/>
       <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//OutputModeModel/META_MODEL"/>
     </genEnums>
-    <genClasses ecoreClass="BDSL.ecore#//BRSModel">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//BRSModel/signature"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//BRSModel/statements"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//BRSModel/main"/>
+    <genClasses ecoreClass="BDSL.ecore#//BDSLDocument">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//BDSLDocument/signature"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//BDSLDocument/statements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//BDSLDocument/main"/>
     </genClasses>
-    <genClasses ecoreClass="BDSL.ecore#//BRSModelImport">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//BRSModelImport/importedNamespace"/>
+    <genClasses ecoreClass="BDSL.ecore#//BDSLDocumentImport">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//BDSLDocumentImport/importedNamespace"/>
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//AbstractElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//AbstractElement/name"/>

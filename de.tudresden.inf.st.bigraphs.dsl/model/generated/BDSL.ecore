@@ -2,7 +2,7 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="bDSL" nsURI="http://www.tudresden.de/inf/st/bigraphs/dsl/BDSL"
     nsPrefix="bDSL">
-  <eClassifiers xsi:type="ecore:EClass" name="BRSModel">
+  <eClassifiers xsi:type="ecore:EClass" name="BDSLDocument">
     <eStructuralFeatures xsi:type="ecore:EReference" name="signature" upperBound="-1"
         eType="#//Signature" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="statements" upperBound="-1"
@@ -10,7 +10,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="main" eType="#//MainElement"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BRSModelImport">
+  <eClassifiers xsi:type="ecore:EClass" name="BDSLDocumentImport">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="importedNamespace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractElement">
