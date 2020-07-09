@@ -159,6 +159,9 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//ExportMethod/sink"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//ExportMethod/resourcePath"/>
     </genClasses>
+    <genClasses ecoreClass="BDSL.ecore#//ExecuteBRSMethod">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//ExecuteBRSMethod/brs"/>
+    </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//LoadMethod">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BDSL.ecore#//LoadMethod/sig"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//LoadMethod/format"/>

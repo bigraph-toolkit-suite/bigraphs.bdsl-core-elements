@@ -235,7 +235,7 @@ AbstractMainStatements:
 	BRSDefinition | MethodStatements | BDSLVariableDeclaration;
 
 MethodStatements:
-	PrintLn | ExportMethod | LoadMethod
+	PrintLn | ExportMethod | ExecuteBRSMethod | LoadMethod
 ;
 
 BDSLBlock:
@@ -257,6 +257,10 @@ PrintableExpression:
 	
 ExportMethod:
 	'export' {ExportMethod} '(' ((brs=BRSVarReference)) (',' 'as' '=' format=ExportFormat)? (',' 'to' '=' sink=DataSink (',' 'resourcePath' '=' resourcePath=STRING)?)? ')'
+;
+
+ExecuteBRSMethod:
+	'execute' {ExecuteBRSMethod} '(' ((brs=BRSVarReference)) ')'
 ;
 
 LoadMethod:

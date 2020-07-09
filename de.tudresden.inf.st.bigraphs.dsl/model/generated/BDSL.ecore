@@ -127,6 +127,10 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sink" eType="#//DataSink"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="resourcePath" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExecuteBRSMethod" eSuperTypes="#//MethodStatements">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="brs" eType="#//BRSVarReference"
+        containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LoadMethod" eSuperTypes="#//AssignableBigraphExpression #//MethodStatements">
     <eStructuralFeatures xsi:type="ecore:EReference" name="sig" eType="#//Signature"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="format" eType="#//LoadFormat"/>

@@ -106,7 +106,7 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 		if (context instanceof AbstractElement && reference.eContainer() == BDSLPackage.Literals.BIGRAPH_VAR_REFERENCE) {
 			EObject containerElement = EcoreUtil2.getContainerOfType(context, AbstractElement.class);
 			if (containerElement != null) {
-				System.out.println("containerElement: " + containerElement);
+//				System.out.println("containerElement: " + containerElement);
 //				Scopes.selectCompatible(IScope.NULLSCOPE.getAllElements(), BDSLPackage.Literals.BIGRAPH_VAR_REFERENCE);
 //				EObject rootElement = EcoreUtil2.getRootContainer(context);
 				Signature correctSignature = inferSignature((AbstractElement) containerElement);

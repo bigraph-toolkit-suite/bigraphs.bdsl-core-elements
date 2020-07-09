@@ -1,6 +1,6 @@
 define(["ace/lib/oop", "ace/mode/text", "ace/mode/text_highlight_rules"], function(oop, mText, mTextHighlightRules) {
 	var HighlightRules = function() {
-		var keywords = "UNSET|UNSET2|active|agents|arity|as|atomic|barren|bigmc|bigrapher|brs|cdo|classpath|closure|clsre|console|ctrl|ecore|export|file|id|import|instance|iso|load|loaded|main|merge|partial|passive|pred|preds|println|react|resourcePath|rules|sig|signature|subst|substitution|to|unspecified|val|xmi";
+		var keywords = "UNSET|UNSET2|active|agents|arity|as|atomic|barren|bigmc|bigrapher|brs|cdo|classpath|closure|clsre|console|ctrl|ecore|execute|export|file|id|import|instance|iso|load|loaded|main|merge|partial|passive|pred|preds|println|react|resourcePath|rules|sig|signature|subst|substitution|to|unspecified|val|xmi";
 		this.$rules = {
 			"start": [
 				{token: "comment", regex: "\\/\\/.*$"},
