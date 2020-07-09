@@ -256,7 +256,7 @@ PrintableExpression:
 	({StringLiteral} value=STRING) | (BigraphVarReference);
 	
 ExportMethod:
-	'export' {ExportMethod} '(' ((brs=BRSVarReference)) (',' 'as' '=' format=ExportFormat)? (',' 'to' '=' sink=DataSink (',' 'filename' '=' filename=STRING)?)? ')'
+	'export' {ExportMethod} '(' ((brs=BRSVarReference)) (',' 'as' '=' format=ExportFormat)? (',' 'to' '=' sink=DataSink (',' 'resourcePath' '=' resourcePath=STRING)?)? ')'
 ;
 
 LoadMethod:
@@ -296,7 +296,7 @@ enum LoadFormat:
 ;
 
 enum DataSink:
-	STDOUT='console' | FILE='file' | DB='cdo'
+	STDOUT='console' | LOCAL_FILE='file' | DB='cdo'
 ;
 
 enum DataSource:

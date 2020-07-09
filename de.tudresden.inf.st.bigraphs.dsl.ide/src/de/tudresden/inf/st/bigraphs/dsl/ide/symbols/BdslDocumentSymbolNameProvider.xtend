@@ -1,15 +1,15 @@
 package de.tudresden.inf.st.bigraphs.dsl.ide.symbols
 
+import com.google.common.collect.Lists
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.BRSVarReference
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphVarReference
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.MainElement
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.MethodStatements
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.PredicateVarReference
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.RuleVarReference
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolMapper.DocumentSymbolNameProvider
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.MainElement
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.MethodStatements
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphVarReference
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.RuleVarReference
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.BRSVarReference
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.PredicateVarReference
-import com.google.common.collect.Lists
 
 class BdslDocumentSymbolNameProvider extends DocumentSymbolNameProvider {
 

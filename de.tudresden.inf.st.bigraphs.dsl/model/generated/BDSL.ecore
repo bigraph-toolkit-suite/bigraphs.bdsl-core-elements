@@ -125,7 +125,7 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="format" eType="#//ExportFormat"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sink" eType="#//DataSink"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="filename" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resourcePath" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LoadMethod" eSuperTypes="#//AssignableBigraphExpression #//MethodStatements">
     <eStructuralFeatures xsi:type="ecore:EReference" name="sig" eType="#//Signature"/>
@@ -167,7 +167,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="DataSink">
     <eLiterals name="STDOUT" literal="console"/>
-    <eLiterals name="FILE" value="1" literal="file"/>
+    <eLiterals name="LOCAL_FILE" value="1" literal="file"/>
     <eLiterals name="DB" value="2" literal="cdo"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="DataSource">

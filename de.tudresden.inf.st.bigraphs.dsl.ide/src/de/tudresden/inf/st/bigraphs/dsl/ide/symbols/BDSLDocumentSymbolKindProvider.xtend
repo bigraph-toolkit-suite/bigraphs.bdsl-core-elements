@@ -23,7 +23,7 @@ class BDSLDocumentSymbolKindProvider extends DocumentSymbolKindProvider {
 			case BINARY_NESTING_OPERATOR: Operator
 			// Methods
 			case EXPORT_METHOD: Method
-			case EXPORT_METHOD__FILENAME: File
+			case EXPORT_METHOD__RESOURCE_PATH: File
 			case PRINT_LN: Method
 			case PRINT_LN__TEXT: String
 			// BRS

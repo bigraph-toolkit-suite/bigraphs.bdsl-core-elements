@@ -41,7 +41,7 @@
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="BDSL.ecore#//DataSink">
       <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//DataSink/STDOUT"/>
-      <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//DataSink/FILE"/>
+      <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//DataSink/LOCAL_FILE"/>
       <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//DataSink/DB"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="BDSL.ecore#//DataSource">
@@ -157,7 +157,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//ExportMethod/brs"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//ExportMethod/format"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//ExportMethod/sink"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//ExportMethod/filename"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//ExportMethod/resourcePath"/>
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//LoadMethod">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BDSL.ecore#//LoadMethod/sig"/>
