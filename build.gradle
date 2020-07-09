@@ -14,7 +14,8 @@ ext.versions = [
     mwe2: '2.11.3',
     antlrgen: '[2.1.1,3)',
     cdo: '4.2.1',
-    commonslang3: '3.10'
+    commonslang3: '3.10',
+    commonsio: '2.6'
 ]
 
 subprojects {

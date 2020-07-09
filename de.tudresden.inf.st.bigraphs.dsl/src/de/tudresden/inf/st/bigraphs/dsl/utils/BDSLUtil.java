@@ -31,18 +31,32 @@ public class BDSLUtil {
 //		return tmp;
 	}
 	
+	public static class Strings {
+	    public static String rawStringOf(String value) {
+	    	if(Objects.isNull(value)) return null;
+	        boolean firstPos = value.charAt(0) == '\"' || value.charAt(0) == '\'';
+	        boolean lastPos = value.charAt(value.length() - 1) == '\"' || value.charAt(value.length() - 1) == '\'';
+	        if (firstPos && lastPos) {
+	            return value.substring(1, value.length() - 1);
+	        }
+	        return value;
+	    }
+	}
+
 	public static class Resources {
 		public static DataSource getDataSourceFromIdentifier(String resourcePath) {
-			if(resourcePath.startsWith("classpath:")) {
-				return DataSource.CLASSPATH;
+			if (Objects.nonNull(resourcePath) && !resourcePath.isEmpty()) {
+				if (resourcePath.startsWith("classpath:")) {
+					return DataSource.CLASSPATH;
+				}
+				if (resourcePath.startsWith("cdo:")) {
+					return DataSource.DB;
+				}
+				if (resourcePath.startsWith("file:")) {
+					return DataSource.LOCAL_FILE;
+				}
 			}
-			if(resourcePath.startsWith("cdo:")) {
-				return DataSource.DB;
-			}
-			if(resourcePath.startsWith("file:")) {
-				return DataSource.LOCAL_FILE;
-			}
-			return null;
+			return DataSource.UNSPECIFIED;
 		}
 	}
 }

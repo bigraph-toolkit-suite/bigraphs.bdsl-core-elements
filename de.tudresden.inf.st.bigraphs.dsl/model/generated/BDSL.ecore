@@ -171,9 +171,10 @@
     <eLiterals name="DB" value="2" literal="cdo"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="DataSource">
-    <eLiterals name="LOCAL_FILE" literal="file"/>
-    <eLiterals name="DB" value="1" literal="cdo"/>
-    <eLiterals name="CLASSPATH" value="2" literal="classpath"/>
+    <eLiterals name="UNSPECIFIED" literal="unspecified"/>
+    <eLiterals name="LOCAL_FILE" value="1" literal="file"/>
+    <eLiterals name="DB" value="2" literal="cdo"/>
+    <eLiterals name="CLASSPATH" value="3" literal="classpath"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="OutputModeModel">
     <eLiterals name="INSTANCE_MODEL" literal="xmi"/>

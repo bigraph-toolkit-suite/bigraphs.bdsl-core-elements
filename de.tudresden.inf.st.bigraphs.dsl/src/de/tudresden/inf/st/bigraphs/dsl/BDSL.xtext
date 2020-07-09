@@ -300,7 +300,7 @@ enum DataSink:
 ;
 
 enum DataSource:
-	LOCAL_FILE='file' | DB='cdo' | CLASSPATH='classpath'
+	UNSPECIFIED='unspecified' | LOCAL_FILE='file' | DB='cdo' | CLASSPATH='classpath'
 ;
 
 enum OutputModeModel:

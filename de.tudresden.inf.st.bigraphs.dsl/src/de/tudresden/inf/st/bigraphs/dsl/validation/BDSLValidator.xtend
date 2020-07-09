@@ -3,17 +3,19 @@
  */
 package de.tudresden.inf.st.bigraphs.dsl.validation
 
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable
-import org.eclipse.xtext.validation.Check
-import de.tudresden.inf.st.bigraphs.models.bigraphBaseModel.BigraphBaseModelPackage
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLPackage
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphVarReference
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.Closure
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.DataSource
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.LoadMethod
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.Signature
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalVarDecl
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.Site
+import de.tudresden.inf.st.bigraphs.dsl.utils.BDSLUtil
 import java.util.Objects
 import org.eclipse.emf.ecore.EObject
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphVarReference
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.Site
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.Closure
+import org.eclipse.xtext.validation.Check
+import org.apache.commons.io.FilenameUtils
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.LoadFormat
 
 //import java.security.Signature
 /**
@@ -28,12 +30,41 @@ import de.tudresden.inf.st.bigraphs.dsl.bDSL.Closure
 class BDSLValidator extends AbstractBDSLValidator {
 
 	public static val INVALID_NAME = 'invalidName'
-	
+
 	public static val INVALID_CLOSURE_DEFINITION = 'invalidClosure'
 
 	public static val CYCLIC_VARIABLE_USAGE = 'cyclicBigraphVariable';
 
 	public static val SITE_INDEX_IS_POSITIVE = 'siteIndexIsPositive';
+
+	public static val LOAD_METHOD_MISSING_RESOURCE_IDENTIFIER = 'missingResourceIdentifier';
+	public static val LOAD_METHOD_RES_EXT_AMBIGUOUS = 'fileExtensionMismatch';
+
+	@Check
+	def loadMethodResourceFormat(LoadMethod loadMethod) {
+		if (loadMethod.resourcePath === null || BDSLUtil.Strings.rawStringOf(loadMethod.resourcePath).isEmpty) {
+			warning("The resourcePath is not set", BDSLPackage.Literals.LOAD_METHOD__RESOURCE_PATH,
+				LOAD_METHOD_MISSING_RESOURCE_IDENTIFIER)
+		} else {
+			val ext = FilenameUtils.getExtension(BDSLUtil.Strings.rawStringOf(loadMethod.resourcePath))
+			val loadFormatOfExt = LoadFormat.get(ext)
+			if (Objects.isNull(loadFormatOfExt) || loadMethod.format != loadFormatOfExt) {
+				warning("The extension of the resource path doesn't match with the specified load-as argument",
+					BDSLPackage.Literals.LOAD_METHOD__RESOURCE_PATH, LOAD_METHOD_RES_EXT_AMBIGUOUS)
+			}
+
+		}
+
+	}
+
+	@Check
+	def loadMethodNoResourceIdentifier(LoadMethod loadMethod) {
+		if (BDSLUtil.Resources.getDataSourceFromIdentifier(BDSLUtil.Strings.rawStringOf(loadMethod.resourcePath)) ==
+			DataSource.UNSPECIFIED) {
+			warning("The resourcePath is missing a resource identifier",
+				BDSLPackage.Literals.LOAD_METHOD__RESOURCE_PATH, LOAD_METHOD_MISSING_RESOURCE_IDENTIFIER)
+		}
+	}
 
 	@Check
 	def siteIndexIsPositive(Site siteExpression) {
@@ -42,7 +73,7 @@ class BDSLValidator extends AbstractBDSLValidator {
 				SITE_INDEX_IS_POSITIVE);
 		}
 	}
-	
+
 	@Check
 	def closureNamesAreNotDistinct(Closure closureExpression) {
 		val t = newHashSet(closureExpression.value.toArray)

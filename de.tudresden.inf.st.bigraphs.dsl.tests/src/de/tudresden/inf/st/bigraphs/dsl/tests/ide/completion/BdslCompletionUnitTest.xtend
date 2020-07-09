@@ -1,6 +1,6 @@
 package de.tudresden.inf.st.bigraphs.dsl.tests.ide.completion
 
-import org.junit.Test
+//import org.junit.Test
 //import org.junit.jupiter.api.Test
 import de.tudresden.inf.st.bigraphs.dsl.tests.ide.AbstractBdslLSPTest
 import org.eclipse.xtext.testing.TestCompletionConfiguration
@@ -10,6 +10,7 @@ import org.eclipse.lsp4j.TextDocumentIdentifier
 import org.eclipse.lsp4j.Position
 import org.junit.Assert
 import java.util.function.Function
+import org.junit.jupiter.api.Test
 
 class BdslCompletionUnitTest extends AbstractBdslLSPTest {
 

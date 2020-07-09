@@ -45,6 +45,7 @@
       <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//DataSink/DB"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="BDSL.ecore#//DataSource">
+      <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//DataSource/UNSPECIFIED"/>
       <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//DataSource/LOCAL_FILE"/>
       <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//DataSource/DB"/>
       <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//DataSource/CLASSPATH"/>
