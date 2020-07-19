@@ -43,8 +43,8 @@ The language server protocol `*.jar` is located under `de.tudresden.inf.st.bigra
 ### Running Tests
 
 ```bash
-$ ./gradlew :de.tudresden.inf.st.bigraphs.dsl.tests:test
-$ ./gradlew test --tests de.tudresden.inf.st.bigraphs.dsl.tests.ide.sym*
+$ ./gradlew :de.tudresden.inf.st.bigraphs.dsl.tests:test -PwithTests
+$ ./gradlew test --tests de.tudresden.inf.st.bigraphs.dsl.tests.ide.sym* -PwithTests
 ```
 
 

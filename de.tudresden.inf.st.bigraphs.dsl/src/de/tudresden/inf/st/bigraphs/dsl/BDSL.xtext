@@ -27,7 +27,7 @@ BigraphVarReferenceID hidden():
 	
 
 AbstractElement:
-	LocalVarDecl | LocalRuleDecl | LocalPredicateDeclaration
+	LocalVarDecl | LocalRuleDecl | LocalPredicateDeclaration | BRSDefinition
 	// and rules
 ;
 
@@ -243,7 +243,7 @@ BDSLBlock:
 
 
 BRSDefinition:
-	{BRSDefinition} 'brs' name=ID '{'
+	'brs' {BRSDefinition} name=ID ("(" sig=[Signature] ")")? '{'
 	('agents' '=' ("[" agents+=BigraphVarReference? (',' agents+=BigraphVarReference)* "]"))?
 	(',' 'rules' '=' ("[" rules+=RuleVarReference? (',' agents+=RuleVarReference)* "]"))?
 	(',' 'preds' '=' ("[" predicates+=PredicateVarReference? (',' predicates+=PredicateVarReference)* "]"))?

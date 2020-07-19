@@ -31,6 +31,7 @@ import de.tudresden.inf.st.bigraphs.dsl.bDSL.AbstractElement;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.AbstractMainStatements;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLDocument;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLPackage;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.BRSDefinition;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.NodeExpressionCall;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.Signature;

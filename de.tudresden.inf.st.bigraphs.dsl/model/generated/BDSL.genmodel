@@ -143,7 +143,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//BDSLBlock/statements"/>
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//BRSDefinition">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//BRSDefinition/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//BRSDefinition/agents"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//BRSDefinition/rules"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//BRSDefinition/predicates"/>
