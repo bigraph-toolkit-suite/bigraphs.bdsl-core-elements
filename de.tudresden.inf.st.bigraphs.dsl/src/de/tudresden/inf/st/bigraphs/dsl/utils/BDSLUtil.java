@@ -2,9 +2,12 @@ package de.tudresden.inf.st.bigraphs.dsl.utils;
 
 import java.util.Objects;
 
+import org.eclipse.emf.ecore.EObject;
+
 import com.google.common.base.Preconditions;
 
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.AbstractBigraphDeclaration;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphVarDeclOrReference;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphVarReference;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.DataSource;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.LoadMethod;
@@ -30,17 +33,28 @@ public class BDSLUtil {
 //		}
 //		return tmp;
 	}
-	
+
+	public static LocalVarDecl getLocalVarDecl(BigraphVarDeclOrReference typeLeftHandSide) {
+		if (typeLeftHandSide instanceof LocalVarDecl) {
+			return (LocalVarDecl) typeLeftHandSide;
+		}
+		if (typeLeftHandSide instanceof BigraphVarReference) {
+			return ((BigraphVarReference) typeLeftHandSide).getValue();
+		}
+		return null;
+	}
+
 	public static class Strings {
-	    public static String rawStringOf(String value) {
-	    	if(Objects.isNull(value)) return null;
-	        boolean firstPos = value.charAt(0) == '\"' || value.charAt(0) == '\'';
-	        boolean lastPos = value.charAt(value.length() - 1) == '\"' || value.charAt(value.length() - 1) == '\'';
-	        if (firstPos && lastPos) {
-	            return value.substring(1, value.length() - 1);
-	        }
-	        return value;
-	    }
+		public static String rawStringOf(String value) {
+			if (Objects.isNull(value))
+				return null;
+			boolean firstPos = value.charAt(0) == '\"' || value.charAt(0) == '\'';
+			boolean lastPos = value.charAt(value.length() - 1) == '\"' || value.charAt(value.length() - 1) == '\'';
+			if (firstPos && lastPos) {
+				return value.substring(1, value.length() - 1);
+			}
+			return value;
+		}
 	}
 
 	public static class Resources {
