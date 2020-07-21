@@ -75,8 +75,8 @@ val test4(Sig1) = load(sig=Sig3, as=xmi, resourcePath="cdo:models/test.xmi")
 Signature of method call doesn't match with signature on left-hand side of the variable declaration with name test3:16,
 Signature of method call doesn't match with signature on left-hand side of the variable declaration with name test4:19")
 	}
-	
-		@Test
+
+	@Test
 	def void testSignatureMatchOnAssignment_03() {
 		initialize
 		val uri = 'inmemory:/foo.bdsl'
@@ -107,7 +107,8 @@ main = {
 }
 			'''
 		)
-		expectDiagnostics(uri, "Signature of bigraph reference doesn't match with signature on left-hand side of the variable declaration with name test2b:20")
+		expectDiagnostics(uri,
+			"Signature of bigraph reference doesn't match with signature on left-hand side of the variable declaration with name test2b:20")
 	}
 
 	@Test

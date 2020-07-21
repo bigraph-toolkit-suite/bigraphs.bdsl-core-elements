@@ -1,17 +1,23 @@
 package de.tudresden.inf.st.bigraphs.dsl.utils;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.EcoreUtil2;
 
 import com.google.common.base.Preconditions;
 
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.AbstractBigraphDeclaration;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLVariableDeclaration;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphVarDeclOrReference;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphVarReference;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.NodeExpressionCall;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.DataSource;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.LoadMethod;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalVarDecl;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.Signature;
 
 /*
  * 
@@ -19,19 +25,30 @@ import de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalVarDecl;
  */
 public class BDSLUtil {
 
-	@Deprecated
-	public static LocalVarDecl getLocalVarDeclFromLoadMethod(LoadMethod loadMethod) {
+	/**
+	 * 1. If signature already set, return it; 2. Check if control type is
+	 * explicitly defined; 3. Run through definitions and find a node expression
+	 * call. From the first one, get the signature
+	 * 
+	 * @param localVarDecl the variable declaration
+	 * @return a signature, or {@code null} if it could not be derived
+	 */
+	public static Signature tryInferSignature(LocalVarDecl localVarDecl) {
+		if (Objects.nonNull(localVarDecl.getSig()))
+			return localVarDecl.getSig();
+		if (Objects.nonNull(localVarDecl.getControlType())) {
+			return (Signature) localVarDecl.getControlType().eContainer();
+		}
+		BDSLVariableDeclaration container = EcoreUtil2.getContainerOfType(localVarDecl, BDSLVariableDeclaration.class);
+		if (Objects.nonNull(container)) {
+			List<Signature> signatures = container.getDefinition().stream().filter(x -> x instanceof NodeExpressionCall)
+					.map(x -> ((NodeExpressionCall) x).getValue()).map(x -> (Signature) x.eContainer())
+					.collect(Collectors.toList());
+			if (signatures.size() > 0) {
+				return signatures.get(0);
+			}
+		}
 		return null;
-//		Preconditions.checkArgument(Objects.nonNull(loadMethod), "LoadMethod must not be null");
-////		Preconditions.checkArgument(AbstractBigraphDeclaration.class.isAssignableFrom(loadMethod.getReference().getClass()));
-//		LocalVarDecl tmp = null;
-//		
-//		if (loadMethod.getReference() instanceof BigraphVarReference) {
-//			tmp = ((BigraphVarReference) loadMethod.getReference()).getValue();
-//		} else if (loadMethod.getReference() instanceof LocalVarDecl) {
-//			tmp = (LocalVarDecl) loadMethod.getReference();
-//		}
-//		return tmp;
 	}
 
 	public static LocalVarDecl getLocalVarDecl(BigraphVarDeclOrReference typeLeftHandSide) {
