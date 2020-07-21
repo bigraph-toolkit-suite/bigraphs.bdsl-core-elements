@@ -101,6 +101,10 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BDSLExpression"/>
   <eClassifiers xsi:type="ecore:EClass" name="AssignableBigraphExpression" eSuperTypes="#//BDSLExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AssignableBigraphExpressionWithExplicitSig"
+      eSuperTypes="#//AssignableBigraphExpression #//MethodStatements">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sig" eType="#//Signature"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MethodStatements" eSuperTypes="#//AbstractMainStatements"/>
   <eClassifiers xsi:type="ecore:EClass" name="PrintLn" eSuperTypes="#//MethodStatements">
     <eStructuralFeatures xsi:type="ecore:EReference" name="text" eType="#//PrintableExpression"
@@ -118,11 +122,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="ExecuteBRSMethod" eSuperTypes="#//MethodStatements">
     <eStructuralFeatures xsi:type="ecore:EReference" name="brs" eType="#//BRSVarReference"
         containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="LoadMethod" eSuperTypes="#//AssignableBigraphExpression #//MethodStatements">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="sig" eType="#//Signature"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="format" eType="#//LoadFormat"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resourcePath" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractMainStatements"/>
   <eClassifiers xsi:type="ecore:EClass" name="BDSLBlock">
@@ -211,5 +210,14 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StringLiteral" eSuperTypes="#//PrintableExpression">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LoadMethod" eSuperTypes="#//AssignableBigraphExpressionWithExplicitSig">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="format" eType="#//LoadFormat"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resourcePath" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CreateRandomBigraphMethod" eSuperTypes="#//AssignableBigraphExpressionWithExplicitSig">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="n" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="t" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="p" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
   </eClassifiers>
 </ecore:EPackage>

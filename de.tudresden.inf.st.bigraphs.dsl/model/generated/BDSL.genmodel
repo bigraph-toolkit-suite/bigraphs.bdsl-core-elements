@@ -138,6 +138,9 @@
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//BDSLExpression"/>
     <genClasses ecoreClass="BDSL.ecore#//AssignableBigraphExpression"/>
+    <genClasses ecoreClass="BDSL.ecore#//AssignableBigraphExpressionWithExplicitSig">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BDSL.ecore#//AssignableBigraphExpressionWithExplicitSig/sig"/>
+    </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//MethodStatements"/>
     <genClasses ecoreClass="BDSL.ecore#//PrintLn">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//PrintLn/text"/>
@@ -152,11 +155,6 @@
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//ExecuteBRSMethod">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//ExecuteBRSMethod/brs"/>
-    </genClasses>
-    <genClasses ecoreClass="BDSL.ecore#//LoadMethod">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BDSL.ecore#//LoadMethod/sig"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//LoadMethod/format"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//LoadMethod/resourcePath"/>
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//AbstractMainStatements"/>
     <genClasses ecoreClass="BDSL.ecore#//BDSLBlock">
@@ -186,6 +184,15 @@
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//StringLiteral">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//StringLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="BDSL.ecore#//LoadMethod">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//LoadMethod/format"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//LoadMethod/resourcePath"/>
+    </genClasses>
+    <genClasses ecoreClass="BDSL.ecore#//CreateRandomBigraphMethod">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//CreateRandomBigraphMethod/n"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//CreateRandomBigraphMethod/t"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//CreateRandomBigraphMethod/p"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

@@ -25,6 +25,8 @@ FqnWithWildCard:
 BigraphVarReferenceID hidden():
 	('$' FQN); 
 	
+FLOAT returns ecore::EFloat : INT'.'INT;
+
 fragment BDSLNameSigDeclFrag *:
 	name=ID ("(" sig=[Signature] ")")?
 ;
@@ -54,12 +56,14 @@ IdOrKw :
 
 KEYWORD :
 	MainKeyword
+	| METHOD_KEYWORD
 	| "react"
 	| "signature"
 ;
 
 METHOD_KEYWORD:
 	'load' 
+	| 'randomBigraph'
 	| "export"
 	| "execute"
 	| "println"
@@ -231,11 +235,16 @@ BDSLTerminalExpression returns BDSLExpression:
 ////////////////////////////////////
 
 AssignableBigraphExpression:
-	LoadMethod | BigraphVarReference
+	AssignableBigraphExpressionWithExplicitSig | BigraphVarReference
 ;
 
+AssignableBigraphExpressionWithExplicitSig:
+	LoadMethod | CreateRandomBigraphMethod
+;
+
+
 MethodStatements:
-	PrintLn | ExportMethod | ExecuteBRSMethod | LoadMethod
+	PrintLn | ExportMethod | ExecuteBRSMethod | LoadMethod | CreateRandomBigraphMethod
 ;
 
 PrintLn:
@@ -252,9 +261,19 @@ ExecuteBRSMethod:
 	'execute' {ExecuteBRSMethod} '(' ((brs=BRSVarReference)) ')'
 ;
 
-LoadMethod:
+LoadMethod returns AssignableBigraphExpressionWithExplicitSig:
 	{LoadMethod}
 	'load' '(' ('sig' '=' sig=[Signature])? (',' 'as' '=' format=LoadFormat)? (',' 'resourcePath' '=' resourcePath=STRING)? ')'
+;
+
+CreateRandomBigraphMethod returns AssignableBigraphExpressionWithExplicitSig:
+	{CreateRandomBigraphMethod}
+	'randomBigraph' '(' 
+		('sig' '=' sig=[Signature])?
+		(',' 'n' '=' n=INT)?
+		(',' 't' '=' t=INT)?
+		(',' 'p' '=' p=FLOAT)?
+	')'
 ;
 
 

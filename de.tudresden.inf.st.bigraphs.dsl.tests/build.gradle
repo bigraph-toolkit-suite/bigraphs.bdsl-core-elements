@@ -17,6 +17,7 @@ test {
 	useJUnitPlatform()
 	//useJUnit()
 	maxHeapSize '512m'
+	dependsOn cleanTest
 	testLogging {
         showStandardStreams = true
     }
