@@ -32,9 +32,11 @@ import com.google.inject.Inject;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.AbstractElement;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.AbstractElementsWithNameAndSig;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.AbstractMainStatements;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.AssignmentOrVariableDeclaration;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLDocument;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLPackage;
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLVariableDeclaration;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLReferenceDeclaration;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLVariableDeclaration2;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BRSDefinition;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphVarDeclOrReference;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable;
@@ -86,19 +88,18 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 		parentScope = getBRSModelScope(context, reference, module, parentScope);
 //		System.out.println(parentScope);
 
-		
 //		ontext: de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.BigraphVarReferenceImpl@52350abb (name: test2)
 //		Reference.eContainer: org.eclipse.emf.ecore.impl.EClassImpl@3b956878 (name: LoadMethod) (instanceClassName: null) (abstract: false, interface: false)
 
-		
 		// TODO check before if computational subBRS (they can have a different
 		// signature)
 		// Bigraph variable reference scope (excluding itself at the end, no recursive
 		// bigraph declaration allowed)
-		if (context instanceof AbstractElementsWithNameAndSig && reference.eContainer() == BDSLPackage.Literals.BIGRAPH_VAR_REFERENCE) {
+		if (context instanceof AbstractElementsWithNameAndSig
+				&& reference.eContainer() == BDSLPackage.Literals.BIGRAPH_VAR_REFERENCE) {
 			EObject containerElement = EcoreUtil2.getContainerOfType(context, AbstractElementsWithNameAndSig.class);
 			if (containerElement != null) {
-//				System.out.println("containerElement: " + containerElement);
+				System.out.println("containerElement: " + containerElement);
 //				Scopes.selectCompatible(IScope.NULLSCOPE.getAllElements(), BDSLPackage.Literals.BIGRAPH_VAR_REFERENCE);
 //				EObject rootElement = EcoreUtil2.getRootContainer(context);
 				Signature correctSignature = inferSignature((AbstractElementsWithNameAndSig) containerElement);
@@ -123,52 +124,68 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 						return !Objects.equal(e.getEObjectOrProxy(), context);
 					}
 				};
-				Collection<AbstractElementsWithNameAndSig> filtered = Collections2.filter(allVarDeclarations, signatureFilterPredicate);
+				Collection<AbstractElementsWithNameAndSig> filtered = Collections2.filter(allVarDeclarations,
+						signatureFilterPredicate);
 				IScope existingScope = Scopes.scopeFor(filtered);
-				return existingScope; //new FilteringScope(existingScope, filter);
+				return existingScope; // new FilteringScope(existingScope, filter);
 			}
 		}
 
 		// Scope Provider for controls inside a bigraph definition
 		if ((context instanceof NodeExpressionCall)
-				&& reference.eContainer() == BDSLPackage.Literals.NODE_EXPRESSION_CALL) { 
-			
-//			System.out.println("Reference.eContainer: " + reference.eContainer());
-			
-			Optional<BDSLVariableDeclaration> bdslVarDecl = StreamSupport.stream(EcoreUtil2.getAllContainers(context).spliterator(), false)
-					.filter(x -> x instanceof BDSLVariableDeclaration).map(x -> (BDSLVariableDeclaration)x).findFirst();
+				&& reference.eContainer() == BDSLPackage.Literals.NODE_EXPRESSION_CALL) {
+
+			System.out.println("Reference.eContainer of NodeExpressionCall: " + reference.eContainer());
+
+			Optional<AssignmentOrVariableDeclaration> bdslVarDecl = StreamSupport
+					.stream(EcoreUtil2.getAllContainers(context).spliterator(), false)
+					.filter(x -> x instanceof AssignmentOrVariableDeclaration)
+					.map(x -> (AssignmentOrVariableDeclaration) x).findFirst();
 			EObject containerElement = null;
-			if(bdslVarDecl.isPresent()) {
+			System.out.println("bdslVarDecl: " + bdslVarDecl);
+			if (bdslVarDecl.isPresent()) {
 				containerElement = bdslVarDecl.get();
-				if(((BDSLVariableDeclaration)containerElement).getType() instanceof BigraphVarDeclOrReference) {
-//					System.out.println("\tNow in var decl ...");
-					containerElement = BDSLUtil.getLocalVarDecl((BigraphVarDeclOrReference)((BDSLVariableDeclaration)containerElement).getType());
+				System.out.println("Trying to cast now: " + containerElement + "; " + containerElement.getClass() + "; "
+						+ containerElement.eClass());
+				if (((BDSLVariableDeclaration2) containerElement).getVariable() instanceof BigraphVarDeclOrReference) {
+					System.out.println("\tNow in var decl 1...");
+					containerElement = BDSLUtil.getLocalVarDecl((BigraphVarDeclOrReference) ((BDSLVariableDeclaration2) containerElement).getVariable());
+					System.out.println("\tcontainerElement is now: " + containerElement);
 				}
 			} else {
 				containerElement = EcoreUtil2.getContainerOfType(context, AbstractElementsWithNameAndSig.class);
-				if(containerElement == null) {
+				System.out.println("\t now in else block");
+				if (containerElement == null) {
 					System.out.println("\tfirst round is null");
-					containerElement = EcoreUtil2.getContainerOfType(context, BDSLVariableDeclaration.class);
-					if(containerElement != null) {
-						if(((BDSLVariableDeclaration)containerElement).getType() instanceof BigraphVarDeclOrReference) {
-							System.out.println("\tNow in var decl ...");
-							containerElement = BDSLUtil.getLocalVarDecl((BigraphVarDeclOrReference)((BDSLVariableDeclaration)containerElement).getType());
+					containerElement = EcoreUtil2.getContainerOfType(context, BDSLVariableDeclaration2.class);
+					if (containerElement != null) {
+						if (((BDSLVariableDeclaration2) containerElement)
+								.getVariable() instanceof BigraphVarDeclOrReference) {
+							System.out.println("\tNow in var decl 2...");
+							containerElement = BDSLUtil.getLocalVarDecl(
+									(BigraphVarDeclOrReference) ((BDSLVariableDeclaration2) containerElement)
+											.getVariable());
 						}
 					}
 				}
 				System.out.println("Still: " + containerElement);
-				if(containerElement == null) {
+				if (containerElement == null) {
 					containerElement = EcoreUtil2.getContainerOfType(context, BigraphVarDeclOrReference.class);
 					System.out.println("\t" + containerElement);
 				}
 			}
-			
-			
+
 			Signature correctSignature = null;
-			if(containerElement != null) {
-				correctSignature = inferSignature((AbstractElementsWithNameAndSig) containerElement);
+			if (containerElement != null) {
+
+				System.out.println("\t containerElement: " + containerElement);
+				if (containerElement instanceof AssignmentOrVariableDeclaration)
+					correctSignature = inferSignature((AssignmentOrVariableDeclaration) containerElement);
+				if(containerElement instanceof AbstractElementsWithNameAndSig) {
+					correctSignature = inferSignature((AbstractElementsWithNameAndSig) containerElement);
+				}
 			}
-		
+
 //			System.out.println("Signature so far: " + correctSignature);
 			if (correctSignature != null) {
 //				Signature correctSignature = inferSignature((AbstractElementsWithNameAndSig) containerElement);
@@ -218,8 +235,9 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 	public void findAllLocalBigraphVariableDeclarations(EObject context, List<AbstractElementsWithNameAndSig> collect) {
 //		System.out.println("context: " + context);
 //		List<AbstractElement> allVarDeclarations = EcoreUtil2.getAllContentsOfType(context, AbstractElement.class);
-		List<AbstractElementsWithNameAndSig> allVarDeclarations = EcoreUtil2.getAllContentsOfType(context, AbstractElementsWithNameAndSig.class);
-		
+		List<AbstractElementsWithNameAndSig> allVarDeclarations = EcoreUtil2.getAllContentsOfType(context,
+				AbstractElementsWithNameAndSig.class);
+
 		List<String> names = collect.stream().map(x -> x.getName()).collect(Collectors.toList());
 		for (AbstractElementsWithNameAndSig each : allVarDeclarations) {
 			if (!names.contains(each.getName())) {
@@ -231,10 +249,22 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 		}
 	}
 
+	public Signature inferSignature(AssignmentOrVariableDeclaration variableOrAssignment) {
+		if (variableOrAssignment instanceof BDSLVariableDeclaration2) {
+			return inferSignature(((BDSLVariableDeclaration2) variableOrAssignment).getVariable());
+		} else if (variableOrAssignment instanceof BDSLReferenceDeclaration) {
+			return inferSignature(((BDSLReferenceDeclaration) variableOrAssignment).getTarget());
+		}
+		return null;
+	}
+
 	/**
-	 * Infer the signature of a variable declaration by looking up the parent context.
+	 * Infer the signature of a variable declaration by looking up the parent
+	 * context.
 	 * 
-	 * A inner bigraph declaration need not have to define a signature (or more specifically, it is not possible to define one accidentally).
+	 * A inner bigraph declaration need not have to define a signature (or more
+	 * specifically, it is not possible to define one accidentally).
+	 * 
 	 * @param variable
 	 * @return
 	 */
@@ -243,7 +273,8 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 			return variable.getSig();
 		}
 		if (variable.eContainer() != null) {
-			EObject container = EcoreUtil2.getContainerOfType(variable.eContainer(), AbstractElementsWithNameAndSig.class);
+			EObject container = EcoreUtil2.getContainerOfType(variable.eContainer(),
+					AbstractElementsWithNameAndSig.class);
 //			Signature sig = ((LocalVarDecl) variable.eContainer()).getSig();
 //			if (sig != null)
 //				return sig;
@@ -252,7 +283,7 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 		}
 		return null;
 	}
-	
+
 //	public Signature inferSignature(LocalRuleDecl variable) {
 //		if (variable.getSig() != null) {
 //			return variable.getSig();
@@ -270,7 +301,7 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 	public IScope getBRSModelScope(EObject context, EReference reference, BDSLDocument module, IScope parent) {
 //		System.out.println("getBRSModelScope");
 		Collection<AbstractElement> allDefinitions = module.getStatements();
-		IScope ad1 = Scopes.scopeFor(allDefinitions, parent); //Scopes.scopeFor(allDefinitions2, parent);
+		IScope ad1 = Scopes.scopeFor(allDefinitions, parent); // Scopes.scopeFor(allDefinitions2, parent);
 		Collection<AbstractMainStatements> allDefinitions2 = module.getMain().getBody().getStatements();
 		IScope ad2 = Scopes.scopeFor(allDefinitions2, ad1);
 //				Collections2.filter(module.getStatements(),

@@ -15,16 +15,17 @@ BDSLDocument:
 
 BDSLDocumentImport:
 	'import' importedNamespace=FqnWithWildCard;
+FqnWithWildCard:
+	FQN ('.*')?;
 
 FQN:
 	ID ('.' ID)*; // TODO: could be now also IdOrKw instead of ID
 
-FqnWithWildCard:
-	FQN ('.*')?;
-
 BigraphVarReferenceID hidden():
 	('$' FQN); 
-	
+
+//terminal DOLLAR: '$';
+
 FLOAT returns ecore::EFloat : INT'.'INT;
 
 fragment BDSLNameSigDeclFrag *:
@@ -36,10 +37,10 @@ fragment BDSLSiteVarsAndControlVarFrag *:
 ;
 
 AbstractElement:
-	BDSLVariableDeclaration | AbstractElementsWithNameAndSig
+	AssignmentOrVariableDeclaration
 ;
 
-AbstractElementsWithNameAndSig:
+AbstractElementsWithNameAndSig: //TODO rename to namedelement
 	LocalVarDecl | LocalRuleDecl | LocalPredicateDeclaration | BRSDefinition
 ;
 
@@ -57,16 +58,23 @@ IdOrKw :
 KEYWORD :
 	MainKeyword
 	| METHOD_KEYWORD
-	| "react"
-	| "signature"
+	| VAR_DECL_KEWORDS
+;
+
+VAR_DECL_KEWORDS:
+	'react'
+	| 'val'
+	| 'pred'
+	| 'brs'
+	| 'signature'
 ;
 
 METHOD_KEYWORD:
 	'load' 
 	| 'randomBigraph'
-	| "export"
-	| "execute"
-	| "println"
+	| 'export'
+	| 'execute'
+	| 'println'
 ;
 
 // Creates a signature class with the same name: shortcut for "signature returns signature"
@@ -90,7 +98,7 @@ LocalVarDecl:
 ;
 
 LVD2 returns LocalVarDecl:
-	{LVD2} "val" name=ID BDSLSiteVarsAndControlVarFrag '=' "{" definition+=(BigraphExpression)* "}"
+	{LVD2} 'val' name=ID BDSLSiteVarsAndControlVarFrag '=' '{' BDSLBigraphDefinition '}'
 ;
 
 AbstractBigraphDeclaration:
@@ -113,15 +121,14 @@ Site:
 
 LocalRuleDecl:
 	"react" {LocalRuleDecl} BDSLNameSigDeclFrag
-	("="
-	"{" redex=BigraphExpression "}"
-	','
-	'{' reactum=BigraphExpression '}'
-	)
 ;
 	
 LocalPredicateDeclaration:
 	'pred' {LocalPredicateDeclaration} BDSLNameSigDeclFrag (':' type=PredicateType)? '=' '{' definition=BigraphExpression '}'
+;
+
+BRSDefinition:
+	'brs' {BRSDefinition} BDSLNameSigDeclFrag
 ;
 
 ElementaryBigraphs:
@@ -160,9 +167,22 @@ PredicateVarReference:
 BRSVarReference:
 //	{BRSVarReference}
 	value=[BRSDefinition|BigraphVarReferenceID];
+
 	
 BigraphVarDeclOrReference: // dont remove: needed to organize hierarchy
 	LocalVarDecl | BigraphVarReference
+;
+
+BigraphRuleDeclOrReference: // dont remove: needed to organize hierarchy
+	LocalRuleDecl | RuleVarReference
+;
+
+BigraphPredDeclOrReference: // dont remove: needed to organize hierarchy
+	LocalPredicateDeclaration | PredicateVarReference
+;
+
+BigraphBdslVarDeclOrReference:
+	BRSDefinition | BRSVarReference
 ;
 
 
@@ -184,22 +204,30 @@ PrimaryExpression returns BigraphExpression:
 	//	{BigraphLiteral} value=AbstractBigraphDeclaration
 	AbstractBigraphDeclaration;
 
+//BDSLReferenceClass: 
+//	BigraphVarReference | RuleVarReference | PredicateVarReference | BRSVarReference
+//;
 
-
-
-BDSLVariableDeclaration:
-	(type=LocalVarDecl | (type=BigraphVarReference)) '=' 
-	(
-		expression=BDSLExpression | 
-//		(methodinvocation?= METHOD_KEYWORD? (expression+=BDSLExpression)) | 
-		
-		('{' definition+=(BigraphExpression)* '}')
-	)
-
+AssignmentOrVariableDeclaration:
+	BDSLVariableDeclaration2 | BDSLReferenceDeclaration
 ;
 
+BDSLVariableDeclaration2:
+	{BDSLVariableDeclaration2}
+	(variable=AbstractElementsWithNameAndSig) ('=' 
+	(
+		value=BDSLExpression
+	))?
+;
 
-// analogeous: BDSLReact var decl and predvardecl
+BDSLReferenceDeclaration:
+	{BDSLReferenceDeclaration}
+	target=[AbstractElementsWithNameAndSig | BigraphVarReferenceID] ('=' 
+	(
+		value=BDSLExpression
+	))?
+;
+
 
 BDSLExpression:
 	BDSLAssignment
@@ -210,24 +238,43 @@ BDSLAssignment returns BDSLExpression:
 	({BDSLAssignment.left=current} '=' right=BDSLExpression)? // Right associativity	
 ;
 
+//BDSLReactDefinition
+//BDSLPredDefinition
+fragment BDSLReactDefinition:
+	( redex=(BigraphExpression|AssignableBigraphExpressionWithExplicitSig) '}' ',' '{' reactum=(BigraphExpression|AssignableBigraphExpressionWithExplicitSig)) //TODO AssignableBigraphExpressionWithExplicitSig
+;
+
+fragment BDSLBrsDefinition:
+	brs = AssignableBigraphExpressionWithExplicitSig 
+	| (
+		('agents' '=' ("[" agents+=BigraphVarReference? (',' agents+=BigraphVarReference)* "]"))
+		(',' 'rules' '=' ("[" rules+=RuleVarReference? (',' agents+=RuleVarReference)* "]"))
+		(',' 'preds' '=' ("[" predicates+=PredicateVarReference? (',' predicates+=PredicateVarReference)* "]"))?
+	)
+;
+
+fragment BDSLBigraphDefinition: // this also covers Predicate definitions
+	definition+=(BigraphExpression)*
+;
+
 BDSLSelectionExpression returns BDSLExpression:
-	BDSLTerminalExpression
-//	(
-//	{SJMemberSelection.receiver=current} '.'
-//	member=[SJMember]
-//	(methodinvocation?='('
-//	(args+=SJExpression (',' args+=SJExpression)*)? ')'
-//	)?
-//	)*
-// see "Implementing Domain Specific Languages with Xtext and Xtend - Second Edition"
+	BDSLTerminalExpression |
+	(
+		('{'
+			( => BDSLReactDefinition | => BDSLBigraphDefinition | => BDSLBrsDefinition)
+		'}'
+		)
+	)
 ;
 
 BDSLTerminalExpression returns BDSLExpression:
 //	{BDSLStringConstant} value=STRING |
 //	{BDSLIntConstant} value=INT |
 //	{BDSLBoolConstant} value = ('true' | 'false') |
-	AssignableBigraphExpression |
-	'(' BDSLExpression ')'
+//	{BDSLOpenBigraphDefinitionConstant} '{'
+//	| {BDSLCloseBigraphDefinitionConstant} '}'
+	AssignableBigraphExpression 
+	| '(' BDSLExpression ')' //this might be not needed for our case
 ;
 
 ////////////////////////////////////
@@ -238,7 +285,7 @@ AssignableBigraphExpression:
 	AssignableBigraphExpressionWithExplicitSig | BigraphVarReference
 ;
 
-AssignableBigraphExpressionWithExplicitSig:
+AssignableBigraphExpressionWithExplicitSig: //TODO rename to methodsomething
 	LoadMethod | CreateRandomBigraphMethod
 ;
 
@@ -282,19 +329,13 @@ CreateRandomBigraphMethod returns AssignableBigraphExpressionWithExplicitSig:
 ////////////////////////////////////
 
 AbstractMainStatements:
-	BRSDefinition | MethodStatements | BDSLVariableDeclaration;
+	MethodStatements | AssignmentOrVariableDeclaration//| BDSLVariableDeclaration // | BDSLReactionDeclaration
+;
 
 
 BDSLBlock:
 	{BDSLBlock} '{' statements += AbstractMainStatements* '}' ;
 
-
-BRSDefinition:
-	'brs' {BRSDefinition} BDSLNameSigDeclFrag '{'
-	('agents' '=' ("[" agents+=BigraphVarReference? (',' agents+=BigraphVarReference)* "]"))?
-	(',' 'rules' '=' ("[" rules+=RuleVarReference? (',' agents+=RuleVarReference)* "]"))?
-	(',' 'preds' '=' ("[" predicates+=PredicateVarReference? (',' predicates+=PredicateVarReference)* "]"))?
-	'}';
 
 
 //////////////////////////
@@ -344,5 +385,5 @@ enum OutputModeModel:
 //terminal BASICID: ('a'..'z'|'A'..'Z'|'0'..'9' | 'å' | 'ä' | 'ö')*;
 //terminal STRING: '"' -> '"';
 //terminal WS: (' '|'\t')+;
-//terminal ANY_OTHER: .;m
+//terminal ANY_OTHER: .;
 	

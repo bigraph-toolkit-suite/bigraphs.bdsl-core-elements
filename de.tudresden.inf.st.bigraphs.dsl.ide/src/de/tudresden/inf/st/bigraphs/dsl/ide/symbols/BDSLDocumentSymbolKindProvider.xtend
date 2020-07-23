@@ -28,9 +28,9 @@ class BDSLDocumentSymbolKindProvider extends DocumentSymbolKindProvider {
 			case PRINT_LN__TEXT: String
 			// BRS
 			case BRS_DEFINITION: Variable
-			case BRS_DEFINITION__AGENTS: Array
-			case BRS_DEFINITION__RULES: Array
-			case BRS_DEFINITION__PREDICATES: Array
+//			case B: Array
+//			case BRS_DEFINITION__RULES: Array
+//			case BRS_DEFINITION__PREDICATES: Array
 			default: Field
 		}
 	}

@@ -18,10 +18,10 @@ import org.apache.commons.io.FilenameUtils
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.LoadFormat
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.AssignableBigraphExpression
 import org.eclipse.xtext.EcoreUtil2
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLVariableDeclaration
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphVarDeclOrReference
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.AssignableBigraphExpressionWithExplicitSig
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.AbstractMainStatements
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLVariableDeclaration2
 
 //import java.security.Signature
 /**
@@ -48,33 +48,33 @@ class BDSLValidator extends AbstractBDSLValidator {
 
 	public static val ASSIGNMENT_SIGNATURES_MISMATCH = 'signatureMismatch';
 
-	@Check
-	def assignableBigraphExpressionSigCheck(BDSLVariableDeclaration container) {
-		if (container.expression !== null) {
-			val localVarDecl = BDSLUtil.getLocalVarDecl(container.type as BigraphVarDeclOrReference)
-			if (localVarDecl.sig !== null) {
-				if ((container.expression instanceof AssignableBigraphExpressionWithExplicitSig)) {
-					val sigFromMethod = (container.expression as AssignableBigraphExpressionWithExplicitSig).sig
-					if (sigFromMethod !== localVarDecl.sig) {
-						error(
-							"Signature of method call doesn't match with signature on left-hand side of the variable declaration with name " +
-								localVarDecl.name, BDSLPackage.Literals.BDSL_VARIABLE_DECLARATION__TYPE,
-							ASSIGNMENT_SIGNATURES_MISMATCH);
-					}
-				}
-				if ((container.expression instanceof BigraphVarDeclOrReference)) {
-					val sigFromReference = BDSLUtil.getLocalVarDecl(container.expression as BigraphVarDeclOrReference).
-						sig
-					if (sigFromReference !== localVarDecl.sig) {
-						error(
-							"Signature of bigraph reference doesn't match with signature on left-hand side of the variable declaration with name " +
-								localVarDecl.name, BDSLPackage.Literals.BDSL_VARIABLE_DECLARATION__TYPE,
-							ASSIGNMENT_SIGNATURES_MISMATCH);
-					}
-				}
-			}
-		}
-	}
+//	@Check
+//	def assignableBigraphExpressionSigCheck(BDSLVariableDeclaration2 container) {
+//		if (container.value !== null) {
+//			val localVarDecl = BDSLUtil.getLocalVarDecl(container.type as BigraphVarDeclOrReference)
+//			if (localVarDecl.sig !== null) {
+//				if ((container.expression instanceof AssignableBigraphExpressionWithExplicitSig)) {
+//					val sigFromMethod = (container.expression as AssignableBigraphExpressionWithExplicitSig).sig
+//					if (sigFromMethod !== localVarDecl.sig) {
+//						error(
+//							"Signature of method call doesn't match with signature on left-hand side of the variable declaration with name " +
+//								localVarDecl.name, BDSLPackage.Literals.BDSL_VARIABLE_DECLARATION__TYPE,
+//							ASSIGNMENT_SIGNATURES_MISMATCH);
+//					}
+//				}
+//				if ((container.expression instanceof BigraphVarDeclOrReference)) {
+//					val sigFromReference = BDSLUtil.getLocalVarDecl(container.expression as BigraphVarDeclOrReference).
+//						sig
+//					if (sigFromReference !== localVarDecl.sig) {
+//						error(
+//							"Signature of bigraph reference doesn't match with signature on left-hand side of the variable declaration with name " +
+//								localVarDecl.name, BDSLPackage.Literals.BDSL_VARIABLE_DECLARATION__TYPE,
+//							ASSIGNMENT_SIGNATURES_MISMATCH);
+//					}
+//				}
+//			}
+//		}
+//	}
 
 	@Check
 	def loadMethodResourceFormat(LoadMethod loadMethod) {

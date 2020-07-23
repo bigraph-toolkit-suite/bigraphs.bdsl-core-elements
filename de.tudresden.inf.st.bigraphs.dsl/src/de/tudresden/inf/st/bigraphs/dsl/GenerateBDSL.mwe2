@@ -51,8 +51,13 @@ Workflow {
 			scopeProvider = {
 				ignoreCase = false
 			}
+			parserGenerator = {
+				options = {
+				//backtrack = true
+				//backtrackLexer = true
+				}
+			}
 			validator = {
-			// composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
 			// Generates checks for @Deprecated grammar annotations, an IssueProvider and a corresponding PropertyPage
 				generateDeprecationValidation = true
 				composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"

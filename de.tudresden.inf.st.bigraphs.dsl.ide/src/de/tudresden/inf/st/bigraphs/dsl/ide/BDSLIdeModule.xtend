@@ -3,7 +3,6 @@
  */
 package de.tudresden.inf.st.bigraphs.dsl.ide
 
-import de.tudresden.inf.st.bigraphs.dsl.ide.symbols.BDSLDocumentSymbolKindProvider
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolMapper.DocumentSymbolKindProvider
 import de.tudresden.inf.st.bigraphs.dsl.ide.symbols.BdslHierarchicalDocumentSymbolService
 import org.eclipse.xtext.ide.server.symbol.HierarchicalDocumentSymbolService
@@ -15,6 +14,7 @@ import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider
 import de.tudresden.inf.st.bigraphs.dsl.ide.completion.BdslContentProposalProvider
 import de.tudresden.inf.st.bigraphs.dsl.ide.completion.BdslContentProposalCreator
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalCreator
+import de.tudresden.inf.st.bigraphs.dsl.ide.symbols.BDSLDocumentSymbolKindProvider
 
 /**
  * Use this class to register IDE components such as context proposal provider, code lens service, formatting, etc.

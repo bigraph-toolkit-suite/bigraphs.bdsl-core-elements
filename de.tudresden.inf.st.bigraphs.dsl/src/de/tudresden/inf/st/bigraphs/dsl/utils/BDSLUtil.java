@@ -10,13 +10,18 @@ import org.eclipse.xtext.EcoreUtil2;
 import com.google.common.base.Preconditions;
 
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.AbstractBigraphDeclaration;
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLVariableDeclaration;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.AssignableBigraphExpression;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.AssignableBigraphExpressionWithExplicitSig;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLExpression;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLReferenceDeclaration;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLVariableDeclaration2;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphVarDeclOrReference;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphVarReference;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.NodeExpressionCall;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.DataSource;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.LoadMethod;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalVarDecl;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.MethodStatements;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.Signature;
 
 /*
@@ -39,13 +44,17 @@ public class BDSLUtil {
 		if (Objects.nonNull(localVarDecl.getControlType())) {
 			return (Signature) localVarDecl.getControlType().eContainer();
 		}
-		BDSLVariableDeclaration container = EcoreUtil2.getContainerOfType(localVarDecl, BDSLVariableDeclaration.class);
+		BDSLVariableDeclaration2 container = EcoreUtil2.getContainerOfType(localVarDecl,
+				BDSLVariableDeclaration2.class);
 		if (Objects.nonNull(container)) {
-			List<Signature> signatures = container.getDefinition().stream().filter(x -> x instanceof NodeExpressionCall)
-					.map(x -> ((NodeExpressionCall) x).getValue()).map(x -> (Signature) x.eContainer())
-					.collect(Collectors.toList());
-			if (signatures.size() > 0) {
-				return signatures.get(0);
+			if (container.getValue() instanceof BDSLExpression) {
+				BDSLExpression bdslExpr = container.getValue();
+				List<Signature> signatures = bdslExpr.getDefinition().stream()
+						.filter(x -> x instanceof NodeExpressionCall).map(x -> ((NodeExpressionCall) x).getValue())
+						.map(x -> (Signature) x.eContainer()).collect(Collectors.toList());
+				if (signatures.size() > 0) {
+					return signatures.get(0);
+				}
 			}
 		}
 		return null;
@@ -59,6 +68,64 @@ public class BDSLUtil {
 			return ((BigraphVarReference) typeLeftHandSide).getValue();
 		}
 		return null;
+	}
+
+	public static boolean bdslExpressionIsBRSDefinition(BDSLExpression bdslExpression) {
+		if (Objects.nonNull(bdslExpression.getAgents()) && bdslExpression.getAgents().size() > 0 &&
+				Objects.nonNull(bdslExpression.getRules()) && bdslExpression.getRules().size() > 0
+				&& !bdslExpressionIsRuleDefinition(bdslExpression) && !bdslExpressionIsBigraphDefinition(bdslExpression)
+				&& !bdslExpressionIsMethodStatement(bdslExpression)) {
+			return true;
+		}
+		return false;
+	}
+
+	public static boolean bdslExpressionIsRuleDefinition(BDSLExpression bdslExpression) {
+		if (Objects.nonNull(bdslExpression.getRedex()) && Objects.nonNull(bdslExpression.getReactum())
+				&& !bdslExpressionIsMethodStatement(bdslExpression)) {
+			return true;
+		}
+		return false;
+	}
+
+	public static boolean bdslExpressionIsMethodStatement(BDSLExpression bdslExpression) {
+		return bdslExpression instanceof MethodStatements;
+	}
+	
+	public static boolean bdslExpressionIsAssignableBigraphMethodExpression(BDSLExpression bdslExpression) {
+		return bdslExpression instanceof AssignableBigraphExpressionWithExplicitSig;
+	}
+
+	public static boolean bdslExpressionIsBigraphDefinition(BDSLExpression bdslExpression) {
+		if (Objects.nonNull(bdslExpression.getDefinition()) && bdslExpression.getDefinition().size() > 0
+				&& !bdslExpressionIsMethodStatement(bdslExpression)) {
+			return true;
+		}
+		return false;
+	}
+
+	public static void updateSignatureOfAssignment(AssignableBigraphExpression assignmentExpression,
+			Signature signature) {
+		BDSLVariableDeclaration2 prntContainer = EcoreUtil2.getContainerOfType(assignmentExpression,
+				BDSLVariableDeclaration2.class);
+		if (Objects.isNull(prntContainer)) {
+			BDSLReferenceDeclaration refCnt = EcoreUtil2.getContainerOfType(assignmentExpression,
+					BDSLReferenceDeclaration.class);
+			assert refCnt != null;
+			updateSignatureOfAssignment(refCnt, signature);
+		} else {
+			updateSignatureOfAssignment(prntContainer, signature);
+		}
+	}
+
+	public static void updateSignatureOfAssignment(BDSLVariableDeclaration2 prntContainer, Signature signature) {
+//        LocalVarDecl decl = BDSLUtil2.getLocalVarDecl(prntContainer.getVariable());
+		prntContainer.getVariable().setSig(signature); // update signature
+	}
+
+	public static void updateSignatureOfAssignment(BDSLReferenceDeclaration prntContainer, Signature signature) {
+//        LocalVarDecl decl = BDSLUtil2.getLocalVarDecl(prntContainer.getTarget());
+		prntContainer.getTarget().setSig(signature); // update signature
 	}
 
 	public static class Strings {
