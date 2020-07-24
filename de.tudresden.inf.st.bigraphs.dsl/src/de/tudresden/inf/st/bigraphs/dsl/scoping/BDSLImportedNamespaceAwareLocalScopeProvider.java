@@ -99,7 +99,7 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 				&& reference.eContainer() == BDSLPackage.Literals.BIGRAPH_VAR_REFERENCE) {
 			EObject containerElement = EcoreUtil2.getContainerOfType(context, AbstractElementsWithNameAndSig.class);
 			if (containerElement != null) {
-				System.out.println("containerElement: " + containerElement);
+//				System.out.println("containerElement: " + containerElement);
 //				Scopes.selectCompatible(IScope.NULLSCOPE.getAllElements(), BDSLPackage.Literals.BIGRAPH_VAR_REFERENCE);
 //				EObject rootElement = EcoreUtil2.getRootContainer(context);
 				Signature correctSignature = inferSignature((AbstractElementsWithNameAndSig) containerElement);
@@ -135,40 +135,40 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 		if ((context instanceof NodeExpressionCall)
 				&& reference.eContainer() == BDSLPackage.Literals.NODE_EXPRESSION_CALL) {
 
-			System.out.println("Reference.eContainer of NodeExpressionCall: " + reference.eContainer());
+//			System.out.println("Reference.eContainer of NodeExpressionCall: " + reference.eContainer());
 
 			Optional<AssignmentOrVariableDeclaration> bdslVarDecl = StreamSupport
 					.stream(EcoreUtil2.getAllContainers(context).spliterator(), false)
 					.filter(x -> x instanceof AssignmentOrVariableDeclaration)
 					.map(x -> (AssignmentOrVariableDeclaration) x).findFirst();
 			EObject containerElement = null;
-			System.out.println("bdslVarDecl: " + bdslVarDecl);
+//			System.out.println("bdslVarDecl: " + bdslVarDecl);
 			if (bdslVarDecl.isPresent()) {
 				containerElement = bdslVarDecl.get();
-				System.out.println("Trying to cast now: " + containerElement + "; " + containerElement.getClass() + "; "
-						+ containerElement.eClass());
+//				System.out.println("Trying to cast now: " + containerElement + "; " + containerElement.getClass() + "; "
+//						+ containerElement.eClass());
 				if (((BDSLVariableDeclaration2) containerElement).getVariable() instanceof BigraphVarDeclOrReference) {
-					System.out.println("\tNow in var decl 1...");
+//					System.out.println("\tNow in var decl 1...");
 					containerElement = BDSLUtil.getLocalVarDecl((BigraphVarDeclOrReference) ((BDSLVariableDeclaration2) containerElement).getVariable());
-					System.out.println("\tcontainerElement is now: " + containerElement);
+//					System.out.println("\tcontainerElement is now: " + containerElement);
 				}
 			} else {
 				containerElement = EcoreUtil2.getContainerOfType(context, AbstractElementsWithNameAndSig.class);
-				System.out.println("\t now in else block");
+//				System.out.println("\t now in else block");
 				if (containerElement == null) {
-					System.out.println("\tfirst round is null");
+//					System.out.println("\tfirst round is null");
 					containerElement = EcoreUtil2.getContainerOfType(context, BDSLVariableDeclaration2.class);
 					if (containerElement != null) {
 						if (((BDSLVariableDeclaration2) containerElement)
 								.getVariable() instanceof BigraphVarDeclOrReference) {
-							System.out.println("\tNow in var decl 2...");
+//							System.out.println("\tNow in var decl 2...");
 							containerElement = BDSLUtil.getLocalVarDecl(
 									(BigraphVarDeclOrReference) ((BDSLVariableDeclaration2) containerElement)
 											.getVariable());
 						}
 					}
 				}
-				System.out.println("Still: " + containerElement);
+//				System.out.println("Still: " + containerElement);
 				if (containerElement == null) {
 					containerElement = EcoreUtil2.getContainerOfType(context, BigraphVarDeclOrReference.class);
 					System.out.println("\t" + containerElement);
@@ -178,7 +178,7 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 			Signature correctSignature = null;
 			if (containerElement != null) {
 
-				System.out.println("\t containerElement: " + containerElement);
+//				System.out.println("\t containerElement: " + containerElement);
 				if (containerElement instanceof AssignmentOrVariableDeclaration)
 					correctSignature = inferSignature((AssignmentOrVariableDeclaration) containerElement);
 				if(containerElement instanceof AbstractElementsWithNameAndSig) {

@@ -55,8 +55,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="LocalRuleDecl" eSuperTypes="#//AbstractElementsWithNameAndSig #//BigraphRuleDeclOrReference"/>
   <eClassifiers xsi:type="ecore:EClass" name="LocalPredicateDeclaration" eSuperTypes="#//AbstractElementsWithNameAndSig #//BigraphPredDeclOrReference">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//PredicateType"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="definition" eType="#//BigraphExpression"
-        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BRSDefinition" eSuperTypes="#//AbstractElementsWithNameAndSig #//BigraphBdslVarDeclOrReference"/>
   <eClassifiers xsi:type="ecore:EClass" name="ElementaryBigraphs" eSuperTypes="#//AbstractBigraphDeclaration"/>
@@ -73,16 +71,16 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="to" unique="false" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BigraphVarReference" eSuperTypes="#//AbstractBigraphDeclaration #//BigraphVarDeclOrReference #//AssignableBigraphExpression #//PrintableExpression">
+  <eClassifiers xsi:type="ecore:EClass" name="BigraphVarReference" eSuperTypes="#//AbstractBigraphDeclaration #//BigraphVarDeclOrReference #//BDSLReferenceSymbol #//PrintableExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//LocalVarDecl"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RuleVarReference" eSuperTypes="#//BigraphRuleDeclOrReference">
+  <eClassifiers xsi:type="ecore:EClass" name="RuleVarReference" eSuperTypes="#//BigraphRuleDeclOrReference #//BDSLReferenceSymbol">
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//LocalRuleDecl"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PredicateVarReference" eSuperTypes="#//BigraphPredDeclOrReference">
+  <eClassifiers xsi:type="ecore:EClass" name="PredicateVarReference" eSuperTypes="#//BigraphPredDeclOrReference #//BDSLReferenceSymbol">
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//LocalPredicateDeclaration"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BRSVarReference" eSuperTypes="#//BigraphBdslVarDeclOrReference">
+  <eClassifiers xsi:type="ecore:EClass" name="BRSVarReference" eSuperTypes="#//BigraphBdslVarDeclOrReference #//BDSLReferenceSymbol">
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//BRSDefinition"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BigraphVarDeclOrReference"/>
@@ -90,6 +88,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="BigraphPredDeclOrReference"/>
   <eClassifiers xsi:type="ecore:EClass" name="BigraphBdslVarDeclOrReference"/>
   <eClassifiers xsi:type="ecore:EClass" name="BigraphExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BDSLReferenceSymbol"/>
   <eClassifiers xsi:type="ecore:EClass" name="AssignmentOrVariableDeclaration" eSuperTypes="#//AbstractElement #//AbstractMainStatements">
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//BDSLExpression"
         containment="true"/>
@@ -112,7 +111,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="brs" eType="#//AssignableBigraphExpressionWithExplicitSig"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="agents" upperBound="-1"
-        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject" containment="true"/>
+        eType="#//BDSLReferenceSymbol" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="rules" upperBound="-1"
         eType="#//RuleVarReference" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="predicates" upperBound="-1"
@@ -121,6 +120,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="BDSLBigraphDefinition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="definition" upperBound="-1"
         eType="#//BigraphExpression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ReferenceClassSymbol" eSuperTypes="#//AssignableBigraphExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//AbstractElementsWithNameAndSig"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AssignableBigraphExpression" eSuperTypes="#//BDSLExpression"/>
   <eClassifiers xsi:type="ecore:EClass" name="AssignableBigraphExpressionWithExplicitSig"

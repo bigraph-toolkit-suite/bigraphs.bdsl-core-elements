@@ -22,6 +22,17 @@ import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphVarDeclOrReference
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.AssignableBigraphExpressionWithExplicitSig
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.AbstractMainStatements
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLVariableDeclaration2
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLReferenceDeclaration
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalVarDecl
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLReferenceSymbol
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalRuleDecl
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.RuleVarReference
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalPredicateDeclaration
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.PredicateVarReference
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.BRSDefinition
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.BRSVarReference
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.ReferenceClassSymbol
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLExpression
 
 //import java.security.Signature
 /**
@@ -47,6 +58,58 @@ class BDSLValidator extends AbstractBDSLValidator {
 	public static val LOAD_METHOD_RES_EXT_AMBIGUOUS = 'fileExtensionMismatch';
 
 	public static val ASSIGNMENT_SIGNATURES_MISMATCH = 'signatureMismatch';
+
+	public static val ASSIGNMENT_TYPE_CHECKING = 'assignmentTypesNotMatch';
+
+//	@Check
+//	def checkTypeOfAssignment(BDSLReferenceDeclaration referenceDeclaration) {
+//	}
+
+	@Check
+	def checkTypeOfAssignment(BDSLVariableDeclaration2 varDeclaration) {
+		val variableLeft = varDeclaration.variable
+		val valueRight = varDeclaration.value
+//						System.out.println("Type right: " + valueRight)
+//		System.out.println("checkSymbol: " + checkReferenceSymbolType(valueRight, LocalRuleDecl))
+
+		if (valueRight instanceof AssignableBigraphExpressionWithExplicitSig) {
+			return
+		}
+
+		if (variableLeft instanceof LocalVarDecl && (
+			!BDSLUtil.bdslExpressionIsBigraphDefinition(valueRight) && !BDSLUtil.checkReferenceSymbolType(valueRight, LocalVarDecl))) {
+			error(
+				"Type of left-hand side of the variable declaration with name " +
+					variableLeft.name + " doesn't match with type on right-hand side", BDSLPackage.Literals.BDSL_VARIABLE_DECLARATION2__VARIABLE,
+				ASSIGNMENT_TYPE_CHECKING);
+		}
+
+		if (variableLeft instanceof LocalRuleDecl && (
+			!BDSLUtil.bdslExpressionIsRuleDefinition(valueRight) && !BDSLUtil.checkReferenceSymbolType(valueRight, LocalRuleDecl))) {
+			error(
+				"Type of left-hand side of the rule declaration with name " +
+					variableLeft.name + " doesn't match with type on right-hand side", BDSLPackage.Literals.BDSL_VARIABLE_DECLARATION2__VARIABLE,
+				ASSIGNMENT_TYPE_CHECKING);
+		}
+
+		if (variableLeft instanceof LocalPredicateDeclaration && (
+			!BDSLUtil.bdslExpressionIsBigraphDefinition(valueRight) &&
+			!BDSLUtil.checkReferenceSymbolType(valueRight, LocalPredicateDeclaration))) {
+			error(
+				"Type of left-hand side of the predicate declaration with name " +
+					variableLeft.name + " doesn't match with type on right-hand side", BDSLPackage.Literals.BDSL_VARIABLE_DECLARATION2__VARIABLE,
+				ASSIGNMENT_TYPE_CHECKING);
+		}
+
+		if (variableLeft instanceof BRSDefinition && (
+			!BDSLUtil.bdslExpressionIsBRSDefinition(valueRight) && !BDSLUtil.checkReferenceSymbolType(valueRight, BRSDefinition))) {
+			error(
+				"Type of left-hand side of the BRS declaration with name " +
+					variableLeft.name + " doesn't match with type on right-hand side", BDSLPackage.Literals.BDSL_VARIABLE_DECLARATION2__VARIABLE,
+				ASSIGNMENT_TYPE_CHECKING);
+		}
+
+	}
 
 //	@Check
 //	def assignableBigraphExpressionSigCheck(BDSLVariableDeclaration2 container) {
@@ -75,7 +138,6 @@ class BDSLValidator extends AbstractBDSLValidator {
 //			}
 //		}
 //	}
-
 	@Check
 	def loadMethodResourceFormat(LoadMethod loadMethod) {
 		if (loadMethod.resourcePath === null || BDSLUtil.Strings.rawStringOf(loadMethod.resourcePath).isEmpty) {

@@ -18,6 +18,7 @@ import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLVariableDeclaration2;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphVarDeclOrReference;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphVarReference;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.NodeExpressionCall;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.ReferenceClassSymbol;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.DataSource;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.LoadMethod;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalVarDecl;
@@ -100,6 +101,14 @@ public class BDSLUtil {
 		if (Objects.nonNull(bdslExpression.getDefinition()) && bdslExpression.getDefinition().size() > 0
 				&& !bdslExpressionIsMethodStatement(bdslExpression)) {
 			return true;
+		}
+		return false;
+	}
+	
+	public static boolean checkReferenceSymbolType(BDSLExpression bdslExpression, Class<?> clazz) {
+		if(bdslExpression instanceof ReferenceClassSymbol) {
+			Class<?> refClass = ((ReferenceClassSymbol)bdslExpression).getType().getClass();
+			return clazz.isAssignableFrom(refClass);
 		}
 		return false;
 	}

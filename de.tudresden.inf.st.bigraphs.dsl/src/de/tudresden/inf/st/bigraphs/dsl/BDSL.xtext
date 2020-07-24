@@ -124,7 +124,7 @@ LocalRuleDecl:
 ;
 	
 LocalPredicateDeclaration:
-	'pred' {LocalPredicateDeclaration} BDSLNameSigDeclFrag (':' type=PredicateType)? '=' '{' definition=BigraphExpression '}'
+	'pred' {LocalPredicateDeclaration} BDSLNameSigDeclFrag (':' type=PredicateType)? //'=' '{' definition=BigraphExpression '}'
 ;
 
 BRSDefinition:
@@ -204,9 +204,9 @@ PrimaryExpression returns BigraphExpression:
 	//	{BigraphLiteral} value=AbstractBigraphDeclaration
 	AbstractBigraphDeclaration;
 
-//BDSLReferenceClass: 
-//	BigraphVarReference | RuleVarReference | PredicateVarReference | BRSVarReference
-//;
+BDSLReferenceSymbol: 
+	BigraphVarReference | RuleVarReference | PredicateVarReference | BRSVarReference
+;
 
 AssignmentOrVariableDeclaration:
 	BDSLVariableDeclaration2 | BDSLReferenceDeclaration
@@ -281,8 +281,12 @@ BDSLTerminalExpression returns BDSLExpression:
 // Global BDSL Methods			  //
 ////////////////////////////////////
 
+ReferenceClassSymbol:
+	type=[AbstractElementsWithNameAndSig | BigraphVarReferenceID]
+;
+
 AssignableBigraphExpression:
-	AssignableBigraphExpressionWithExplicitSig | BigraphVarReference
+	AssignableBigraphExpressionWithExplicitSig | ReferenceClassSymbol//BigraphVarReference
 ;
 
 AssignableBigraphExpressionWithExplicitSig: //TODO rename to methodsomething

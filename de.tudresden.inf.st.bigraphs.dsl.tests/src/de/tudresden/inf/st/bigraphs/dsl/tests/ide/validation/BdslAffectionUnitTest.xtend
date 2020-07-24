@@ -112,6 +112,73 @@ main = {
 	}
 
 	@Test
+	def void testTypeCheckingOnAssignment_01() {
+		initialize
+		val uri = 'inmemory:/foo01.bdsl'
+		open(uri, '''
+			signature Sig1 {
+				active ctrl a arity 1
+				passive ctrl b arity 1
+				atomic ctrl c arity 1
+			}
+			
+			main = {
+				brs example(Sig1) = {
+					agents = [$big1],
+				    rules = [$reactRule1]
+				}
+				brs ex2 = $example
+			}
+			
+			val big1(Sig1) = {
+				a | b | b
+			}
+			
+			val big2 = load(sig=Sig1, as=xmi, resourcePath="classpath:models/test.xmi")
+			
+			val bigTest = $big1
+			val bigTest2 = $big2
+			
+			react reactRule1(Sig1) = {$big1}, {a | b}
+			react reactRule2(Sig1) = $reactRule1
+		''')
+		expectDiagnostics(uri, "")
+
+		val uri2 = 'inmemory:/foo02.bdsl'
+		open(uri2, '''
+			signature Sig1 {
+				active ctrl a arity 1
+				passive ctrl b arity 1
+				atomic ctrl c arity 1
+			}
+			
+			main = {
+				
+			
+							val big1(Sig1) = {
+								a | b | b
+							}
+							react reactRule1 = $big1 //fail
+							react reactRule2(Sig1) = {$big1}, {a | b} //ok
+							react reactRule3(Sig1) = $reactRule2 // ok
+							val big2 = $reactRule2 //fail
+							val big3 = $big2 //ok, even if not resolvable
+							brs brsVar1(Sig1) = {
+												agents = [$big1],
+											    rules = [$reactRule2]
+											}
+							brs brsVar2(Sig1) = $brsVar1 //ok
+							brs brsVar3(Sig1) = $big1 //fail
+							brs brsVar4(Sig1) = $reactRule2 //fail
+			}
+		''')
+		expectDiagnostics(uri2, "Type of left-hand side of the BRS declaration with name brsVar3 doesn't match with type on right-hand side:22,
+Type of left-hand side of the BRS declaration with name brsVar4 doesn't match with type on right-hand side:23,
+Type of left-hand side of the rule declaration with name reactRule1 doesn't match with type on right-hand side:12,
+Type of left-hand side of the variable declaration with name big2 doesn't match with type on right-hand side:15")
+	}
+
+	@Test
 	def void testResourcePathLoadMethod_01() {
 		initialize
 		val uri = 'inmemory:/foo.bdsl'

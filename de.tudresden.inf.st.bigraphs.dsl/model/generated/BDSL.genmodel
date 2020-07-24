@@ -100,7 +100,6 @@
     <genClasses ecoreClass="BDSL.ecore#//LocalRuleDecl"/>
     <genClasses ecoreClass="BDSL.ecore#//LocalPredicateDeclaration">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//LocalPredicateDeclaration/type"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//LocalPredicateDeclaration/definition"/>
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//BRSDefinition"/>
     <genClasses ecoreClass="BDSL.ecore#//ElementaryBigraphs"/>
@@ -132,6 +131,7 @@
     <genClasses ecoreClass="BDSL.ecore#//BigraphPredDeclOrReference"/>
     <genClasses ecoreClass="BDSL.ecore#//BigraphBdslVarDeclOrReference"/>
     <genClasses ecoreClass="BDSL.ecore#//BigraphExpression"/>
+    <genClasses ecoreClass="BDSL.ecore#//BDSLReferenceSymbol"/>
     <genClasses ecoreClass="BDSL.ecore#//AssignmentOrVariableDeclaration">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//AssignmentOrVariableDeclaration/value"/>
     </genClasses>
@@ -154,6 +154,9 @@
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//BDSLBigraphDefinition">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//BDSLBigraphDefinition/definition"/>
+    </genClasses>
+    <genClasses ecoreClass="BDSL.ecore#//ReferenceClassSymbol">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BDSL.ecore#//ReferenceClassSymbol/type"/>
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//AssignableBigraphExpression"/>
     <genClasses ecoreClass="BDSL.ecore#//AssignableBigraphExpressionWithExplicitSig">
