@@ -33,6 +33,11 @@ import de.tudresden.inf.st.bigraphs.dsl.bDSL.BRSDefinition
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BRSVarReference
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.ReferenceClassSymbol
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLExpression
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.AbstractElementsWithNameAndSig
+import java.util.List
+import java.util.ArrayList
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.SignatureImpl
+import de.tudresden.inf.st.bigraphs.dsl.services.BDSLGrammarAccess.BRSDefinitionElements
 
 //import java.security.Signature
 /**
@@ -61,83 +66,75 @@ class BDSLValidator extends AbstractBDSLValidator {
 
 	public static val ASSIGNMENT_TYPE_CHECKING = 'assignmentTypesNotMatch';
 
-//	@Check
-//	def checkTypeOfAssignment(BDSLReferenceDeclaration referenceDeclaration) {
-//	}
-
 	@Check
 	def checkTypeOfAssignment(BDSLVariableDeclaration2 varDeclaration) {
 		val variableLeft = varDeclaration.variable
 		val valueRight = varDeclaration.value
-//						System.out.println("Type right: " + valueRight)
-//		System.out.println("checkSymbol: " + checkReferenceSymbolType(valueRight, LocalRuleDecl))
 
 		if (valueRight instanceof AssignableBigraphExpressionWithExplicitSig) {
 			return
 		}
 
-		if (variableLeft instanceof LocalVarDecl && (
-			!BDSLUtil.bdslExpressionIsBigraphDefinition(valueRight) && !BDSLUtil.checkReferenceSymbolType(valueRight, LocalVarDecl))) {
-			error(
-				"Type of left-hand side of the variable declaration with name " +
-					variableLeft.name + " doesn't match with type on right-hand side", BDSLPackage.Literals.BDSL_VARIABLE_DECLARATION2__VARIABLE,
-				ASSIGNMENT_TYPE_CHECKING);
+		if (variableLeft instanceof LocalVarDecl && !(
+			BDSLUtil.bdslExpressionIsBigraphDefinition(valueRight) ||
+			BDSLUtil.checkReferenceSymbolType(valueRight, LocalVarDecl))) {
+			error("Type of left-hand side of the variable declaration with name " + variableLeft.name +
+				" doesn't match with type on right-hand side",
+				BDSLPackage.Literals.BDSL_VARIABLE_DECLARATION2__VARIABLE, ASSIGNMENT_TYPE_CHECKING);
 		}
 
-		if (variableLeft instanceof LocalRuleDecl && (
-			!BDSLUtil.bdslExpressionIsRuleDefinition(valueRight) && !BDSLUtil.checkReferenceSymbolType(valueRight, LocalRuleDecl))) {
-			error(
-				"Type of left-hand side of the rule declaration with name " +
-					variableLeft.name + " doesn't match with type on right-hand side", BDSLPackage.Literals.BDSL_VARIABLE_DECLARATION2__VARIABLE,
-				ASSIGNMENT_TYPE_CHECKING);
+		if (variableLeft instanceof LocalRuleDecl && !(
+			BDSLUtil.bdslExpressionIsRuleDefinition(valueRight) ||
+			BDSLUtil.checkReferenceSymbolType(valueRight, LocalRuleDecl))) {
+			error("Type of left-hand side of the rule declaration with name " + variableLeft.name +
+				" doesn't match with type on right-hand side",
+				BDSLPackage.Literals.BDSL_VARIABLE_DECLARATION2__VARIABLE, ASSIGNMENT_TYPE_CHECKING);
 		}
 
-		if (variableLeft instanceof LocalPredicateDeclaration && (
-			!BDSLUtil.bdslExpressionIsBigraphDefinition(valueRight) &&
-			!BDSLUtil.checkReferenceSymbolType(valueRight, LocalPredicateDeclaration))) {
-			error(
-				"Type of left-hand side of the predicate declaration with name " +
-					variableLeft.name + " doesn't match with type on right-hand side", BDSLPackage.Literals.BDSL_VARIABLE_DECLARATION2__VARIABLE,
-				ASSIGNMENT_TYPE_CHECKING);
+		if (variableLeft instanceof LocalPredicateDeclaration && !(
+			BDSLUtil.bdslExpressionIsBigraphDefinition(valueRight) ||
+			BDSLUtil.checkReferenceSymbolType(valueRight, LocalPredicateDeclaration))) {
+			error("Type of left-hand side of the predicate declaration with name " + variableLeft.name +
+				" doesn't match with type on right-hand side",
+				BDSLPackage.Literals.BDSL_VARIABLE_DECLARATION2__VARIABLE, ASSIGNMENT_TYPE_CHECKING);
 		}
 
-		if (variableLeft instanceof BRSDefinition && (
-			!BDSLUtil.bdslExpressionIsBRSDefinition(valueRight) && !BDSLUtil.checkReferenceSymbolType(valueRight, BRSDefinition))) {
-			error(
-				"Type of left-hand side of the BRS declaration with name " +
-					variableLeft.name + " doesn't match with type on right-hand side", BDSLPackage.Literals.BDSL_VARIABLE_DECLARATION2__VARIABLE,
-				ASSIGNMENT_TYPE_CHECKING);
+		if (variableLeft instanceof BRSDefinition && !(
+			BDSLUtil.bdslExpressionIsBRSDefinition(valueRight) ||
+			BDSLUtil.checkReferenceSymbolType(valueRight, BRSDefinition))) {
+			error("Type of left-hand side of the BRS declaration with name " + variableLeft.name +
+				" doesn't match with type on right-hand side",
+				BDSLPackage.Literals.BDSL_VARIABLE_DECLARATION2__VARIABLE, ASSIGNMENT_TYPE_CHECKING);
 		}
 
 	}
+	
+	Signature sigRight;
+	@Check
+	def assignableBigraphExpressionSigCheck(BDSLVariableDeclaration2 container) {
+		val variableLeft = container.variable
+		val valueRight = container.value
+		val signatureLeft = variableLeft.sig
+		if (valueRight === null || signatureLeft === null) {
+			return
+		}
+			
+		var sigRight = {
+			if (valueRight instanceof AssignableBigraphExpressionWithExplicitSig) {
+				sigRight = (valueRight as AssignableBigraphExpressionWithExplicitSig).sig
+			} else if (valueRight instanceof ReferenceClassSymbol) {
+				sigRight = BDSLUtil.tryInferSignature((valueRight as ReferenceClassSymbol).type)
+			}
+		}
+	
+		if (sigRight !== null && sigRight !== signatureLeft) {
+			error(
+				"Signature of right-hand side doesn't match with signature on left-hand side of the variable declaration with name " +
+					variableLeft.name, BDSLPackage.Literals.BDSL_VARIABLE_DECLARATION2__VARIABLE,
+				ASSIGNMENT_SIGNATURES_MISMATCH);
+		}
+	}
 
-//	@Check
-//	def assignableBigraphExpressionSigCheck(BDSLVariableDeclaration2 container) {
-//		if (container.value !== null) {
-//			val localVarDecl = BDSLUtil.getLocalVarDecl(container.type as BigraphVarDeclOrReference)
-//			if (localVarDecl.sig !== null) {
-//				if ((container.expression instanceof AssignableBigraphExpressionWithExplicitSig)) {
-//					val sigFromMethod = (container.expression as AssignableBigraphExpressionWithExplicitSig).sig
-//					if (sigFromMethod !== localVarDecl.sig) {
-//						error(
-//							"Signature of method call doesn't match with signature on left-hand side of the variable declaration with name " +
-//								localVarDecl.name, BDSLPackage.Literals.BDSL_VARIABLE_DECLARATION__TYPE,
-//							ASSIGNMENT_SIGNATURES_MISMATCH);
-//					}
-//				}
-//				if ((container.expression instanceof BigraphVarDeclOrReference)) {
-//					val sigFromReference = BDSLUtil.getLocalVarDecl(container.expression as BigraphVarDeclOrReference).
-//						sig
-//					if (sigFromReference !== localVarDecl.sig) {
-//						error(
-//							"Signature of bigraph reference doesn't match with signature on left-hand side of the variable declaration with name " +
-//								localVarDecl.name, BDSLPackage.Literals.BDSL_VARIABLE_DECLARATION__TYPE,
-//							ASSIGNMENT_SIGNATURES_MISMATCH);
-//					}
-//				}
-//			}
-//		}
-//	}
 	@Check
 	def loadMethodResourceFormat(LoadMethod loadMethod) {
 		if (loadMethod.resourcePath === null || BDSLUtil.Strings.rawStringOf(loadMethod.resourcePath).isEmpty) {

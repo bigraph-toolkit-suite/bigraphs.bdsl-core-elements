@@ -2,7 +2,6 @@ package de.tudresden.inf.st.bigraphs.dsl.tests.ide.validation
 
 import de.tudresden.inf.st.bigraphs.dsl.tests.ide.AbstractBdslLSPTest
 //import org.junit.Test
-import org.junit.Assert
 import org.junit.jupiter.api.Test
 
 /*
@@ -71,9 +70,9 @@ val test3a(Sig3) = load(sig=Sig3, as=xmi, resourcePath="cdo:models/test.xmi")
 val test4(Sig1) = load(sig=Sig3, as=xmi, resourcePath="cdo:models/test.xmi")
 			'''
 		)
-		expectDiagnostics(uri, "Signature of method call doesn't match with signature on left-hand side of the variable declaration with name test2:15,
-Signature of method call doesn't match with signature on left-hand side of the variable declaration with name test3:16,
-Signature of method call doesn't match with signature on left-hand side of the variable declaration with name test4:19")
+		expectDiagnostics(uri, "Signature of right-hand side doesn't match with signature on left-hand side of the variable declaration with name test2:15,
+Signature of right-hand side doesn't match with signature on left-hand side of the variable declaration with name test3:16,
+Signature of right-hand side doesn't match with signature on left-hand side of the variable declaration with name test4:19")
 	}
 
 	@Test
@@ -108,7 +107,7 @@ main = {
 			'''
 		)
 		expectDiagnostics(uri,
-			"Signature of bigraph reference doesn't match with signature on left-hand side of the variable declaration with name test2b:20")
+			"Signature of right-hand side doesn't match with signature on left-hand side of the variable declaration with name test2b:20")
 	}
 
 	@Test
@@ -125,7 +124,7 @@ main = {
 			main = {
 				brs example(Sig1) = {
 					agents = [$big1],
-				    rules = [$reactRule1]
+					   rules = [$reactRule1]
 				}
 				brs ex2 = $example
 			}
@@ -158,24 +157,25 @@ main = {
 							val big1(Sig1) = {
 								a | b | b
 							}
-							react reactRule1 = $big1 //fail
+							react reactRule1 = $big1 //fail 12
 							react reactRule2(Sig1) = {$big1}, {a | b} //ok
 							react reactRule3(Sig1) = $reactRule2 // ok
 							val big2 = $reactRule2 //fail
 							val big3 = $big2 //ok, even if not resolvable
 							brs brsVar1(Sig1) = {
 												agents = [$big1],
-											    rules = [$reactRule2]
+												   rules = [$reactRule2]
 											}
 							brs brsVar2(Sig1) = $brsVar1 //ok
-							brs brsVar3(Sig1) = $big1 //fail
-							brs brsVar4(Sig1) = $reactRule2 //fail
+							brs brsVar3(Sig1) = $big1 //fail 22
+							brs brsVar4(Sig1) = $reactRule2 //fail 23
 			}
 		''')
 		expectDiagnostics(uri2, "Type of left-hand side of the BRS declaration with name brsVar3 doesn't match with type on right-hand side:22,
 Type of left-hand side of the BRS declaration with name brsVar4 doesn't match with type on right-hand side:23,
 Type of left-hand side of the rule declaration with name reactRule1 doesn't match with type on right-hand side:12,
 Type of left-hand side of the variable declaration with name big2 doesn't match with type on right-hand side:15")
+
 	}
 
 	@Test
@@ -289,20 +289,9 @@ The extension of the resource path doesn't match with the specified load-as argu
 				}
 			'''
 		)
-		expectDiagnostics(uri, "extraneous input '-' expecting RULE_INT:10")
+//		expectDiagnostics(uri, "extraneous input '-' expecting RULE_INT:10")
+		expectDiagnostics(uri, "no viable alternative at input '(':10")
 
-	}
-
-	def expectDiagnostics(String uri, String expected) {
-		val diagnostics = diagnostics;
-		var issues = diagnostics.get(uri)
-		if (issues === null) {
-			Assert.assertEquals("", expected)
-			return
-		}
-		Assert.assertEquals(expected, issues.sortBy[range.start.line].sortBy[message].join(',\n') [
-			message + ":" + range.start.line
-		])
 	}
 
 }

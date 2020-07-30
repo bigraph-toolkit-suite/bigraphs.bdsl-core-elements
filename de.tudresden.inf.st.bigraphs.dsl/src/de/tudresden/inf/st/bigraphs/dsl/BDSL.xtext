@@ -102,7 +102,7 @@ LVD2 returns LocalVarDecl:
 ;
 
 AbstractBigraphDeclaration:
-	BigraphVarReference | NodeExpressionCall | LVD2 | Site | ElementaryBigraphs
+	BigraphVarReference | NodeExpressionCall | LVD2 | ElementaryBigraphs
 ;
 
 NodeExpressionCall:
@@ -124,7 +124,7 @@ LocalRuleDecl:
 ;
 	
 LocalPredicateDeclaration:
-	'pred' {LocalPredicateDeclaration} BDSLNameSigDeclFrag (':' type=PredicateType)? //'=' '{' definition=BigraphExpression '}'
+	'pred' {LocalPredicateDeclaration} BDSLNameSigDeclFrag (':' type=PredicateType)?
 ;
 
 BRSDefinition:
@@ -132,7 +132,7 @@ BRSDefinition:
 ;
 
 ElementaryBigraphs:
-	Barren | Merge | Closure | Substitution
+	Site | Barren | Merge | Closure | Substitution
 ;
 
 Barren:

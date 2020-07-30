@@ -39,6 +39,7 @@ import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLReferenceDeclaration;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLVariableDeclaration2;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BRSDefinition;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphVarDeclOrReference;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlType;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalVarDecl;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.NodeExpressionCall;
@@ -72,6 +73,7 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
 //		System.out.println("Context: " + context);
+//		System.out.println("Reference: " + reference);
 //		System.out.println("Reference.eContainer: " + reference.eContainer());
 
 		if (reference == BDSLPackage.Literals.BDSL_DOCUMENT_IMPORT) {
@@ -131,6 +133,29 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 			}
 		}
 
+		if ((context instanceof LocalVarDecl) && reference == BDSLPackage.Literals.LOCAL_VAR_DECL__CONTROL_TYPE
+				&& reference.eContainer() == BDSLPackage.Literals.LOCAL_VAR_DECL) {
+			Signature currentSignature = BDSLUtil.tryInferSignature(((LocalVarDecl) context));
+			if (java.util.Objects.nonNull(currentSignature)) {
+				List<IEObjectDescription> controlScope = new ArrayList<IEObjectDescription>();
+				QualifiedName sigQfn = nameProvider.getFullyQualifiedName(currentSignature);
+				for (ControlVariable x : currentSignature.getControls()) {
+						String ctrlQfn = ((ControlVariable) x).getName();
+						QualifiedName ctrlFullQfn = QualifiedName.EMPTY.append(sigQfn).append(ctrlQfn);
+						
+						AliasedEObjectDescription objDescr = new AliasedEObjectDescription(QualifiedName.create(ctrlQfn),
+								EObjectDescription.create(nameProvider.getFullyQualifiedName(x), x));
+						AliasedEObjectDescription objDescr2 = new AliasedEObjectDescription(ctrlFullQfn,
+								EObjectDescription.create(ctrlFullQfn, x));
+						
+						controlScope.add(objDescr);
+						controlScope.add(objDescr2);
+				}
+				IScope existingScope = new SimpleScope(IScope.NULLSCOPE, controlScope, false);
+				return existingScope;
+			}
+		}
+
 		// Scope Provider for controls inside a bigraph definition
 		if ((context instanceof NodeExpressionCall)
 				&& reference.eContainer() == BDSLPackage.Literals.NODE_EXPRESSION_CALL) {
@@ -149,7 +174,8 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 //						+ containerElement.eClass());
 				if (((BDSLVariableDeclaration2) containerElement).getVariable() instanceof BigraphVarDeclOrReference) {
 //					System.out.println("\tNow in var decl 1...");
-					containerElement = BDSLUtil.getLocalVarDecl((BigraphVarDeclOrReference) ((BDSLVariableDeclaration2) containerElement).getVariable());
+					containerElement = BDSLUtil.getLocalVarDecl(
+							(BigraphVarDeclOrReference) ((BDSLVariableDeclaration2) containerElement).getVariable());
 //					System.out.println("\tcontainerElement is now: " + containerElement);
 				}
 			} else {
@@ -181,30 +207,31 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 //				System.out.println("\t containerElement: " + containerElement);
 				if (containerElement instanceof AssignmentOrVariableDeclaration)
 					correctSignature = inferSignature((AssignmentOrVariableDeclaration) containerElement);
-				if(containerElement instanceof AbstractElementsWithNameAndSig) {
+				if (containerElement instanceof AbstractElementsWithNameAndSig) {
 					correctSignature = inferSignature((AbstractElementsWithNameAndSig) containerElement);
 				}
 			}
 
 //			System.out.println("Signature so far: " + correctSignature);
 			if (correctSignature != null) {
-//				Signature correctSignature = inferSignature((AbstractElementsWithNameAndSig) containerElement);
-//				System.out.println("\t correctSignature: " + correctSignature);
-//						((LocalVarDecl) containerElement).getSig();
-//				if (correctSignature == null) {
-
-//				}
-//				IScope existingScope = Scopes.scopeFor(correctSignature.getControls());
 				List<IEObjectDescription> scopesy = new ArrayList<IEObjectDescription>();
+				QualifiedName sigQfn = nameProvider.getFullyQualifiedName(correctSignature);
 				for (ControlVariable x : correctSignature.getControls()) {
 					if (x instanceof ControlVariable) {
-						String fqn1 = ((ControlVariable) x).getName();
+//						String fqn1 = ((ControlVariable) x).getName();
+						String ctrlQfn = ((ControlVariable) x).getName();
+						QualifiedName ctrlFullQfn = QualifiedName.EMPTY.append(sigQfn).append(ctrlQfn);
 						// der alias name erlaubt, das als stellvertreter einzugeben und zeigt dabei
 						// immer noch
 						// auf das richtige element im Scope
-						AliasedEObjectDescription obj2 = new AliasedEObjectDescription(QualifiedName.create(fqn1),
-								EObjectDescription.create(nameProvider.getFullyQualifiedName(x), x));
+						AliasedEObjectDescription obj2 = new AliasedEObjectDescription(QualifiedName.create(ctrlQfn),
+								EObjectDescription.create(ctrlQfn, x));
+						
+						AliasedEObjectDescription objDescr2 = new AliasedEObjectDescription(ctrlFullQfn,
+								EObjectDescription.create(ctrlFullQfn, x));
+						
 						scopesy.add(obj2);
+						scopesy.add(objDescr2);
 					}
 				}
 				IScope existingScope = new SimpleScope(IScope.NULLSCOPE, scopesy, false);
@@ -216,10 +243,6 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 //			return result;
 		return super.getScope(context, reference);
 	}
-
-//	public void collectScopeVarDeclarations(List<LocalVarDecl> list, EObject rootElement) {
-//
-//	}
 
 	/**
 	 * Find all local bigraph variable declaration beginning from the current scope.

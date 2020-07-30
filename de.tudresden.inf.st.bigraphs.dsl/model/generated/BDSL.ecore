@@ -49,7 +49,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="SiteVars">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Site" eSuperTypes="#//AbstractBigraphDeclaration">
+  <eClassifiers xsi:type="ecore:EClass" name="Site" eSuperTypes="#//ElementaryBigraphs">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LocalRuleDecl" eSuperTypes="#//AbstractElementsWithNameAndSig #//BigraphRuleDeclOrReference"/>

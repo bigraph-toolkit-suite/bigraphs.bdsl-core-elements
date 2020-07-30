@@ -10,17 +10,24 @@ import org.eclipse.xtext.EcoreUtil2;
 import com.google.common.base.Preconditions;
 
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.AbstractBigraphDeclaration;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.AbstractElementsWithNameAndSig;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.AssignableBigraphExpression;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.AssignableBigraphExpressionWithExplicitSig;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLExpression;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLReferenceDeclaration;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLReferenceSymbol;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLVariableDeclaration2;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.BRSDefinition;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphExpression;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphVarDeclOrReference;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphVarReference;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.NodeExpressionCall;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.ReferenceClassSymbol;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.RuleVarReference;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.DataSource;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.LoadMethod;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalPredicateDeclaration;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalRuleDecl;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalVarDecl;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.MethodStatements;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.Signature;
@@ -31,10 +38,29 @@ import de.tudresden.inf.st.bigraphs.dsl.bDSL.Signature;
  */
 public class BDSLUtil {
 
+	public static Signature tryInferSignature(AbstractElementsWithNameAndSig variable) {
+		if (variable instanceof LocalVarDecl) {
+			return tryInferSignature((LocalVarDecl)variable);
+		}
+		if (variable instanceof LocalPredicateDeclaration) {
+			return tryInferSignature((LocalPredicateDeclaration)variable);
+		}
+		if (variable instanceof LocalRuleDecl) {
+			return tryInferSignature((LocalRuleDecl)variable);
+		}
+		if (variable instanceof BRSDefinition) {
+			return tryInferSignature((BRSDefinition)variable);
+		}
+		return null;
+	}
+
 	/**
-	 * 1. If signature already set, return it; 2. Check if control type is
-	 * explicitly defined; 3. Run through definitions and find a node expression
-	 * call. From the first one, get the signature
+	 * This method tries to infer a signature from a local bigraph variable
+	 * declaration. The user is allowed to omit the signature. However, in some
+	 * cases it can be derived from the definition: 1. If signature already set,
+	 * return it; 2. Check if control type is explicitly defined; 3. Run through
+	 * definitions and find a node expression call. From the first one, get the
+	 * signature
 	 * 
 	 * @param localVarDecl the variable declaration
 	 * @return a signature, or {@code null} if it could not be derived
@@ -50,11 +76,92 @@ public class BDSLUtil {
 		if (Objects.nonNull(container)) {
 			if (container.getValue() instanceof BDSLExpression) {
 				BDSLExpression bdslExpr = container.getValue();
-				List<Signature> signatures = bdslExpr.getDefinition().stream()
-						.filter(x -> x instanceof NodeExpressionCall).map(x -> ((NodeExpressionCall) x).getValue())
-						.map(x -> (Signature) x.eContainer()).collect(Collectors.toList());
-				if (signatures.size() > 0) {
-					return signatures.get(0);
+				if (bdslExpressionIsBigraphDefinition(bdslExpr)) {
+					List<Signature> signatures = bdslExpr.getDefinition().stream()
+							.filter(x -> x instanceof NodeExpressionCall).map(x -> ((NodeExpressionCall) x).getValue())
+							.map(x -> (Signature) x.eContainer()).collect(Collectors.toList());
+					if (signatures.size() > 0) {
+						return signatures.get(0);
+					}
+				}
+				if (bdslExpr instanceof AssignableBigraphExpressionWithExplicitSig) {
+					return ((AssignableBigraphExpressionWithExplicitSig) container.getValue()).getSig();
+				}
+				if (bdslExpr instanceof ReferenceClassSymbol) {
+					return tryInferSignature((LocalVarDecl) ((ReferenceClassSymbol) bdslExpr).getType());
+				}
+			}
+		}
+		return null;
+	}
+
+	public static Signature tryInferSignature(LocalPredicateDeclaration localPredDecl) {
+		if (Objects.nonNull(localPredDecl.getSig()))
+			return localPredDecl.getSig();
+
+		BDSLVariableDeclaration2 container = EcoreUtil2.getContainerOfType(localPredDecl,
+				BDSLVariableDeclaration2.class);
+		if (Objects.nonNull(container)) {
+			if (container.getValue() instanceof BDSLExpression) {
+				BDSLExpression bdslExpr = container.getValue();
+				if (bdslExpressionIsBigraphDefinition(bdslExpr)) {
+					List<Signature> signatures = bdslExpr.getDefinition().stream()
+							.filter(x -> x instanceof NodeExpressionCall).map(x -> ((NodeExpressionCall) x).getValue())
+							.map(x -> (Signature) x.eContainer()).collect(Collectors.toList());
+					if (signatures.size() > 0) {
+						return signatures.get(0);
+					}
+				}
+				if (bdslExpr instanceof AssignableBigraphExpressionWithExplicitSig) {
+					return ((AssignableBigraphExpressionWithExplicitSig) container.getValue()).getSig();
+				}
+				if (bdslExpr instanceof ReferenceClassSymbol) {
+					return tryInferSignature((LocalVarDecl) ((ReferenceClassSymbol) bdslExpr).getType());
+				}
+			}
+		}
+		return null;
+	}
+
+	public static Signature tryInferSignature(LocalRuleDecl localRuleDecl) {
+		if (Objects.nonNull(localRuleDecl.getSig()))
+			return localRuleDecl.getSig();
+		BDSLVariableDeclaration2 container = EcoreUtil2.getContainerOfType(localRuleDecl,
+				BDSLVariableDeclaration2.class);
+
+		if (Objects.nonNull(container)) {
+			if (container.getValue() instanceof BDSLExpression) {
+				BDSLExpression bdslExpr = container.getValue();
+				if (bdslExpressionIsRuleDefinition(bdslExpr)) {
+					if (bdslExpr.getRedex() instanceof BigraphVarReference) {
+						// TODO
+						return tryInferSignature((LocalVarDecl) ((BigraphVarReference) bdslExpr.getRedex()).getValue());
+					}
+				}
+				if (bdslExpr.getRedex() instanceof AssignableBigraphExpressionWithExplicitSig) {
+					return ((AssignableBigraphExpressionWithExplicitSig) bdslExpr.getRedex()).getSig();
+				}
+				if (bdslExpr instanceof ReferenceClassSymbol) {
+					return tryInferSignature((LocalRuleDecl) ((ReferenceClassSymbol) bdslExpr).getType());
+				}
+			}
+		}
+		return null;
+	}
+
+	public static Signature tryInferSignature(BRSDefinition brsDefinition) {
+		if (Objects.nonNull(brsDefinition.getSig()))
+			return brsDefinition.getSig();
+		BDSLVariableDeclaration2 container = EcoreUtil2.getContainerOfType(brsDefinition,
+				BDSLVariableDeclaration2.class);
+		if (Objects.nonNull(container)) {
+			if (container.getValue() instanceof BDSLExpression) {
+				BDSLExpression bdslExpr = container.getValue();
+				if (bdslExpressionIsBRSDefinition(bdslExpr)) {
+					BDSLReferenceSymbol referenceSymbol = bdslExpr.getAgents().get(0);
+					if (referenceSymbol instanceof BigraphVarReference) {
+						return tryInferSignature(((BigraphVarReference) referenceSymbol).getValue());
+					}
 				}
 			}
 		}
@@ -72,18 +179,19 @@ public class BDSLUtil {
 	}
 
 	public static boolean bdslExpressionIsBRSDefinition(BDSLExpression bdslExpression) {
-		if (Objects.nonNull(bdslExpression.getAgents()) && bdslExpression.getAgents().size() > 0 &&
-				Objects.nonNull(bdslExpression.getRules()) && bdslExpression.getRules().size() > 0
-				&& !bdslExpressionIsRuleDefinition(bdslExpression) && !bdslExpressionIsBigraphDefinition(bdslExpression)
-				&& !bdslExpressionIsMethodStatement(bdslExpression)) {
+		BDSLVariableDeclaration2 decl = EcoreUtil2.getContainerOfType(bdslExpression, BDSLVariableDeclaration2.class);
+		if (Objects.nonNull(bdslExpression.getAgents()) && bdslExpression.getAgents().size() > 0
+				&& Objects.nonNull(bdslExpression.getRules()) && bdslExpression.getRules().size() > 0
+				&& !bdslExpressionIsMethodStatement(bdslExpression) && decl.getVariable() instanceof BRSDefinition) {
 			return true;
 		}
 		return false;
 	}
 
 	public static boolean bdslExpressionIsRuleDefinition(BDSLExpression bdslExpression) {
+		BDSLVariableDeclaration2 decl = EcoreUtil2.getContainerOfType(bdslExpression, BDSLVariableDeclaration2.class);
 		if (Objects.nonNull(bdslExpression.getRedex()) && Objects.nonNull(bdslExpression.getReactum())
-				&& !bdslExpressionIsMethodStatement(bdslExpression)) {
+				&& !bdslExpressionIsMethodStatement(bdslExpression) && decl.getVariable() instanceof LocalRuleDecl) {
 			return true;
 		}
 		return false;
@@ -92,22 +200,34 @@ public class BDSLUtil {
 	public static boolean bdslExpressionIsMethodStatement(BDSLExpression bdslExpression) {
 		return bdslExpression instanceof MethodStatements;
 	}
-	
+
 	public static boolean bdslExpressionIsAssignableBigraphMethodExpression(BDSLExpression bdslExpression) {
 		return bdslExpression instanceof AssignableBigraphExpressionWithExplicitSig;
 	}
 
 	public static boolean bdslExpressionIsBigraphDefinition(BDSLExpression bdslExpression) {
+		BDSLVariableDeclaration2 decl = EcoreUtil2.getContainerOfType(bdslExpression, BDSLVariableDeclaration2.class);
 		if (Objects.nonNull(bdslExpression.getDefinition()) && bdslExpression.getDefinition().size() > 0
-				&& !bdslExpressionIsMethodStatement(bdslExpression)) {
+				&& !bdslExpressionIsMethodStatement(bdslExpression)
+				&& (decl.getVariable() instanceof LocalPredicateDeclaration
+						|| decl.getVariable() instanceof LocalVarDecl)) {
 			return true;
 		}
 		return false;
 	}
-	
+
+	public static boolean bdslExpressionIsPredicateDefinition(BDSLExpression bdslExpression) {
+		BDSLVariableDeclaration2 decl = EcoreUtil2.getContainerOfType(bdslExpression, BDSLVariableDeclaration2.class);
+		if (bdslExpressionIsBigraphDefinition(bdslExpression) && Objects.nonNull(decl)
+				&& decl.getVariable() instanceof LocalPredicateDeclaration) {
+			return true;
+		}
+		return false;
+	}
+
 	public static boolean checkReferenceSymbolType(BDSLExpression bdslExpression, Class<?> clazz) {
-		if(bdslExpression instanceof ReferenceClassSymbol) {
-			Class<?> refClass = ((ReferenceClassSymbol)bdslExpression).getType().getClass();
+		if (bdslExpression instanceof ReferenceClassSymbol) {
+			Class<?> refClass = ((ReferenceClassSymbol) bdslExpression).getType().getClass();
 			return clazz.isAssignableFrom(refClass);
 		}
 		return false;
