@@ -6,6 +6,7 @@ generate bDSL "http://www.tudresden.de/inf/st/bigraphs/dsl/BDSL"
 
 // types are in italic font
 BDSLDocument:
+	(importsUda+=(BDSLUdaImport)*)
 	// first imports and signatures 
 	signature+=(Signature)*
 	
@@ -17,6 +18,10 @@ BDSLDocumentImport:
 	'import' importedNamespace=FqnWithWildCard;
 FqnWithWildCard:
 	FQN ('.*')?;
+	
+BDSLUdaImport:
+	'import:uda' importedNamespace=FqnWithWildCard
+;
 
 FQN:
 	ID ('.' ID)*; // TODO: could be now also IdOrKw instead of ID

@@ -55,12 +55,16 @@
       <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//OutputModeModel/META_MODEL"/>
     </genEnums>
     <genClasses ecoreClass="BDSL.ecore#//BDSLDocument">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//BDSLDocument/importsUda"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//BDSLDocument/signature"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//BDSLDocument/statements"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//BDSLDocument/main"/>
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//BDSLDocumentImport">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//BDSLDocumentImport/importedNamespace"/>
+    </genClasses>
+    <genClasses ecoreClass="BDSL.ecore#//BDSLUdaImport">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//BDSLUdaImport/importedNamespace"/>
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//AbstractElement"/>
     <genClasses ecoreClass="BDSL.ecore#//AbstractElementsWithNameAndSig">
