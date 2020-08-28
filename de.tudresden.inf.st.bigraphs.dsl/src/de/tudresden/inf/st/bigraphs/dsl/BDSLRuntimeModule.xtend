@@ -35,7 +35,7 @@ class BDSLRuntimeModule extends AbstractBDSLRuntimeModule {
 	}
 
 	override Class<? extends IValueConverterService> bindIValueConverterService() {
-		return DefaultTerminalConverters;
+		return BDSLDefaultTerminalConverters;
 	}
 	
 	def Class<? extends IEObjectDocumentationProvider> bindIEObjectDocumentationProvider() {

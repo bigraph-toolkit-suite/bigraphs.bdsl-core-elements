@@ -25,7 +25,7 @@ class BDSLIdeModule extends AbstractBDSLIdeModule {
 		return BdslContentProposalCreator;
 	}
 
-	def Class<? extends IdeContentProposalProvider> bindIdeContentProposalProvider() {
+	override Class<? extends IdeContentProposalProvider> bindIdeContentProposalProvider() {
 		return BdslContentProposalProvider
 	}
 

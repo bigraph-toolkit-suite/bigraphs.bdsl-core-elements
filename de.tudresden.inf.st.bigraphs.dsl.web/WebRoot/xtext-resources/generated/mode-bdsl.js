@@ -1,6 +1,6 @@
 define(["ace/lib/oop", "ace/mode/text", "ace/mode/text_highlight_rules"], function(oop, mText, mTextHighlightRules) {
 	var HighlightRules = function() {
-		var keywords = "UNSET|UNSET2|active|agents|arity|as|atomic|barren|bigmc|bigrapher|brs|cdo|classpath|closure|clsre|console|ctrl|ecore|execute|export|file|id|import|instance|iso|load|loaded|main|merge|n|p|partial|passive|pred|preds|println|randomBigraph|react|resourcePath|rules|sig|signature|subst|substitution|t|to|unspecified|val|xmi";
+		var keywords = "UNSET|UNSET2|active|agents|arity|as|atomic|barren|bigmc|bigrapher|brs|case|catch|cdo|classpath|closure|clsre|console|ctrl|default|do|ecore|else|execute|export|extends|extension|false|file|finally|for|id|if|import|instance|instanceof|iso|j|load|loaded|main|merge|n|new|null|p|partial|passive|pred|preds|println|randomBigraph|react|resourcePath|return|rules|sig|signature|static|subst|substitution|super|switch|synchronized|t|throw|to|true|try|typeof|unspecified|val|var|while|xmi";
 		this.$rules = {
 			"start": [
 				{token: "comment", regex: "\\/\\/.*$"},
@@ -8,6 +8,7 @@ define(["ace/lib/oop", "ace/mode/text", "ace/mode/text_highlight_rules"], functi
 				{token: "string", regex: '["](?:(?:\\\\.)|(?:[^"\\\\]))*?["]'},
 				{token: "string", regex: "['](?:(?:\\\\.)|(?:[^'\\\\]))*?[']"},
 				{token: "constant.numeric", regex: "[+-]?\\d+(?:(?:\\.\\d*)?(?:[eE][+-]?\\d+)?)?\\b"},
+				{token: "constant.numeric", regex: "0[xX][0-9a-fA-F]+\\b"},
 				{token: "lparen", regex: "[\\[({]"},
 				{token: "rparen", regex: "[\\])}]"},
 				{token: "keyword", regex: "\\b(?:" + keywords + ")\\b"}

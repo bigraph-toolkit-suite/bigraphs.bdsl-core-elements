@@ -10,6 +10,29 @@ import org.junit.jupiter.api.Test
  * The first statement must be {@code initialize}.
  */
 class BdslAffectionUnitTest extends AbstractBdslLSPTest {
+	
+		@Test
+	def void udfOperationTest_01() {
+		initialize
+		val uri = 'inmemory:/foo.bdsl'
+		open(
+			uri,
+			'''
+			signature Sig1 {
+				atomic ctrl a arity 1
+				atomic ctrl b arity 1
+			}
+main = {
+	val test1 = load(sig=Sig1, as=xmi, resourcePath="classpath:models/test.xmi")
+	$test1 = load(sig=Sig1, as=xmi, resourcePath="classpath:models/test.xmi")
+    j {
+    	java.util.Date ( $test1 )
+    }
+}
+			'''
+		)
+		expectDiagnostics(uri, "")
+	}
 
 	@Test
 	def void testSignatureMatchOnAssignment_01() {

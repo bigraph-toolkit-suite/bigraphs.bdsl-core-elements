@@ -13,16 +13,46 @@ import static extension org.junit.Assert.assertFalse
 import org.junit.jupiter.api.Assertions
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLDocument
 
-//import org.junit.Test
+import org.junit.runner.RunWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.validation.ValidationTestHelper
+import com.google.inject.Provider
+import org.eclipse.emf.ecore.resource.ResourceSet
 
-//import org.junit.jupiter.api.Test
-//import org.junit.jupiter.api.^extension.ExtendWith
 
+@RunWith(typeof(XtextRunner))
 @ExtendWith(InjectionExtension)
 @InjectWith(BDSLInjectorProvider)
 class BDSLParsingTest {
 	@Inject
 	ParseHelper<BDSLDocument> parseHelper
+	@Inject
+	extension ParseHelper<BDSLDocument>
+	@Inject extension ValidationTestHelper
+	@Inject Provider<ResourceSet> resourceSetProvider;
+	
+	
+	@Test
+	def void importTest_01() {
+		
+		val first = '''
+signature Sig1 {
+	atomic ctrl a arity 1
+	atomic ctrl b arity 1
+}
+
+main = {
+    val test = load(sig=Sig1, as=xmi, resourcePath="classpath:models/test.xmi")
+    $test23 = load(sig=Sig1, as=xmi, resourcePath="classpath:models/test.xmi")
+    println($test2)
+}
+
+
+val test2(Sig1) = {
+	a | b
+}
+		'''.parse()
+	}
 	
 	@Test
 	def void loadModel() {
