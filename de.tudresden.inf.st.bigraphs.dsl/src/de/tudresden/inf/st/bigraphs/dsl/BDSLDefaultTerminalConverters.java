@@ -37,7 +37,7 @@ public class BDSLDefaultTerminalConverters extends DefaultTerminalConverters {//
 
 			@Override
 			protected String internalToString(String value) {
-				System.out.println("internalToString: " + value);
+//				System.out.println("internalToString: " + value);
 				if (GrammarUtil.getAllKeywords(getGrammar()).contains(value)) {
 					return value; //"$" + value;
 				}
@@ -46,7 +46,7 @@ public class BDSLDefaultTerminalConverters extends DefaultTerminalConverters {//
 
 			@Override
 			protected String internalToValue(String string, INode node) throws ValueConverterException {
-				System.out.println("internalToValue: " + string);
+//				System.out.println("internalToValue: " + string);
 				return string.startsWith("$") ? string.substring(1) : string;
 			}
 		};

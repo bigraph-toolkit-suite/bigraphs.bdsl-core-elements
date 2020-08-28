@@ -259,7 +259,7 @@ public class BDSLUtil {
 
 	public static class Strings {
 		public static String rawStringOf(String value) {
-			if (Objects.isNull(value))
+			if (Objects.isNull(value) || value.isEmpty())
 				return null;
 			boolean firstPos = value.charAt(0) == '\"' || value.charAt(0) == '\'';
 			boolean lastPos = value.charAt(value.length() - 1) == '\"' || value.charAt(value.length() - 1) == '\'';

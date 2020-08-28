@@ -93,8 +93,9 @@ class BDSLValidator extends AbstractBDSLValidator {
 		}
 
 	}
-	
+
 	Signature sigRight;
+
 	@Check
 	def assignableBigraphExpressionSigCheck(BDSLVariableDeclaration2 container) {
 		val variableLeft = container.variable
@@ -103,7 +104,7 @@ class BDSLValidator extends AbstractBDSLValidator {
 		if (valueRight === null || signatureLeft === null) {
 			return
 		}
-			
+
 		var sigRight = {
 			if (valueRight instanceof AssignableBigraphExpressionWithExplicitSig) {
 				sigRight = (valueRight as AssignableBigraphExpressionWithExplicitSig).sig
@@ -111,7 +112,7 @@ class BDSLValidator extends AbstractBDSLValidator {
 				sigRight = BDSLUtil.tryInferSignature((valueRight as ReferenceClassSymbol).type)
 			}
 		}
-	
+
 		if (sigRight !== null && sigRight !== signatureLeft) {
 			error(
 				"Signature of right-hand side doesn't match with signature on left-hand side of the variable declaration with name " +
@@ -122,7 +123,8 @@ class BDSLValidator extends AbstractBDSLValidator {
 
 	@Check
 	def loadMethodResourceFormat(LoadMethod loadMethod) {
-		if (loadMethod.resourcePath === null || BDSLUtil.Strings.rawStringOf(loadMethod.resourcePath).isEmpty) {
+		if (loadMethod.resourcePath === null || BDSLUtil.Strings.rawStringOf(loadMethod.resourcePath) === null ||
+			BDSLUtil.Strings.rawStringOf(loadMethod.resourcePath).isEmpty) {
 			warning("The resourcePath is not set", BDSLPackage.Literals.LOAD_METHOD__RESOURCE_PATH,
 				LOAD_METHOD_MISSING_RESOURCE_IDENTIFIER)
 		} else {
@@ -171,7 +173,7 @@ class BDSLValidator extends AbstractBDSLValidator {
 
 		var current = varDecl as EObject;
 		while (Objects::nonNull(current)) {
-			println("vcurrent" + current)
+//			println("vcurrent" + current)
 			if (current == varDecl.value) {
 				warning("Cyclic bigraph variable reference", BDSLPackage::eINSTANCE.bigraphVarReference_Value)
 				return

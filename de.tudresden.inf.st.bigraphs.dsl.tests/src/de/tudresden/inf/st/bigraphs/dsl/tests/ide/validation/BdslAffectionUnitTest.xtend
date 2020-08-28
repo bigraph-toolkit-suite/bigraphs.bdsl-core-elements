@@ -222,7 +222,7 @@ main = {
 }
 			'''
 		)
-		expectDiagnostics(uri, "The resourcePath is missing a resource identifier:9,
+				expectDiagnostics(uri, "The resourcePath is missing a resource identifier:9,
 The resourcePath is missing a resource identifier:10,
 The resourcePath is not set:9,
 The resourcePath is not set:10,
