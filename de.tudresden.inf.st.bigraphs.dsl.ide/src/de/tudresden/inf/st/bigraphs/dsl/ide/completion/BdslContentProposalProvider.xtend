@@ -28,7 +28,7 @@ class BdslContentProposalProvider extends IdeContentProposalProvider {
 	override protected _createProposals(RuleCall ruleCall, ContentAssistContext context,
 		IIdeContentProposalAcceptor acceptor) {
 		if (ruleCall.rule.name == "MainKeyword") {
-			grammarAccess.mainKeywordAccess.group.createProposals(context, acceptor)
+			grammarAccess.MAIN_KEYWORDAccess.group.createProposals(context, acceptor)
 			return
 		}
 	}

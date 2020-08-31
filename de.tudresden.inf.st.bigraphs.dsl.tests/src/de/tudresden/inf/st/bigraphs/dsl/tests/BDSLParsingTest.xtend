@@ -10,20 +10,147 @@ import org.eclipse.xtext.testing.util.ParseHelper
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.^extension.ExtendWith
 import static extension org.junit.Assert.assertFalse
+import static extension org.junit.Assert.assertSame
 import org.junit.jupiter.api.Assertions
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLDocument
 
-//import org.junit.Test
+import org.junit.runner.RunWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.validation.ValidationTestHelper
+import com.google.inject.Provider
+import org.eclipse.emf.ecore.resource.ResourceSet
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLReferenceDeclaration
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLVariableDeclaration2
 
-//import org.junit.jupiter.api.Test
-//import org.junit.jupiter.api.^extension.ExtendWith
-
+@RunWith(typeof(XtextRunner))
 @ExtendWith(InjectionExtension)
 @InjectWith(BDSLInjectorProvider)
 class BDSLParsingTest {
 	@Inject
 	ParseHelper<BDSLDocument> parseHelper
-	
+	@Inject
+	extension ParseHelper<BDSLDocument>
+	@Inject extension ValidationTestHelper
+	@Inject Provider<ResourceSet> resourceSetProvider;
+
+	@Test def void testSameNamespace() {
+		val first = '''
+		namespace my.bdsl		
+		signature Sig1 {ctrl a arity 1}
+		val a1(Sig1) = { a }
+		'''.parse
+		first.assertNoErrors
+		'''
+		namespace my.bdsl
+		val b1(Sig1) = $a1
+		'''.parse(first.eResource.resourceSet).assertNoErrors
+	}
+
+	@Test def void testImports_threeFiles() {
+		val first = '''
+namespace my.first.pack
+
+signature Sig1 {atomic ctrl a arity 1}
+val a1(Sig1) = { a }
+val a2(Sig1) = { a }
+'''.parse
+		'''
+namespace my.second.pack
+
+signature Sig1 {atomic ctrl b arity 1}
+val b1(Sig2) = { b }
+val b2(Sig2) = { b }
+'''.parse(first.eResource.resourceSet)
+		'''
+namespace my.third.pack
+import:bdsl my.first.pack.a1
+import:bdsl my.second.pack.*
+
+val c1 = $a1 // a1 is imported
+val c2 = $my.first.pack.a2 // a2 not imported, but fully qualified
+val c3 = $b1 // b1 imported by wildcard
+val c4 = $b2 // b2 imported by wildcard
+'''.parse(first.eResource.resourceSet).assertNoErrors
+	}
+
+	@Test def void testTwoFiles_qualifiedName() {
+//		initialize
+		val resourceSet = resourceSetProvider.get
+		val first = '''
+namespace:bdsl my.first.pack
+
+signature Sig1 {
+	atomic ctrl a arity 1
+	atomic ctrl b arity 1
+}
+
+main = {
+	val big1(Sig1) = { a }
+}
+'''.parse(resourceSet)
+
+		val second = '''
+namespace:bdsl my.second.pack
+main = {
+	$my.first.pack.big1 = {b}
+}
+'''.parse(resourceSet)
+		first.assertNoErrors
+		second.assertNoErrors
+
+		println("first.class: " + (first.main.body.statements.head as BDSLVariableDeclaration2).variable.class)
+		println("second.class: " + (second.main.body.statements.head as BDSLReferenceDeclaration).target.class)
+
+		(second.main.body.statements.head as BDSLReferenceDeclaration).target.class.assertSame(
+			(first.main.body.statements.head as BDSLVariableDeclaration2).variable.class)
+
+	}
+
+	@Test def void testNamespace_ClassQualifiedNames() {
+		val first = '''
+namespace:bdsl my.first.pack
+
+signature Sig1 {
+	atomic ctrl a arity 1
+	atomic ctrl b arity 1
+}
+
+main = {
+	val big1(Sig1) = { a }
+}
+'''.parse
+		val second = '''
+namespace:bdsl my.second.pack
+main = {
+	$my.first.pack.big1 = {a}
+}
+'''.parse(first.eResource.resourceSet)
+		first.assertNoErrors
+		second.assertNoErrors
+	}
+
+	@Test
+	def void importTest_01() {
+
+		val first = '''
+signature Sig1 {
+	atomic ctrl a arity 1
+	atomic ctrl b arity 1
+}
+
+main = {
+    val test = load(sig=Sig1, as=xmi, resourcePath="classpath:models/test.xmi")
+    $test23 = load(sig=Sig1, as=xmi, resourcePath="classpath:models/test.xmi")
+    println($test2)
+}
+
+
+val test2(Sig1) = {
+	a | b
+}
+		'''.parse()
+	}
+
 	@Test
 	def void loadModel() {
 		val result = parseHelper.parse('''
@@ -44,19 +171,17 @@ val test2(Sig1) = {
 }
 
 		''')
-		
+
 		Assertions.assertNotNull(result)
 		val errors = result.eResource.errors
 		println('''Unexpected errors: «errors.join(", ")»''');
 		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
-		
-		
-		//		val expr = result.statements
+
+	// val expr = result.statements
 //		println(result.signature)
 //		val LocalVarDeclImpl stmt1 = expr.get(0) as LocalVarDeclImpl
 //		println(stmt1.sig)
 //		println(stmt1.sig.controls)
 //var a(s1) = s1.a["a"] * s1.a * s2.a["b","b"] * s1.b;	
-
 	}
 }

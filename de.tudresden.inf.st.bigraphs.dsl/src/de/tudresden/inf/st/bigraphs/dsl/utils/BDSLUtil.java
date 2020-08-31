@@ -10,7 +10,7 @@ import org.eclipse.xtext.EcoreUtil2;
 import com.google.common.base.Preconditions;
 
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.AbstractBigraphDeclaration;
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.AbstractElementsWithNameAndSig;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.AbstractNamedSignatureElement;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.AssignableBigraphExpression;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.AssignableBigraphExpressionWithExplicitSig;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLExpression;
@@ -38,7 +38,7 @@ import de.tudresden.inf.st.bigraphs.dsl.bDSL.Signature;
  */
 public class BDSLUtil {
 
-	public static Signature tryInferSignature(AbstractElementsWithNameAndSig variable) {
+	public static Signature tryInferSignature(AbstractNamedSignatureElement variable) {
 		if (variable instanceof LocalVarDecl) {
 			return tryInferSignature((LocalVarDecl)variable);
 		}
@@ -259,7 +259,7 @@ public class BDSLUtil {
 
 	public static class Strings {
 		public static String rawStringOf(String value) {
-			if (Objects.isNull(value))
+			if (Objects.isNull(value) || value.isEmpty())
 				return null;
 			boolean firstPos = value.charAt(0) == '\"' || value.charAt(0) == '\'';
 			boolean lastPos = value.charAt(value.length() - 1) == '\"' || value.charAt(value.length() - 1) == '\'';

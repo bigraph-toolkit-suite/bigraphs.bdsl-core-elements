@@ -3,41 +3,26 @@
  */
 package de.tudresden.inf.st.bigraphs.dsl.validation
 
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.AssignableBigraphExpressionWithExplicitSig
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLPackage
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLVariableDeclaration2
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.BRSDefinition
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphVarReference
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.Closure
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.DataSource
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.LoadFormat
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.LoadMethod
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalPredicateDeclaration
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalRuleDecl
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalVarDecl
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.ReferenceClassSymbol
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.Signature
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.Site
 import de.tudresden.inf.st.bigraphs.dsl.utils.BDSLUtil
 import java.util.Objects
+import org.apache.commons.io.FilenameUtils
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.validation.Check
-import org.apache.commons.io.FilenameUtils
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.LoadFormat
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.AssignableBigraphExpression
-import org.eclipse.xtext.EcoreUtil2
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphVarDeclOrReference
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.AssignableBigraphExpressionWithExplicitSig
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.AbstractMainStatements
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLVariableDeclaration2
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLReferenceDeclaration
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalVarDecl
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLReferenceSymbol
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalRuleDecl
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.RuleVarReference
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalPredicateDeclaration
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.PredicateVarReference
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.BRSDefinition
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.BRSVarReference
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.ReferenceClassSymbol
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLExpression
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.AbstractElementsWithNameAndSig
-import java.util.List
-import java.util.ArrayList
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.impl.SignatureImpl
-import de.tudresden.inf.st.bigraphs.dsl.services.BDSLGrammarAccess.BRSDefinitionElements
 
 //import java.security.Signature
 /**
@@ -108,8 +93,9 @@ class BDSLValidator extends AbstractBDSLValidator {
 		}
 
 	}
-	
+
 	Signature sigRight;
+
 	@Check
 	def assignableBigraphExpressionSigCheck(BDSLVariableDeclaration2 container) {
 		val variableLeft = container.variable
@@ -118,7 +104,7 @@ class BDSLValidator extends AbstractBDSLValidator {
 		if (valueRight === null || signatureLeft === null) {
 			return
 		}
-			
+
 		var sigRight = {
 			if (valueRight instanceof AssignableBigraphExpressionWithExplicitSig) {
 				sigRight = (valueRight as AssignableBigraphExpressionWithExplicitSig).sig
@@ -126,7 +112,7 @@ class BDSLValidator extends AbstractBDSLValidator {
 				sigRight = BDSLUtil.tryInferSignature((valueRight as ReferenceClassSymbol).type)
 			}
 		}
-	
+
 		if (sigRight !== null && sigRight !== signatureLeft) {
 			error(
 				"Signature of right-hand side doesn't match with signature on left-hand side of the variable declaration with name " +
@@ -137,7 +123,8 @@ class BDSLValidator extends AbstractBDSLValidator {
 
 	@Check
 	def loadMethodResourceFormat(LoadMethod loadMethod) {
-		if (loadMethod.resourcePath === null || BDSLUtil.Strings.rawStringOf(loadMethod.resourcePath).isEmpty) {
+		if (loadMethod.resourcePath === null || BDSLUtil.Strings.rawStringOf(loadMethod.resourcePath) === null ||
+			BDSLUtil.Strings.rawStringOf(loadMethod.resourcePath).isEmpty) {
 			warning("The resourcePath is not set", BDSLPackage.Literals.LOAD_METHOD__RESOURCE_PATH,
 				LOAD_METHOD_MISSING_RESOURCE_IDENTIFIER)
 		} else {
@@ -186,7 +173,7 @@ class BDSLValidator extends AbstractBDSLValidator {
 
 		var current = varDecl as EObject;
 		while (Objects::nonNull(current)) {
-			println("vcurrent" + current)
+//			println("vcurrent" + current)
 			if (current == varDecl.value) {
 				warning("Cyclic bigraph variable reference", BDSLPackage::eINSTANCE.bigraphVarReference_Value)
 				return

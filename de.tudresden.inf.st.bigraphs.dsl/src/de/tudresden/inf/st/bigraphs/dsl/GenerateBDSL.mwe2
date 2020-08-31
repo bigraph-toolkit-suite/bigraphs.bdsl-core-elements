@@ -2,6 +2,7 @@ module de.tudresden.inf.st.bigraphs.dsl.GenerateBDSL
 
 import org.eclipse.xtext.xtext.generator.*
 import org.eclipse.xtext.xtext.generator.model.project.*
+import de.tudresden.inf.st.bigraphs.dsl.BDSLEcore2XtextValueConverterServiceFragment2
 
 var rootPath = ".."
 
@@ -64,6 +65,7 @@ Workflow {
 			}
 			generator = {
 				generateXtendStub = true
+//				generateXtendMain = true
 			}
 			junitSupport = {
 				junitVersion = "5"

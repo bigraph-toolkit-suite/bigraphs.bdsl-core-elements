@@ -3,13 +3,50 @@ package de.tudresden.inf.st.bigraphs.dsl.tests.ide.validation
 import de.tudresden.inf.st.bigraphs.dsl.tests.ide.AbstractBdslLSPTest
 //import org.junit.Test
 import org.junit.jupiter.api.Test
-
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLDocument
+import com.google.inject.Inject
+import org.eclipse.xtext.testing.util.ParseHelper
+import org.eclipse.xtext.testing.validation.ValidationTestHelper
+//import com.google.inject.Provider
+import org.eclipse.emf.ecore.resource.ResourceSet
+import static extension org.junit.Assert.assertSame
 /*
  * Syntax validation unit tests for {@link BDSLValidator}
  * 
  * The first statement must be {@code initialize}.
  */
 class BdslAffectionUnitTest extends AbstractBdslLSPTest {
+//	@Inject
+//	ParseHelper<BDSLDocument> parseHelper
+//	@Inject
+//	extension ParseHelper<BDSLDocument>
+//	@Inject extension ValidationTestHelper
+//	@Inject Provider<ResourceSet> resourceSetProvider;
+
+
+
+	@Test
+	def void udfOperationTest_01() {
+		initialize
+		val uri = 'inmemory:/foo.bdsl'
+		open(
+			uri,
+			'''
+			signature Sig1 {
+				atomic ctrl a arity 1
+				atomic ctrl b arity 1
+			}
+main = {
+	val test1 = load(sig=Sig1, as=xmi, resourcePath="classpath:models/test.xmi")
+	$test1 = load(sig=Sig1, as=xmi, resourcePath="classpath:models/test.xmi")
+    j {
+    	java.util.Date ( $test1 )
+    }
+}
+			'''
+		)
+		expectDiagnostics(uri, "")
+	}
 
 	@Test
 	def void testSignatureMatchOnAssignment_01() {
