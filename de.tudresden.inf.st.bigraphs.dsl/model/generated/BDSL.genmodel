@@ -55,6 +55,7 @@
       <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//OutputModeModel/META_MODEL"/>
     </genEnums>
     <genClasses ecoreClass="BDSL.ecore#//BDSLDocument">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//BDSLDocument/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//BDSLDocument/importDeclarationsBdsl"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//BDSLDocument/importDeclarationsUdf"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//BDSLDocument/signature"/>

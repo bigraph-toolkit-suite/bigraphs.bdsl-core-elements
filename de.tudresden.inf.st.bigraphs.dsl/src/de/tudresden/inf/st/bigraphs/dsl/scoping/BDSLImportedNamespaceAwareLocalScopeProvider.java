@@ -79,6 +79,22 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 	}
 
 	@Override
+	protected List<ImportNormalizer> internalGetImportedNamespaceResolvers(final EObject context, boolean ignoreCase) {
+		List<ImportNormalizer> importedNamespaceResolvers = super.internalGetImportedNamespaceResolvers(context,
+				ignoreCase);
+		if (context instanceof BDSLDocument) {
+			String fqn = ((BDSLDocument) context).getName();
+			if (fqn != null && !fqn.isEmpty()) {
+				QualifiedName qfn1 = nameProvider.getFullyQualifiedName(context);
+//				QualifiedName qfn1 = QualifiedName.create(fqn.split("\\."));
+				importedNamespaceResolvers.add(new ImportNormalizer(qfn1, true, // use wildcards
+						ignoreCase));
+			}
+		}
+		return importedNamespaceResolvers;
+	}
+
+	@Override
 	public IScope getScope(EObject context, EReference reference) {
 //		System.out.println("Context: " + context);
 //		System.out.println("Reference: " + reference);
@@ -173,7 +189,11 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 				containerElement = bdslVarDecl.get();
 //				System.out.println("Trying to cast now: " + containerElement + "; " + containerElement.getClass() + "; "
 //						+ containerElement.eClass());
-				if (((BDSLVariableDeclaration2) containerElement).getVariable() instanceof BigraphVarDeclOrReference) {
+				if (containerElement instanceof BDSLReferenceDeclaration) {
+					containerElement = ((BDSLReferenceDeclaration) containerElement).getTarget();
+				} else if (containerElement instanceof BDSLVariableDeclaration2
+						&& ((BDSLVariableDeclaration2) containerElement)
+								.getVariable() instanceof BigraphVarDeclOrReference) {
 //					System.out.println("\tNow in var decl 1...");
 					containerElement = BDSLUtil.getLocalVarDecl(
 							(BigraphVarDeclOrReference) ((BDSLVariableDeclaration2) containerElement).getVariable());
@@ -309,14 +329,15 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 	}
 
 	public IScope getBRSModelScope(EObject context, EReference reference, BDSLDocument module, IScope parent) {
-//		System.out.println("getBRSModelScope");
 		Collection<AbstractElement> allDefinitions = module.getStatements();
 		IScope ad1 = Scopes.scopeFor(allDefinitions, parent); // Scopes.scopeFor(allDefinitions2, parent);
-		Collection<AbstractMainStatements> allDefinitions2 = module.getMain().getBody().getStatements();
-		IScope ad2 = Scopes.scopeFor(allDefinitions2, ad1);
-//				Collections2.filter(module.getStatements(),
-//				e -> e.getClass().equals(LocalVarDecl.class));
-		return ad2;
+		if (java.util.Objects.nonNull(module.getMain())) {
+			Collection<AbstractMainStatements> allDefinitions2 = module.getMain().getBody().getStatements();
+			IScope ad2 = Scopes.scopeFor(allDefinitions2, ad1);
+			return ad2;
+		} else {
+			return ad1;
+		}
 	}
 
 	public IScope getSigDefScope(EObject context, EReference reference, IScope parent) {

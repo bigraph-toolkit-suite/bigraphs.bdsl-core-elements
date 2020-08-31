@@ -14,30 +14,34 @@ BDSLDocument:
 // first imports and signatures 
 //		(importDeclarations+=XImportDeclaration*)
 //	importSection=XImportSection?
+	('namespace' name=QualifiedName)?
 	(importDeclarationsBdsl+=BDSLDocumentImport | importDeclarationsUdf+=BDSLUdfImport)*
 
 	// signature definitions
 	signature+=(Signature)*
 
 	// and unordered group of global and local statements
-	((statements+=(AbstractElement)*) & (main=MainElement));
+	((statements+=(AbstractElement)*) & (main=MainElement)?);
 
-FqnWithWildCard:
-	FQN ('.*')?;
+//FqnWithWildCard:
+//	QualifiedName ('.*')?;
 
+QualifiedNameWithWildcardOptional :
+	QualifiedName  ('.' '*')?;
+	
 FQN:
 	ID ('.' ID)*; // TODO: could be now also IdOrKw instead of ID
 
 //terminal DOLLAR: '$';
 terminal BIGRAPH_VAR_REFERENCE_ID returns ecore::EString:
-	('$' ID ('.' ID)*)	//cannot reference to FQN directly
+	('$' ID ('.' ID)*)	//cannot reference to FQN directly, 
 ;
 
 BDSLDocumentImport:
-	{BDSLDocumentImport} 'import:bdsl' importedNamespace=FqnWithWildCard;
+	{BDSLDocumentImport} 'import:bdsl' importedNamespace=QualifiedNameWithWildcardOptional;
 
 BDSLUdfImport:
-	{BDSLUdfImport} 'import:udf' importedNamespace=FqnWithWildCard;
+	{BDSLUdfImport} 'import:udf' importedNamespace=QualifiedNameWithWildcardOptional;
 
 //terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 terminal INT returns ecore::EInt: ('0'..'9')+;
@@ -294,14 +298,10 @@ UDFOperation:
 	'j' '{' expression+=UdfCallExpression* '}' //body=XBlockExpression
 ;
 
-//DataType:
-//  'datatype' name=ID 
-//  'mapped-to' javaType=[jvmTypes::JvmType|FQN];
-
 UdfCallExpression returns XExpression:
 	{UdfCallExpression}
 	//	(=>(type=JvmTypeReference name=QualifiedName) | name=QualifiedName)
-	(type=[jvmTypes::JvmType|FQN]) //QualifiedName
+	(type=[jvmTypes::JvmType|QualifiedName])
 //	name=FQN //QualifiedName
 	( '()'
 	| ('('
@@ -309,6 +309,7 @@ UdfCallExpression returns XExpression:
 	params+=[AbstractNamedSignatureElement|BIGRAPH_VAR_REFERENCE_ID] (','
 	params+=[AbstractNamedSignatureElement|BIGRAPH_VAR_REFERENCE_ID])*
 	')'));
+	//StaticQualifier
 
 ClosedBrackets hidden():
 	'(' ')';

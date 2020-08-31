@@ -3,6 +3,7 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="bDSL" nsURI="http://www.tudresden.de/inf/st/bigraphs/dsl/BDSL"
     nsPrefix="bDSL">
   <eClassifiers xsi:type="ecore:EClass" name="BDSLDocument">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="importDeclarationsBdsl"
         upperBound="-1" eType="#//BDSLDocumentImport" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="importDeclarationsUdf"

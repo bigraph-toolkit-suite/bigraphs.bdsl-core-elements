@@ -3,15 +3,29 @@ package de.tudresden.inf.st.bigraphs.dsl.tests.ide.validation
 import de.tudresden.inf.st.bigraphs.dsl.tests.ide.AbstractBdslLSPTest
 //import org.junit.Test
 import org.junit.jupiter.api.Test
-
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLDocument
+import com.google.inject.Inject
+import org.eclipse.xtext.testing.util.ParseHelper
+import org.eclipse.xtext.testing.validation.ValidationTestHelper
+//import com.google.inject.Provider
+import org.eclipse.emf.ecore.resource.ResourceSet
+import static extension org.junit.Assert.assertSame
 /*
  * Syntax validation unit tests for {@link BDSLValidator}
  * 
  * The first statement must be {@code initialize}.
  */
 class BdslAffectionUnitTest extends AbstractBdslLSPTest {
-	
-		@Test
+//	@Inject
+//	ParseHelper<BDSLDocument> parseHelper
+//	@Inject
+//	extension ParseHelper<BDSLDocument>
+//	@Inject extension ValidationTestHelper
+//	@Inject Provider<ResourceSet> resourceSetProvider;
+
+
+
+	@Test
 	def void udfOperationTest_01() {
 		initialize
 		val uri = 'inmemory:/foo.bdsl'
@@ -222,7 +236,7 @@ main = {
 }
 			'''
 		)
-				expectDiagnostics(uri, "The resourcePath is missing a resource identifier:9,
+		expectDiagnostics(uri, "The resourcePath is missing a resource identifier:9,
 The resourcePath is missing a resource identifier:10,
 The resourcePath is not set:9,
 The resourcePath is not set:10,

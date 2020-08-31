@@ -1,5 +1,6 @@
 package de.tudresden.inf.st.bigraphs.dsl;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
@@ -12,13 +13,16 @@ import org.eclipse.xtext.conversion.impl.AbstractNullSafeConverter;
 import org.eclipse.xtext.conversion.impl.AbstractValueConverterService;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.impl.AbstractNode;
+
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLDocument;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.ReferenceClassSymbol;
 
 import com.google.inject.Inject;
 
 // https://stackoverflow.com/questions/11598869/how-can-i-create-cross-reference-when-a-sigil-is-required-for-referring-but-not/11599826#11599826
 // https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#value-converter
-public class BDSLDefaultTerminalConverters extends DefaultTerminalConverters {//AbstractDeclarativeValueConverterService {
+public class BDSLDefaultTerminalConverters extends DefaultTerminalConverters {// AbstractDeclarativeValueConverterService
+																				// {
 
 	private Grammar grammar;
 
@@ -39,15 +43,24 @@ public class BDSLDefaultTerminalConverters extends DefaultTerminalConverters {//
 			protected String internalToString(String value) {
 //				System.out.println("internalToString: " + value);
 				if (GrammarUtil.getAllKeywords(getGrammar()).contains(value)) {
-					return value; //"$" + value;
+					return value;
 				}
-				return "$" + value; //value;
+
+				return "$" + value;
 			}
 
 			@Override
 			protected String internalToValue(String string, INode node) throws ValueConverterException {
 //				System.out.println("internalToValue: " + string);
-				return string.startsWith("$") ? string.substring(1) : string;
+//				EObject semanticElement = node.getRootNode().getSemanticElement();
+//				String prefix = "";
+//				if (semanticElement instanceof BDSLDocument) {
+//					String fqn = ((BDSLDocument) semanticElement).getName();
+//					if (fqn != null && !fqn.isEmpty() && !string.contains(fqn) && !string.contains(".")) {
+//						prefix = fqn + ".";
+//					}
+//				}
+				return string.startsWith("$") ? (string.substring(1)) : (string);
 			}
 		};
 	}
