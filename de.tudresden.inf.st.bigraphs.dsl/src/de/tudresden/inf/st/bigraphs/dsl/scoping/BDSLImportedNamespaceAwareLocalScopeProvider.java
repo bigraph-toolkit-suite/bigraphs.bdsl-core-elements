@@ -181,12 +181,12 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 			
 			EObject newContext = context;
 			if(newContext instanceof LVD2) {
-				System.out.println("LVD2 detected");
+//				System.out.println("LVD2 detected");
 //				Signature currentSignature = BDSLUtil.tryInferSignature(((LocalVarDecl) context));
 //				System.out.println("Sig is:" + currentSignature);
 				LocalVarDecl parent = BDSLUtil.getParentOf((LVD2)newContext);
-				System.out.println("parent: " + parent);
-				System.out.println("parent sig: " + parent.getSig());
+//				System.out.println("parent: " + parent);
+//				System.out.println("parent sig: " + parent.getSig());
 				newContext = parent;
 			} 
 			
