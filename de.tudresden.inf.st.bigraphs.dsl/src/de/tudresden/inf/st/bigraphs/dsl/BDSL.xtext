@@ -96,7 +96,7 @@ Signature:
 	('{' (controls+=ControlDef)+ '}')?;
 
 ControlDef returns ControlVariable:
-	{ControlVariable} type=ControlType? 'ctrl' name=ID 'arity' arity=INT;
+	{ControlVariable} type=ControlType? (('ctrl' name=ID 'arity' arity=INT) | (name=ID ':' arity=INT));
 
 	///////////////////////////////////
 // Bigraphs						 //
@@ -290,7 +290,7 @@ CreateRandomBigraphMethod returns AssignableBigraphExpressionWithExplicitSig:
 // Main Block and Main Statements //
 ////////////////////////////////////
 AbstractMainStatements:
-	MethodStatements | AssignmentOrVariableDeclaration | UDFOperation //| BDSLVariableDeclaration // | BDSLReactionDeclaration
+	MethodStatements | AssignmentOrVariableDeclaration | UDFOperation
 ;
 
 UDFOperation:

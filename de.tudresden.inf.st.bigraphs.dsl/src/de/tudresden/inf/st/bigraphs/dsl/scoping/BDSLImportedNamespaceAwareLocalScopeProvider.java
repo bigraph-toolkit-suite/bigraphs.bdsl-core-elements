@@ -15,6 +15,7 @@ import javax.inject.Singleton;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -43,6 +44,7 @@ import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLReferenceDeclaration;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLVariableDeclaration2;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphVarDeclOrReference;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.ControlVariable;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.LVD2;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalVarDecl;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.NodeExpressionCall;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.Signature;
@@ -96,12 +98,11 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
-//		System.out.println("Context: " + context);
-//		System.out.println("Reference: " + reference);
-//		System.out.println("Reference.eContainer: " + reference.eContainer());
+		System.out.println("Context: " + context);
+		System.out.println("Reference: " + reference);
+		System.out.println("Reference.eContainer: " + reference.eContainer());
 
 		if (reference == BDSLPackage.Literals.BDSL_DOCUMENT_IMPORT) {
-//			System.out.println("BRS_MODEL_IMPORT: looking into global scope");
 			return super.getGlobalScope(context.eResource(), reference);
 		}
 
@@ -120,31 +121,56 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 		// bigraph declaration allowed)
 		if (context instanceof AbstractNamedSignatureElement
 				&& reference.eContainer() == BDSLPackage.Literals.BIGRAPH_VAR_REFERENCE) {
+			System.out.println("BIGRAPH_VAR_REFERENCE detected");
+			
 			EObject containerElement = EcoreUtil2.getContainerOfType(context, AbstractNamedSignatureElement.class);
 			if (containerElement != null) {
-//				System.out.println("containerElement: " + containerElement);
+				System.out.println("containerElement: " + containerElement);
 //				Scopes.selectCompatible(IScope.NULLSCOPE.getAllElements(), BDSLPackage.Literals.BIGRAPH_VAR_REFERENCE);
-//				EObject rootElement = EcoreUtil2.getRootContainer(context);
+				
+				if(containerElement instanceof LVD2) {
+					System.out.println("LVD2 detected for REFERENCE");
+//					Signature currentSignature = BDSLUtil.tryInferSignature(((LocalVarDecl) context));
+//					System.out.println("Sig is:" + currentSignature);
+					LocalVarDecl parent = BDSLUtil.getParentOf((LVD2)containerElement);
+//					System.out.println("new parent cont sig: " + parent.getSig());
+					containerElement = parent;
+					System.out.println("new parent cont: " + parent);
+				} 
+				
 				Signature correctSignature = inferSignature((AbstractNamedSignatureElement) containerElement);
 				List<AbstractNamedSignatureElement> allVarDeclarations = new ArrayList<AbstractNamedSignatureElement>();
-				findAllLocalBigraphVariableDeclarations(context, allVarDeclarations);
+				findAllLocalBigraphVariableDeclarations(containerElement, allVarDeclarations);
+				allVarDeclarations.forEach(x -> {
+					System.out.println("\tallVarDecl: " + x);
+				});
+				// now filter out only those with a matching signature
 				Predicate<AbstractNamedSignatureElement> signatureFilterPredicate = new Predicate<AbstractNamedSignatureElement>() {
 					@Override
 					public boolean apply(AbstractNamedSignatureElement arg0) {
+						System.out.println("\t infer sig for: " + arg0);
 						Signature infered = inferSignature(arg0);
+						if(arg0 instanceof LVD2 && infered == null) {
+							LocalVarDecl parent = BDSLUtil.getParentOf((LVD2)arg0);
+							infered = inferSignature(parent);
+						}
+						System.out.println("\t infered sig is: " + infered);
 						if (infered == null)
 							return false;
 						return infered.equals(correctSignature);
 					}
 				};
-				Predicate<IEObjectDescription> filter = new Predicate<IEObjectDescription>() {
-					@Override
-					public boolean apply(IEObjectDescription e) {
-						return !Objects.equal(e.getEObjectOrProxy(), context);
-					}
-				};
+//				Predicate<IEObjectDescription> filter = new Predicate<IEObjectDescription>() {
+//					@Override
+//					public boolean apply(IEObjectDescription e) {
+//						return !Objects.equal(e.getEObjectOrProxy(), containerElement);
+//					}
+//				};
 				Collection<AbstractNamedSignatureElement> filtered = Collections2.filter(allVarDeclarations,
 						signatureFilterPredicate);
+				filtered.forEach(x -> {
+					System.out.println("\tfiltered: " + x);
+				});
 				IScope existingScope = Scopes.scopeFor(filtered);
 				return existingScope; // new FilteringScope(existingScope, filter);
 			}
@@ -152,7 +178,21 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 
 		if ((context instanceof LocalVarDecl) && reference == BDSLPackage.Literals.LOCAL_VAR_DECL__CONTROL_TYPE
 				&& reference.eContainer() == BDSLPackage.Literals.LOCAL_VAR_DECL) {
-			Signature currentSignature = BDSLUtil.tryInferSignature(((LocalVarDecl) context));
+			
+			EObject newContext = context;
+			if(newContext instanceof LVD2) {
+				System.out.println("LVD2 detected");
+//				Signature currentSignature = BDSLUtil.tryInferSignature(((LocalVarDecl) context));
+//				System.out.println("Sig is:" + currentSignature);
+				LocalVarDecl parent = BDSLUtil.getParentOf((LVD2)newContext);
+				System.out.println("parent: " + parent);
+				System.out.println("parent sig: " + parent.getSig());
+				newContext = parent;
+			} 
+			
+			Signature currentSignature = BDSLUtil.tryInferSignature(((LocalVarDecl) newContext));
+			
+			
 			if (java.util.Objects.nonNull(currentSignature)) {
 				List<IEObjectDescription> controlScope = new ArrayList<IEObjectDescription>();
 				QualifiedName sigQfn = nameProvider.getFullyQualifiedName(currentSignature);
@@ -173,6 +213,8 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 			}
 		}
 
+
+		
 		// Scope Provider for controls inside a bigraph definition
 		if ((context instanceof NodeExpressionCall)
 				&& reference.eContainer() == BDSLPackage.Literals.NODE_EXPRESSION_CALL) {
@@ -319,9 +361,6 @@ public class BDSLImportedNamespaceAwareLocalScopeProvider extends ImportedNamesp
 		if (variable.eContainer() != null) {
 			EObject container = EcoreUtil2.getContainerOfType(variable.eContainer(),
 					AbstractNamedSignatureElement.class);
-//			Signature sig = ((LocalVarDecl) variable.eContainer()).getSig();
-//			if (sig != null)
-//				return sig;
 			if (container instanceof AbstractNamedSignatureElement)
 				return inferSignature(((AbstractNamedSignatureElement) container));
 		}

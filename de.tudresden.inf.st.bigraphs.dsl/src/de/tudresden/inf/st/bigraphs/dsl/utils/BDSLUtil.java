@@ -25,6 +25,7 @@ import de.tudresden.inf.st.bigraphs.dsl.bDSL.NodeExpressionCall;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.ReferenceClassSymbol;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.RuleVarReference;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.DataSource;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.LVD2;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.LoadMethod;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalPredicateDeclaration;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.LocalRuleDecl;
@@ -40,18 +41,23 @@ public class BDSLUtil {
 
 	public static Signature tryInferSignature(AbstractNamedSignatureElement variable) {
 		if (variable instanceof LocalVarDecl) {
-			return tryInferSignature((LocalVarDecl)variable);
+			return tryInferSignature((LocalVarDecl) variable);
 		}
 		if (variable instanceof LocalPredicateDeclaration) {
-			return tryInferSignature((LocalPredicateDeclaration)variable);
+			return tryInferSignature((LocalPredicateDeclaration) variable);
 		}
 		if (variable instanceof LocalRuleDecl) {
-			return tryInferSignature((LocalRuleDecl)variable);
+			return tryInferSignature((LocalRuleDecl) variable);
 		}
 		if (variable instanceof BRSDefinition) {
-			return tryInferSignature((BRSDefinition)variable);
+			return tryInferSignature((BRSDefinition) variable);
 		}
 		return null;
+	}
+
+	public static LocalVarDecl getParentOf(LVD2 innerVariable) {
+		BDSLVariableDeclaration2 parent = EcoreUtil2.getContainerOfType(innerVariable, BDSLVariableDeclaration2.class);
+		return parent.getVariable() instanceof LocalVarDecl ? (LocalVarDecl) parent.getVariable() : null;
 	}
 
 	/**
