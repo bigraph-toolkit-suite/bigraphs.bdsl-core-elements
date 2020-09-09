@@ -1,9 +1,9 @@
 package de.tudresden.inf.st.bigraphs.dsl.udf;
 
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLDocument;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.UDFArgumentTypes;
 
-public interface ToBooleanFunction extends BDSLUserDefinedFunction<BDSLDocument, Boolean> {
+public interface ToBooleanFunction extends BDSLUserDefinedFunction<Boolean> {
 
 	@Override
-	Boolean apply(BDSLDocument bdslDocument);
+	Boolean apply(UDFArgumentTypes bdslDocument);
 }

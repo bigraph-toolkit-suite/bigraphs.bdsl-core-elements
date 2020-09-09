@@ -55,7 +55,6 @@
       <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//OutputModeModel/META_MODEL"/>
     </genEnums>
     <genClasses ecoreClass="BDSL.ecore#//BDSLDocument">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//BDSLDocument/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//BDSLDocument/importDeclarationsBdsl"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//BDSLDocument/importDeclarationsUdf"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//BDSLDocument/signature"/>
@@ -70,7 +69,6 @@
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//AbstractElement"/>
     <genClasses ecoreClass="BDSL.ecore#//AbstractNamedSignatureElement">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//AbstractNamedSignatureElement/name"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BDSL.ecore#//AbstractNamedSignatureElement/sig"/>
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//MainElement">
@@ -132,6 +130,9 @@
     <genClasses ecoreClass="BDSL.ecore#//BRSVarReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BDSL.ecore#//BRSVarReference/value"/>
     </genClasses>
+    <genClasses ecoreClass="BDSL.ecore#//BDSLDocumentReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BDSL.ecore#//BDSLDocumentReference/value"/>
+    </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//BigraphVarDeclOrReference"/>
     <genClasses ecoreClass="BDSL.ecore#//BigraphRuleDeclOrReference"/>
     <genClasses ecoreClass="BDSL.ecore#//BigraphPredDeclOrReference"/>
@@ -188,6 +189,9 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//UDFOperation/expression"/>
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//XExpression"/>
+    <genClasses ecoreClass="BDSL.ecore#//UDFArgumentTypes">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//UDFArgumentTypes/name"/>
+    </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//BDSLBlock">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//BDSLBlock/statements"/>
     </genClasses>

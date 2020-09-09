@@ -2,12 +2,14 @@ package de.tudresden.inf.st.bigraphs.dsl.udf;
 
 import java.util.function.Function;
 
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.UDFArgumentTypes;
+
 /**
  * @author Dominik Grzelak
  */
-public interface BDSLUserDefinedFunction<T, R> extends Function<T, R> {
+public interface BDSLUserDefinedFunction<R> extends Function<UDFArgumentTypes, R> {
 
     @Override
-    R apply(T t);
+    R apply(UDFArgumentTypes t);
 }
 

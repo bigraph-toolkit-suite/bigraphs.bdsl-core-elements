@@ -162,6 +162,9 @@ PredicateVarReference:
 BRSVarReference:
 //	{BRSVarReference}
 	value=[BRSDefinition|BIGRAPH_VAR_REFERENCE_ID];
+	
+BDSLDocumentReference:
+	value=[BDSLDocument|BIGRAPH_VAR_REFERENCE_ID];
 
 BigraphVarDeclOrReference: // dont remove: needed to organize hierarchy
 	LocalVarDecl | BigraphVarReference;
@@ -306,13 +309,17 @@ UdfCallExpression returns XExpression:
 	( '()'
 	| ('('
 	////		(params+=FullJvmFormalParameter (',' params+=FullJvmFormalParameter)*)?
-	params+=[AbstractNamedSignatureElement|BIGRAPH_VAR_REFERENCE_ID] (','
-	params+=[AbstractNamedSignatureElement|BIGRAPH_VAR_REFERENCE_ID])*
+	params+=[UDFArgumentTypes|BIGRAPH_VAR_REFERENCE_ID] (','
+	params+=[UDFArgumentTypes|BIGRAPH_VAR_REFERENCE_ID])*
 	')'));
 	//StaticQualifier
 
 ClosedBrackets hidden():
 	'(' ')';
+
+UDFArgumentTypes:
+	AbstractNamedSignatureElement | BDSLDocument
+;
 
 BDSLBlock:
 	{BDSLBlock} '{' statements+=AbstractMainStatements* '}';

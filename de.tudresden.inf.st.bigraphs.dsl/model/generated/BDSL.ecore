@@ -2,8 +2,7 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="bDSL" nsURI="http://www.tudresden.de/inf/st/bigraphs/dsl/BDSL"
     nsPrefix="bDSL">
-  <eClassifiers xsi:type="ecore:EClass" name="BDSLDocument">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BDSLDocument" eSuperTypes="#//UDFArgumentTypes">
     <eStructuralFeatures xsi:type="ecore:EReference" name="importDeclarationsBdsl"
         upperBound="-1" eType="#//BDSLDocumentImport" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="importDeclarationsUdf"
@@ -22,8 +21,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="importedNamespace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractElement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="AbstractNamedSignatureElement">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractNamedSignatureElement" eSuperTypes="#//UDFArgumentTypes">
     <eStructuralFeatures xsi:type="ecore:EReference" name="sig" eType="#//Signature"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MainElement">
@@ -90,6 +88,9 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BRSVarReference" eSuperTypes="#//BigraphBdslVarDeclOrReference #//BDSLReferenceSymbol">
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//BRSDefinition"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BDSLDocumentReference">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//BDSLDocument"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BigraphVarDeclOrReference"/>
   <eClassifiers xsi:type="ecore:EClass" name="BigraphRuleDeclOrReference"/>
@@ -161,6 +162,9 @@
         eType="#//XExpression" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UDFArgumentTypes">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BDSLBlock">
     <eStructuralFeatures xsi:type="ecore:EReference" name="statements" upperBound="-1"
         eType="#//AbstractMainStatements" containment="true"/>
@@ -249,6 +253,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="UdfCallExpression" eSuperTypes="#//XExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="params" unique="false"
-        upperBound="-1" eType="#//AbstractNamedSignatureElement"/>
+        upperBound="-1" eType="#//UDFArgumentTypes"/>
   </eClassifiers>
 </ecore:EPackage>

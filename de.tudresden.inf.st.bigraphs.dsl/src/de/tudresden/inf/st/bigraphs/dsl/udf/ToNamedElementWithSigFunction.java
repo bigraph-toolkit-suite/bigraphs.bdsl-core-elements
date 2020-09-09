@@ -1,13 +1,13 @@
 package de.tudresden.inf.st.bigraphs.dsl.udf;
 
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.AbstractNamedSignatureElement;
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLDocument;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.UDFArgumentTypes;
 
 /**
  * @author Dominik Grzelak
  */
-public interface ToNamedElementWithSigFunction extends BDSLUserDefinedFunction<BDSLDocument, AbstractNamedSignatureElement> {
+public interface ToNamedElementWithSigFunction extends BDSLUserDefinedFunction<AbstractNamedSignatureElement> {
 
     @Override
-    AbstractNamedSignatureElement apply(BDSLDocument bdslDocument);
+    AbstractNamedSignatureElement apply(UDFArgumentTypes bdslDocument);
 }
