@@ -21,8 +21,8 @@
       <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//BinaryNestingOperator/COMPOSITION"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="BDSL.ecore#//ControlType">
-      <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//ControlType/ATOMIC"/>
       <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//ControlType/ACTIVE"/>
+      <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//ControlType/ATOMIC"/>
       <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//ControlType/PASSIVE"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="BDSL.ecore#//PredicateType">
@@ -93,7 +93,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//NodeExpressionCall/links"/>
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//NameConstant">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//NameConstant/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//NameConstant/value"/>
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//SiteVars">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//SiteVars/name"/>
@@ -170,6 +170,18 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BDSL.ecore#//AssignableBigraphExpressionWithExplicitSig/sig"/>
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//MethodStatements"/>
+    <genClasses ecoreClass="BDSL.ecore#//BdslCallbackMethods">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//BdslCallbackMethods/brs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//BdslCallbackMethods/statements"/>
+    </genClasses>
+    <genClasses ecoreClass="BDSL.ecore#//BRSStartedCallback"/>
+    <genClasses ecoreClass="BDSL.ecore#//BRSFinishedCallback"/>
+    <genClasses ecoreClass="BDSL.ecore#//PredicateMatchCallback">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//PredicateMatchCallback/params"/>
+    </genClasses>
+    <genClasses ecoreClass="BDSL.ecore#//RuleMatchCallback">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//RuleMatchCallback/params"/>
+    </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//PrintLn">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//PrintLn/text"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//PrintLn/mode"/>
@@ -185,6 +197,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//ExecuteBRSMethod/brs"/>
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//AbstractMainStatements"/>
+    <genClasses ecoreClass="BDSL.ecore#//CallbackStatements"/>
     <genClasses ecoreClass="BDSL.ecore#//UDFOperation">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//UDFOperation/expression"/>
     </genClasses>

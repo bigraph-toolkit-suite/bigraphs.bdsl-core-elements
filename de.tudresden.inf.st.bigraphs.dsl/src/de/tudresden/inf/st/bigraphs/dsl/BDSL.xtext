@@ -1,21 +1,17 @@
 grammar de.tudresden.inf.st.bigraphs.dsl.BDSL with org.eclipse.xtext.xbase.Xbase //with org.eclipse.xtext.xbase.Xtype //with org.eclipse.xtext.common.Terminals //
-
 import "platform:/resource/BigraphBaseModel/model/bigraphBaseModel.ecore" as bigraph
 //import "http://www.tudresden.de/inf/st/bigraphs/dsl/BDSL" as bdsl
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 import "http://www.eclipse.org/xtext/common/JavaVMTypes" as jvmTypes
 //import "http://www.eclipse.org/xtext/xbase/Xbase" as xbase
-
 generate bDSL "http://www.tudresden.de/inf/st/bigraphs/dsl/BDSL"
-
 
 // types are in italic font
 BDSLDocument:
 // first imports and signatures 
 //		(importDeclarations+=XImportDeclaration*)
 //	importSection=XImportSection?
-	('namespace' name=QualifiedName)?
-	(importDeclarationsBdsl+=BDSLDocumentImport | importDeclarationsUdf+=BDSLUdfImport)*
+	('namespace' name=QualifiedName)? (importDeclarationsBdsl+=BDSLDocumentImport | importDeclarationsUdf+=BDSLUdfImport)*
 
 	// signature definitions
 	signature+=(Signature)*
@@ -23,18 +19,18 @@ BDSLDocument:
 	// and unordered group of global and local statements
 	((statements+=(AbstractElement)*) & (main=MainElement)?);
 
-//FqnWithWildCard:
+	//FqnWithWildCard:
 //	QualifiedName ('.*')?;
 
-QualifiedNameWithWildcardOptional :
-	QualifiedName  ('.' '*')?;
-	
+QualifiedNameWithWildcardOptional:
+	QualifiedName ('.' '*')?;
+
 FQN:
 	ID ('.' ID)*; // TODO: could be now also IdOrKw instead of ID
 
 //terminal DOLLAR: '$';
 terminal BIGRAPH_VAR_REFERENCE_ID returns ecore::EString:
-	('$' ID ('.' ID)*)	//cannot reference to FQN directly, 
+	('$' ID ('.' ID)*) //cannot reference to FQN directly, 
 ;
 
 BDSLDocumentImport:
@@ -43,8 +39,9 @@ BDSLDocumentImport:
 BDSLUdfImport:
 	{BDSLUdfImport} 'import:udf' importedNamespace=QualifiedNameWithWildcardOptional;
 
-//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
-terminal INT returns ecore::EInt: ('0'..'9')+;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+terminal INT returns ecore::EInt:
+	('0'..'9')+;
 
 FLOAT returns ecore::EFloat:
 	INT '.' INT;
@@ -56,7 +53,7 @@ fragment BDSLSiteVarsAndControlVarFrag *:
 	(("[" siteArgs+=SiteVars (',' siteArgs+=SiteVars)* "]")? ':' controlType=[ControlVariable|FQN])?;
 
 AbstractElement:
-	AssignmentOrVariableDeclaration;
+	AssignmentOrVariableDeclaration | BdslCallbackMethods;
 
 AbstractNamedSignatureElement: //TODO rename to namedelement
 	LocalVarDecl | LocalRuleDecl | LocalPredicateDeclaration | BRSDefinition;
@@ -114,7 +111,7 @@ NodeExpressionCall:
 	value=[ControlVariable|FQN] ("[" links+=NameConstant? (',' links+=NameConstant)* "]")?;
 
 NameConstant:
-	{NameConstant} name=STRING;
+	{NameConstant} value=STRING;
 
 	//TODO: change to linkNamevars or so
 SiteVars:
@@ -136,7 +133,7 @@ ElementaryBigraphs:
 	Site | Barren | Merge | Closure | Substitution;
 
 Barren:
-	'barren' {Barren} '()';
+	('barren' | 'brn') {Barren} '()';
 
 Merge:
 	'merge' {Merge} '(' sites=INT ')';
@@ -162,7 +159,7 @@ PredicateVarReference:
 BRSVarReference:
 //	{BRSVarReference}
 	value=[BRSDefinition|BIGRAPH_VAR_REFERENCE_ID];
-	
+
 BDSLDocumentReference:
 	value=[BDSLDocument|BIGRAPH_VAR_REFERENCE_ID];
 
@@ -206,7 +203,8 @@ BDSLVariableDeclaration2:
 	{BDSLVariableDeclaration2} (variable=AbstractNamedSignatureElement) ('=' (value=BDSLExpression))?;
 
 BDSLReferenceDeclaration:
-	{BDSLReferenceDeclaration} target=[AbstractNamedSignatureElement|BIGRAPH_VAR_REFERENCE_ID] ('=' (value=BDSLExpression))?;
+	{BDSLReferenceDeclaration} target=[AbstractNamedSignatureElement|BIGRAPH_VAR_REFERENCE_ID] ('='
+	(value=BDSLExpression))?;
 
 BDSLExpression:
 	BDSLAssignment;
@@ -260,7 +258,43 @@ AssignableBigraphExpressionWithExplicitSig: //TODO rename to methodsomething
 	LoadMethod | CreateRandomBigraphMethod;
 
 MethodStatements:
-	PrintLn | ExportMethod | ExecuteBRSMethod | LoadMethod | CreateRandomBigraphMethod;
+	PrintLn | ExportMethod | ExecuteBRSMethod | LoadMethod | CreateRandomBigraphMethod | BdslCallbackMethods;
+
+BdslCallbackMethods:
+	PredicateMatchCallback | RuleMatchCallback | BRSStartedCallback | BRSFinishedCallback;
+
+fragment BDSLCallbackCodeBlockFragment *:
+	statements+=CallbackStatements*;
+
+BRSStartedCallback:
+	{BRSStartedCallback}
+	'onReactiveSystemStarted' '(' brs=BRSVarReference ')' '=' '{' BDSLCallbackCodeBlockFragment '}';
+
+BRSFinishedCallback:
+	{BRSFinishedCallback}
+	'onReactiveSystemFinished' '(' brs=BRSVarReference ')' '=' '{' BDSLCallbackCodeBlockFragment '}';
+
+PredicateMatchCallback:
+	{PredicateMatchCallback}
+	'listenForPredicateMatch' '(' brs=BRSVarReference ','
+	'['
+	params+=PredicateVarReference (','
+	params+=PredicateVarReference)*
+	']'
+	')' '=' '{'
+	BDSLCallbackCodeBlockFragment
+	'}';
+
+RuleMatchCallback:
+	{RuleMatchCallback}
+	'listenForRuleMatch' '(' brs=BRSVarReference ','
+	'['
+	params+=RuleVarReference (','
+	params+=RuleVarReference)*
+	']'
+	')' '=' '{'
+	BDSLCallbackCodeBlockFragment
+	'}';
 
 PrintLn:
 	'println' {PrintLn} '(' text=(PrintableExpression) (',' mode=OutputModeModel)? ')';
@@ -293,8 +327,10 @@ CreateRandomBigraphMethod returns AssignableBigraphExpressionWithExplicitSig:
 // Main Block and Main Statements //
 ////////////////////////////////////
 AbstractMainStatements:
-	MethodStatements | AssignmentOrVariableDeclaration | UDFOperation
-;
+	MethodStatements | AssignmentOrVariableDeclaration | UDFOperation;
+
+CallbackStatements:
+	MethodStatements | UDFOperation;
 
 UDFOperation:
 	{UDFOperation}
@@ -305,21 +341,16 @@ UdfCallExpression returns XExpression:
 	{UdfCallExpression}
 	//	(=>(type=JvmTypeReference name=QualifiedName) | name=QualifiedName)
 	(type=[jvmTypes::JvmType|QualifiedName])
-//	name=FQN //QualifiedName
-	( '()'
+	//	name=FQN //QualifiedName
+	('()'
 	| ('('
 	////		(params+=FullJvmFormalParameter (',' params+=FullJvmFormalParameter)*)?
 	params+=[UDFArgumentTypes|BIGRAPH_VAR_REFERENCE_ID] (','
 	params+=[UDFArgumentTypes|BIGRAPH_VAR_REFERENCE_ID])*
 	')'));
-	//StaticQualifier
-
-ClosedBrackets hidden():
-	'(' ')';
 
 UDFArgumentTypes:
-	AbstractNamedSignatureElement | BDSLDocument
-;
+	AbstractNamedSignatureElement | BDSLDocument;
 
 BDSLBlock:
 	{BDSLBlock} '{' statements+=AbstractMainStatements* '}';
@@ -338,7 +369,7 @@ enum BinaryNestingOperator:
 ;
 
 enum ControlType:
-	ATOMIC='atomic' | ACTIVE='active' | PASSIVE='passive';
+	ACTIVE='active' | ATOMIC='atomic' | PASSIVE='passive';
 
 enum PredicateType:
 	PARTIAL='partial' | ISO='iso';

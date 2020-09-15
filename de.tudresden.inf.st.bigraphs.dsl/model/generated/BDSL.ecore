@@ -50,7 +50,7 @@
         eType="#//NameConstant" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NameConstant">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SiteVars">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -138,7 +138,23 @@
       eSuperTypes="#//AssignableBigraphExpression #//MethodStatements">
     <eStructuralFeatures xsi:type="ecore:EReference" name="sig" eType="#//Signature"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MethodStatements" eSuperTypes="#//AbstractMainStatements"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MethodStatements" eSuperTypes="#//AbstractMainStatements #//CallbackStatements"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BdslCallbackMethods" eSuperTypes="#//AbstractElement #//MethodStatements">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="brs" eType="#//BRSVarReference"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statements" upperBound="-1"
+        eType="#//CallbackStatements" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BRSStartedCallback" eSuperTypes="#//BdslCallbackMethods"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BRSFinishedCallback" eSuperTypes="#//BdslCallbackMethods"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PredicateMatchCallback" eSuperTypes="#//BdslCallbackMethods">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="params" upperBound="-1"
+        eType="#//PredicateVarReference" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RuleMatchCallback" eSuperTypes="#//BdslCallbackMethods">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="params" upperBound="-1"
+        eType="#//RuleVarReference" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PrintLn" eSuperTypes="#//MethodStatements">
     <eStructuralFeatures xsi:type="ecore:EReference" name="text" eType="#//PrintableExpression"
         containment="true"/>
@@ -157,7 +173,8 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractMainStatements"/>
-  <eClassifiers xsi:type="ecore:EClass" name="UDFOperation" eSuperTypes="#//AbstractMainStatements">
+  <eClassifiers xsi:type="ecore:EClass" name="CallbackStatements"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UDFOperation" eSuperTypes="#//AbstractMainStatements #//CallbackStatements">
     <eStructuralFeatures xsi:type="ecore:EReference" name="expression" upperBound="-1"
         eType="#//XExpression" containment="true"/>
   </eClassifiers>
@@ -184,8 +201,8 @@
     <eLiterals name="COMPOSITION" value="2" literal="*"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ControlType">
-    <eLiterals name="ATOMIC" literal="atomic"/>
-    <eLiterals name="ACTIVE" value="1" literal="active"/>
+    <eLiterals name="ACTIVE" literal="active"/>
+    <eLiterals name="ATOMIC" value="1" literal="atomic"/>
     <eLiterals name="PASSIVE" value="2" literal="passive"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="PredicateType">
