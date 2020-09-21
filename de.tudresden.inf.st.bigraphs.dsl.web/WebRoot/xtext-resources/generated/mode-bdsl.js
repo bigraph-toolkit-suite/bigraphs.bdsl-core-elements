@@ -1,6 +1,6 @@
 define(["ace/lib/oop", "ace/mode/text", "ace/mode/text_highlight_rules"], function(oop, mText, mTextHighlightRules) {
 	var HighlightRules = function() {
-		var keywords = "UNSET|UNSET2|active|agents|arity|as|atomic|barren|bigmc|bigrapher|brn|brs|case|catch|cdo|classpath|closure|clsre|console|ctrl|default|do|ecore|else|execute|export|extends|extension|false|file|finally|for|id|if|import|instance|instanceof|iso|j|listenForPredicateMatch|listenForRuleMatch|load|loaded|main|merge|n|namespace|new|null|onReactiveSystemFinished|onReactiveSystemStarted|p|partial|passive|pred|preds|println|randomBigraph|react|resourcePath|return|rules|sig|signature|static|subst|substitution|super|switch|synchronized|t|throw|to|true|try|typeof|unspecified|val|var|while|xmi";
+		var keywords = "UNSET|UNSET2|active|agents|arity|as|atomic|barren|bigmc|bigrapher|brn|brs|case|catch|cdo|classpath|closure|clsre|console|ctrl|default|do|ecore|else|execute|export|extends|extension|false|file|finally|for|id|if|import|instance|instanceof|iso|j|listenForPredicateMatch|listenForRuleMatch|load|loaded|main|merge|n|namespace|new|null|onReactiveSystemFinished|onReactiveSystemStarted|p|partial|passive|png|pred|preds|println|randomBigraph|react|resourcePath|return|rules|sig|signature|static|subst|substitution|super|switch|synchronized|t|throw|true|try|typeof|unspecified|val|var|while|xmi";
 		this.$rules = {
 			"start": [
 				{token: "comment", regex: "\\/\\/.*$"},

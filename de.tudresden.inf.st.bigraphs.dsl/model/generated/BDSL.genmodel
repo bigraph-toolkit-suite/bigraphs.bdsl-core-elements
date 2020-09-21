@@ -34,6 +34,7 @@
       <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//ExportFormat/ECORE"/>
       <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//ExportFormat/BIGRAPHER"/>
       <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//ExportFormat/BIGMC"/>
+      <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//ExportFormat/PNG"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="BDSL.ecore#//LoadFormat">
       <genEnumLiterals ecoreEnumLiteral="BDSL.ecore#//LoadFormat/XMI"/>
@@ -188,9 +189,8 @@
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//PrintableExpression"/>
     <genClasses ecoreClass="BDSL.ecore#//ExportMethod">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//ExportMethod/brs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BDSL.ecore#//ExportMethod/variable"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//ExportMethod/format"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//ExportMethod/sink"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//ExportMethod/resourcePath"/>
     </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//ExecuteBRSMethod">

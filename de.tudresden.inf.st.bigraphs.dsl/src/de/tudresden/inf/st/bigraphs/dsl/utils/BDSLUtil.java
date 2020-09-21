@@ -25,6 +25,7 @@ import de.tudresden.inf.st.bigraphs.dsl.bDSL.BRSStartedCallback;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphExpression;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphVarDeclOrReference;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BigraphVarReference;
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.DataSink;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.NodeExpressionCall;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.PredicateMatchCallback;
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.ReferenceClassSymbol;
@@ -376,6 +377,19 @@ public class BDSLUtil {
 				}
 			}
 			return DataSource.UNSPECIFIED;
+		}
+		
+		public static DataSink getDataSinkFromIdentifier(String resourcePath) {
+			if (Objects.nonNull(resourcePath) && !resourcePath.isEmpty()) {
+				if (resourcePath.startsWith("console:")) {
+					return DataSink.STDOUT;
+				} else if (resourcePath.startsWith("cdo:")) {
+					return DataSink.DB;
+				} else if (resourcePath.startsWith("file:")) {
+					return DataSink.LOCAL_FILE;
+				}
+			}
+			return DataSink.STDOUT;
 		}
 	}
 }

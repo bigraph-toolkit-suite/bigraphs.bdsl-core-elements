@@ -23,6 +23,9 @@ import java.util.Objects
 import org.apache.commons.io.FilenameUtils
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.validation.Check
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.ExportMethod
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.DataSink
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.ExportFormat
 
 //import java.security.Signature
 /**
@@ -44,7 +47,12 @@ class BDSLValidator extends AbstractBDSLValidator {
 
 	public static val SITE_INDEX_IS_POSITIVE = 'siteIndexIsPositive';
 
-	public static val LOAD_METHOD_MISSING_RESOURCE_IDENTIFIER = 'missingResourceIdentifier';
+	public static val LOAD_METHOD_MISSING_RESOURCE_IDENTIFIER = 'missingResourceIdentifierLoadMethod';
+	
+	public static val EXPORT_METHOD_MISSING_RESOURCE_IDENTIFIER = 'missingResourceIdentifierExportMethod';
+	
+	public static val EXPORT_METHOD_INCOMPATIBLE_RESOURCE_IDENTIFIER = 'incompatibleResourceIdentifierExportMethod';
+	
 	public static val LOAD_METHOD_RES_EXT_AMBIGUOUS = 'fileExtensionMismatch';
 
 	public static val ASSIGNMENT_SIGNATURES_MISMATCH = 'signatureMismatch';
@@ -147,6 +155,25 @@ class BDSLValidator extends AbstractBDSLValidator {
 				BDSLPackage.Literals.LOAD_METHOD__RESOURCE_PATH, LOAD_METHOD_MISSING_RESOURCE_IDENTIFIER)
 		}
 	}
+	
+//	@Check
+//	def exportMethodNoResourceIdentifier(ExportMethod exportMethod) {
+//		if (BDSLUtil.Resources.getDataSinkFromIdentifier(BDSLUtil.Strings.rawStringOf(exportMethod.resourcePath)) ===
+//			DataSink.STDOUT) {
+//			warning("The resourcePath is missing a resource identifier",
+//				BDSLPackage.Literals.EXPORT_METHOD__RESOURCE_PATH, EXPORT_METHOD_MISSING_RESOURCE_IDENTIFIER)
+//		}
+//	}
+	
+	@Check
+	def incompatibleResourceIdentifierForPng(ExportMethod exportMethod) {
+		val dataSink = BDSLUtil.Resources.getDataSinkFromIdentifier(BDSLUtil.Strings.rawStringOf(exportMethod.resourcePath));
+		if (exportMethod.format == ExportFormat.PNG && (dataSink === DataSink.STDOUT)) {
+			warning("The specified resource path is incompatible with the export format",
+				BDSLPackage.Literals.EXPORT_METHOD__RESOURCE_PATH, EXPORT_METHOD_INCOMPATIBLE_RESOURCE_IDENTIFIER)
+		}
+	}
+	
 
 	@Check
 	def siteIndexIsPositive(Site siteExpression) {

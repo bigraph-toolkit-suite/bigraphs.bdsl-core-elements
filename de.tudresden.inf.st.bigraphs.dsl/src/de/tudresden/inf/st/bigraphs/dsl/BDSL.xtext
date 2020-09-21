@@ -303,8 +303,11 @@ PrintableExpression:
 	({StringLiteral} value=STRING) | (BigraphVarReference);
 
 ExportMethod:
-	'export' {ExportMethod} '(' ((brs=BRSVarReference)) (',' 'as' '=' format=ExportFormat)? (',' 'to' '=' sink=DataSink
-	(',' 'resourcePath' '=' resourcePath=STRING)?)? ')';
+	'export' {ExportMethod} '('
+	(variable=ReferenceClassSymbol)
+	(',' 'as' '=' format=ExportFormat)?
+	(',' 'resourcePath' '=' resourcePath=STRING)?
+	')';
 
 ExecuteBRSMethod:
 	'execute' {ExecuteBRSMethod} '(' ((brs=BRSVarReference)) ')';
@@ -375,7 +378,7 @@ enum PredicateType:
 	PARTIAL='partial' | ISO='iso';
 
 enum ExportFormat:
-	XMI='xmi' | ECORE='ecore' | BIGRAPHER='bigrapher' | BIGMC='bigmc';
+	XMI='xmi' | ECORE='ecore' | BIGRAPHER='bigrapher' | BIGMC='bigmc' | PNG='png';
 
 enum LoadFormat:
 	XMI='xmi' | ECORE='ecore';
