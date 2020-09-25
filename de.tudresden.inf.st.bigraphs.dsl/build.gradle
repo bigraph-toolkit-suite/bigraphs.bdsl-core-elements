@@ -1,3 +1,8 @@
+plugins {
+  id "com.jfrog.bintray" version "1.7.3"
+  id "maven-publish"
+}
+
 ext.title = 'Bigraph Language (BDSL)'
 description = 'Language infrastructure for Bigraph DSL (BDSL) based on Xtext'
 
@@ -9,11 +14,13 @@ configurations {
 
 apply plugin: 'java'
 apply plugin: 'maven'
+apply plugin: 'com.jfrog.bintray'
 
 archivesBaseName = 'de.tudresden.inf.st.bigraphs.dsl'
 
 dependencies {
 	compile project(":BigraphBaseModel")
+	//compile 'de.tudresden.inf.st.bigraphs.model:bigraph-ecore-model:1.1.0'
 	compile "org.eclipse.xtext:org.eclipse.xtext:${versions.xtext}"
 	compile "org.eclipse.xtext:org.eclipse.xtext.xbase:${versions.xtext}"
 	compile "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:${versions.xtext}"
@@ -41,6 +48,24 @@ task generateXtextLanguage(type: JavaExec) {
 generateXtext.dependsOn(generateXtextLanguage)
 clean.dependsOn(cleanGenerateXtextLanguage)
 eclipse.classpath.plusConfigurations += [configurations.mwe2]
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+javadoc.failOnError = false
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
+
+apply from: "${rootDir}/gradle/bintray.data.gradle"
 
 /*
 project(':BigraphBaseModel') {

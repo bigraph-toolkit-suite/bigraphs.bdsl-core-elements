@@ -1,0 +1,66 @@
+// POM configuration
+def pomConfig = {
+    licenses {
+        license {
+            name "The Apache Software License, Version 2.0"
+            url "http://www.apache.org/licenses/LICENSE-2.0.txt"
+            distribution "repo"
+        }
+    }
+    developers {
+        developer {
+            id "dgrzelak"
+            name "Dominik Grzelak"
+            email "dominik.grzelak@tu-dresden.de"
+        }
+    }
+
+    scm {
+        url "https://git-st.inf.tu-dresden.de/bigraphs/bigraph-dsl-ce"
+    }
+}
+
+// Create the publication details
+publishing {
+    publications {
+        MyPublication(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+            groupId 'de.tudresden.inf.st.bigraphs.dsl'
+            artifactId 'de.tudresden.inf.st.bigraphs.dsl'
+            version project.version
+            pom.withXml {
+                def root = asNode()
+                root.appendNode('description', 'BDSL Core Elements Framework')
+                root.appendNode('name', 'de.tudresden.inf.st.bigraphs.dsl')
+                root.appendNode('url', 'https://git-st.inf.tu-dresden.de/bigraphs/bigraph-dsl-ce')
+                root.children().last() + pomConfig
+            }
+        }
+    }
+}
+
+// Bintray configuration
+bintray {
+	user = System.getProperty('bintray.user')
+	key = System.getProperty('bintray.key')
+	//publications = ['MyPublication'] 
+	configurations = ['archives']
+	pkg {
+		repo = 'maven-repository'
+		name = 'de.tudresden.inf.st.bigraphs.dsl'
+		userOrg = 'st-tu-dresden'
+		licenses = ['Apache-2.0']
+		vcsUrl = 'https://git-st.inf.tu-dresden.de/bigraphs/bigraph-dsl-ce.git'
+		labels = ['bigraph', 'DSL']
+		publicDownloadNumbers = true
+		version {
+			name = project.version
+			vcsTag = 'v${project.version}'
+			desc = 'BDSL CE Framework'
+			released  = new Date()
+			//attributes = ['name': 'value']
+		}
+	}
+}

@@ -5,11 +5,42 @@
 This projects contains the following core elements of the bigraph DSL called **BDSL**:
 - Grammar, Parser, ...
 - IDE support (Language Server Protocol)
-- Some tests
+- Unit tests
 
 IDE support is provided for the following platforms to be more productive when experimenting with bigraphs:
 
 - Eclipse, IntelliJ, Visual Code, ... by utilizing the *Language Server Protocol*
+
+## Getting Started
+
+Maven Dependency:
+
+```xml
+<repositories>
+    <repository>
+    	<id>bintray-st-tu-dresden-maven-repository</id>
+        <url>https://dl.bintray.com/st-tu-dresden/maven-repository</url>
+	</repository>
+</repositories>            
+
+<dependency>
+	<groupId>de.tudresden.inf.st.bigraphs.dsl</groupId>
+    <artifactId>de.tudresden.inf.st.bigraphs.dsl</artifactId>
+    <version>VERSION</version>
+    <exclusions>
+    	<exclusion>
+        	<groupId>de.tudresden.inf.st.bigraphs.dsl</groupId>
+            <artifactId>BigraphBaseModel</artifactId>
+        </exclusion>
+        <exclusion>
+        	<groupId>org.eclipse.xtext</groupId>
+        	<artifactId>xtext-dev-bom</artifactId>
+        </exclusion>
+    </exclusions>
+</dependency>
+```
+
+
 
 ## Build configuration
 
@@ -24,6 +55,12 @@ $ git submodule update --recursive --remote
 This will also pull the necessary [Ecore Bigraph Meta Model]() project, which is needed for this Eclipse-based project.
 
 > **Note:** [Ecore Bigraph Meta Model]() is configured as a Git submodule in this project.
+
+### Build everything
+
+```bash
+$ ./gradlew clean build
+```
 
 
 
@@ -52,6 +89,16 @@ $ ./gradlew test --tests *BdslAffectionUnitTest -PwithTests
 # Only a specific test method
 $ ./gradlew test --tests *testSignatureMatchOnAssignment_01 -PwithTests
 ```
+
+### Deploying Artifacts
+
+Execute the following goals to deploy artifacts to [Bintray](https://bintray.com/):
+```bash
+$ cd de.tudresden.inf.st.bigraphs.dsl
+$ ../gradlew bintrayUpload -Dbintray.user=<USER> -Dbintray.key=<API-KEY>
+```
+
+A working API key is needed and you must join the [st-tu-dresden organization](https://bintray.com/st-tu-dresden) at Bintray.
 
 
 

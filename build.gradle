@@ -24,9 +24,11 @@ subprojects {
 		mavenLocal()
 		mavenCentral()
 		maven {
+			name 'jabylon'
 			url 'http://www.jabylon.org/maven/'
 		}
         maven {
+        	name 'bintray-st-tu-dresden'
             url 'https://dl.bintray.com/st-tu-dresden/maven-repository'
         }
         maven {
@@ -43,7 +45,7 @@ subprojects {
 	}
 
 	group = 'de.tudresden.inf.st.bigraphs.dsl'
-	version = '1.0.0-SNAPSHOT'
+	version = '1.0.0' //'1.0.0-SNAPSHOT'
 	
 	apply plugin: 'org.xtext.xtend'
 	apply plugin: 'eclipse'
