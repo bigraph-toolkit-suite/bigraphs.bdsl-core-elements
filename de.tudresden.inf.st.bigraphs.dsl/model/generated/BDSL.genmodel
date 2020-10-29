@@ -99,9 +99,6 @@
     <genClasses ecoreClass="BDSL.ecore#//SiteVars">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//SiteVars/name"/>
     </genClasses>
-    <genClasses ecoreClass="BDSL.ecore#//Site">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//Site/index"/>
-    </genClasses>
     <genClasses ecoreClass="BDSL.ecore#//LocalRuleDecl"/>
     <genClasses ecoreClass="BDSL.ecore#//LocalPredicateDeclaration">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//LocalPredicateDeclaration/type"/>
@@ -119,6 +116,10 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//Substitution/from"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//Substitution/to"/>
     </genClasses>
+    <genClasses ecoreClass="BDSL.ecore#//Site">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BDSL.ecore#//Site/index"/>
+    </genClasses>
+    <genClasses ecoreClass="BDSL.ecore#//Join"/>
     <genClasses ecoreClass="BDSL.ecore#//BigraphVarReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BDSL.ecore#//BigraphVarReference/value"/>
     </genClasses>

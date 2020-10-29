@@ -55,9 +55,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="SiteVars">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Site" eSuperTypes="#//ElementaryBigraphs">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LocalRuleDecl" eSuperTypes="#//AbstractNamedSignatureElement #//BigraphRuleDeclOrReference"/>
   <eClassifiers xsi:type="ecore:EClass" name="LocalPredicateDeclaration" eSuperTypes="#//AbstractNamedSignatureElement #//BigraphPredDeclOrReference">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//PredicateType"/>
@@ -77,6 +74,10 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="to" unique="false" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Site" eSuperTypes="#//ElementaryBigraphs">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Join" eSuperTypes="#//ElementaryBigraphs"/>
   <eClassifiers xsi:type="ecore:EClass" name="BigraphVarReference" eSuperTypes="#//AbstractBigraphDeclaration #//BigraphVarDeclOrReference #//BDSLReferenceSymbol #//PrintableExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//LocalVarDecl"/>
   </eClassifiers>

@@ -117,9 +117,6 @@ NameConstant:
 SiteVars:
 	name=ID;
 
-Site:
-	'id' '(' index=INT ')';
-
 LocalRuleDecl:
 	"react" {LocalRuleDecl} BDSLNameSigDeclFrag;
 
@@ -130,7 +127,7 @@ BRSDefinition:
 	'brs' {BRSDefinition} BDSLNameSigDeclFrag;
 
 ElementaryBigraphs:
-	Site | Barren | Merge | Closure | Substitution;
+	Site | Barren | Merge | Closure | Substitution | Join;
 
 Barren:
 	('barren' | 'brn') {Barren} '()';
@@ -143,6 +140,12 @@ Closure:
 
 Substitution:
 	('substitution' | 'subst') {Substitution} '(' from=STRING ',' ('[' to+=STRING (',' to+=STRING)* ']') ')';
+
+Site:
+	'id' '(' index=INT ')';
+
+Join:
+	'join' {Join} '()';
 
 BigraphVarReference:
 //	{BigraphVarReference}

@@ -50,7 +50,7 @@ Replace `VERSION` with the current version.
 To clone this repository, use:
 
 ```bash
-$ git clone --recursive [url]
+$ git clone --recursive [url]it
 # To update the submodule
 $ git submodule update --recursive --remote
 ```
