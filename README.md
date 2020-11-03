@@ -2,6 +2,9 @@
 
 # Bigraph DSL - Core Elements (CE)
 
+**Current Version:** 1.0.0
+**Development:** 1.0.0-SNAPSHOT
+
 This projects contains the following major building blocks of **BDSL**, a bigraphical DSL:
 - Grammar, Parser, ...
 - Language Server Protocol for IDE implementation support
@@ -50,7 +53,7 @@ Replace `VERSION` with the current version.
 To clone this repository, use:
 
 ```bash
-$ git clone --recursive [url]it
+$ git clone --recursive [url]
 # To update the submodule
 $ git submodule update --recursive --remote
 ```

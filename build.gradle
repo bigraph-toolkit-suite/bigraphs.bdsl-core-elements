@@ -45,7 +45,7 @@ subprojects {
 	}
 
 	group = 'de.tudresden.inf.st.bigraphs.dsl'
-	version = '1.0.0-SNAPSHOT' //'1.0.0' //'1.0.0-SNAPSHOT'
+	version = '1.0.0-SNAPSHOT' // '1.0.0' //
 	
 	apply plugin: 'org.xtext.xtend'
 	apply plugin: 'eclipse'
