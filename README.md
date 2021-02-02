@@ -68,7 +68,7 @@ This will also pull the necessary [Ecore Bigraph Meta Model]() project, which is
 $ ./gradlew clean build
 ```
 
-
+This will also install the project in the local repository to be used by other Java projects.
 
 #### Generate Xtext Language Artifacts
 
