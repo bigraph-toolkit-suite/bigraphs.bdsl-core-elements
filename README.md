@@ -132,6 +132,7 @@ You may then be able to run the "MWE2 workflow" and to generate "Xtext artifacts
 - Language Server Protocol Implementation is located under `de.tudresden.inf.st.bigraphs.dsl.ide`
 - Test classes are located under `./de.tudresden.inf.st.bigraphs.dsl.tests/`
   - needs sub-projects `de.tudresden.inf.st.bigraphs.dsl` and `de.tudresden.inf.st.bigraphs.dsl.ide`
+- **(!)** Note that the required CDO/EMF/Ecore dependencies are stored separately inside the `./etc/libs` folder. The reason is that there is currently no easy way on how to resolve Eclipse dependencies from P2 repositories in gradle. To clarify: Updating the versions means replacing the files.
 
 
 
