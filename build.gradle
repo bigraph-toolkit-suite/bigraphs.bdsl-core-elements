@@ -52,7 +52,7 @@ subprojects {
 	}
 
 	group = 'de.tudresden.inf.st.bigraphs.dsl'
-	version = '1.0.0-SNAPSHOT' // -SNAPSHOT
+	version = '1.0.0' // -SNAPSHOT
 	
 	apply plugin: 'org.xtext.xtend'
 	apply plugin: 'eclipse'
