@@ -2,8 +2,11 @@
 
 # Bigraph DSL Grammar: Core Elements (CE)
 
-**Current Version:** 1.0.0
-**Development:** 1.0.0-SNAPSHOT
+| Version Release | Version Development |
+| --------------- | ------------------- |
+| 1.0.0           | 1.0.0-SNAPSHOT      |
+
+ 
 
 This projects contains the following major building blocks of **BDSL**, a bigraphical DSL:
 - Grammar, Parser, ...
