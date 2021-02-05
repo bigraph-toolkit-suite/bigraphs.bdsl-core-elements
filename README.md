@@ -1,6 +1,6 @@
 <img src="./etc/bigraph-dsl-logo.png" style="zoom:90%;" />
 
-# Bigraph DSL - Core Elements (CE)
+# Bigraph DSL Grammar: Core Elements (CE)
 
 **Current Version:** 1.0.0
 **Development:** 1.0.0-SNAPSHOT
@@ -22,17 +22,11 @@ Refer to [https://git-st.inf.tu-dresden.de/bigraphs/bigraph-algebraic-interprete
 Use the following dependency and repository for a Maven-based project:
 
 ```xml
-<repositories>
-    <repository>
-    	<id>bintray-st-tu-dresden-maven-repository</id>
-        <url>https://dl.bintray.com/st-tu-dresden/maven-repository</url>
-	</repository>
-</repositories>            
-
+<!-- Dependency -->          
 <dependency>
 	<groupId>de.tudresden.inf.st.bigraphs.dsl</groupId>
-    <artifactId>de.tudresden.inf.st.bigraphs.dsl</artifactId>
-    <version>VERSION</version>
+    <artifactId>bdsl-grammar</artifactId>
+    <version>${version}</version>
     <exclusions>
     	<exclusion>
         	<groupId>de.tudresden.inf.st.bigraphs.dsl</groupId>
@@ -44,6 +38,18 @@ Use the following dependency and repository for a Maven-based project:
         </exclusion>
     </exclusions>
 </dependency>
+
+<!-- Repository -->
+<repositories>
+	<repository>
+        <snapshots>
+        	<enabled>true</enabled>
+        </snapshots>
+        <id>STFactory</id>
+        <name>st-tu-dresden-artifactory</name>
+    	<url>https://stgroup.jfrog.io/artifactory/st-tu-dresden-release</url>
+	</repository>
+</repositories>  
 ```
 
 Replace `VERSION` with the current version.
@@ -53,14 +59,16 @@ Replace `VERSION` with the current version.
 To clone this repository, use:
 
 ```bash
+# Default
 $ git clone --recursive [url]
-# To update the submodule
+
+# To update the submodule later
 $ git submodule update --recursive --remote
 ```
 
-This will also pull the necessary [Ecore Bigraph Meta Model]() project, which is needed for this Eclipse-based project.
+This will also pull the necessary [Ecore Bigraph Metamodel](https://git-st.inf.tu-dresden.de/bigraphs/ecore-bigraph-meta-model) project, which is needed for this Eclipse-based project.
 
-> **Note:** [Ecore Bigraph Meta Model]() is configured as a Git submodule in this project.
+> **Note:** [Ecore Bigraph Metamodel](https://git-st.inf.tu-dresden.de/bigraphs/ecore-bigraph-meta-model) is configured as a Git submodule in this project.
 
 ### Build everything
 
@@ -68,7 +76,7 @@ This will also pull the necessary [Ecore Bigraph Meta Model]() project, which is
 $ ./gradlew clean build
 ```
 
-This will also install the project in the local repository to be used by other Java projects.
+This will also install the project in your Maven local repository to be used by other Java projects.
 
 #### Generate Xtext Language Artifacts
 
@@ -100,16 +108,10 @@ $ ./gradlew test --tests *testSignatureMatchOnAssignment_01 -PwithTests
 
 ### Artifact Deployment
 
-Execute the following goals to deploy artifacts to [Bintray](https://bintray.com/):
+Execute the following goals to deploy artifacts to the [ST-Group's Artifactory](https://stgroup.jfrog.io/artifactory):
 ```bash
-$ cd de.tudresden.inf.st.bigraphs.dsl
-$ ../gradlew bintrayUpload -Dbintray.user=<USER> -Dbintray.key=<API-KEY>
+$ ./gradlew artifactoryPublish -PartifactoryUser=username -PartifactoryPassword=password
 ```
-
-An account for Bintray must be created first. 
-
-Further, a working API key is needed and you must join the organization [st-tu-dresden](https://bintray.com/st-tu-dresden) in Bintray.
-
 
 
 ## Working in Eclipse
