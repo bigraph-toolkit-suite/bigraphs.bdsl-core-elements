@@ -121,7 +121,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="brs" eType="#//AssignableBigraphExpressionWithExplicitSig"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="agents" upperBound="-1"
-        eType="#//BDSLReferenceSymbol" containment="true"/>
+        eType="#//BigraphVarReference" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="rules" upperBound="-1"
         eType="#//RuleVarReference" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="predicates" upperBound="-1"

@@ -223,10 +223,24 @@ fragment BDSLReactDefinition:
 	AssignableBigraphExpressionWithExplicitSig)) //TODO AssignableBigraphExpressionWithExplicitSig
 ;
 
+//fragment BDSLBrsDefinition:
+//	brs=AssignableBigraphExpressionWithExplicitSig | (('agents' '=' ("[" agents+=BigraphVarReference? (','
+//	agents+=BigraphVarReference)* "]")) (',' 'rules' '=' ("[" rules+=RuleVarReference? (',' agents+=RuleVarReference)*
+//	"]")) (',' 'preds' '=' ("[" predicates+=PredicateVarReference? (',' predicates+=PredicateVarReference)* "]"))?);
+
 fragment BDSLBrsDefinition:
-	brs=AssignableBigraphExpressionWithExplicitSig | (('agents' '=' ("[" agents+=BigraphVarReference? (','
-	agents+=BigraphVarReference)* "]")) (',' 'rules' '=' ("[" rules+=RuleVarReference? (',' agents+=RuleVarReference)*
-	"]")) (',' 'preds' '=' ("[" predicates+=PredicateVarReference? (',' predicates+=PredicateVarReference)* "]"))?);
+	brs=AssignableBigraphExpressionWithExplicitSig | 
+(
+	('agents' '=' '[' agents+=BigraphVarReference (',' agents+=BigraphVarReference)* ']')
+	(',' 'rules' '=' '[' rules+=RuleVarReference (',' rules+=RuleVarReference)* ']')
+	(',' 'preds' '=' '[' predicates+=PredicateVarReference (',' predicates+=PredicateVarReference)* ']')?
+)
+;
+		
+	
+//('agents' '=' '[' agents+=BigraphVarReference (',' agents+=BigraphVarReference)* ']')
+//('rules' '=' '[' rules+=RuleVarReference (',' rules+=RuleVarReference)* ']')
+//('preds' '=' '[' predicates+=PredicateVarReference (',' predicates+=PredicateVarReference)* ']')?
 
 fragment BDSLBigraphDefinition: // this also covers Predicate definitions
 	definition+=(BigraphExpression)*;
