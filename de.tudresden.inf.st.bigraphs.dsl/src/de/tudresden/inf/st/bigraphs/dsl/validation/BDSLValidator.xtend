@@ -26,6 +26,8 @@ import org.eclipse.xtext.validation.Check
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.ExportMethod
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.DataSink
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.ExportFormat
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLBrsDefinition
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLExpression
 
 //import java.security.Signature
 /**
@@ -48,16 +50,48 @@ class BDSLValidator extends AbstractBDSLValidator {
 	public static val SITE_INDEX_IS_POSITIVE = 'siteIndexIsPositive';
 
 	public static val LOAD_METHOD_MISSING_RESOURCE_IDENTIFIER = 'missingResourceIdentifierLoadMethod';
-	
+
 	public static val EXPORT_METHOD_MISSING_RESOURCE_IDENTIFIER = 'missingResourceIdentifierExportMethod';
-	
+
 	public static val EXPORT_METHOD_INCOMPATIBLE_RESOURCE_IDENTIFIER = 'incompatibleResourceIdentifierExportMethod';
-	
+
 	public static val LOAD_METHOD_RES_EXT_AMBIGUOUS = 'fileExtensionMismatch';
 
 	public static val ASSIGNMENT_SIGNATURES_MISMATCH = 'signatureMismatch';
 
 	public static val ASSIGNMENT_TYPE_CHECKING = 'assignmentTypesNotMatch';
+
+	public static val BRS_AGENT_CHECKING_NOT_PRIME = 'brsAgentIsNotPrime';
+	public static val BRS_AGENT_CHECKING_NOT_GROUND = 'brsAgentIsNotGround';
+
+	@Check
+	def checkBrsAgentIsPrime(BDSLBrsDefinition brsDefFrag) {
+	}
+
+	@Check
+	def checkBrsAgentIsGround(BDSLBrsDefinition brsDefFrag) {
+		var eMsg = "";
+//		println("brsDefFrag.eContainer: " + brsDefFrag.eContainer)
+		if (brsDefFrag.eContainer instanceof BDSLVariableDeclaration2) {
+			val brsVarDecl = brsDefFrag.eContainer as BDSLVariableDeclaration2;
+//			println("brsDecl.variable: " + brsVarDecl.variable);
+			if (brsVarDecl.variable instanceof BRSDefinition) {
+				var brsVar = brsVarDecl.variable as BRSDefinition
+//				println("brsVar.name: " + brsVar.name)
+				// BDSLVariableDeclaration2
+				for (BigraphVarReference eachAgent : brsDefFrag.agents) {
+//					println("Agent : " + eachAgent.value)
+					val localVarDecl = eachAgent.value as LocalVarDecl
+//					println("localVarDecl.eContainer: " + localVarDecl.eContainer)
+					val agentDecl = localVarDecl.eContainer as BDSLVariableDeclaration2
+//					println("agentDecl.value: " + agentDecl.value)
+					val agentExpr = agentDecl.value as BDSLExpression
+//					println("agentExpr.definition: " + agentExpr.definition)
+					//check if ctrl is non atomic and if the next operation has a barren root or something
+				}
+			}
+		}
+	}
 
 	@Check
 	def checkTypeOfAssignment(BDSLVariableDeclaration2 varDeclaration) {
@@ -155,7 +189,7 @@ class BDSLValidator extends AbstractBDSLValidator {
 				BDSLPackage.Literals.LOAD_METHOD__RESOURCE_PATH, LOAD_METHOD_MISSING_RESOURCE_IDENTIFIER)
 		}
 	}
-	
+
 //	@Check
 //	def exportMethodNoResourceIdentifier(ExportMethod exportMethod) {
 //		if (BDSLUtil.Resources.getDataSinkFromIdentifier(BDSLUtil.Strings.rawStringOf(exportMethod.resourcePath)) ===
@@ -164,16 +198,15 @@ class BDSLValidator extends AbstractBDSLValidator {
 //				BDSLPackage.Literals.EXPORT_METHOD__RESOURCE_PATH, EXPORT_METHOD_MISSING_RESOURCE_IDENTIFIER)
 //		}
 //	}
-	
 	@Check
 	def incompatibleResourceIdentifierForPng(ExportMethod exportMethod) {
-		val dataSink = BDSLUtil.Resources.getDataSinkFromIdentifier(BDSLUtil.Strings.rawStringOf(exportMethod.resourcePath));
+		val dataSink = BDSLUtil.Resources.getDataSinkFromIdentifier(
+			BDSLUtil.Strings.rawStringOf(exportMethod.resourcePath));
 		if (exportMethod.format == ExportFormat.PNG && (dataSink === DataSink.STDOUT)) {
 			warning("The specified resource path is incompatible with the export format",
 				BDSLPackage.Literals.EXPORT_METHOD__RESOURCE_PATH, EXPORT_METHOD_INCOMPATIBLE_RESOURCE_IDENTIFIER)
 		}
 	}
-	
 
 	@Check
 	def siteIndexIsPositive(Site siteExpression) {

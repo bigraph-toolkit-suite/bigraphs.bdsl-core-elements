@@ -330,5 +330,40 @@ The extension of the resource path doesn't match with the specified load-as argu
 		expectDiagnostics(uri, "no viable alternative at input '(':10")
 
 	}
+	
+	@Test
+	def void testAgentInBRSIsGround() {
+		initialize
+		val uri = 'inmemory:/foo.bdsl'
+		open(
+			uri,
+			'''
+				signature Sig1 {
+					active a:1
+					passive b:1
+					atomic c:1
+				}
+				
+				main = {
+					brs example(Sig1) = {
+						agents = [$agent],
+					    rules = [$rule1]
+					}
+				}
+				
+				val agent(Sig1) = {
+					a | b | c
+				}
+				
+				react rule1(Sig1) = {
+				    $agent
+				}, {
+				    a | b
+				}
+			'''
+		)
+//		expectDiagnostics(uri, "extraneous input '-' expecting RULE_INT:10")
+		//expectDiagnostics(uri, "no viable alternative at input '(':10")
+	}
 
 }
