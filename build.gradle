@@ -27,7 +27,7 @@ ext.versions = [
 ]
 
 subprojects {
-	ext.xtextVersion = '2.21.0'
+	ext.xtextVersion = '2.22.0'
 	repositories {
 		mavenCentral()
 		jcenter()
@@ -47,8 +47,8 @@ subprojects {
 		implementation "org.eclipse.emf:org.eclipse.emf.ecore:${versions.emfEcore}"
 		implementation "org.eclipse.emf:org.eclipse.emf.ecore.xmi:${versions.emfEcoreXmi}"
 		implementation "org.eclipse.emf:org.eclipse.emf.common:${versions.emfCommon}"
+		implementation "org.eclipse.emf:org.eclipse.emf.codegen.ecore:${versions.emfEcoreCodeGen}"
 		implementation "org.eclipse.emf:org.eclipse.emf.codegen:${versions.emfCodegen}"
-		implementation "org.eclipse.emf:org.eclipse.emf.codegen.ecore:${versions.emfEcoreCodegen}"
 	}
 
 	group = 'de.tudresden.inf.st.bigraphs.dsl'
