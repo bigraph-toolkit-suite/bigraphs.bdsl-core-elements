@@ -4,19 +4,21 @@
 package de.tudresden.inf.st.bigraphs.dsl.jvmmodel
 
 import com.google.inject.Inject
+import de.tudresden.inf.st.bigraphs.dsl.BDSLLib
 import de.tudresden.inf.st.bigraphs.dsl.bDSL.BDSLDocument
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.UDFOperation
+import de.tudresden.inf.st.bigraphs.dsl.bDSL.UdfCallExpression
+import java.util.HashMap
+import org.eclipse.xtext.EcoreUtil2
+import org.eclipse.xtext.common.types.JvmDeclaredType
+import org.eclipse.xtext.common.types.TypesFactory
+import org.eclipse.xtext.common.types.util.TypeReferences
+import org.eclipse.xtext.naming.IQualifiedNameProvider
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
-import de.tudresden.inf.st.bigraphs.dsl.bDSL.UDFOperation
-import org.eclipse.xtext.common.types.util.TypeReferences
-import org.eclipse.xtext.common.types.TypesFactory
-import org.eclipse.xtext.scoping.impl.ImportNormalizer
-import static org.eclipse.xtext.naming.QualifiedName.create
-import de.tudresden.inf.st.bigraphs.dsl.udf.BDSLUserDefinedConsumer
-//import de.tudresden.inf.st.bigraphs.dsl.bDSL.UdfCallExpression
-import org.eclipse.xtext.common.types.JvmUnknownTypeReference
-import org.eclipse.xtext.naming.IQualifiedNameProvider
+
 //import de.tudresden.inf.st.bigraphs.dsl.scoping.BDSLUserDefinedExtensionLoader
 
 /**
@@ -47,11 +49,11 @@ class BDSLJvmModelInferrer extends AbstractModelInferrer {
 	 * 
 	 * @param element
 	 *            the model to create one or more
-	 *            {@link org.eclipse.xtext.common.types.JvmDeclaredType declared
+	 *            {@link JvmDeclaredType declared
 	 *            types} from.
 	 * @param acceptor
 	 *            each created
-	 *            {@link org.eclipse.xtext.common.types.JvmDeclaredType type}
+	 *            {@link JvmDeclaredType type}
 	 *            without a container should be passed to the acceptor in order
 	 *            get attached to the current resource. The acceptor's
 	 *            {@link IJvmDeclaredTypeAcceptor#accept(org.eclipse.xtext.common.types.JvmDeclaredType)
@@ -87,10 +89,47 @@ class BDSLJvmModelInferrer extends AbstractModelInferrer {
 ////			}
 ////		]
 //	}
+	
+	val jvmTypesDefined = new HashMap<Class, JvmDeclaredType>();
+	
 	def dispatch void infer(UDFOperation udfop, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
-//					val udfop = element as UDFOperation
-		println("stmt: " + udfop)
-
+		for (exp : udfop.expression) {
+			val exp1 = exp as UdfCallExpression
+			val compNode = NodeModelUtils.getNode(exp1)
+			val textClazzName = compNode.text
+			val cleanedClazzName = textClazzName.substring(0, textClazzName.indexOf("(")).trim
+//			println("compNode.text: " + textClazzName + " // compNode.toString: " + compNode.toString)
+			
+			// Go through all udf:import statements
+			val bdslDoc = EcoreUtil2.getContainerOfType(exp1, BDSLDocument)
+			val udfImports = bdslDoc.importDeclarationsUdf
+			
+			udfImports.forEach[entry | {
+				try {
+					var fullClassName = entry.importedNamespace
+					if(entry.importedNamespace.contains("*")) {
+						val cleanedNamespace = entry.importedNamespace.replaceAll("\\*", "").trim
+						fullClassName = cleanedNamespace + cleanedClazzName
+					} else if (fullClassName.contains(cleanedClazzName)) {
+						// Nothing to do
+					}
+					println("fullClassName: " + fullClassName)
+					val realClazz = Class.forName(fullClassName, false, BDSLLib.DCL)
+					println("realClazz found: " + realClazz)
+					var jvmInterfaceType = jvmTypesDefined.get(realClazz)
+					if(jvmInterfaceType === null) {
+						jvmInterfaceType = exp1.toInterface(realClazz.canonicalName, null) // BDSLUserDefinedConsumer.canonicalName//Function.canonicalName		
+						jvmTypesDefined.put(realClazz, jvmInterfaceType)				
+					}
+//					println("new interface type - jvmInterfaceType: " + jvmInterfaceType);
+					acceptor.accept(jvmInterfaceType)
+					exp1.associate(jvmInterfaceType)
+					exp1.type = jvmInterfaceType
+				} catch(Exception e) {
+					e.printStackTrace
+				}
+			}]
+		}
 //		for (exp : udfop.expression) {
 //			val exp1 = exp as UdfCallExpression
 //

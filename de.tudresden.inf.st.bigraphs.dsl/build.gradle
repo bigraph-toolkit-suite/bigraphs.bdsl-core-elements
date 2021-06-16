@@ -27,6 +27,8 @@ dependencies {
 	compile "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:${versions.xtext}"
 	compile "org.apache.commons:commons-lang3:${versions.commonslang3}"
 	compile "commons-io:commons-io:${versions.commonsio}"
+	compile "net.bytebuddy:byte-buddy-agent:1.11.2"
+	//compile "org.hyperic:sigar:4.2.0"
 
 	mwe2 'org.eclipse.emf:org.eclipse.emf.mwe2.launch:${versions.mwe2}'
 	mwe2 "org.eclipse.xtext:org.eclipse.xtext.common.types:${versions.xtext}"
@@ -66,6 +68,13 @@ jar {
         from { generatePomFileForMavenJavaPublication }
         rename ".*", "pom.xml"
     }
+//    manifest {
+//    	attributes(
+//            'Launcher-Agent-Class': 'de.tudresden.inf.st.bigraphs.dsl.ClassPathAgent',
+//            'Agent-Class': 'de.tudresden.inf.st.bigraphs.dsl.ClassPathAgent',
+//            'Premain-Class' : 'de.tudresden.inf.st.bigraphs.dsl.ClassPathAgent'
+//        )
+//    }
 }
 
 artifacts {

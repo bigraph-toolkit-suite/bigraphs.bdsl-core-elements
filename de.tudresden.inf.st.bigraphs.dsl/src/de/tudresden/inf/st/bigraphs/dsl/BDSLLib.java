@@ -21,10 +21,15 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
+//import net.bytebuddy.agent.ByteBuddyAgent;
+import java.lang.*;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+//import org.eclipse.emf.mwe.internal.core.debug.processing.ProcessHandler;
+
+import net.bytebuddy.agent.ByteBuddyAgent;
 
 /**
  * An utility class that provides essential functionality for BDSL programs.
@@ -38,6 +43,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
  * @author Dominik Grzelak
  */
 public class BDSLLib {
+	public static DynamicClassLoader DCL = new DynamicClassLoader(ClassLoader.getSystemClassLoader());
 	public static String MAIN_LIB = "";
 	private final static String FILE_EXT_CLASS = ".class";
 	
@@ -171,19 +177,41 @@ public class BDSLLib {
 
 	public void addToClasspath(File file) {
 		try {
-			if (!file.exists())
-				throw new FileNotFoundException(file.getPath());
-
 			URL url = file.toURI().toURL();
-			URLClassLoader classLoader = (URLClassLoader) ClassLoader.getSystemClassLoader();
-			Method method = URLClassLoader.class.getDeclaredMethod("addURL", URL.class);
-			method.setAccessible(true);
-			method.invoke(classLoader, url);
+			DCL.add(url);
+//			loadLibrary(file);
 			loadedJarFiles.add(file);
-		} catch (Exception e) {
+//			ClassPathAgent.appendJarFile(new JarFile(file));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			File AGENT_JAR = new File(BDSLLib.class.getClassLoader().getResource("classpathagent-1.0-SNAPSHOT.jar").getFile());
+			ByteBuddyAgent.attach(AGENT_JAR, String.valueOf(ProcessHandle.current().pid()), file.getPath());
 			throw new RuntimeException("Exception loading external jar file.", e);
 		}
+
+		
+//		try {
+//			if (!file.exists())
+//				throw new FileNotFoundException(file.getPath());
+//
+//			URL url = file.toURI().toURL();
+//			ClassLoader classLoader = ClassLoader.getSystemClassLoader();
+//			//URLClassLoader classLoader = (URLClassLoader) ClassLoader.getSystemClassLoader();
+//			Method method = URLClassLoader.class.getDeclaredMethod("addURL", URL.class);
+//			method.setAccessible(true);
+//			method.invoke(classLoader, url);
+//			loadedJarFiles.add(file);
+//		} catch (Exception e) {
+//			throw new RuntimeException("Exception loading external jar file.", e);
+//		}
 	}
+	
+	public static void addJarToClassPath(File jarFile) {
+		File AGENT_JAR = //new File("/de.tudresden.inf.st.bigraphs.dsl/src/classpathagent-1.0-SNAPSHOT.jar");
+				new File(BDSLLib.class.getClassLoader().getResource("classpathagent-1.0-SNAPSHOT.jar").getFile());
+        ByteBuddyAgent.attach(AGENT_JAR, String.valueOf(ProcessHandle.current().pid()), jarFile.getPath());
+    }
 	
 	public List<File> getLoadedJarFiles() {
 		return loadedJarFiles;
