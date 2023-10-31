@@ -2,30 +2,37 @@
 
 # Bigraph DSL Grammar: Core Elements (CE)
 
-| Version Release | Version Development |
-| --------------- | ------------------- |
-| 1.0.0           | 1.0.0-SNAPSHOT      |
+|             | Release | Development    |
+|-------------|---------|----------------|
+| **Version** | 1.0.0   | 1.0.0-SNAPSHOT |
+| **Java**    | 17      | 17             |
 
  
 
-This projects contains the following major building blocks of **BDSL**, a bigraphical DSL:
-- Grammar, Parser, ...
-- Language Server Protocol for IDE implementation support
+This projects contains the following major building blocks of **BDSL**, the Bigraphical Domain-specific Language:
+- Grammar, Parser, Validation, ...
+- Language Server Protocol for language support in any IDE
 - Unit tests
 
-IDE support is provided for the following platforms to be more productive when experimenting with BDSL:
+The grammar is implemented using [Xtext](https://github.com/eclipse/xtext) and [Xtend](https://eclipse.dev/Xtext/xtend/).
+Xtext is a language development framework, and Xtend is a language that compiles into idiomatic Java source code.
 
+IDE support is provided for the following platforms to be more productive when experimenting with BDSL:
 - Eclipse, IntelliJ, Visual Code, ... by utilizing the *Language Server Protocol*
 
-This framework provides the core elements on which other frameworks may be based and other applications may be implemented.
-Refer to [https://git-st.inf.tu-dresden.de/bigraphs/bigraph-algebraic-interpreter](https://git-st.inf.tu-dresden.de/bigraphs/bigraph-algebraic-interpreter), for instance, where an interpreter for BDSL is implemented.
+This framework provides the core elements, which may be used in other Java frameworks, libraries and applications.
+For instance, refer to [https://git-st.inf.tu-dresden.de/bigraphs/bigraph-algebraic-interpreter](https://git-st.inf.tu-dresden.de/bigraphs/bigraph-algebraic-interpreter), where an interpreter for BDSL is implemented.
+
 
 ## Getting Started
 
-Use the following dependency and repository for a Maven-based project:
+### Maven Configuration
+
+Use the following dependency within a Maven-based project.
+Replace `${version}` with the current version.
 
 ```xml
-<!-- Dependency -->          
+<!-- BDSL Grammar -->          
 <dependency>
 	<groupId>de.tudresden.inf.st.bigraphs.dsl</groupId>
     <artifactId>bdsl-grammar</artifactId>
@@ -41,79 +48,106 @@ Use the following dependency and repository for a Maven-based project:
         </exclusion>
     </exclusions>
 </dependency>
+```
 
-<!-- Repository -->
+### SNAPSHOT Releases
+
+For SNAPSHOT releases also add the following repository to you project's `pom.xml`:
+
+```xml
+<!-- Additional Repository for SNAPSHOT Releases -->
 <repositories>
 	<repository>
         <snapshots>
         	<enabled>true</enabled>
         </snapshots>
-        <id>STFactory</id>
-        <name>st-tu-dresden-artifactory</name>
-    	<url>https://stgroup.jfrog.io/artifactory/st-tu-dresden-release</url>
+        <id>ossrh</id>
+    	<url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
 	</repository>
 </repositories>  
 ```
 
-Replace `VERSION` with the current version.
+## Development
 
-## Build configuration
+**Requirements**
+- Java >= 17
+- Gradle >= 7.4.2
+- Check that the environment variable `JAVA_HOME` is pointing to the correct JDK
 
-To clone this repository, use:
+### Project Setup
 
-```bash
-# Default
-$ git clone --recursive [url]
+First, clone this repository:
 
-# To update the submodule later
-$ git submodule update --recursive --remote
+```shell
+git clone --recursive [url]
 ```
 
-This will also pull the necessary [Ecore Bigraph Metamodel](https://git-st.inf.tu-dresden.de/bigraphs/ecore-bigraph-meta-model) project, which is needed for this Eclipse-based project.
+This project includes [Ecore Bigraph Metamodel](https://github.com/bigraph-toolkit-suite/bigraphs.bigraph-ecore-metamodel) as git submodule.
+The main branch of the repository [Ecore Bigraph Metamodel](https://github.com/bigraph-toolkit-suite/bigraphs.bigraph-ecore-metamodel) will also be pulled.
+This dependency includes the Ecore metamodels of bigraphs that is used by the Xtext-based BDSL grammar to represent
+bigraphical structures.
 
-> **Note:** [Ecore Bigraph Metamodel](https://git-st.inf.tu-dresden.de/bigraphs/ecore-bigraph-meta-model) is configured as a Git submodule in this project.
-
-### Build everything
-
-```bash
-$ ./gradlew clean build
+To update the submodule (i.e., the Bigraph Ecore Metamodel) later at any time to the latest version, run the following command:
+```shell
+git submodule update --recursive --remote
 ```
 
-This will also install the project in your Maven local repository to be used by other Java projects.
+### Building from Source
+
+```shell
+gradle clean build
+```
 
 #### Generate Xtext Language Artifacts
 
 ```bash
-$ ./gradlew clean generateXtext
+gradle clean generateXtext
 ```
 
 #### Generate Language Server Protocol
 
 ```bash
-$ ./gradlew shadowJar
+gradle shadowJar
 ```
-The language server protocol `*.jar` is located under `de.tudresden.inf.st.bigraphs.dsl.ide/build/libs/`.
 
-### Running Tests
+[//]: # (TODO)
+
+> **Note:** The language server protocol `*.jar` is located under `de.tudresden.inf.st.bigraphs.dsl.ide/build/libs/`.
+
+#### Run Tests
 
 The following commands show how to run various kinds of tests:
 
-```bash
+[//]: # (TODO)
+
+```shell
 # Run all test cases
-$ ./gradlew :de.tudresden.inf.st.bigraphs.dsl.tests:test -PwithTests
+gradle :de.tudresden.inf.st.bigraphs.dsl.tests:test -PwithTests
 # All tests within a package
-$ ./gradlew test --tests de.tudresden.inf.st.bigraphs.dsl.tests.ide.validation* -PwithTests
+gradle test --tests de.tudresden.inf.st.bigraphs.dsl.tests.ide.validation* -PwithTests
 # All tests within a class
-$ ./gradlew test --tests *BdslAffectionUnitTest -PwithTests
+gradle test --tests *BdslAffectionUnitTest -PwithTests
 # Only a specific test method
-$ ./gradlew test --tests *testSignatureMatchOnAssignment_01 -PwithTests
+gradle test --tests *testSignatureMatchOnAssignment_01 -PwithTests
 ```
 
-### Artifact Deployment
+#### Install Grammar to Local Maven Repository
 
-Execute the following goals to deploy artifacts to the [ST-Group's Artifactory](https://stgroup.jfrog.io/artifactory):
-```bash
-$ ./gradlew artifactoryPublish -PartifactoryUser=username -PartifactoryPassword=password
+If you want to use the BDSL grammar artifact in your Java projects for testing and development purposes, you can install the compiled JARs into your local Maven repository (usually located at `~/.m2/`).
+Then it can be conveniently used by other Java projects.
+
+Run the following command:
+```shell
+gradle publishToMavenLocal
+```
+
+### Deployment
+
+[//]: # (TODO)
+
+Execute the following goals to deploy artifacts to the [Central Repository]():
+```shell
+gradle artifactoryPublish -PartifactoryUser=username -PartifactoryPassword=password
 ```
 
 
@@ -121,16 +155,20 @@ $ ./gradlew artifactoryPublish -PartifactoryUser=username -PartifactoryPassword=
 
 This project is best worked with Eclipse. Import everything into a new Eclipse workspace:
 
+[//]: # (TODO)
+
 - `de.tudresden.inf.st.bigraphs.dsl.parent`
-- `BigraphBaseModel` (the cloned Git submodule also contained after following the [Build configuration](#Build-configuration) instructions)
+- `bigraphs.bigraph-ecore-metamodel` (the cloned Git submodule also contained after following the [Build configuration](#Build-configuration) instructions)
 - Old project remnants that don't need to be considered for now: `de.tudresden.inf.st.bigraphs.dsl.ui`
   - Further, `de.tudresden.inf.st.bigraphs.dsl.web` will be discarded soon
 
-You may need to re-generate the model code of the `BigraphBaseModel` project as this process is not currently handled by the gradle script.
+You may need to re-generate the model code of the `bigraphs.bigraph-ecore-metamodel` project as this process is not currently handled by the gradle script.
 
 You may then be able to run the "MWE2 workflow" and to generate "Xtext artifacts" via the Eclipse IDE inside the `de.tudresden.inf.st.bigraphs.dsl` project, or call the appropriate gradle command as shown above.
 
 ### Project Structure
+
+[//]: # (TODO)
 
 - gradle-based Project
 - Language infrastructure for Bigraph DSL (BDSL) based on Xtext is located under `de.tudresden.inf.st.bigraphs.dsl` 

@@ -5,8 +5,8 @@ package de.tudresden.inf.st.bigraphs.dsl.formatting2
 
 import com.google.inject.Inject
 import de.tudresden.inf.st.bigraphs.dsl.services.BDSLGrammarAccess
-import de.tudresden.inf.st.bigraphs.models.bigraphBaseModel.BBigraph
-import de.tudresden.inf.st.bigraphs.models.bigraphBaseModel.BRoot
+import org.bigraphs.model.bigraphBaseModel.BBigraph
+import org.bigraphs.model.bigraphBaseModel.BRoot
 import org.eclipse.xtext.formatting2.AbstractFormatter2
 import org.eclipse.xtext.formatting2.IFormattableDocument
 

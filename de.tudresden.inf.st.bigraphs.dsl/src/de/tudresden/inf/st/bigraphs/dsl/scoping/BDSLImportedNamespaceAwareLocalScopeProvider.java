@@ -11,7 +11,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import javax.inject.Singleton;
+//import javax.inject.Singleton;
+//import jakarta.inject.Singleton;
+import com.google.inject.Singleton;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;

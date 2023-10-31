@@ -1,16 +1,17 @@
 dependencies {
-	compile project(':de.tudresden.inf.st.bigraphs.dsl')
-	compile project(':de.tudresden.inf.st.bigraphs.dsl.ide')
+	implementation project(':de.tudresden.inf.st.bigraphs.dsl') // TODO
+	implementation project(':de.tudresden.inf.st.bigraphs.dsl.ide') // TODO
 
-	testRuntime 'org.junit.jupiter:junit-jupiter-engine'
-	testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api' //, version: '5.7.0-M1'
+	
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api' //, version: '5.7.0-M1' // TODO
+	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine' // TODO
+	
 	//testCompile group: 'org.junit.platform', name: 'junit-platform-launcher' //, version: '1.7.0-M1'
-	
-	testCompile "org.eclipse.xtext:org.eclipse.xtext.testing:${versions.xtext}"
-	testCompile "org.eclipse.xtext:org.eclipse.xtext.xbase.testing:${versions.xtext}"
-	testCompile "junit:junit:4.13"
-	
-	
+
+	testImplementation "org.eclipse.xtext:org.eclipse.xtext.testing:${versions.xtext}" // TODO
+	testImplementation "org.eclipse.xtext:org.eclipse.xtext.xbase.testing:${versions.xtext}" // TODO
+	testImplementation "junit:junit:4.13" // TODO
 }
 
 test {

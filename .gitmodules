@@ -1,5 +1,4 @@
-[submodule "BigraphBaseModel"]
-	path = BigraphBaseModel
-	url = git@git-st.inf.tu-dresden.de:bigraphs/ecore-bigraph-meta-model.git
-	branch = master
-  ignore = dirty
+[submodule "bigraphs.bigraph-ecore-metamodel"]
+	path = bigraphs.bigraph-ecore-metamodel
+	url = git@github.com:bigraph-toolkit-suite/bigraphs.bigraph-ecore-metamodel.git
+	branch = main

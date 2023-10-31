@@ -16,9 +16,13 @@ Workflow {
 				runtimeTest = {
 					enabled = true
 				}
-				web = {
-					enabled = true
-				}
+				//genericIde = {
+				//	enabled = true
+				//}
+				//mavenLayout = true
+				//web = {
+				//	enabled = true
+				//}
 				//				eclipsePlugin = {
 				//					enabled = true
 				//				}
@@ -37,7 +41,9 @@ Workflow {
 		language = StandardLanguage {
 			name = "de.tudresden.inf.st.bigraphs.dsl.BDSL"
 			fileExtensions = "bdsl"
-			referencedResource = "platform:/resource/BigraphBaseModel/model/bigraphBaseModel.genmodel"
+			// TODO 2023
+			//referencedResource = "platform:/resource/BigraphBaseModel/model/bigraphBaseModel.genmodel"
+			referencedResource = "platform:/resource/bigraphs.bigraph-ecore-metamodel/model/bigraphBaseModel.genmodel"
 			fragment = ecore2xtext.Ecore2XtextValueConverterServiceFragment2 auto-inject {}
 			fragment = ui.quickfix.QuickfixProviderFragment2 auto-inject {}
 
@@ -45,12 +51,12 @@ Workflow {
 				generateStub = true
 				generateXtendStub = true
 			}
-
-			serializer = {
-				generateStub = false
-			}
 			scopeProvider = {
 				ignoreCase = false
+			}
+			
+			serializer = {
+				generateStub = false
 			}
 			parserGenerator = {
 				options = {

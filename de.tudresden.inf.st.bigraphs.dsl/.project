@@ -3,6 +3,7 @@
 	<name>de.tudresden.inf.st.bigraphs.dsl</name>
 	<comment></comment>
 	<projects>
+		<project>BigraphBaseModel</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

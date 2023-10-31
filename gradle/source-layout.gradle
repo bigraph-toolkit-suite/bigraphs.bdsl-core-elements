@@ -1,24 +1,27 @@
+logger.warn('An info log message.')
 if (name.endsWith(".tests")) {
+logger.warn('tessst.')
 	sourceSets {
 		/*
 		main {
-			java.srcDirs = ['src', 'src-gen']
+			java.srcDir = ['src', 'src-gen']
 			resources.srcDirs = ['src', 'src-gen', 'xtext-gen']
 			xtendOutputDir = 'xtend-gen'
 		}
 		*/
 		test {
-			java.srcDirs = ['src', 'src-gen']
+			java.srcDirs = ['src', 'src-gen', 'xtend-gen']
 			//resources.srcDirs = ['src-gen']
-			xtendOutputDir = 'xtend-gen'
+			xtend.outputDir = 'xtend-gen'
 		}
 	}
 } else {
+logger.warn('normal source sets.')
 	sourceSets {
 		main {
-			java.srcDirs = ['src', 'src-gen']
-			resources.srcDirs = ['src', 'src-gen', 'xtext-gen']
-			xtendOutputDir = 'xtend-gen'
+			java.srcDirs = ['src', 'src-gen', 'xtend-gen']
+			//resources.srcDirs = ['src', 'src-gen']
+			xtend.outputDir = 'xtend-gen'
 		}
 		test {
 			java.srcDirs = []
@@ -44,5 +47,8 @@ jar {
 }
 
 plugins.withId('war') {
-	webAppDirName = "WebRoot"
+	war {
+		webAppDirectory = file("src/main/webapp")
+	}
 }
+
