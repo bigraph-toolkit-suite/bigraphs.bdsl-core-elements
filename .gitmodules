@@ -1,4 +1,4 @@
 [submodule "bigraphs.bigraph-ecore-metamodel"]
 	path = bigraphs.bigraph-ecore-metamodel
 	url = git@github.com:bigraph-toolkit-suite/bigraphs.bigraph-ecore-metamodel.git
-	branch = v1.6.1
+	branch = main
