@@ -1,28 +1,36 @@
-logger.warn('An info log message.')
 if (name.endsWith(".tests")) {
-logger.warn('tessst.')
 	sourceSets {
-		/*
+//		test {
+//			java.srcDirs = ['src', 'src-gen', 'xtend-gen']
+//			resources.srcDirs = ['xtend-gen', 'src-gen']
+//			xtend.outputDir = 'xtend-gen'
+//		}
 		main {
-			java.srcDir = ['src', 'src-gen']
-			resources.srcDirs = ['src', 'src-gen', 'xtext-gen']
-			xtendOutputDir = 'xtend-gen'
+			java.srcDirs = []
+			resources.srcDirs = []
 		}
-		*/
 		test {
-			java.srcDirs = ['src', 'src-gen', 'xtend-gen']
-			//resources.srcDirs = ['src-gen']
-			xtend.outputDir = 'xtend-gen'
+//			java.srcDir 'src/test/xtext-gen'
+			java.srcDirs = ['src/main/xtext-gen', 'src/main/xtend-gen', 'src/main/java', 'src-gen']
+//			resources.srcDir 'src/test/xtext-gen'
+//			resources.srcDirs = ['src/main/xtext-gen', 'src/main/xtend-gen']
+			xtend.outputDir = 'src/test/xtend-gen'
 		}
 	}
 } else {
-logger.warn('normal source sets.')
 	sourceSets {
 		main {
-			java.srcDirs = ['src', 'src-gen', 'xtend-gen']
-			//resources.srcDirs = ['src', 'src-gen']
-			xtend.outputDir = 'xtend-gen'
+//			java.srcDir 'src/main/xtext-gen'
+			java.srcDirs = ['src/main/xtext-gen', 'src/main/xtend-gen', 'src/main/java', 'src-gen']
+//			resources.srcDir 'src/main/xtext-gen'
+//			resources.srcDirs = ['src/main/xtext-gen', 'src/main/xtend-gen']
+			xtend.outputDir = 'src/main/xtend-gen'
 		}
+//		main {
+//			java.srcDirs = ['src', 'src-gen', 'xtend-gen']
+//			resources.srcDirs = ['xtend-gen', 'src-gen']
+//			xtend.outputDir = 'xtend-gen'
+//		}
 		test {
 			java.srcDirs = []
 			resources.srcDirs = []

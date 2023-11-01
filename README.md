@@ -4,7 +4,7 @@
 
 |             | Release | Development    |
 |-------------|---------|----------------|
-| **Version** | 1.0.0   | 1.0.0-SNAPSHOT |
+| **Version** | N.A.    | 1.0.0-SNAPSHOT |
 | **Java**    | 17      | 17             |
 
  
@@ -73,6 +73,8 @@ For SNAPSHOT releases also add the following repository to you project's `pom.xm
 - Java >= 17
 - Gradle >= 7.4.2
 - Check that the environment variable `JAVA_HOME` is pointing to the correct JDK
+  - `update-java-alternatives --list`
+  - `export JAVA_HOME=...`
 
 ### Project Setup
 
@@ -94,23 +96,34 @@ git submodule update --recursive --remote
 
 ### Building from Source
 
+This command builds everything:
+
 ```shell
 gradle clean build
+# Individual modules
+# gradle clean :de.tudresden.inf.st.bigraphs.dsl:build
+# gradle clean :de.tudresden.inf.st.bigraphs.dsl.ide:build
 ```
 
 #### Generate Xtext Language Artifacts
 
 ```bash
-gradle clean generateXtext
+gradle clean generateXtext # this fires the code generation
+gradle clean generateXtextLanguage
+# Individual module
+# gradle clean :de.tudresden.inf.st.bigraphs.dsl:generateXtext
+# gradle clean :de.tudresden.inf.st.bigraphs.dsl:generateXtextLanguage
 ```
 
 #### Generate Language Server Protocol
 
 ```bash
 gradle shadowJar
+# Individual module
+gradle clean :de.tudresden.inf.st.bigraphs.dsl.ide:shadowJar
 ```
 
-[//]: # (TODO)
+The build depends on shadowJar task.
 
 > **Note:** The language server protocol `*.jar` is located under `de.tudresden.inf.st.bigraphs.dsl.ide/build/libs/`.
 
@@ -118,13 +131,11 @@ gradle shadowJar
 
 The following commands show how to run various kinds of tests:
 
-[//]: # (TODO)
-
 ```shell
 # Run all test cases
-gradle :de.tudresden.inf.st.bigraphs.dsl.tests:test -PwithTests
+gradle :org.bigraphs.dsl.tests:test -PwithTests
 # All tests within a package
-gradle test --tests de.tudresden.inf.st.bigraphs.dsl.tests.ide.validation* -PwithTests
+gradle test --tests org.bigraphs.dsl.tests.ide.validation* -PwithTests
 # All tests within a class
 gradle test --tests *BdslAffectionUnitTest -PwithTests
 # Only a specific test method
@@ -139,43 +150,81 @@ Then it can be conveniently used by other Java projects.
 Run the following command:
 ```shell
 gradle publishToMavenLocal
+gradle :org.bigraphs.dsl:publishToMavenLocal
+gradle :org.bigraphs.dsl.ide:publishToMavenLocal
 ```
+
+This publishes only the `bdsl-grammar` module containing the BDSL.
 
 ### Deployment
 
-[//]: # (TODO)
+- see [The Central Repository Documentation](https://central.sonatype.org/publish/publish-guide/#deployment)
+- see [gradle-nexus / publish-plugin](https://github.com/gradle-nexus/publish-plugin/) 
 
-Execute the following goals to deploy artifacts to the [Central Repository]():
+**Arguments**
+
+Every of the following gradle command accepts some arguments:
+- The arguments `sonatypeUsername` and `sonatypePassword` are your JIRA account details from [https://issues.sonatype.org/](https://issues.sonatype.org/)
+- `signing.keyId`, `signing.password` and `signing.secretKeyRingFile` must also be configured in `gradle.properties` within the user's home directory.
+  - secret key ring file usually at `~/.gnupg/secring.gpg`
+  - Otherwise, generate it: `gpg --export-secret-keys > ~/.gnupg/secring.gpg`
+- Arguments can be passed in several ways: https://docs.gradle.org/current/userguide/build_environment.html
+
+The Gradle GPG signing plugin is used to sign the components for the deployment.
+It relies on the gpg command being installed:
 ```shell
-gradle artifactoryPublish -PartifactoryUser=username -PartifactoryPassword=password
+sudo apt install gnupg2
+```
+and the GPG credentials being available e.g. from `gradle.properties` within the user's home directory.
+More information can be found [here](https://central.sonatype.org/publish/requirements/gpg/).
+
+
+
+#### SNAPSHOT Deployment
+
+Execute the following goal to deploy the `bdsl-grammar` module to the Central Repository:
+```shell
+gradle publishToSonatype -PsonatypeUsername=username -PsonatypePassword=password
 ```
 
+- The `version` element in `build.gradle` of the parent project must contain the classifier `SNAPSHOT`.
+
+#### Release Deployment
+
+Execute the following command to manually release the artifacts placed in the closed staging repository in Nexus UI.
+The staging repository might be dropped (if needed) or manually released from the Nexus UI.
+
+```shell
+gradle publishToSonatype closeSonatypeStagingRepository
+gradle :org.bigraphs.dsl:publishToSonatype closeSonatypeStagingRepository
+```
+
+Call the following to publish all publications to Sonatype's OSSRH Nexus and subsequently close and release the corresponding staging repository:
+```shell
+gradle publishToSonatype closeAndReleaseSonatypeStagingRepository
+```
+
+> **Note:** This is not recommended!
 
 ## Working in Eclipse
 
 This project is best worked with Eclipse. Import everything into a new Eclipse workspace:
 
-[//]: # (TODO)
-
-- `de.tudresden.inf.st.bigraphs.dsl.parent`
-- `bigraphs.bigraph-ecore-metamodel` (the cloned Git submodule also contained after following the [Build configuration](#Build-configuration) instructions)
-- Old project remnants that don't need to be considered for now: `de.tudresden.inf.st.bigraphs.dsl.ui`
-  - Further, `de.tudresden.inf.st.bigraphs.dsl.web` will be discarded soon
+- `org.bigraphs.dsl.parent`
+- `bigraphs.bigraph-ecore-metamodel` (the cloned Git submodule is also contained after following the [Project Setup](#Development) instructions)
 
 You may need to re-generate the model code of the `bigraphs.bigraph-ecore-metamodel` project as this process is not currently handled by the gradle script.
 
-You may then be able to run the "MWE2 workflow" and to generate "Xtext artifacts" via the Eclipse IDE inside the `de.tudresden.inf.st.bigraphs.dsl` project, or call the appropriate gradle command as shown above.
+You may then be able to run the "MWE2 workflow" and to generate "Xtext artifacts" via the Eclipse IDE inside the `org.bigraphs.dsl` project, or call the appropriate gradle command as shown above.
 
 ### Project Structure
 
-[//]: # (TODO)
-
 - gradle-based Project
-- Language infrastructure for Bigraph DSL (BDSL) based on Xtext is located under `de.tudresden.inf.st.bigraphs.dsl` 
-- Language Server Protocol Implementation is located under `de.tudresden.inf.st.bigraphs.dsl.ide`
-- Test classes are located under `./de.tudresden.inf.st.bigraphs.dsl.tests/`
-  - needs sub-projects `de.tudresden.inf.st.bigraphs.dsl` and `de.tudresden.inf.st.bigraphs.dsl.ide`
-- **(!)** Note that the required CDO/EMF/Ecore dependencies are stored separately inside the `./etc/libs` folder. The reason is that there is currently no easy way on how to resolve Eclipse dependencies from P2 repositories in gradle. To clarify: Updating the versions means replacing the files.
+- Language infrastructure for Bigraph DSL (BDSL) based on Xtext is located under `org.bigraphs.dsl` 
+- Language Server Protocol Implementation is located under `org.bigraphs.dsl.ide`
+- Test classes are located under `./org.bigraphs.dsl.tests/`
+  - Requires modules `org.bigraphs.dsl` and `org.bigraphs.dsl.ide`
+- **(!)** Note that the required CDO/EMF/Ecore dependencies are stored separately inside the `./etc/libs` folder. The reason is that there is currently no easy way on how to resolve Eclipse dependencies from P2 repositories in gradle. To clarify: Updating the versions means replacing the files. These dependencies are shadowed in the bdsl-grammar JAR
 
 
 

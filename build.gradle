@@ -1,76 +1,88 @@
 buildscript {
-	repositories {
-		// mavenLocal()
-		mavenCentral()
-		gradlePluginPortal()
-	}
-	dependencies {
-		classpath 'org.xtext:xtext-gradle-plugin:4.0.0'
-	}
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+    dependencies {
+        classpath 'org.xtext:xtext-gradle-plugin:4.0.0'
+    }
 }
 
 plugins {
-  id "org.xtext.xtend" version "4.0.0"
+    id "org.xtext.xtend" version "4.0.0"
+    id 'io.github.gradle-nexus.publish-plugin' version '1.3.0'
 }
 
-// TODO 2023
-//apply plugin: 'com.jfrog.artifactory'
-apply plugin: 'java'
-apply plugin: 'maven-publish'
+nexusPublishing {
+    repositories {
+//        sonatype()
+        sonatype {
+            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"))
+            snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
+        }
+    }
+}
+
+group = "org.bigraphs.dsl"
+version = '1.0.0-SNAPSHOT'
 
 ext.versions = [
-    xtext: '2.32.0',
-    emfCommon: '2.29.0',
-    emfEcoreXmi: '2.35.0',
-    emfEcore: '2.34.0',
-    emfCodegen: '2.23.0',
-    emfEcoreCodeGen: '2.35.0',
-    lsp4j: '0.8.1',
-    //mwe2: '2.11.3',
-    mwe2: '2.25.0',
-    antlrgen: '[2.1.1,3)',
-    commonslang3: '3.10',
-    commonsio: '2.6'
+        xtext          : '2.32.0',
+        emfCommon      : '2.29.0',
+        emfEcoreXmi    : '2.35.0',
+        emfEcore       : '2.34.0',
+        emfCodegen     : '2.23.0',
+        emfEcoreCodeGen: '2.35.0',
+        lsp4j          : '0.8.1',
+        mwe2           : '2.25.0',
+        antlrgen       : '[2.1.1,3)',
+        commonslang3   : '3.10',
+        commonsio      : '2.6'
 ]
 
 subprojects {
-	ext.xtextVersion = '2.32.0'
-	repositories {
-		mavenLocal()
-		mavenCentral()
-		//jcenter()
-		// TODO 2023
+    ext.xtextVersion = '2.32.0'
+    group = 'org.bigraphs.dsl'
+    version = '1.0.0-SNAPSHOT'
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
         maven {
-        	name 'sonatype-snapshots'
-        	url 'https://s01.oss.sonatype.org/content/repositories/snapshots'
-    	}
-	}
+            name 'sonatype-snapshots'
+            url 'https://s01.oss.sonatype.org/content/repositories/snapshots'
+        }
+    }
 
-	//apply plugin: 'java'
-	apply plugin: 'java-library'
-	dependencies {
-		api platform("org.eclipse.xtext:xtext-dev-bom:${versions.xtext}") // TODO 2023 changed to impl
-		implementation fileTree(include: ['*.jar'], dir: "${projectDir}/../etc/libs") // TODO 2023 changed to impl
-		implementation "org.eclipse.emf:org.eclipse.emf.ecore:${versions.emfEcore}"
-		implementation "org.eclipse.emf:org.eclipse.emf.ecore.xmi:${versions.emfEcoreXmi}"
-		implementation "org.eclipse.emf:org.eclipse.emf.common:${versions.emfCommon}"
-		implementation "org.eclipse.emf:org.eclipse.emf.codegen.ecore:${versions.emfEcoreCodeGen}"
-		implementation "org.eclipse.emf:org.eclipse.emf.codegen:${versions.emfCodegen}"
-		implementation "org.eclipse.xtend:org.eclipse.xtend.lib:2.30.0"
-		implementation "jakarta.inject:jakarta.inject-api:2.0.1"
-	}
+    apply plugin: 'java-library'
+    apply plugin: 'maven-publish'
+    apply plugin: 'signing'
+    apply plugin: 'org.xtext.xtend'
+    apply plugin: 'eclipse'
+    apply plugin: 'idea'
 
-	apply plugin: 'org.xtext.xtend'
-	apply from: "${rootDir}/gradle/source-layout.gradle"
-	apply plugin: 'eclipse'
-	apply plugin: 'idea'
+    dependencies {
+        // implementation maps to the Maven runtime scope
+        // api maps to the Maven compile scope
+        api platform("org.eclipse.xtext:xtext-dev-bom:${versions.xtext}")
+        api "org.eclipse.emf:org.eclipse.emf.ecore:${versions.emfEcore}"
+        api "org.eclipse.emf:org.eclipse.emf.ecore.xmi:${versions.emfEcoreXmi}"
+        api "org.eclipse.emf:org.eclipse.emf.common:${versions.emfCommon}"
+        api "org.eclipse.emf:org.eclipse.emf.codegen.ecore:${versions.emfEcoreCodeGen}"
+        api "org.eclipse.emf:org.eclipse.emf.codegen:${versions.emfCodegen}"
+        api "org.eclipse.xtend:org.eclipse.xtend.lib:2.30.0"
+        api "jakarta.inject:jakarta.inject-api:2.0.1"
 
-	group = 'de.tudresden.inf.st.bigraphs.dsl'// TODO 2023
-	version = '1.0.1-SNAPSHOT'
-	
-	apply from: "${rootDir}/gradle/java-compiler-settings.gradle"
+        // will not be in the pom at all but included in the shadowed jar
+        compileOnly fileTree(include: ['*.jar'], dir: "${projectDir}/../etc/libs")
+        implementation fileTree(include: ['*.jar'], dir: "${projectDir}/../etc/libs")
+    }
 
-	configurations.all {
-		exclude group: 'asm'
-	}
+    apply from: "${rootDir}/gradle/source-layout.gradle"
+    apply from: "${rootDir}/gradle/java-compiler-settings.gradle"
+
+    configurations.all {
+        exclude group: 'asm'
+    }
 }

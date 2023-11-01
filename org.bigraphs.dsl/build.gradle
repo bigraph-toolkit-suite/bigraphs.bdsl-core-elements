@@ -1,0 +1,170 @@
+plugins {
+    id 'com.github.johnrengelman.shadow' version '7.1.2' // works with Gradle 7
+    id "java"
+}
+
+archivesBaseName = "bdsl-grammar"
+ext.artifactId = "bdsl-grammar"
+
+dependencies {
+    // will be included in the pom scope compile
+    api project(":bigraphs.bigraph-ecore-metamodel")
+
+    api "org.eclipse.xtext:org.eclipse.xtext:${versions.xtext}"
+    api "org.eclipse.xtext:org.eclipse.xtext.xbase:${versions.xtext}"
+    api "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:${versions.xtext}"
+    api "jakarta.inject:jakarta.inject-api:2.0.1"
+    api "org.apache.commons:commons-lang3:${versions.commonslang3}"
+    api "commons-io:commons-io:${versions.commonsio}"
+    api "net.bytebuddy:byte-buddy-agent:1.11.2"
+    //compile "org.hyperic:sigar:4.2.0"
+}
+configurations {
+    mwe2 {
+        extendsFrom compileClasspath
+    }
+}
+dependencies {
+    mwe2 'org.eclipse.emf:org.eclipse.emf.mwe2.launch:${versions.mwe2}'
+    mwe2 "org.eclipse.xtext:org.eclipse.xtext.common.types:${versions.xtext}"
+    mwe2 "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:${versions.xtext}"
+    mwe2 'org.eclipse.xtext:xtext-antlr-generator' //${versions.antlrgen}
+}
+
+task generateXtextLanguage(type: JavaExec) {
+    mainClass = 'org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher'
+    classpath = configurations.mwe2
+    inputs.file "src/main/java/org/bigraphs/dsl/GenerateBDSL.mwe2"
+    inputs.file "src/main/java/org/bigraphs/dsl/BDSL.xtext"
+    outputs.dir "src/main/xtext-gen"
+    args += "src/main/java/org/bigraphs/dsl/GenerateBDSL.mwe2"
+    args += "-p"
+    args += "rootPath=/${projectDir}/.."
+}
+
+processResources.dependsOn(generateXtextLanguage)
+generateXtext.dependsOn(generateXtextLanguage)
+clean.dependsOn(cleanGenerateXtextLanguage)
+eclipse.classpath.plusConfigurations += [configurations.mwe2]
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+sourcesJar.dependsOn(generateXtext)
+
+//jar {
+//    into("META-INF/maven/$project.group/${artifactId}") {
+//        from { generatePomFileForMavenJavaPublication }
+//        rename ".*", "pom.xml"
+//    }
+//    manifest {
+//    	attributes(
+//            'Launcher-Agent-Class': 'org.bigraphs.dsl.ClassPathAgent',
+//            'Agent-Class': 'org.bigraphs.dsl.ClassPathAgent',
+//            'Premain-Class' : 'org.bigraphs.dsl.ClassPathAgent'
+//        )
+//    }
+//}
+
+shadowJar {
+    from(project.extensions.findByType(JavaPluginExtension.class).sourceSets.main.output)
+    configurations = [project.configurations.runtimeClasspath]
+    exclude('META-INF/INDEX.LIST', 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA', 'schema/*',
+            '.options', '.api_description', '*.profile', '*.html', 'about.*', 'about_files/*',
+            'plugin.xml', 'systembundle.properties', 'profile.list')
+	archiveClassifier = ''
+//	archiveVersion = ''
+//	archiveBaseName = 'bdsl-grammar'
+    append('plugin.properties')
+    mergeServiceFiles()
+
+    dependencies {
+        include(dependency('org.eclipse.emf.cdo:org.eclipse.emf.cdo.common:4.20.0.v20221106-0628'))
+        include(dependency('org.eclipse.emf.cdo:org.eclipse.emf.cdo:4.20.0.v20221124-1637'))
+    }
+    // Include dependencies from the 'libs' folder
+//	from "${projectDir}/../etc/libs" include('*.jar')
+}
+build.dependsOn(shadowJar)
+
+// https://docs.gradle.org/current/userguide/publishing_maven.html
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+//            groupId = 'org.bigraphs.dsl'
+            artifactId = 'bdsl-grammar'
+//            version = '1.0.1-SNAPSHOT'
+            from components.java
+            suppressPomMetadataWarningsFor('runtimeElements')
+            pom {
+                name = 'BDSL Grammar'
+                description = 'The Xtext grammar and parser of BDSL'
+                url = 'https://github.com/bigraph-toolkit-suite/bigraphs.bdsl-core-elements'
+//				properties = [
+//						myProp: "value",
+//						"prop.with.dots": "anotherValue"
+//				]
+                dependencies {
+
+                }
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'dgrzelak'
+                        name = 'Dominik Grzelak'
+                        email = 'dominik.grzelak@web.de'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:https://github.com/bigraph-toolkit-suite/bigraphs.bdsl-core-elements.git'
+                    developerConnection = 'scm:git@github.com:bigraph-toolkit-suite/bigraphs.bdsl-core-elements.git'
+                    url = 'https://github.com/bigraph-toolkit-suite/bigraphs.bdsl-core-elements'
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            def releasesRepoUrl = layout.buildDirectory.dir('repos/releases')
+            logger.debug("releasesRepoUrl: " + releasesRepoUrl)
+            def snapshotsRepoUrl = layout.buildDirectory.dir('repos/snapshots')
+            logger.debug("snapshotsRepoUrl: " + snapshotsRepoUrl)
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+        }
+    }
+}
+
+signing {
+    sign publishing.publications.mavenJava
+}
+
+javadoc {
+    if (JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
+    failOnError = false
+}
+
+
+// Disabling Gradle Module Metadata publication
+// https://docs.gradle.org/current/userguide/publishing_gradle_module_metadata.html#sub:disabling-gmm-publication
+//tasks.withType(GenerateModuleMetadata).configureEach {
+//	enabled = false
+//}
+
+/*
+project(':BigraphBaseModel') {
+	compileJava {
+		onlyIf {
+            project.hasProperty("generateBigraphBaseModel")
+        }
+	}
+}
+*/
+
