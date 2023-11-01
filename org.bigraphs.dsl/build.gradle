@@ -8,7 +8,9 @@ ext.artifactId = "bdsl-grammar"
 
 dependencies {
     // will be included in the pom scope compile
-    api project(":bigraphs.bigraph-ecore-metamodel")
+    implementation project(":bigraphs.bigraph-ecore-metamodel")
+    api "org.bigraphs.model:bigraph-ecore-model:1.6.1-SNAPSHOT"
+//    runtimeOnly project(":bigraphs.bigraph-ecore-metamodel")
 
     api "org.eclipse.xtext:org.eclipse.xtext:${versions.xtext}"
     api "org.eclipse.xtext:org.eclipse.xtext.xbase:${versions.xtext}"
@@ -23,6 +25,9 @@ configurations {
     mwe2 {
         extendsFrom compileClasspath
     }
+}
+components.java.withVariantsFromConfiguration(configurations.runtimeElements) {
+    skip()
 }
 dependencies {
     mwe2 'org.eclipse.emf:org.eclipse.emf.mwe2.launch:${versions.mwe2}'
@@ -110,7 +115,10 @@ publishing {
 //						"prop.with.dots": "anotherValue"
 //				]
                 dependencies {
-
+                    runtimeOnly("org.bigraphs.dsl:bigraphs.bigraph-ecore-metamodel") {
+                        transitive = false
+                    }
+//                    "org.bigraphs.model:bigraph-ecore-model:1.6.1-SNAPSHOT"
                 }
                 licenses {
                     license {
