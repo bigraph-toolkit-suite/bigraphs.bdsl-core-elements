@@ -161,8 +161,8 @@ javadoc {
 
 project(':bigraphs.bigraph-ecore-metamodel') {
 	compileJava {
-		onlyIf {
-            project.hasProperty("generateBigraphBaseModel")
-        }
+//		onlyIf {
+//            project.hasProperty("generateBigraphBaseModel")
+//        }
 	}
 }

@@ -34,12 +34,12 @@ Replace `${version}` with the current version.
 ```xml
 <!-- BDSL Grammar -->          
 <dependency>
-	<groupId>de.tudresden.inf.st.bigraphs.dsl</groupId>
+	<groupId>org.bigraphs.dsl</groupId>
     <artifactId>bdsl-grammar</artifactId>
     <version>${version}</version>
     <exclusions>
     	<exclusion>
-        	<groupId>de.tudresden.inf.st.bigraphs.dsl</groupId>
+        	<groupId>org.bigraphs.dsl</groupId>
             <artifactId>BigraphBaseModel</artifactId>
         </exclusion>
         <exclusion>
@@ -99,33 +99,33 @@ git submodule update --recursive --remote
 This command builds everything:
 
 ```shell
-gradle clean build
-# Individual modules
-# gradle clean :de.tudresden.inf.st.bigraphs.dsl:build
-# gradle clean :de.tudresden.inf.st.bigraphs.dsl.ide:build
+# Except tests
+gradle clean build -x :org.bigraphs.dsl.tests:build
+# Specific module
+# gradle clean :org.bigraphs.dsl:build
+# gradle clean :org.bigraphs.dsl.ide:build
 ```
 
 #### Generate Xtext Language Artifacts
 
 ```bash
-gradle clean generateXtext # this fires the code generation
-gradle clean generateXtextLanguage
-# Individual module
-# gradle clean :de.tudresden.inf.st.bigraphs.dsl:generateXtext
-# gradle clean :de.tudresden.inf.st.bigraphs.dsl:generateXtextLanguage
+gradle clean generateXtextLanguage # this fires the code generation
+# Specific module
+# gradle clean :org.bigraphs.dsl:generateXtext
+# gradle clean :org.bigraphs.dsl:generateXtextLanguage
 ```
 
 #### Generate Language Server Protocol
 
 ```bash
 gradle shadowJar
-# Individual module
-gradle clean :de.tudresden.inf.st.bigraphs.dsl.ide:shadowJar
+# Specific module
+gradle clean :org.bigraphs.dsl.ide:shadowJar
 ```
 
 The build depends on shadowJar task.
 
-> **Note:** The language server protocol `*.jar` is located under `de.tudresden.inf.st.bigraphs.dsl.ide/build/libs/`.
+> **Note:** The language server protocol `*.jar` is located under `org.bigraphs.dsl.ide/build/libs/`.
 
 #### Run Tests
 
