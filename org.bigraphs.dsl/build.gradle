@@ -158,13 +158,11 @@ javadoc {
 //	enabled = false
 //}
 
-/*
-project(':BigraphBaseModel') {
+
+project(':bigraphs.bigraph-ecore-metamodel') {
 	compileJava {
 		onlyIf {
             project.hasProperty("generateBigraphBaseModel")
         }
 	}
 }
-*/
-

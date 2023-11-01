@@ -1,6 +1,5 @@
 include 'org.bigraphs.dsl'
 include 'org.bigraphs.dsl.ide'
-//include 'de.tudresden.inf.st.bigraphs.dsl.web'
 include 'org.bigraphs.dsl.tests'
 include 'bigraphs.bigraph-ecore-metamodel'
 project(':bigraphs.bigraph-ecore-metamodel').projectDir = file('./bigraphs.bigraph-ecore-metamodel/')

@@ -3,6 +3,8 @@
 out
 gen
 .directory
+bigraphs.bigraph-ecore-metamodel/build/**
+bigraphs.bigraph-ecore-metamodel/bin/**
 /**/build/
 /**/src-gen/
 /**/xtend-gen/

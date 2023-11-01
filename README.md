@@ -81,7 +81,7 @@ For SNAPSHOT releases also add the following repository to you project's `pom.xm
 First, clone this repository:
 
 ```shell
-git clone --recursive [url]
+git clone --recursive https://github.com/bigraph-toolkit-suite/bigraphs.bdsl-core-elements
 ```
 
 This project includes [Ecore Bigraph Metamodel](https://github.com/bigraph-toolkit-suite/bigraphs.bigraph-ecore-metamodel) as git submodule.
@@ -89,7 +89,7 @@ The main branch of the repository [Ecore Bigraph Metamodel](https://github.com/b
 This dependency includes the Ecore metamodels of bigraphs that is used by the Xtext-based BDSL grammar to represent
 bigraphical structures.
 
-To update the submodule (i.e., the Bigraph Ecore Metamodel) later at any time to the latest version, run the following command:
+To update the submodule (i.e., the Bigraph Ecore Metamodel) later at any time to the latest tagged version, run the following command:
 ```shell
 git submodule update --recursive --remote
 ```
@@ -163,8 +163,8 @@ This publishes only the `bdsl-grammar` module containing the BDSL.
 
 **Arguments**
 
-Every of the following gradle command accepts some arguments:
-- The arguments `sonatypeUsername` and `sonatypePassword` are your JIRA account details from [https://issues.sonatype.org/](https://issues.sonatype.org/)
+Every of the following gradle commands accept some arguments:
+- The arguments `sonatypeUsername` and `sonatypePassword` are the JIRA account details from [https://issues.sonatype.org/](https://issues.sonatype.org/)
 - `signing.keyId`, `signing.password` and `signing.secretKeyRingFile` must also be configured in `gradle.properties` within the user's home directory.
   - secret key ring file usually at `~/.gnupg/secring.gpg`
   - Otherwise, generate it: `gpg --export-secret-keys > ~/.gnupg/secring.gpg`
@@ -177,7 +177,6 @@ sudo apt install gnupg2
 ```
 and the GPG credentials being available e.g. from `gradle.properties` within the user's home directory.
 More information can be found [here](https://central.sonatype.org/publish/requirements/gpg/).
-
 
 
 #### SNAPSHOT Deployment
