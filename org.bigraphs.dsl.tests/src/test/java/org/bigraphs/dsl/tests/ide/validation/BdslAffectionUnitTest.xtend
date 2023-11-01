@@ -9,7 +9,7 @@ import org.eclipse.xtext.testing.util.ParseHelper
 import org.eclipse.xtext.testing.validation.ValidationTestHelper
 //import com.google.inject.Provider
 import org.eclipse.emf.ecore.resource.ResourceSet
-import static extension org.junit.Assert.assertSame
+//import static extension org.junit.Assert.assertSame
 /*
  * Syntax validation unit tests for {@link BDSLValidator}
  *

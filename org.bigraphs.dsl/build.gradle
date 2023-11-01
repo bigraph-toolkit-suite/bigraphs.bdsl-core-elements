@@ -67,6 +67,10 @@ sourcesJar.dependsOn(generateXtext)
 //    }
 //}
 
+tasks.named("sourcesJar") {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
 shadowJar {
     from(project.extensions.findByType(JavaPluginExtension.class).sourceSets.main.output)
     configurations = [project.configurations.runtimeClasspath]

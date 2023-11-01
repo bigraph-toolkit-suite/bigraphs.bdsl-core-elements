@@ -100,7 +100,7 @@ This command builds everything:
 
 ```shell
 # Except tests
-gradle clean build -x :org.bigraphs.dsl.tests:build
+gradle clean build -x test
 # Specific module
 # gradle clean :org.bigraphs.dsl:build
 # gradle clean :org.bigraphs.dsl.ide:build
@@ -141,6 +141,8 @@ gradle test --tests *BdslAffectionUnitTest -PwithTests
 # Only a specific test method
 gradle test --tests *testSignatureMatchOnAssignment_01 -PwithTests
 ```
+
+Test report is written to `org.bigraphs.dsl.tests/build/reports/tests/test/index.html`.
 
 #### Install Grammar to Local Maven Repository
 

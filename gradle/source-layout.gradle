@@ -1,62 +1,43 @@
 if (name.endsWith(".tests")) {
-	sourceSets {
-//		test {
-//			java.srcDirs = ['src', 'src-gen', 'xtend-gen']
-//			resources.srcDirs = ['xtend-gen', 'src-gen']
-//			xtend.outputDir = 'xtend-gen'
-//		}
-		main {
-			java.srcDirs = []
-			resources.srcDirs = []
-		}
-		test {
-//			java.srcDir 'src/test/xtext-gen'
-			java.srcDirs = ['src/main/xtext-gen', 'src/main/xtend-gen', 'src/main/java', 'src-gen']
-//			resources.srcDir 'src/test/xtext-gen'
-//			resources.srcDirs = ['src/main/xtext-gen', 'src/main/xtend-gen']
-			xtend.outputDir = 'src/test/xtend-gen'
-		}
-	}
+    sourceSets {
+        test {
+            java.srcDirs = ['src/test/java', 'src/test/xtend-gen', 'src/main/xtext-gen', 'src/main/xtend-gen', 'src/main/java', 'src-gen']
+            xtend.outputDir = 'src/test/xtend-gen'
+        }
+    }
 } else {
-	sourceSets {
-		main {
-//			java.srcDir 'src/main/xtext-gen'
-			java.srcDirs = ['src/main/xtext-gen', 'src/main/xtend-gen', 'src/main/java', 'src-gen']
-//			resources.srcDir 'src/main/xtext-gen'
-//			resources.srcDirs = ['src/main/xtext-gen', 'src/main/xtend-gen']
-			xtend.outputDir = 'src/main/xtend-gen'
-		}
-//		main {
-//			java.srcDirs = ['src', 'src-gen', 'xtend-gen']
-//			resources.srcDirs = ['xtend-gen', 'src-gen']
-//			xtend.outputDir = 'xtend-gen'
-//		}
-		test {
-			java.srcDirs = []
-			resources.srcDirs = []
-		}
-	}
+    sourceSets {
+        main {
+            java.srcDirs = ['src/main/xtext-gen', 'src/main/xtend-gen', 'src/main/java', 'src-gen']
+            resources.srcDirs = ['src/main/xtend-gen', 'src/main/xtext-gen']
+            xtend.outputDir = 'src/main/xtend-gen'
+        }
+        test {
+            java.srcDirs = []
+            resources.srcDirs = []
+        }
+    }
 }
 
 sourceSets.all {
-	resources.exclude '**/*.g', '**/*.mwe2', '**/*.xtend', '**/*._trace'
+    resources.exclude '**/*.g', '**/*.mwe2', '**/*.xtend', '**/*._trace'
 }
 
 jar {
-	from('model') {
-		into('model')
-	}
-	from(sourceSets.main.allSource) {
-		include '**/*.xtext'
-	}
-	manifest {
-		attributes 'Bundle-SymbolicName': project.name
-	}
+    from('model') {
+        into('model')
+    }
+    from(sourceSets.main.allSource) {
+        include '**/*.xtext'
+    }
+    manifest {
+        attributes 'Bundle-SymbolicName': project.name
+    }
 }
 
 plugins.withId('war') {
-	war {
-		webAppDirectory = file("src/main/webapp")
-	}
+    war {
+        webAppDirectory = file("src/main/webapp")
+    }
 }
 
