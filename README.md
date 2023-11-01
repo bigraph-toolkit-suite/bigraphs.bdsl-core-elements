@@ -2,10 +2,10 @@
 
 # Bigraph DSL Grammar: Core Elements (CE)
 
-|             | Release | Development    |
-|-------------|---------|----------------|
-| **Version** | N.A.    | 1.0.0-SNAPSHOT |
-| **Java**    | 17      | 17             |
+|             | Release        | Development    |
+|-------------|----------------|----------------|
+| **Version** | 1.0.0-SNAPSHOT | 2.0.0-SNAPSHOT |
+| **Java**    | 17             | 17             |
 
  
 
