@@ -2,10 +2,10 @@
 
 # Bigraph DSL Grammar: Core Elements (CE)
 
-|             | Release        | Development    |
-|-------------|----------------|----------------|
-| **Version** | 1.0.0-SNAPSHOT | 2.0.0-SNAPSHOT |
-| **Java**    | 17             | 17             |
+|                      | Release | Development    |
+|----------------------|---------|----------------|
+| **Version**          | 2.0.1   | 3.0.0-SNAPSHOT |
+| Gradle Compatability | 7.6.2   | 7.6.2          |
 
  
 
@@ -92,6 +92,8 @@ bigraphical structures.
 To update the submodule (i.e., the Bigraph Ecore Metamodel) later at any time to the latest tagged version, run the following command:
 ```shell
 git submodule update --recursive --remote
+# Force overwriting changes
+git submodule update --recursive --remote --force
 ```
 
 ### Building from Source
@@ -100,27 +102,33 @@ This command builds everything:
 
 ```shell
 # Except tests
-gradle clean build -x test
+./gradlew clean build -x test
 # Specific module
-# gradle clean :org.bigraphs.dsl:build
-# gradle clean :org.bigraphs.dsl.ide:build
+# ./gradlew clean :org.bigraphs.dsl:build -x test
+# ./gradlew clean :org.bigraphs.dsl.ide:build -x test
 ```
+
+The builds can be found in:
+- ./org.bigraphs.dsl/build/libs
+- ./org.bigraphs.dsl.ide/build/libs
 
 #### Generate Xtext Language Artifacts
 
+You can just generate the code from the Xtext grammar by issuing the next command:
+
 ```bash
-gradle clean generateXtextLanguage # this fires the code generation
+./gradlew clean generateXtextLanguage 
 # Specific module
-# gradle clean :org.bigraphs.dsl:generateXtext
-# gradle clean :org.bigraphs.dsl:generateXtextLanguage
+# ./gradlew clean :org.bigraphs.dsl:generateXtext
+# ./gradlew clean :org.bigraphs.dsl:generateXtextLanguage
 ```
 
 #### Generate Language Server Protocol
 
 ```bash
-gradle shadowJar
+./gradlew shadowJar
 # Specific module
-gradle clean :org.bigraphs.dsl.ide:shadowJar
+./gradlew clean :org.bigraphs.dsl.ide:shadowJar
 ```
 
 The build depends on shadowJar task.
@@ -133,13 +141,13 @@ The following commands show how to run various kinds of tests:
 
 ```shell
 # Run all test cases
-gradle :org.bigraphs.dsl.tests:test -PwithTests
+./gradlew :org.bigraphs.dsl.tests:test -PwithTests
 # All tests within a package
-gradle test --tests org.bigraphs.dsl.tests.ide.validation* -PwithTests
+./gradlew test --tests org.bigraphs.dsl.tests.ide.validation* -PwithTests
 # All tests within a class
-gradle test --tests *BdslAffectionUnitTest -PwithTests
+./gradlew test --tests *BdslAffectionUnitTest -PwithTests
 # Only a specific test method
-gradle test --tests *testSignatureMatchOnAssignment_01 -PwithTests
+./gradlew test --tests *testSignatureMatchOnAssignment_01 -PwithTests
 ```
 
 Test report is written to `org.bigraphs.dsl.tests/build/reports/tests/test/index.html`.
@@ -151,9 +159,9 @@ Then it can be conveniently used by other Java projects.
 
 Run the following command:
 ```shell
-gradle publishToMavenLocal
-gradle :org.bigraphs.dsl:publishToMavenLocal
-gradle :org.bigraphs.dsl.ide:publishToMavenLocal
+./gradlew publishToMavenLocal
+./gradlew :org.bigraphs.dsl:publishToMavenLocal
+./gradlew :org.bigraphs.dsl.ide:publishToMavenLocal
 ```
 
 This publishes only the `bdsl-grammar` module containing the BDSL.
@@ -170,6 +178,7 @@ Every of the following gradle commands accept some arguments:
 - `signing.keyId`, `signing.password` and `signing.secretKeyRingFile` must also be configured in `gradle.properties` within the user's home directory.
   - secret key ring file usually at `~/.gnupg/secring.gpg`
   - Otherwise, generate it: `gpg --export-secret-keys > ~/.gnupg/secring.gpg`
+  - For the passphrase, use the one when the keys were generated (cf. also ~/.m2/settings.xml)
 - Arguments can be passed in several ways: https://docs.gradle.org/current/userguide/build_environment.html
 
 The Gradle GPG signing plugin is used to sign the components for the deployment.

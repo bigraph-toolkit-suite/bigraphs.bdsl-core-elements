@@ -9,7 +9,7 @@ ext.artifactId = "bdsl-grammar"
 dependencies {
     // will be included in the pom scope compile
     implementation project(":bigraphs.bigraph-ecore-metamodel")
-    api "org.bigraphs.model:bigraph-ecore-model:1.6.1-SNAPSHOT"
+    api "org.bigraphs.model:bigraph-ecore-model:2.0.1"
 //    runtimeOnly project(":bigraphs.bigraph-ecore-metamodel")
 
     api "org.eclipse.xtext:org.eclipse.xtext:${versions.xtext}"
@@ -49,6 +49,8 @@ task generateXtextLanguage(type: JavaExec) {
 
 processResources.dependsOn(generateXtextLanguage)
 generateXtext.dependsOn(generateXtextLanguage)
+// for gradle 8.x
+//processResources.mustRunAfter generateXtext
 clean.dependsOn(cleanGenerateXtextLanguage)
 eclipse.classpath.plusConfigurations += [configurations.mwe2]
 

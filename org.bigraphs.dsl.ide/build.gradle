@@ -39,20 +39,5 @@ shadowJar {
 	mergeServiceFiles()
 }
 
-/*
-shadowJar {
-    //from(project.convention.getPlugin(JavaPluginConvention).sourceSets.main.output) // TODO
-    //configurations = [project.configurations.compile] // TODO 2023 changed to runtimeOnly from runtime, or getByName("runtimeOnly")
-    exclude('META-INF/INDEX.LIST', 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA', 'schema/*',
-            '.options', '.api_description', '*.profile', '*.html', 'about.*', 'about_files/*',
-            'plugin.xml', 'systembundle.properties', 'profile.list')
-    archiveFileName = 'bdsl-language-server.jar'
-//    archivesBaseName = 'bdsl-language-server'
-//    version = '1.0.0'
-//	  baseName = 'my-shadow-app'
-//    manifest {
-//        attributes 'Main-Class': 'org.eclipse.xtext.ide.server.ServerLauncher'
-//    }
-    append('plugin.properties')
-}
-*/
+// for gradle 8.x
+//processResources.mustRunAfter generateXtext

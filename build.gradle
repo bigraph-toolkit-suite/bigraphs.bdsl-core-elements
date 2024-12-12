@@ -25,13 +25,13 @@ nexusPublishing {
 }
 
 group = "org.bigraphs.dsl"
-version = '2.0.0-SNAPSHOT'
+version = '3.0.0-SNAPSHOT'
 
 ext.versions = [
         xtext          : '2.32.0',
-        emfCommon      : '2.29.0',
-        emfEcoreXmi    : '2.35.0',
-        emfEcore       : '2.34.0',
+        emfEcore       : '2.38.0',
+        emfEcoreXmi    : '2.38.0',
+        emfCommon      : '2.40.0',
         emfCodegen     : '2.23.0',
         emfEcoreCodeGen: '2.35.0',
         lsp4j          : '0.8.1',
@@ -44,7 +44,7 @@ ext.versions = [
 subprojects {
     ext.xtextVersion = '2.32.0'
     group = 'org.bigraphs.dsl'
-    version = '2.0.0-SNAPSHOT'
+    version = '3.0.0-SNAPSHOT'
 
     repositories {
         mavenLocal()
