@@ -17,15 +17,19 @@ plugins {
 nexusPublishing {
     repositories {
 //        sonatype()
-        sonatype {
-            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"))
+//        sonatype {
+//            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"))
+//            snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
+//        }
+        sonatype {  //only for users registered in Sonatype after 24 Feb 2021
+            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
             snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
         }
     }
 }
 
 group = "org.bigraphs.dsl"
-version = '3.0.0-SNAPSHOT'
+version = '2.0.1'
 
 ext.versions = [
         xtext          : '2.32.0',
@@ -44,7 +48,7 @@ ext.versions = [
 subprojects {
     ext.xtextVersion = '2.32.0'
     group = 'org.bigraphs.dsl'
-    version = '3.0.0-SNAPSHOT'
+    version = '2.0.1'
 
     repositories {
         mavenLocal()
