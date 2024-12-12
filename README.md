@@ -2,10 +2,11 @@
 
 # Bigraph DSL Grammar: Core Elements (CE)
 
-|                      | Release | Development    |
-|----------------------|---------|----------------|
-| **Version**          | 2.0.1   | 3.0.0-SNAPSHOT |
-| Gradle Compatability | 7.6.2   | 7.6.2          |
+|                         | Release | Development    |
+|-------------------------|---------|----------------|
+| **Version**             | 2.0.1   | 3.0.0-SNAPSHOT |
+| Bigraph Ecore Metamodel | 2.0.1   | 2.0.1          |
+| Gradle Compatability    | 7.6.2   | 7.6.2          |
 
  
 
