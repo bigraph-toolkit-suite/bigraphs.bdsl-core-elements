@@ -2,15 +2,14 @@
 
 # Bigraph DSL Grammar: Core Elements (CE)
 
-|                                  | Release | Development    |
-|----------------------------------|---------|----------------|
-| **BDSL Core Elements (Grammar)** | 2.0.1   | 3.0.0-SNAPSHOT |
-| Bigraph Ecore Metamodel          | 2.0.1   | 2.0.1          |
-| Gradle Compatability             | 7.6.2   | 7.6.2          |
+| Compatibility                    | Release |
+| -------------------------------- | ------- |
+| **BDSL Core Elements (Grammar)** | 2.0.1   |
+| \|- Bigraph Ecore Metamodel      | 2.0.1   |
+| \| - Gradle Compatability        | 7.6.2   |
 
- 
+ This project contains the following major building blocks of **BDSL**, the Bigraphical Domain-specific Language:
 
-This projects contains the following major building blocks of **BDSL**, the Bigraphical Domain-specific Language:
 - Grammar, Parser, Validation, ...
 - Language Server Protocol for language support in any IDE
 - Unit tests
@@ -22,7 +21,7 @@ IDE support is provided for the following platforms to be more productive when e
 - Eclipse, IntelliJ, Visual Code, ... by utilizing the *Language Server Protocol*
 
 This framework provides the core elements, which may be used in other Java frameworks, libraries and applications.
-For instance, refer to [https://git-st.inf.tu-dresden.de/bigraphs/bigraph-algebraic-interpreter](https://git-st.inf.tu-dresden.de/bigraphs/bigraph-algebraic-interpreter), where an interpreter for BDSL is implemented.
+For instance, refer to [BDSL Interpreter](https://github.com/bigraph-toolkit-suite/bigraphs.bdsl-interpreter-parent), where an interpreter for BDSL is implemented.
 
 
 ## Getting Started
@@ -51,23 +50,6 @@ Replace `${version}` with the current version.
 </dependency>
 ```
 
-### SNAPSHOT Releases
-
-For SNAPSHOT releases also add the following repository to you project's `pom.xml`:
-
-```xml
-<!-- Additional Repository for SNAPSHOT Releases -->
-<repositories>
-	<repository>
-        <snapshots>
-        	<enabled>true</enabled>
-        </snapshots>
-        <id>ossrh</id>
-    	<url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
-	</repository>
-</repositories>  
-```
-
 ## Development
 
 **Requirements**
@@ -87,8 +69,7 @@ git clone --recursive https://github.com/bigraph-toolkit-suite/bigraphs.bdsl-cor
 
 This project includes [Ecore Bigraph Metamodel](https://github.com/bigraph-toolkit-suite/bigraphs.bigraph-ecore-metamodel) as git submodule.
 The main branch of the repository [Ecore Bigraph Metamodel](https://github.com/bigraph-toolkit-suite/bigraphs.bigraph-ecore-metamodel) will also be pulled.
-This dependency includes the Ecore metamodels of bigraphs that is used by the Xtext-based BDSL grammar to represent
-bigraphical structures.
+This dependency includes the Ecore metamodels of bigraphs that are used by the Xtext-based BDSL grammar to represent bigraphical structures.
 
 To update the submodule (i.e., the Bigraph Ecore Metamodel) later at any time to the latest tagged version, run the following command:
 ```shell
@@ -96,6 +77,26 @@ git submodule update --recursive --remote
 # Force overwriting changes
 git submodule update --recursive --remote --force
 ```
+
+#### Working in Eclipse
+
+This project is best worked with **[Eclipse Modeling Tools IDE](https://www.eclipse.org/downloads/packages/release/2025-09/m1/eclipse-modeling-tools)**. Import everything into a new Eclipse workspace:
+
+- `org.bigraphs.dsl.parent`
+- `bigraphs.bigraph-ecore-metamodel` (the cloned Git submodule according to the [Project Setup](#Development) instructions)
+
+You may need to re-generate the model code of the `bigraphs.bigraph-ecore-metamodel` project as this process is not currently handled by the gradle script.
+
+You may then be able to run the "MWE2 workflow" and to generate "Xtext artifacts" via the **Eclipse IDE** inside the `org.bigraphs.dsl` project, or call the appropriate gradle command as shown below in [Building from Source](#Building-from-Source).
+
+### Project Structure
+
+- gradle-based Project
+- Language infrastructure for Bigraph DSL (BDSL) based on Xtext is located under `org.bigraphs.dsl` 
+- Language Server Protocol Implementation is located under `org.bigraphs.dsl.ide`
+- Test classes are located under `./org.bigraphs.dsl.tests/`
+  - Requires modules `org.bigraphs.dsl` and `org.bigraphs.dsl.ide`
+- **(!)** Note that the required CDO/EMF/Ecore dependencies are stored separately inside the `./etc/libs` folder. The reason is that there is currently no easy way on how to resolve Eclipse dependencies from P2 repositories in gradle. To clarify: Updating the versions means replacing the files. These dependencies are shadowed in the bdsl-grammar JAR
 
 ### Building from Source
 
@@ -169,8 +170,7 @@ This publishes only the `bdsl-grammar` module containing the BDSL.
 
 ### Deployment
 
-- see [The Central Repository Documentation](https://central.sonatype.org/publish/publish-guide/#deployment)
-- see [gradle-nexus / publish-plugin](https://github.com/gradle-nexus/publish-plugin/) 
+- See [Gradle Publish Plugin](https://central.sonatype.org/publish/publish-portal-gradle/) 
 
 **Arguments**
 
@@ -184,6 +184,7 @@ Every of the following gradle commands accept some arguments:
 
 The Gradle GPG signing plugin is used to sign the components for the deployment.
 It relies on the gpg command being installed:
+
 ```shell
 sudo apt install gnupg2
 ```
@@ -216,26 +217,4 @@ gradle publishToSonatype closeAndReleaseSonatypeStagingRepository
 ```
 
 > **Note:** This is not recommended!
-
-## Working in Eclipse
-
-This project is best worked with Eclipse. Import everything into a new Eclipse workspace:
-
-- `org.bigraphs.dsl.parent`
-- `bigraphs.bigraph-ecore-metamodel` (the cloned Git submodule is also contained after following the [Project Setup](#Development) instructions)
-
-You may need to re-generate the model code of the `bigraphs.bigraph-ecore-metamodel` project as this process is not currently handled by the gradle script.
-
-You may then be able to run the "MWE2 workflow" and to generate "Xtext artifacts" via the Eclipse IDE inside the `org.bigraphs.dsl` project, or call the appropriate gradle command as shown above.
-
-### Project Structure
-
-- gradle-based Project
-- Language infrastructure for Bigraph DSL (BDSL) based on Xtext is located under `org.bigraphs.dsl` 
-- Language Server Protocol Implementation is located under `org.bigraphs.dsl.ide`
-- Test classes are located under `./org.bigraphs.dsl.tests/`
-  - Requires modules `org.bigraphs.dsl` and `org.bigraphs.dsl.ide`
-- **(!)** Note that the required CDO/EMF/Ecore dependencies are stored separately inside the `./etc/libs` folder. The reason is that there is currently no easy way on how to resolve Eclipse dependencies from P2 repositories in gradle. To clarify: Updating the versions means replacing the files. These dependencies are shadowed in the bdsl-grammar JAR
-
-
-
+> 
