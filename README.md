@@ -1,12 +1,13 @@
 <img src="./etc/bigraph-dsl-logo.png" style="zoom:90%;" />
 
-# Bigraph DSL Grammar: Core Elements (CE)
+# Bigraph DSL Grammar (Core)
 
 | Compatibility                    | Release |
 | -------------------------------- | ------- |
-| **BDSL Core Elements (Grammar)** | 2.0.1   |
+| **BDSL Grammar (Core)**          | 2.0.1   |
 | \|- Bigraph Ecore Metamodel      | 2.0.1   |
 | \| - Gradle Compatability        | 7.6.2   |
+| \| - Java Compatability          | 17      |
 
  This project contains the following major building blocks of **BDSL**, the Bigraphical Domain-specific Language:
 
@@ -53,8 +54,8 @@ Replace `${version}` with the current version.
 ## Development
 
 **Requirements**
-- Java >= 17
-- Gradle >= 7.4.2
+- Java == 17
+- Gradle == 7.6.2
 - Check that the environment variable `JAVA_HOME` is pointing to the correct JDK
   - `update-java-alternatives --list`
   - `export JAVA_HOME=...`
@@ -168,7 +169,7 @@ Run the following command:
 
 This publishes only the `bdsl-grammar` module containing the BDSL.
 
-### Deployment
+<!-- ### Deployment
 
 - See [Gradle Publish Plugin](https://central.sonatype.org/publish/publish-portal-gradle/) 
 
@@ -189,19 +190,19 @@ It relies on the gpg command being installed:
 sudo apt install gnupg2
 ```
 and the GPG credentials being available e.g. from `gradle.properties` within the user's home directory.
-More information can be found [here](https://central.sonatype.org/publish/requirements/gpg/).
+More information can be found [here](https://central.sonatype.org/publish/requirements/gpg/). -->
 
 
-#### SNAPSHOT Deployment
+<!-- #### SNAPSHOT Deployment
 
 Execute the following goal to deploy the `bdsl-grammar` module to the Central Repository:
 ```shell
 gradle publishToSonatype -PsonatypeUsername=username -PsonatypePassword=password
 ```
 
-- The `version` element in `build.gradle` of the parent project must contain the classifier `SNAPSHOT`.
+- The `version` element in `build.gradle` of the parent project must contain the classifier `SNAPSHOT`. -->
 
-#### Release Deployment
+<!-- #### Release Deployment
 
 Execute the following command to manually release the artifacts placed in the closed staging repository in Nexus UI.
 The staging repository might be dropped (if needed) or manually released from the Nexus UI.
@@ -217,4 +218,4 @@ gradle publishToSonatype closeAndReleaseSonatypeStagingRepository
 ```
 
 > **Note:** This is not recommended!
-> 
+>  -->
