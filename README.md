@@ -1,6 +1,8 @@
 <img src="./etc/bigraph-dsl-logo.png" style="zoom:90%;" />
 
 > Latest Version: **2.0.1**
+ 
+- BDSL user guide: https://nbn-resolving.org/urn:nbn:de:bsz:14-qucosa2-752170
 
 ---
 
