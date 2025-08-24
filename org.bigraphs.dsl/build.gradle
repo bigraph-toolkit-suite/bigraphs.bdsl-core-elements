@@ -132,7 +132,7 @@ publishing {
                     developer {
                         id = 'dgrzelak'
                         name = 'Dominik Grzelak'
-                        email = 'dominik.grzelak@web.de'
+                        email = 'dominik.grzelak25@gmail.com'
                     }
                 }
                 scm {

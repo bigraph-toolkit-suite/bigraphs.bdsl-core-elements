@@ -1,15 +1,12 @@
 <img src="./etc/bigraph-dsl-logo.png" style="zoom:90%;" />
 
+> Latest Version: **2.0.1**
+
+---
+
 # Bigraph DSL Grammar (Core)
 
-| Compatibility                    | Release |
-| -------------------------------- | ------- |
-| **BDSL Grammar (Core)**          | 2.0.1   |
-| \|- Bigraph Ecore Metamodel      | 2.0.1   |
-| \| - Gradle Compatability        | 7.6.2   |
-| \| - Java Compatability          | 17      |
-
- This project contains the following major building blocks of **BDSL**, the Bigraphical Domain-specific Language:
+This project contains the following major building blocks of **BDSL**, the Bigraphical Domain-specific Language:
 
 - Grammar, Parser, Validation, ...
 - Language Server Protocol for language support in any IDE
@@ -24,6 +21,14 @@ IDE support is provided for the following platforms to be more productive when e
 This framework provides the core elements, which may be used in other Java frameworks, libraries and applications.
 For instance, refer to [BDSL Interpreter](https://github.com/bigraph-toolkit-suite/bigraphs.bdsl-interpreter-parent), where an interpreter for BDSL is implemented.
 
+**Version Compatibility**
+
+| Component                    | Release |
+| -------------------------------- | ------- |
+| **BDSL Grammar (Core)**          | 2.0.1   |
+| \|- Bigraph Ecore Metamodel      | 2.0.1   |
+| \| - Gradle Compatability        | 7.6.2   |
+| \| - Java Compatability          | 17      |
 
 ## Getting Started
 
@@ -219,3 +224,7 @@ gradle publishToSonatype closeAndReleaseSonatypeStagingRepository
 
 > **Note:** This is not recommended!
 >  -->
+
+## License
+
+BDSL Grammar  is Open Source software released under the Apache 2.0 license.
