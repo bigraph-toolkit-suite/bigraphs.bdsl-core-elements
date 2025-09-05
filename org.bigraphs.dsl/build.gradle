@@ -85,8 +85,6 @@ shadowJar {
             '.options', '.api_description', '*.profile', '*.html', 'about.*', 'about_files/*',
             'plugin.xml', 'systembundle.properties', 'profile.list')
 	archiveClassifier = ''
-//	archiveVersion = ''
-//	archiveBaseName = 'bdsl-grammar'
     append('plugin.properties')
     mergeServiceFiles()
 
@@ -95,7 +93,7 @@ shadowJar {
         include(dependency('org.eclipse.emf.cdo:org.eclipse.emf.cdo:4.20.0.v20221124-1637'))
     }
     // Include dependencies from the 'libs' folder
-//	from "${projectDir}/../etc/libs" include('*.jar')
+    //	from "${projectDir}/../etc/libs" include('*.jar')
 }
 build.dependsOn(shadowJar)
 
@@ -120,7 +118,6 @@ publishing {
                     runtimeOnly("org.bigraphs.dsl:bigraphs.bigraph-ecore-metamodel") {
                         transitive = false
                     }
-//                    "org.bigraphs.model:bigraph-ecore-model:1.6.1-SNAPSHOT"
                 }
                 licenses {
                     license {
@@ -164,13 +161,6 @@ javadoc {
     }
     failOnError = false
 }
-
-
-// Disabling Gradle Module Metadata publication
-// https://docs.gradle.org/current/userguide/publishing_gradle_module_metadata.html#sub:disabling-gmm-publication
-//tasks.withType(GenerateModuleMetadata).configureEach {
-//	enabled = false
-//}
 
 
 project(':bigraphs.bigraph-ecore-metamodel') {

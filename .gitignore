@@ -8,6 +8,7 @@ bigraphs.bigraph-ecore-metamodel/bin/**
 /**/build/
 /**/src-gen/
 /**/xtend-gen/
+/**/xtext-gen/
 .gradle/**
 
 # User-specific stuff

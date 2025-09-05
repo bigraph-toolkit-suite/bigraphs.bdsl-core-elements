@@ -1,29 +1,4 @@
-// TODO
-//sourceCompatibility = '17'
-//targetCompatibility = '17'
-// TODO
 java {
 	sourceCompatibility = JavaVersion.VERSION_17
 	targetCompatibility = JavaVersion.VERSION_17
 }
-
-// tasks.withType(Javadoc) {
-// 	options.addStringOption('Xdoclint:none', '-quiet')
-// 	options.tags = [ 'model', 'generated', 'ordered' ]
-// }
-
-// task sourcesJar(type: Jar, dependsOn: classes) {
-// 	group 'Build'
-// 	description 'Assembles a jar archive containing the sources.'
-// 	classifier = 'sources'
-// 	from sourceSets.main.allSource
-// }
-
-// task javadocJar(type: Jar, dependsOn: javadoc) {
-// 	group 'Build'
-// 	description 'Assembles a jar archive containing the JavaDoc output.'
-// 	classifier = 'javadoc'
-// 	from javadoc.destinationDir
-// }
-
-// artifacts.archives sourcesJar, javadocJar

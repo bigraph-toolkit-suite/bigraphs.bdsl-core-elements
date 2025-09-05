@@ -25,12 +25,11 @@ For instance, refer to [BDSL Interpreter](https://github.com/bigraph-toolkit-sui
 
 **Version Compatibility**
 
-| Component                    | Release |
-| -------------------------------- | ------- |
-| **BDSL Grammar (Core)**          | 2.0.1   |
-| \|- Bigraph Ecore Metamodel      | 2.0.1   |
-| \| - Gradle Compatability        | 7.6.2   |
-| \| - Java Compatability          | 17      |
+### Version Compatibility
+
+| BDSL Grammar Release | Bigraph Ecore Metamodel | Gradle Compatibility | Java Compatibility |
+|----------------------|-------------------------|----------------------|--------------------|
+| 2.0.1                | 2.0.1                   | 7.6.2                | 17                 |
 
 ## Getting Started
 
@@ -61,7 +60,7 @@ Replace `${version}` with the current version.
 ## Development
 
 **Requirements**
-- Java == 17
+- Java == **17**
 - Gradle == 7.6.2
 - Check that the environment variable `JAVA_HOME` is pointing to the correct JDK
   - `update-java-alternatives --list`
