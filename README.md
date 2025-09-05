@@ -25,8 +25,6 @@ For instance, refer to [BDSL Interpreter](https://github.com/bigraph-toolkit-sui
 
 **Version Compatibility**
 
-### Version Compatibility
-
 | BDSL Grammar Release | Bigraph Ecore Metamodel | Gradle Compatibility | Java Compatibility |
 |----------------------|-------------------------|----------------------|--------------------|
 | 2.0.1                | 2.0.1                   | 7.6.2                | 17                 |
